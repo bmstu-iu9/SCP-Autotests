@@ -4,83 +4,70 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"strings"
 )
 
-func checkEntry(a []byte, i int) bool {
-	if a[i] == '$' && a[i + 1] == 'E' && a[i + 2] == 'N' && a[i + 3] == 'T' && a[i + 4] == 'R' && a[i + 5] == 'Y' && a[i + 6] == ' '  && a[i + 7] == 'G' && (a[i + 8] == 'O' || a[i + 8] == 'o') {
-		return true
-	} else {
-		return false
+
+func entryPointCountExceed(a []byte) (bool, []byte){
+	s := string(a)
+	if strings.Count(s, "$ENTRY") != 1 {
+		return false, a
 	}
+	ind := strings.Index(s, "$ENTRY")
+	if a[ind + 6] == ' ' && a[ind + 7] == 'G' && (a[ind + 8] == 'o' || a[ind + 8] == 'O') {
+		return true, a[strings.Index(string(a[ind + 8 :]), "{") + ind + 9 : strings.Index(string(a[ind + 8 :]), "}") + ind + 8]
+	}
+	return false, a
 }
 
 func checkFile(path string) []byte {
 	a, err := ioutil.ReadFile(path)
-	noSpaces := a[:]
-	noComm := a[:]
-	cnt := 0
-	i := 0
-	var iBeg int
-	var iEnd int
+	var (
+		indBeg int
+		indEnd int
+		indEnd1 int
+		indEnd2 int
+	)
 
 	if err != nil {
 		fmt.Println("Error opening file")
 		log.Fatal(err)
 	}
 
-	spaceBefore := false
-	for _, v := range a {
-		if v == ' ' || v == '\t'{
-			if !spaceBefore && v != '\t' {
-				noSpaces[cnt] = v
-				cnt += 1
-			}
-			spaceBefore = true
-		} else {
-			noSpaces[cnt] = v
-			cnt += 1
-			spaceBefore = false
-		}
+	for strings.Count(string(a), "/*") > 0 {
+		indBeg = strings.Index(string(a), "/*")
+		indEnd = strings.Index(string(a[indBeg+2:]), "*/") + indBeg + 2
+		a = append(a[:indBeg], a[indEnd+2:]...)
 	}
-	noSpaces = noSpaces[ : cnt]
 
-	cnt = 0
-	for i < len(noSpaces) {
-		if noSpaces[i] == '/' && noSpaces[i + 1] == '*' {
-			i += 2
-			for !(noSpaces[i] == '*' && noSpaces[i + 1] == '/') {
-				i += 1
-			}
-			i += 1
-		} else if noSpaces[i] == '*' {
-			i += 1
-			for !(noSpaces[i] == '*' || noSpaces[i] == '\n'){
-				i += 1
-			}
+	for strings.Count(string(a), "*") > 0 {
+		indBeg = strings.Index(string(a), "*")
+		indEnd1 = strings.Index(string(a[indBeg+1:]), "\n")
+		indEnd2 = strings.Index(string(a[indBeg+1:]), "*")
+		if indEnd1 > indEnd2 {
+			indEnd = indEnd2 + indBeg + 1
 		} else {
-			noComm[cnt] = noSpaces[i]
-			cnt += 1
+			indEnd = indEnd1 + indBeg + 1
 		}
-		i += 1
+		a = append(a[:indBeg], a[indEnd+1:]...)
 	}
-	noComm = noComm[ : cnt]
 
-	for i, _ := range noComm {
-		if checkEntry(noComm, i) {
-			iBeg = i + 11
-			iEnd = i + 11
-			for noComm[iEnd] != '}' {
-				iEnd += 1
-			}
-		}
+	for strings.Count(string(a), "  ") > 0 {
+		indBeg = strings.Index(string(a), "  ")
+		a = append(a[:indBeg], a[indBeg + 1:]...)
 	}
-	res := noComm[iBeg + 1 : iEnd]
-	for _, v := range res {
-		fmt.Printf("%c", v)
+
+	flag, res := entryPointCountExceed(a)
+	if flag {
+		for _, v := range res {
+			fmt.Printf("%c", v)
+		}
+	} else {
+		fmt.Println("Exceeding of entry points count")
 	}
 	return res
 }
 
 func main(){
-	checkFile("./test.txt")
+	checkFile("./tests/tests_auto/test_order.ref")
 }
