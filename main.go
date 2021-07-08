@@ -30,11 +30,16 @@ func checkFile(path string) []byte {
 
 	spaceBefore := false
 	for _, v := range a {
-		if !(v == ' ' && spaceBefore) && v != '\t' {
+		if v == ' ' || v == '\t'{
+			if !spaceBefore && v != '\t' {
+				noSpaces[cnt] = v
+				cnt += 1
+			}
+			spaceBefore = true
+		} else {
 			noSpaces[cnt] = v
 			cnt += 1
-		} else {
-			spaceBefore = true
+			spaceBefore = false
 		}
 	}
 	noSpaces = noSpaces[ : cnt]
@@ -69,7 +74,7 @@ func checkFile(path string) []byte {
 			}
 		}
 	}
-	res := noComm[iBeg : iEnd]
+	res := noComm[iBeg + 1 : iEnd]
 	for _, v := range res {
 		fmt.Printf("%c", v)
 	}
