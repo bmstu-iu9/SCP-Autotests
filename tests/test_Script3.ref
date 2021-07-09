@@ -1,0 +1,52 @@
+
+/*
+ A slightly changed variant of test_Script.ref.
+ */
+
+
+/***********************************************/
+/*           the input program                 */
+/***********************************************/
+
+$ENTRY Go {
+   e.p = <Check <ReplaceIp e.p>>;
+}
+
+ReplaceIp {
+    e.x1 'ip' e.x2 = e.x1'ip address'<ReplaceIp e.x2>;
+    e.Other = e.Other;
+}
+
+Check {
+    = 'T';
+    '<script'e.x2 = 'F';
+    t.y1 e.Z = <Check e.Z>;
+}
+
+/***********************************************/
+/*          the residual program               */
+/***********************************************/
+
+/*
+$ENTRY Go {
+ e.x1 =  <Check_0 e.x1>;
+}
+
+
+Check_0 {
+ e.x1 'ip' e.x2 =  <Check_3_0 (e.x1) (e.x2)>;
+ e.x1 =  <Check_13_0 e.x1>;
+}
+
+
+Check_3_0 {
+ (t.y1 e.x1) (e.x2) =  <Check_3_0 (e.x1) (e.x2)>;
+ () (e.x1) =  <Check_0 e.x1>;
+}
+
+
+Check_13_0 {
+ =  'T';
+ t.y1 e.x1 =  <Check_13_0 e.x1>;
+}
+*/

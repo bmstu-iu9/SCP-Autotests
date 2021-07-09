@@ -1,0 +1,39 @@
+/*
+ The test shows that the algorithms of simple pre-processing of the word equations can
+ result in solving some non-quadratic equations.
+ 
+ Given the equation e.x++'A'++e.x = e.y++e.y++e.y, its solutions are strings in the language A^n with
+ the odd length.
+*/
+
+
+/***********************************************/
+/*           the input program                 */
+/***********************************************/
+*$MST_FROM_ENTRY;
+
+$ENTRY Go {
+ e.y = <BadF e.y e.y e.y>;
+}
+
+BadF {
+ e.x 'A' e.x = 'T';
+ e.z = 'F';
+}
+
+/***********************************************/
+/*          the residual program               */
+/***********************************************/
+/*
+$ENTRY Go {
+ e.x1 =  <InputFormat_0 e.x1>;
+}
+
+
+InputFormat_0 {
+ e.x1 'A' e.x1, ('A' e.x1) (e.x1 'A') : t.Eq1 t.Eq1 =  'T';
+ e.x1 =  'F';
+}
+
+*/
+

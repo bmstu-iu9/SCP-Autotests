@@ -1,0 +1,87 @@
+/*
+ The test is taken from the following paper:
+ M.T Trinh, D.H Chu, J. Jaffar, Progressive reasoning over recursively-defined strings /
+ International Conference on Computer Aided Verification 2016, 218-240
+
+ The program checks whether the letter 'D' can occur in the word 'A'^n 'B'^n 'C'^n.
+*/
+
+/***********************************************/
+/*           the input program                 */
+/***********************************************/
+
+$ENTRY Go {
+ e.p =  <G0 <GramA e.p> <GramB e.p> <GramC e.p>>; /* The input parameter e.p is N represented as a Peano number. */
+}
+
+
+GramA {
+	'I' e.x = 'A' <GramA e.x>;
+	= ;
+}
+GramB {
+	'I' e.x = 'B' <GramB e.x>;
+	= ;
+}
+GramC {
+	'I' e.x = 'C' <GramC e.x>;
+	= ;
+}
+
+G0 {
+         = 'T';
+	e.x 'D'  = 'F';
+        e.x t.y = <G0 e.x>; /* The order of the rules determines that t.y != 'D'. */
+}
+
+/***********************************************/
+/*          the residual program               */
+/***********************************************/
+
+/*
+$ENTRY Go {
+ e.x1 =  <InputFormat_0 e.x1>;
+}
+
+
+InputFormat_0 {
+ 'I' e.x1 =  <G0_0 (e.x1) () (e.x1)>;
+ =  'T';
+}
+
+
+G0_0 {
+ (e.x1) (e.x2) ('I' e.x3) =  <G0_0 (e.x1) (e.x2 'C') (e.x3)>;
+ (e.x1) (e.x2) () =  <G0_3_0 (e.x1) (e.x2)>;
+}
+
+
+G0_3_0 {
+ (e.x1) (e.x2 'C') =  <G0_3_0 (e.x1) (e.x2)>;
+ (e.x1) () =  <G0_1 (e.x1) () (e.x1)>;
+}
+
+
+G0_1 {
+ (e.x1) (e.x2) ('I' e.x3) =  <G0_1 (e.x1) (e.x2 'B') (e.x3)>;
+ (e.x1) (e.x2) () =  <G0_3_1 (e.x1) (e.x2)>;
+}
+
+
+G0_3_1 {
+ (e.x1) (e.x2 'B') =  <G0_3_1 (e.x1) (e.x2)>;
+ (e.x1) () =  <G0_2 () (e.x1)>;
+}
+
+
+G0_2 {
+ (e.x1) ('I' e.x2) =  <G0_2 (e.x1 'A') (e.x2)>;
+ (e.x1) () =  <G0_3_2 e.x1>;
+}
+
+
+G0_3_2 {
+ e.x1 'A' =  <G0_3_2 e.x1>;
+ =  'T';
+}
+*/
