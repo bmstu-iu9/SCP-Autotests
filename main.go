@@ -1,9 +1,8 @@
 package main
 
 import (
-	"fmt"
+	"errors"
 	"io/ioutil"
-	"log"
 	"strings"
 )
 
@@ -40,7 +39,7 @@ func entryPointCountExceed(inBytes []byte) (bool, []byte){
 }
 
 // обработка файла
-func checkFile(path string) []byte {
+func checkFile(path string) ([]byte, error) {
 	inBytes, err := ioutil.ReadFile(path)
 	var (
 		indBeg int
@@ -50,8 +49,7 @@ func checkFile(path string) []byte {
 	)
 
 	if err != nil {
-		fmt.Println("Error opening file")
-		log.Fatal(err)
+		return nil, err
 	}
 
 	for strings.Count(string(inBytes), "/*") > 0 {	// удаление многострочных комментариев
@@ -79,14 +77,10 @@ func checkFile(path string) []byte {
 
 	notExceed, outBytes := entryPointCountExceed(inBytes)	// поиск точек входа
 	outBytes = deleteSideSpaces(outBytes)
-	if notExceed {
-		for _, outByte := range outBytes {
-			fmt.Printf("%c", outByte)
-		}
-	} else {
-		fmt.Println("Exceeding of entry points count")
+	if !notExceed {
+		return nil, errors.New("Exceeding of entry points count\n")
 	}
-	return outBytes
+	return outBytes, nil
 }
 
 func main(){
