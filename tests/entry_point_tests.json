@@ -140,7 +140,7 @@
     "Expected": "(e.x) e.y = <Prefix (e.x) <Concat (e.x) e.y>>;"
   },
   {
-    "TestPath": "tests/test_summcomm.ref",
+    "TestPath": "tests/test_sumcomm.ref",
     "Expected": "(e.p)e.q = <Test <Unary ()(e.p)()(e.q)>>;"
   },
   {

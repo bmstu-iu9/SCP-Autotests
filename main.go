@@ -6,11 +6,13 @@ import (
 	"strings"
 )
 
+// удаление пробельных символов с концов строки
 func deleteSideSpaces(inBytes []byte) (outBytes []byte) {
 	var (
 		indBeg int
 		indEnd int
 	)
+
 	indBeg = 0
 	for inBytes[indBeg] == ' ' || inBytes[indBeg] == '\t' || inBytes[indBeg] == '\n' || inBytes[indBeg] == '\r' {
 		indBeg += 1
@@ -33,7 +35,7 @@ func entryPointCountExceed(inBytes []byte) (bool, []byte){
 	}
 	ind := strings.Index(s, "$ENTRY")
 	if inBytes[ind + 6] == ' ' && inBytes[ind + 7] == 'G' && (inBytes[ind + 8] == 'o' || inBytes[ind + 8] == 'O') {
-		return true, inBytes[strings.Index(string(inBytes[ind + 8 :]), "{") + ind + 9 : strings.Index(string(inBytes[ind + 8 :]), "}") + ind + 8]
+		return true, inBytes[strings.Index(string(inBytes[ind + 8 :]), "{") + ind + 9 : strings.Index(string(inBytes[ind + 8 :]), "}") + ind + 9]
 	}
 	return false, inBytes
 }
@@ -44,8 +46,6 @@ func checkFile(path string) ([]byte, error) {
 	var (
 		indBeg int
 		indEnd int
-		indEnd1 int
-		indEnd2 int
 	)
 
 	if err != nil {
@@ -60,13 +60,7 @@ func checkFile(path string) ([]byte, error) {
 
 	for strings.Count(string(inBytes), "*") > 0 {		// удаление однострочных комментариев
 		indBeg = strings.Index(string(inBytes), "*")
-		indEnd1 = strings.Index(string(inBytes[indBeg+1:]), "\n")
-		indEnd2 = strings.Index(string(inBytes[indBeg+1:]), "*")
-		if indEnd1 > indEnd2 {
-			indEnd = indEnd2 + indBeg + 1
-		} else {
-			indEnd = indEnd1 + indBeg + 1
-		}
+		indEnd = strings.Index(string(inBytes[indBeg+1:]), "\n") + indBeg + 1
 		inBytes = append(inBytes[:indBeg], inBytes[indEnd+1:]...)
 	}
 
@@ -84,5 +78,5 @@ func checkFile(path string) ([]byte, error) {
 }
 
 func main(){
-	checkFile("./tests/test_....ref")	// подставьте вместо многоточия нужный файл проверки
+	checkFile("./tests/test_....ref")	// подставьте вместо многоточия нужный файл
 }
