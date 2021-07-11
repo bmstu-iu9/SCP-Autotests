@@ -7,37 +7,24 @@ import (
 )
 
 // удаление пробельных символов с концов строки
-func deleteSideSpaces(inBytes []byte) (outBytes []byte) {
-	var (
-		indBeg int
-		indEnd int
-	)
-
-	indBeg = 0
-	for inBytes[indBeg] == ' ' || inBytes[indBeg] == '\t' || inBytes[indBeg] == '\n' || inBytes[indBeg] == '\r' {
-		indBeg += 1
-	}
-
-	indEnd = len(inBytes) - 1
-	for inBytes[indEnd] == ' ' || inBytes[indEnd] == '\t' || inBytes[indEnd] == '\n' || inBytes[indBeg] == '\r' {
-		indEnd -= 1
-	}
-	outBytes = inBytes[indBeg : indEnd]
-
-	return outBytes
+func deleteInsideSpaces(inString string) string {
+	inString = strings.ReplaceAll(inString, "\t", "")
+	inString = strings.ReplaceAll(inString, "\n", "")
+	inString = strings.ReplaceAll(inString, "\r", "")
+	return inString
 }
 
 // поиск точек входа и проверка на единственность
-func entryPointCountExceed(inBytes []byte) (bool, []byte){
-	s := string(inBytes)
+func entryPointCountExceed(inString string) (bool, string){
+	s := string(inString)
 	if strings.Count(s, "$ENTRY") != 1 {
-		return false, inBytes
+		return false, inString
 	}
 	ind := strings.Index(s, "$ENTRY")
-	if inBytes[ind + 6] == ' ' && inBytes[ind + 7] == 'G' && (inBytes[ind + 8] == 'o' || inBytes[ind + 8] == 'O') {
-		return true, inBytes[strings.Index(string(inBytes[ind + 8 :]), "{") + ind + 9 : strings.Index(string(inBytes[ind + 8 :]), "}") + ind + 9]
+	if inString[ind + 6] == ' ' && inString[ind + 7] == 'G' && (inString[ind + 8] == 'o' || inString[ind + 8] == 'O') {
+		return true, inString[strings.Index(string(inString[ind + 8 :]), "{") + ind + 9 : strings.Index(string(inString[ind + 8 :]), "}") + ind + 8]
 	}
-	return false, inBytes
+	return false, inString
 }
 
 // обработка файла
@@ -46,6 +33,7 @@ func checkFile(path string) ([]byte, error) {
 	var (
 		indBeg int
 		indEnd int
+		outString string
 	)
 
 	if err != nil {
@@ -64,17 +52,14 @@ func checkFile(path string) ([]byte, error) {
 		inBytes = append(inBytes[:indBeg], inBytes[indEnd+1:]...)
 	}
 
-	for strings.Count(string(inBytes), "  ") > 0 {	// удаление двойных пробелов
-		indBeg = strings.Index(string(inBytes), "  ")
-		inBytes = append(inBytes[:indBeg], inBytes[indBeg + 1:]...)
-	}
-
-	notExceed, outBytes := entryPointCountExceed(inBytes)	// поиск точек входа
-	outBytes = deleteSideSpaces(outBytes)
+	var notExceed bool
+	outString = strings.ReplaceAll(string(inBytes), "  ", " ")
+	notExceed, outString = entryPointCountExceed(outString)	// поиск точек входа
+	outString = deleteInsideSpaces(strings.TrimSpace(outString))
 	if !notExceed {
 		return nil, errors.New("Exceeding of entry points count\n")
 	}
-	return outBytes, nil
+	return []byte(outString), nil
 }
 
 func main(){

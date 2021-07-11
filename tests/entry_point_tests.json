@@ -61,7 +61,7 @@
   },
   {
     "TestPath": "tests/test_finiteletter.ref",
-    "Expected": "(s.z1 s.z2 s.z3 s.z4 e.x1)\n\t = <CheckQuad <Format1 (s.z1 s.z2 s.z3 s.z4)(s.z1 s.z2 s.z3 s.z4 e.x1)> >;"
+    "Expected": "(s.z1 s.z2 s.z3 s.z4 e.x1) = <CheckQuad <Format1 (s.z1 s.z2 s.z3 s.z4)(s.z1 s.z2 s.z3 s.z4 e.x1)> >;"
   },
   {
     "TestPath": "tests/test_KMPtest.ref",
