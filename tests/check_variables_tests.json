@@ -1,0 +1,26 @@
+[
+  {
+    "TestCase": ["e.x", "e.x"],
+    "Expected": ["Coincidences in variables occurred\n"]
+  },
+  {
+    "TestCase": ["e.x", "s.1", "s.2", "s.1"],
+    "Expected": ["Coincidences in variables occurred\n"]
+  },
+  {
+    "TestCase": ["e.x", "e.q"],
+    "Expected": ["Coincidences in variables occurred\n"]
+  },
+  {
+    "TestCase": ["t.y"],
+    "Expected": []
+  },
+  {
+    "TestCase": ["e.x", "s.1", "s.2", "t.xx"],
+    "Expected": []
+  },
+  {
+    "TestCase": ["e.x", "q.1"],
+    "Expected": ["Incorrect variable type\n"]
+  }
+]
