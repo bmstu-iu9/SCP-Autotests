@@ -1,154 +1,154 @@
 [
   {
-    "TestPath": "tests/test_AB_tail.ref",
-    "Expected": "e.q = <Check <ReplaceAB ()e.q>>;"
+    "TestCase": ["tests/test_AB_tail.ref"],
+    "Expected": ["e.q = <Check <ReplaceAB ()e.q>>;"]
   },
   {
-    "TestPath": "tests/test_AB_tail_complex1.ref",
-    "Expected": "(e.q s.x) s.y e.qq = <Check <ReplaceAB ()e.q>>;"
+    "TestCase": ["tests/test_AB_tail_complex1.ref"],
+    "Expected": ["(e.q s.x) s.y e.qq = <Check <ReplaceAB ()e.q>>;"]
   },
   {
-    "TestPath": "tests/test_AB_tail_complex2.ref",
-    "Expected": "e.q = <Check <ReplaceAB ()e.q>>;"
+    "TestCase": ["tests/test_AB_tail_complex2.ref"],
+    "Expected": ["e.q = <Check <ReplaceAB ()e.q>>;"]
   },
   {
-    "TestPath": "tests/test_ABmoved.ref",
-    "Expected": "e.p = <Check <DelAB ( )e.p>>;"
+    "TestCase": ["tests/test_ABmoved.ref"],
+    "Expected": ["e.p = <Check <DelAB ( )e.p>>;"]
   },
   {
-    "TestPath": "tests/test_ABplusPrefix.ref",
-    "Expected": "(e.x) e.y = <Prefix (e.x) <Concat (e.x) e.y>>;"
+    "TestCase": ["tests/test_ABplusPrefix.ref"],
+    "Expected": ["(e.x) e.y = <Prefix (e.x) <Concat (e.x) e.y>>;"]
   },
   {
-    "TestPath": "tests/test_ba1.ref",
-    "Expected": "e.x = <Check <F e.x>>;"
+    "TestCase": ["tests/test_ba1.ref"],
+    "Expected": ["e.x = <Check <F e.x>>;"]
   },
   {
-    "TestPath": "tests/test_ba2.ref",
-    "Expected": "e.x = <Check <F e.x>>;"
+    "TestCase": ["tests/test_ba2.ref"],
+    "Expected": ["e.x = <Check <F e.x>>;"]
   },
   {
-    "TestPath": "tests/test_ba_incorrect.ref",
-    "Expected": "e.x = <Check <F e.x>>;"
+    "TestCase": ["tests/test_ba_incorrect.ref"],
+    "Expected": ["e.x = <Check <F e.x>>;"]
   },
   {
-    "TestPath": "tests/test_eqlemmas0.ref",
-    "Expected": "e.X = <F1 (e.X) ( )( )>;"
+    "TestCase": ["tests/test_eqlemmas0.ref"],
+    "Expected": ["e.X = <F1 (e.X) ( )( )>;"]
   },
   {
-    "TestPath": "tests/test_eqsASrestr.ref",
-    "Expected": "e.x = <F <Equal ('A'e.x)(e.x 'A')>>;"
+    "TestCase": ["tests/test_eqsASrestr.ref"],
+    "Expected": ["e.x = <F <Equal ('A'e.x)(e.x 'A')>>;"]
   },
   {
-    "TestPath": "tests/test_Fabc.ref",
-    "Expected": "e.InitialString = <G <F e.InitialString>>;"
+    "TestCase": ["tests/test_Fabc.ref"],
+    "Expected": ["e.InitialString = <G <F e.InitialString>>;"]
   },
   {
-    "TestPath": "tests/test_Fabc_finalph.ref",
-    "Expected": "e.InitialString = <G <F e.InitialString>>;"
+    "TestCase": ["tests/test_Fabc_finalph.ref"],
+    "Expected": ["e.InitialString = <G <F e.InitialString>>;"]
   },
   {
-    "TestPath": "tests/test_Fabr.ref",
-    "Expected": "e.X = <Fabr (e.X 'A') ()>;"
+    "TestCase": ["tests/test_Fabr.ref"],
+    "Expected": ["e.X = <Fabr (e.X 'A') ()>;"]
   },
   {
-    "TestPath": "tests/test_fib.ref",
-    "Expected": "e.Number = <Fib 'SS'e.Number>;"
+    "TestCase": ["tests/test_fib.ref"],
+    "Expected": ["e.Number = <Fib 'SS'e.Number>;"]
   },
   {
-    "TestPath": "tests/test_FibWord.ref",
-    "Expected": "e.Word = <NextFibWord ( ) e.Word>;"
+    "TestCase": ["tests/test_FibWord.ref"],
+    "Expected": ["e.Word = <NextFibWord ( ) e.Word>;"]
   },
   {
-    "TestPath": "tests/test_finiteletter.ref",
-    "Expected": "(s.z1 s.z2 s.z3 s.z4 e.x1) = <CheckQuad <Format1 (s.z1 s.z2 s.z3 s.z4)(s.z1 s.z2 s.z3 s.z4 e.x1)> >;"
+    "TestCase": ["tests/test_finiteletter.ref"],
+    "Expected": ["(s.z1 s.z2 s.z3 s.z4 e.x1) = <CheckQuad <Format1 (s.z1 s.z2 s.z3 s.z4)(s.z1 s.z2 s.z3 s.z4 e.x1)> >;"]
   },
   {
-    "TestPath": "tests/test_KMPtest.ref",
-    "Expected": "(e.x)e.y = <Match ('AAABAAAABB') e.y>;"
+    "TestCase": ["tests/test_KMPtest.ref"],
+    "Expected": ["(e.x)e.y = <Match ('AAABAAAABB') e.y>;"]
   },
   {
-    "TestPath": "tests/test_look.ref",
-    "Expected": "(e.Str1) e.Str2 = <F ('1' e.Str2 e.Str2 '101') (e.Str1 e.Str1)>;"
+    "TestCase": ["tests/test_look.ref"],
+    "Expected": ["(e.Str1) e.Str2 = <F ('1' e.Str2 e.Str2 '101') (e.Str1 e.Str1)>;"]
   },
   {
-    "TestPath": "tests/test_nonquadratic.ref",
-    "Expected": "e.y = <BadF e.y e.y e.y>;"
+    "TestCase": ["tests/test_nonquadratic.ref"],
+    "Expected": ["e.y = <BadF e.y e.y e.y>;"]
   },
   {
-    "TestPath": "tests/test_openvars.ref",
-    "Expected": "e.w = <F <H e.w> e.w>;"
+    "TestCase": ["tests/test_openvars.ref"],
+    "Expected": ["e.w = <F <H e.w> e.w>;"]
   },
   {
-    "TestPath": "tests/test_order.ref",
-    "Expected": "e.x = <F <G'B'> <H e.x> <G 'A'>>;"
+    "TestCase": ["tests/test_order.ref"],
+    "Expected": ["e.x = <F <G'B'> <H e.x> <G 'A'>>;"]
   },
   {
-    "TestPath": "tests/test_palplusAB.ref",
-    "Expected": "e.x = <Pal e.x 'AB' <Inv e.x>>;"
+    "TestCase": ["tests/test_palplusAB.ref"],
+    "Expected": ["e.x = <Pal e.x 'AB' <Inv e.x>>;"]
   },
   {
-    "TestPath": "tests/test_prefix.ref",
-    "Expected": "(e.x) e.y = <Prefix (e.x) <Concat (e.x) e.y>>;"
+    "TestCase": ["tests/test_prefix.ref"],
+    "Expected": ["(e.x) e.y = <Prefix (e.x) <Concat (e.x) e.y>>;"]
   },
   {
-    "TestPath": "tests/test_PrefixA.ref",
-    "Expected": "(e.x) e.y = <Prefix (e.x) <Concat ('A' e.x) e.y>>;"
+    "TestCase": ["tests/test_PrefixA.ref"],
+    "Expected": ["(e.x) e.y = <Prefix (e.x) <Concat ('A' e.x) e.y>>;"]
   },
   {
-    "TestPath": "tests/test_ProtoSafe.ref",
-    "Expected": "e.p = <while (e.p) (x1 )(x2 )(s 'I')>;"
+    "TestCase": ["tests/test_ProtoSafe.ref"],
+    "Expected": ["e.p = <while (e.p) (x1 )(x2 )(s 'I')>;"]
   },
   {
-    "TestPath": "tests/test_ProtoUnsafe.ref",
-    "Expected": "e.p = <while (e.p) (x1 )(x2 )(s 'I')>;"
+    "TestCase": ["tests/test_ProtoUnsafe.ref"],
+    "Expected": ["e.p = <while (e.p) (x1 )(x2 )(s 'I')>;"]
   },
   {
-    "TestPath": "tests/test_Script.ref",
-    "Expected": "e.p = <Check <ReplaceIp e.p>>;"
+    "TestCase": ["tests/test_Script.ref"],
+    "Expected": ["e.p = <Check <ReplaceIp e.p>>;"]
   },
   {
-    "TestPath": "tests/test_script0.ref",
-    "Expected": "e.p = <Check <Delscript e.p>>;"
+    "TestCase": ["tests/test_script0.ref"],
+    "Expected": ["e.p = <Check <Delscript e.p>>;"]
   },
   {
-    "TestPath": "tests/test_Script1.ref",
-    "Expected": "e.p = <Check <Delscript e.p>>;"
+    "TestCase": ["tests/test_Script1.ref"],
+    "Expected": ["e.p = <Check <Delscript e.p>>;"]
   },
   {
-    "TestPath": "tests/test_Script2.ref",
-    "Expected": "e.p = <Check <ReplaceBr1 e.p>>;"
+    "TestCase": ["tests/test_Script2.ref"],
+    "Expected": ["e.p = <Check <ReplaceBr1 e.p>>;"]
   },
   {
-    "TestPath": "tests/test_Script3.ref",
-    "Expected": "e.p = <Check <ReplaceIp e.p>>;"
+    "TestCase": ["tests/test_Script3.ref"],
+    "Expected": ["e.p = <Check <ReplaceIp e.p>>;"]
   },
   {
-    "TestPath": "tests/test_scriptComplex.ref",
-    "Expected": "e.Text = <Test <Interpret <RpHC <RpLb e.Text>>>>;"
+    "TestCase": ["tests/test_scriptComplex.ref"],
+    "Expected": ["e.Text = <Test <Interpret <RpHC <RpLb e.Text>>>>;"]
   },
   {
-    "TestPath": "tests/test_Singapore.ref",
-    "Expected": "e.p = <G0 <GramA e.p> <GramB e.p> <GramC e.p>>;"
+    "TestCase": ["tests/test_Singapore.ref"],
+    "Expected": ["e.p = <G0 <GramA e.p> <GramB e.p> <GramC e.p>>;"]
   },
   {
-    "TestPath": "tests/test_SqSum.ref",
-    "Expected": "e.x = <Sq e.x'I'>;"
+    "TestCase": ["tests/test_SqSum.ref"],
+    "Expected": ["e.x = <Sq e.x'I'>;"]
   },
   {
-    "TestPath": "tests/test_strangeprefix.ref",
-    "Expected": "(e.x) e.y = <Prefix (e.x) <Concat (e.x) e.y>>;"
+    "TestCase": ["tests/test_strangeprefix.ref"],
+    "Expected": ["(e.x) e.y = <Prefix (e.x) <Concat (e.x) e.y>>;"]
   },
   {
-    "TestPath": "tests/test_sumcomm.ref",
-    "Expected": "(e.p)e.q = <Test <Unary ()(e.p)()(e.q)>>;"
+    "TestCase": ["tests/test_sumcomm.ref"],
+    "Expected": ["(e.p)e.q = <Test <Unary ()(e.p)()(e.q)>>;"]
   },
   {
-    "TestPath": "tests/test_Sweden.ref",
-    "Expected": "(e.y) (e.x) (e.N) = <G0 (e.y) (e.x) (<Gram e.N>)>;"
+    "TestCase": ["tests/test_Sweden.ref"],
+    "Expected": ["(e.y) (e.x) (e.N) = <G0 (e.y) (e.x) (<Gram e.N>)>;"]
   },
   {
-    "TestPath": "tests/test_unused.ref",
-    "Expected": "e.X = <F (e.X)'B'>;"
+    "TestCase": ["tests/test_unused.ref"],
+    "Expected": ["e.X = <F (e.X)'B'>;"]
   }
 ]

@@ -8,36 +8,47 @@ import (
 	"testing"
 )
 
-func TestCheckEntry(t *testing.T) {
-	jsonStorage, err := os.Open("tests/entry_point_tests.json")
+type Test struct {
+	TestCase []string `json:"TestCase"`
+	Expected []string `json:"Expected"`
+}
+
+func getTestsFromFile(path string) ([]Test, error) {
+	jsonStorage, err := os.Open(path)
 	if err != nil {
-		t.Error(err)
+		return nil, err
 	}
 
 	defer jsonStorage.Close()
 
 	data, err := ioutil.ReadAll(jsonStorage)
 	if err != nil {
-		t.Error(err)
+		return nil, err
 	}
 
-	var tests []struct {
-		TestPath string `json:"TestPath"`
-		Expected  string `json:"Expected"`
-	}
+	var tests []Test
 
 	if err = json.Unmarshal(data, &tests); err != nil {
+		return nil, err
+	}
+
+	return tests, nil
+}
+
+func TestCheckEntry(t *testing.T) {
+	tests, err := getTestsFromFile("tests/entry_point_tests.json")
+	if err != nil {
 		t.Error(err)
 	}
 
 	for _, test := range tests {
-		t.Run(test.TestPath, func(t *testing.T){
-			res, err := checkFile(test.TestPath)
+		t.Run(test.TestCase[0], func(t *testing.T) {
+			res, err := checkFile(test.TestCase[0])
 			if err != nil {
 				t.Error(err)
 			} else {
-				if test.Expected != strings.TrimSpace(string(res)) {
-					t.Errorf("Incorrect result\nExpected: %s\nRecieved: %s", test.Expected, res)
+				if test.Expected[0] != strings.TrimSpace(string(res)) {
+					t.Errorf("Incorrect result\nExpected: %s\nRecieved: %s", test.Expected[0], res)
 				}
 			}
 		})
