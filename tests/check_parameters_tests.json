@@ -1,7 +1,7 @@
 [
   {
     "TestCase": ["(e.x e.x) e.y"],
-    "Expected": ["Coincidences in variables occurred\n"]
+    "Expected": ["More than one e-variable occurred\n"]
   },
   {
     "TestCase": ["(e.x s.y (s.z)) e.y"],
@@ -13,7 +13,7 @@
   },
   {
     "TestCase": ["(e.x) e.y (e.z) e.q"],
-    "Expected": ["Coincidences in variables occurred\n"]
+    "Expected": ["More than one e-variable occurred\n"]
   },
   {
     "TestCase": ["(e.x) e.y (e.z)"],

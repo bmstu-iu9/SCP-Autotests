@@ -50,16 +50,17 @@ func splitToTokens(params string) ([]string, error) {
 */
 func checkTokens(tokens []string) error {
 	var noParenthesesTokens []string
+	coincidences := make(map[string]bool)
 	for _, t := range tokens {
 		if strings.Index(t, "(") == -1 && strings.Index(t, ")") == -1 {
 			noParenthesesTokens = append(noParenthesesTokens, t)
 		} else if strings.LastIndex(t, "(") != 0 || strings.Index(t, ")") != len(t) - 1 {
 			return errors.New("Nested parentheses occurred\n")
-		} else if err := checkVariables(strings.Split(t[ 1: len(t) - 1], " ")); err != nil {
+		} else if err := checkVariables(strings.Split(t[ 1: len(t) - 1], " "), &coincidences); err != nil {
 			return err
 		}
 	}
-	if err := checkVariables(noParenthesesTokens); err != nil {
+	if err := checkVariables(noParenthesesTokens, &coincidences); err != nil {
 		return err
 	}
 	return nil
@@ -70,19 +71,23 @@ func checkTokens(tokens []string) error {
 	The set is checked whether there are any coincidences in t- and s-variables and more than one e-variable.
 	An error is returned.
  */
-func checkVariables(vars []string) error {
-	coincidences := make(map[string]bool)
+func checkVariables(vars []string, coincidences *map[string]bool) error {
 	for _, v := range vars {
 		if strings.HasPrefix(v, "e.") {
-			v = "e"
+			if (*coincidences)["e"] {
+				return errors.New("More than one e-variable occurred\n")
+			} else {
+				(*coincidences)["e"] = true
+			}
 		} else if !strings.HasPrefix(v, "s.") && !strings.HasPrefix(v, "t.") {
 			return errors.New("Incorrect variable type\n")
 		}
-		if coincidences[v] {
+		if (*coincidences)[v] {
 			return errors.New("Coincidences in variables occurred\n")
 		} else {
-			coincidences[v] = true
+			(*coincidences)[v] = true
 		}
 	}
+	(*coincidences)["e"] = false
 	return nil
 }

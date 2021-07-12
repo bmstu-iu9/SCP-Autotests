@@ -74,7 +74,8 @@ func TestCheckVariables(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(strings.Join(test.TestCase, " "), func(t *testing.T) {
-			if err = checkVariables(test.TestCase); err != nil && test.Expected[0] != err.Error() {
+			coincidences := make(map[string]bool)
+			if err = checkVariables(test.TestCase, &coincidences); err != nil && test.Expected[0] != err.Error() {
 				t.Errorf("Incorrect error recognition\nExpected: %s\nRecieved: %s", test.Expected[0], err.Error())
 			}
 		})
