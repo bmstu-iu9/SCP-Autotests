@@ -61,7 +61,3 @@ func checkFile(path string) ([]byte, error) {
 	}
 	return []byte(outString), nil
 }
-
-func main(){
-	checkFile("./tests/test_....ref")	// подставьте вместо многоточия нужный файл
-}
