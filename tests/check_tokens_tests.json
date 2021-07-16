@@ -4,10 +4,6 @@
     "Expected": ["More than one e-variable occurred\n"]
   },
   {
-    "TestCase": ["(e.x s.y (s.z))", "e.y"],
-    "Expected": ["Nested parentheses occurred\n"]
-  },
-  {
     "TestCase": ["e.x", "s.1", "s.2", "s.1"],
     "Expected": ["Coincidences in variables occurred\n"]
   },
@@ -22,10 +18,6 @@
   {
     "TestCase": ["(e.x s.1 s.2 t.xx)"],
     "Expected": []
-  },
-  {
-    "TestCase": ["(e.x ())", "(s.1 s.2)", "(t.xx)"],
-    "Expected": ["Nested parentheses occurred\n"]
   },
   {
     "TestCase": ["e.x", "t.x"],

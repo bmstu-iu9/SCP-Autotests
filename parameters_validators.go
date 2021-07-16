@@ -24,22 +24,46 @@ func checkParameters(params string) ([]string, error) {
 	and returns tokens or an error that there are not enough parentheses in the string
  */
 func splitToTokens(params string) ([]string, error) {
-	tokens := strings.Split(params, " ")
-	for i := 0; i < len(tokens); i++ {
-		if len(tokens[i]) == 0 {
-			tokens = append(tokens[ : i], tokens[i + 1 :]...)
-			i--
-		} else if tokens[i][0] == '(' && tokens[i][len(tokens[i]) - 1] != ')' {
-			j := i + 1
-			for ;j < len(tokens) && tokens[j][len(tokens[j]) - 1] != ')'; j++ {	}
-			if j == len(tokens) {
+	tokens := make([]string, 0)
+	var currentToken string
+	for _, c := range params {
+		if c == '(' {
+			if len(currentToken) != 0 {
+				if currentToken[0] == '(' {
+					return nil, errors.New("Nested parentheses occurred\n")
+				} else {
+					tokens = append(tokens, currentToken)
+				}
+			}
+			currentToken = string(c)
+		} else if c == ')' {
+			if len(currentToken) == 0 || currentToken[0] != '(' {
 				return nil, errors.New("Not enough parentheses\n")
 			}
-			tokens[i] = strings.Join(tokens[i : j + 1], " ")
-			tokens = append(tokens[ : i + 1], tokens[j + 1 : ]...)
+			currentToken = strings.TrimSpace(currentToken)
+			tokens = append(tokens, currentToken + string(c))
+			currentToken = ""
+		} else if c == ' ' {
+			if len(currentToken) != 0 {
+				if currentToken[0] == '(' {
+					if len(currentToken) != 1 && currentToken[len(currentToken)-1] != ' ' {
+						currentToken += string(c)
+					}
+				} else {
+					tokens = append(tokens, currentToken)
+					currentToken = ""
+				}
+			}
+		} else {
+			currentToken += string(c)
 		}
 	}
-
+	if len(currentToken) != 0 {
+		if len(currentToken) > 2 && currentToken[0] == '(' && currentToken[len(currentToken) - 1] != ')' {
+			return nil, errors.New("Not enough parentheses\n")
+		}
+		tokens = append(tokens, currentToken)
+	}
 	return tokens, nil
 }
 
@@ -52,8 +76,6 @@ func checkTokens(tokens []string) error {
 	for _, t := range tokens {
 		if strings.Index(t, "(") == -1 && strings.Index(t, ")") == -1 {
 			noParenthesesTokens = append(noParenthesesTokens, t)
-		} else if strings.LastIndex(t, "(") != 0 || strings.Index(t, ")") != len(t) - 1 {
-			return errors.New("Nested parentheses occurred\n")
 		} else if err := checkVariables(strings.Split(t[ 1: len(t) - 1], " "), &coincidences); err != nil {
 			return err
 		}
