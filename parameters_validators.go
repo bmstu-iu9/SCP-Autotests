@@ -37,11 +37,6 @@ func splitToTokens(params string) ([]string, error) {
 			}
 			tokens[i] = strings.Join(tokens[i : j + 1], " ")
 			tokens = append(tokens[ : i + 1], tokens[j + 1 : ]...)
-		} else if tokens[i][0] != '(' {
-			j := i + 1
-			for ;j < len(tokens) && tokens[j][0] != '('; j++ {	}
-			tokens[i] = strings.Join(tokens[i : j], " ")
-			tokens = append(tokens[ : i + 1], tokens[j : ]...)
 		}
 	}
 
@@ -56,7 +51,7 @@ func checkTokens(tokens []string) error {
 	coincidences := make(map[string]bool)
 	for _, t := range tokens {
 		if strings.Index(t, "(") == -1 && strings.Index(t, ")") == -1 {
-			noParenthesesTokens = append(noParenthesesTokens, strings.Split(t, " ")...)
+			noParenthesesTokens = append(noParenthesesTokens, t)
 		} else if strings.LastIndex(t, "(") != 0 || strings.Index(t, ")") != len(t) - 1 {
 			return errors.New("Nested parentheses occurred\n")
 		} else if err := checkVariables(strings.Split(t[ 1: len(t) - 1], " "), &coincidences); err != nil {

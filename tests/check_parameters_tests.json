@@ -33,7 +33,7 @@
   },
   {
     "TestCase": ["e.x t.x"],
-    "Expected": ["e.x t.x"]
+    "Expected": ["e.x", "t.x"]
   },
   {
     "TestCase": ["e.x q.1"],
@@ -41,6 +41,6 @@
   },
   {
     "TestCase": ["e.x s.3 (s.1 s.2) t.w s.u"],
-    "Expected": ["e.x s.3", "(s.1 s.2)", "t.w s.u"]
+    "Expected": ["e.x", "s.3", "(s.1 s.2)", "t.w", "s.u"]
   }
 ]
