@@ -43,72 +43,6 @@ func mapDataToParameters(tokens []string, data string) (map[string]string, error
 }
 
 /*
-	Function gets a string, an integer from which character in order start to parse the string and
-	one of two characters: ')' or '('. It recognises a string enclosed with single quotes or a macrodigit and
-	returns an integer where a string or a set of macrodigits ends.
-*/
-func parse(data string, i int, c byte) (int, error) {
-	for ; i < len(data) && data[i] != c; i++ {
-		if data[i] == '\'' {
-			if j, err := parseString(data, i+1); err != nil {
-				return -1, err
-			} else {
-				i = j
-			}
-		} else if data[i] >= '0' && data[i] <= '9' {
-			if j, err := parseMacrodigit(data, i+1); err != nil {
-				return -1, err
-			} else {
-				i = j - 1
-			}
-		} else if data[i] == '(' {
-			if j, err := parse(data, i + 1, ')'); err != nil {
-				return -1, err
-			} else {
-				i = j
-			}
-		} else if data[i] != ' ' {
-			return -1, errors.New("Invalid data\n")
-		}
-	}
-	if c == ')' && i == len(data) {
-		return -1, errors.New("Not enough parentheses\n")
-	}
-	return i, nil
-}
-
-/*
-	Function is a helper to function parse. It recognises a string enclosed by single quotes and
-	returns	an integer where the string ends.
-*/
-func parseString(data string, i int) (int, error) {
-	for ; i < len(data) && data[i] != '\''; i++ {
-		if data[i] == '\\' {
-			i++
-		}
-	}
-	if i == len(data) {
-		return -1, errors.New("Invalid data\n")
-	} else {
-		return i, nil
-	}
-}
-
-/*
-	Function is a helper to function parse. It recognises a macrodigit and
-	returns	an integer where the macrodigit ends.
-*/
-func parseMacrodigit(data string, i int) (int, error) {
-	for ; i < len(data) && data[i] >= '0' && data[i] <= '9'; i++ {
-	}
-	if i != len(data) && data[i] != ' ' && data[i] != ')' && data[i] != '\'' {
-		return -1, errors.New("Invalid data\n")
-	} else {
-		return i, nil
-	}
-}
-
-/*
 	Function gets a token with no parentheses, data with no parentheses out of quotes and
 	a pointer to map that was described in comment to mapDataToParameters function.
 	The function in two loops assigns values to variables by helper matchDataHelper.
@@ -158,14 +92,80 @@ func matchDataHelper(token string, data *string, values *map[string]string, reve
 		} else {
 			inParenthesesData = (*data)[1:i]
 		}
-		*data = (*data)[i + 1 :]
-		if err = matchData(strings.Split(token[1:len(token) - 1], " "), &inParenthesesData, values); err != nil {
+		*data = (*data)[i+1:]
+		if err = matchData(strings.Split(token[1:len(token)-1], " "), &inParenthesesData, values); err != nil {
 			return err
 		}
 	} else if err := extractValue(token, data, values, true); err != nil {
 		return err
 	}
 	return nil
+}
+
+/*
+	Function gets a string, an integer from which character in order start to parse the string and
+	one of two characters: ')' or '('. It recognises a string enclosed with single quotes or a macrodigit and
+	returns an integer where a string or a set of macrodigits ends.
+*/
+func parse(data string, i int, c byte) (int, error) {
+	for ; i < len(data) && data[i] != c; i++ {
+		if data[i] == '\'' {
+			if j, err := parseString(data, i+1); err != nil {
+				return -1, err
+			} else {
+				i = j
+			}
+		} else if data[i] >= '0' && data[i] <= '9' {
+			if j, err := parseMacrodigit(data, i+1); err != nil {
+				return -1, err
+			} else {
+				i = j - 1
+			}
+		} else if data[i] == '(' {
+			if j, err := parse(data, i+1, ')'); err != nil {
+				return -1, err
+			} else {
+				i = j
+			}
+		} else if data[i] != ' ' {
+			return -1, errors.New("Invalid data\n")
+		}
+	}
+	if c == ')' && i == len(data) {
+		return -1, errors.New("Not enough parentheses\n")
+	}
+	return i, nil
+}
+
+/*
+	Function is a helper to function parse. It recognises a string enclosed by single quotes and
+	returns	an integer where the string ends.
+*/
+func parseString(data string, i int) (int, error) {
+	for ; i < len(data) && data[i] != '\''; i++ {
+		if data[i] == '\\' {
+			i++
+		}
+	}
+	if i == len(data) {
+		return -1, errors.New("Invalid data\n")
+	} else {
+		return i, nil
+	}
+}
+
+/*
+	Function is a helper to function parse. It recognises a macrodigit and
+	returns	an integer where the macrodigit ends.
+*/
+func parseMacrodigit(data string, i int) (int, error) {
+	for ; i < len(data) && data[i] >= '0' && data[i] <= '9'; i++ {
+	}
+	if i != len(data) && data[i] != ' ' && data[i] != ')' && data[i] != '\'' {
+		return -1, errors.New("Invalid data\n")
+	} else {
+		return i, nil
+	}
 }
 
 /*
