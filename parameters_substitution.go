@@ -34,55 +34,12 @@ func getUnparametrizedEntryPoint(path, data string) ([]byte, error) {
 */
 func mapDataToParameters(tokens []string, data string) (map[string]string, error) {
 	values := make(map[string]string)
-	splitData, err := splitData(data)
-	if err != nil {
+	data = strings.ReplaceAll(data, "\\(", "(")
+	data = strings.ReplaceAll(data, "\\)", ")")
+	if err := matchData(tokens, &data, &values); err != nil {
 		return nil, err
 	}
-	if len(tokens) != len(splitData) {
-		return nil, errors.New("Mapping is not possible\n")
-	} else {
-		for i, t := range tokens {
-			if strings.HasPrefix(t, "(") {
-				if !strings.HasPrefix(splitData[i], "(") {
-					return nil, errors.New("Mapping is not possible\n")
-				} else if err = matchData(t[1:len(t)-1], splitData[i][1:len(splitData[i])-1], &values); err != nil {
-					return nil, err
-				}
-			} else if err = matchData(t, splitData[i], &values); err != nil {
-				return nil, err
-			}
-		}
-	}
 	return values, nil
-}
-
-/*
-	Function gets the data that should substitute the parameters in entry point of a Refal-program and
-	split it by parentheses. It returns split data.
-*/
-func splitData(data string) ([]string, error) {
-	splitData := make([]string, 0)
-	if len(data) == 0 {
-		return []string{""}, nil
-	}
-	for i := 0; i < len(data); i++ {
-		if data[i] == '(' {
-			j, err := parse(data, i+1, ')')
-			if err != nil {
-				return nil, err
-			}
-			splitData = append(splitData, strings.TrimSpace(data[i:j+1]))
-			i = j
-		} else if data[i] != ' ' {
-			j, err := parse(data, i, '(')
-			if err != nil {
-				return nil, err
-			}
-			splitData = append(splitData, strings.TrimSpace(data[i:j]))
-			i = j - 1
-		}
-	}
-	return splitData, nil
 }
 
 /*
@@ -104,8 +61,14 @@ func parse(data string, i int, c byte) (int, error) {
 			} else {
 				i = j - 1
 			}
+		} else if data[i] == '(' {
+			if j, err := parse(data, i + 1, ')'); err != nil {
+				return -1, err
+			} else {
+				i = j
+			}
 		} else if data[i] != ' ' {
-			return -1, errors.New("Only strings enclosed with single quotes are supported\n")
+			return -1, errors.New("Invalid data\n")
 		}
 	}
 	if c == ')' && i == len(data) {
@@ -125,7 +88,7 @@ func parseString(data string, i int) (int, error) {
 		}
 	}
 	if i == len(data) {
-		return -1, errors.New("Incorrect string definition\n")
+		return -1, errors.New("Invalid data\n")
 	} else {
 		return i, nil
 	}
@@ -136,10 +99,10 @@ func parseString(data string, i int) (int, error) {
 	returns	an integer where the macrodigit ends.
 */
 func parseMacrodigit(data string, i int) (int, error) {
-	for ; i < len(data) && (data[i] >= '0' && data[i] <= '9') && data[i] != ' ' && data[i] != ')' && data[i] != '\''; i++ {
+	for ; i < len(data) && data[i] >= '0' && data[i] <= '9'; i++ {
 	}
 	if i != len(data) && data[i] != ' ' && data[i] != ')' && data[i] != '\'' {
-		return -1, errors.New("Incorrect macrodigit definition\n")
+		return -1, errors.New("Invalid data\n")
 	} else {
 		return i, nil
 	}
@@ -148,28 +111,60 @@ func parseMacrodigit(data string, i int) (int, error) {
 /*
 	Function gets a token with no parentheses, data with no parentheses out of quotes and
 	a pointer to map that was described in comment to mapDataToParameters function.
-	A token is split by a space in order to get variables of e, s, t dimension.
-	A value is set to each variable in two loops by the function extractValue.
-	The first loop goes from the starting point to the left till e-variable.
-	The second loop - from the ending point to the right till e-variable (that is why the data string is reversed).
+	The function in two loops assigns values to variables by helper matchDataHelper.
+	The first loop goes from the starting point to the right till e-variable.
+	The second loop - from the ending point to the left till e-variable (that is why the data string is reversed).
 */
-func matchData(token string, data string, values *map[string]string) error {
-	vars := strings.Split(token, " ")
-	data = strings.ReplaceAll(data, "\\(", "(")
-	data = strings.ReplaceAll(data, "\\)", ")")
+func matchData(tokens []string, data *string, values *map[string]string) error {
 	i := 0
-	for ; i < len(vars) && vars[i][0] != 'e'; i++ {
-		if err := extractValue(vars[i], &data, values, false); err != nil {
+	for ; i < len(tokens) && tokens[i][0] != 'e'; i++ {
+		if err := matchDataHelper(tokens[i], data, values, false); err != nil {
 			return err
 		}
 	}
-	data = reverse(data)
-	for j := len(vars) - 1; j != i; j-- {
-		if err := extractValue(vars[j], &data, values, true); err != nil {
+	if len(tokens) != i {
+		*data = reverse(*data)
+		for j := len(tokens) - 1; j != i; j-- {
+			if err := matchDataHelper(tokens[i], data, values, true); err != nil {
+				return err
+			}
+		}
+		(*values)[tokens[i]] = reverse(*data)
+	} else if len(*data) != 0 {
+		return errors.New("Recognition impossible\n")
+	}
+	return nil
+}
+
+/*
+	Function is a helper to function matchData.
+	If a token is enclosed with parentheses, function parse finds the substring in data
+	that is also enclosed with structural parentheses. So, matchDataHelper is called recursively
+	in order to work with a variable of e, s, t dimension.
+	A value is set to each variable by the function extractValue.
+*/
+func matchDataHelper(token string, data *string, values *map[string]string, reverseInd bool) error {
+	if token[0] == '(' {
+		if (*data)[0] != '(' {
+			return errors.New("Recognition impossible\n")
+		}
+		i, err := parse(*data, 1, ')')
+		if err != nil {
 			return err
 		}
+		var inParenthesesData string
+		if reverseInd {
+			inParenthesesData = reverse((*data)[1:i])
+		} else {
+			inParenthesesData = (*data)[1:i]
+		}
+		*data = (*data)[i + 1 :]
+		if err = matchData(strings.Split(token[1:len(token) - 1], " "), &inParenthesesData, values); err != nil {
+			return err
+		}
+	} else if err := extractValue(token, data, values, true); err != nil {
+		return err
 	}
-	(*values)[vars[i]] = reverse(data)
 	return nil
 }
 
@@ -204,15 +199,15 @@ func extractValue(variable string, data *string, values *map[string]string, reve
 	Function recognises a term, which can be an expression enclosed by parentheses or a symbol.
 */
 func term(data *string) (res string, err error) {
-	if strings.HasPrefix(*data, "'(") {
-		i := 2
-		for ; i < len(*data) && (*data)[i] != '\'' && (*data)[i] != ')'; i++ {
-		}
-		if i != len(*data) && (*data)[i] != '\'' {
-			res = (*data)[:i+1] + "'"
-			*data = (*data)[i+1:]
+	var j int
+	if (*data)[0] == '(' {
+		j, err = parse(*data, 1, ')')
+		if err != nil {
 			return
 		}
+		res = (*data)[:j+1]
+		*data = (*data)[j+1:]
+		return
 	}
 	res, err = symbol(data)
 	return
@@ -223,6 +218,7 @@ func term(data *string) (res string, err error) {
 	The macrodigit is found by function parseMacrodigit.
 */
 func symbol(data *string) (res string, err error) {
+	var i int
 	if (*data)[0] == '\'' {
 		if (*data)[1] != '\'' {
 			res = "'" + string((*data)[1]) + "'"
@@ -231,7 +227,10 @@ func symbol(data *string) (res string, err error) {
 			err = errors.New("No symbol found\n")
 		}
 	} else {
-		i, _ := parseMacrodigit(*data, 0)
+		i, err = parseMacrodigit(*data, 0)
+		if err != nil {
+			return
+		}
 		res = (*data)[:i]
 		if (*data)[i] == ' ' {
 			*data = (*data)[i+1:]
