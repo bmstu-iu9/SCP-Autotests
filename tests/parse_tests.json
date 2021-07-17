@@ -1,0 +1,46 @@
+[
+  {
+    "TestCase": ["'ababa'", ")"],
+    "Expected": ["Not enough parentheses\n"]
+  },
+  {
+    "TestCase": ["ababa'", ")"],
+    "Expected": ["Invalid data\n"]
+  },
+  {
+    "TestCase": ["ababa'", "("],
+    "Expected": ["Invalid data\n"]
+  },
+  {
+    "TestCase": ["'a''as'12", "("],
+    "Expected": ["9"]
+  },
+  {
+    "TestCase": ["'a''as'12", ")"],
+    "Expected": ["Not enough parentheses\n"]
+  },
+  {
+    "TestCase": ["'a'    12", "("],
+    "Expected": ["9"]
+  },
+  {
+    "TestCase": ["'a''as')12", ")"],
+    "Expected": ["7"]
+  },
+  {
+    "TestCase": ["123()", "("],
+    "Expected": ["3"]
+  },
+  {
+    "TestCase": ["(('a'))) 's'", ")"],
+    "Expected": ["7"]
+  },
+  {
+    "TestCase": ["1 'a'2 ())", ")"],
+    "Expected": ["9"]
+  },
+  {
+    "TestCase": ["1 'a'2 ()", "("],
+    "Expected": ["7"]
+  }
+]
