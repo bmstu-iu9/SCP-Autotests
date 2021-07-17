@@ -97,7 +97,9 @@ func checkTokens(tokens []string) error {
 */
 func checkVariables(vars []string, coincidences *map[string]bool) error {
 	for _, v := range vars {
-		if strings.HasPrefix(v, "e.") {
+		if len(v) < 3 {
+			return errors.New("Invalid variable\n")
+		} else if strings.HasPrefix(v, "e.") {
 			if (*coincidences)["e"] {
 				return errors.New("More than one e-variable occurred\n")
 			} else {
