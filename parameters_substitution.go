@@ -59,7 +59,7 @@ func matchData(tokens []string, data *string, values *map[string]string) error {
 	if len(tokens) != i {
 		*data = reverse(*data)
 		for j := len(tokens) - 1; j != i; j-- {
-			if err := matchDataHelper(tokens[i], data, values, true); err != nil {
+			if err := matchDataHelper(tokens[j], data, values, true); err != nil {
 				return err
 			}
 		}
@@ -78,6 +78,7 @@ func matchData(tokens []string, data *string, values *map[string]string) error {
 	A value is set to each variable by the function extractValue.
 */
 func matchDataHelper(token string, data *string, values *map[string]string, reverseInd bool) error {
+	*data = strings.TrimSpace(*data)
 	if token[0] == '(' {
 		if (*data)[0] != '(' {
 			return errors.New("Recognition impossible\n")
@@ -96,8 +97,14 @@ func matchDataHelper(token string, data *string, values *map[string]string, reve
 		if err = matchData(strings.Split(token[1:len(token)-1], " "), &inParenthesesData, values); err != nil {
 			return err
 		}
-	} else if err := extractValue(token, data, values, true); err != nil {
-		return err
+	} else if reverseInd {
+		if err := extractValue(token, data, values, true); err != nil {
+			return err
+		}
+	} else {
+		if err := extractValue(token, data, values, false); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -161,7 +168,7 @@ func parseString(data string, i int) (int, error) {
 func parseMacrodigit(data string, i int) (int, error) {
 	for ; i < len(data) && data[i] >= '0' && data[i] <= '9'; i++ {
 	}
-	if i != len(data) && data[i] != ' ' && data[i] != ')' && data[i] != '\'' {
+	if i != len(data) && data[i] != ' ' && data[i] != ')' && data[i] != '(' && data[i] != '\'' {
 		return -1, errors.New("Invalid data\n")
 	} else {
 		return i, nil
@@ -177,7 +184,6 @@ func extractValue(variable string, data *string, values *map[string]string, reve
 		val string
 		err error
 	)
-	*data = strings.TrimSpace(*data)
 	if variable[0] == 't' {
 		val, err = term(data)
 	} else if variable[0] == 's' {
@@ -223,19 +229,28 @@ func symbol(data *string) (res string, err error) {
 		if (*data)[1] != '\'' {
 			res = "'" + string((*data)[1]) + "'"
 			*data = "'" + (*data)[2:]
+			if strings.HasPrefix(*data, "''") {
+				*data = (*data)[2:]
+			}
 		} else {
 			err = errors.New("No symbol found\n")
 		}
+	} else if (*data)[0] == '(' || (*data)[0] == ')' {
+		err = errors.New("Invalid data\n")
 	} else {
 		i, err = parseMacrodigit(*data, 0)
 		if err != nil {
 			return
 		}
 		res = (*data)[:i]
-		if (*data)[i] == ' ' {
-			*data = (*data)[i+1:]
+		if i != len(*data) {
+			if (*data)[i] == ' ' {
+				*data = (*data)[i+1:]
+			} else {
+				*data = (*data)[i:]
+			}
 		} else {
-			*data = (*data)[i:]
+			*data = ""
 		}
 	}
 	return
