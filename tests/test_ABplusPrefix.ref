@@ -11,6 +11,8 @@
 
 *$MST_FROM_ENTRY;
 
+/* Теcты: ('A')'BBA', ('ABABA')'C', ('AABABBA')'BABA'*/
+
 $ENTRY Go {
  (e.x) e.y = <Prefix (e.x) <Concat (e.x) e.y>>;
 }

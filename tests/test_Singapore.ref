@@ -10,6 +10,9 @@
 /*           the input program                 */
 /***********************************************/
 
+/* Теcты: 'I', 'III', 'IIIIIIIIIIII' */
+
+
 $ENTRY Go {
  e.p =  <G0 <GramA e.p> <GramB e.p> <GramC e.p>>; /* The input parameter e.p is N represented as a Peano number. */
 }

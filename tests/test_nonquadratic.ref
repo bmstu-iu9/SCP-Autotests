@@ -12,6 +12,8 @@
 /***********************************************/
 *$MST_FROM_ENTRY;
 
+/* Тесты: 'CC('('A')'C)CC', 'CC((A))CCCBB', 'CBBBBC'('BBB')(('B')'BBB')*/
+
 $ENTRY Go {
  e.y = <BadF e.y e.y e.y>;
 }

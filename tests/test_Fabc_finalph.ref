@@ -6,6 +6,10 @@
 /***********************************************/
 /*           the input program                 */
 /***********************************************/
+
+/* Теcты: 'AAAAAAA', 'ACCA', 'ABABBCCCAA'*/
+
+
 $ENTRY Go {
 	 e.InitialString = <G <F e.InitialString>>;
 }

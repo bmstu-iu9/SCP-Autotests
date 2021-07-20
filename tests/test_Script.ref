@@ -16,6 +16,9 @@
 /*           the input program                 */
 /***********************************************/
 
+/* Теcты: 'ssss<<scriptcript>>', 'ipadipipiiiip', 'aaabbb'('<script>')'resgdbdfnssd' */
+
+
 $ENTRY Go {
    e.p = <Check <ReplaceIp e.p>>;
 }

@@ -17,6 +17,8 @@
 /*           the input program                 */
 /***********************************************/
 
+/* Теcты: 'ssss<<sscriptcript>>', '<sc<scrip<scripttript', '(<script)'('scr<script>') */
+
 $ENTRY Go {
    e.p = <Check <ReplaceBr1 e.p>>;
 }

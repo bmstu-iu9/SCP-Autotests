@@ -12,6 +12,8 @@
 /*           the input program                 */
 /***********************************************/
 
+/* Тесты: 'AAA('('A')'C)CC', 'CC((A))CCCBB', 'BDBBBC'('BBB')(('B')'BBB')*/
+
 $ENTRY Go {
     e.w = <F <H e.w> e.w>; 
 }

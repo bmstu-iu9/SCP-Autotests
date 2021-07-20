@@ -15,30 +15,25 @@ func deleteInsideSpaces(inString string) string {
 }
 
 // поиск точек входа и проверка на единственность
-func entryPointCountExceed(inString string) (bool, string) {
+func entryPointCountExceed(inString string) (bool, string, int, int) {
 	s := inString
 	if strings.Count(s, "$ENTRY") != 1 {
-		return false, inString
+		return false, inString, -1, -1
 	}
 	ind := strings.Index(s, "$ENTRY")
 	if inString[ind+6] == ' ' && inString[ind+7] == 'G' && (inString[ind+8] == 'o' || inString[ind+8] == 'O') {
-		return true, inString[strings.Index(string(inString[ind+8:]), "{")+ind+9 : strings.Index(string(inString[ind+8:]), "}")+ind+8]
+		indBeg := strings.Index(inString[ind+8:], "{")+ind+9
+		indEnd := strings.Index(inString[ind+8:], "}")+ind+8
+		return true, inString[indBeg : indEnd], indBeg, indEnd
 	}
-	return false, inString
+	return false, inString, -1, -1
 }
 
-// обработка файла
-func checkFile(path string) ([]byte, error) {
-	inBytes, err := ioutil.ReadFile(path)
+func cleanBytes(inBytes []byte) []byte {
 	var (
-		indBeg    int
-		indEnd    int
-		outString string
+		indBeg int
+		indEnd int
 	)
-
-	if err != nil {
-		return nil, err
-	}
 
 	for strings.Count(string(inBytes), "/*") > 0 { // удаление многострочных комментариев
 		indBeg = strings.Index(string(inBytes), "/*")
@@ -52,9 +47,21 @@ func checkFile(path string) ([]byte, error) {
 		inBytes = append(inBytes[:indBeg], inBytes[indEnd+1:]...)
 	}
 
+	inBytes = []byte(strings.ReplaceAll(string(inBytes), "  ", " "))
+	return inBytes
+}
+
+// обработка файла
+func checkFile(path string) ([]byte, error) {
+	inBytes, err := ioutil.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+
+	inBytes = cleanBytes(inBytes)
 	var notExceed bool
-	outString = strings.ReplaceAll(string(inBytes), "  ", " ")
-	notExceed, outString = entryPointCountExceed(outString) // поиск точек входа
+	outString := string(inBytes)
+	notExceed, outString, _, _ = entryPointCountExceed(outString) // поиск точек входа
 	outString = deleteInsideSpaces(strings.TrimSpace(outString))
 	if !notExceed {
 		return nil, errors.New("Exceeding of entry points count\n")

@@ -12,6 +12,7 @@
 /***********************************************/
 /*           the input program                 */
 /***********************************************/
+/* Теcты: 'sssinnertext(s<<sscriptcript>>)', 'innertext((innertext(<sc<scrip<scripttript)', '(<script)'innertext('scr<script>') */
 
 $ENTRY Go {
  e.Text =  <Test <Interpret <RpHC <RpLb e.Text>>>>;

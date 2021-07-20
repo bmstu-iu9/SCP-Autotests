@@ -9,6 +9,9 @@
 /*           the input program                 */
 /***********************************************/
 
+/* Тесты: ()'AAABAAAABAAAABAAAABB', (()'A'(()))'AAABAABABB', ('BBB'('B'))'AAABABAABAAAABABAABBAAABAAAABA'*/
+
+
 $ENTRY Go {
    (e.x)e.y = <Match ('AAABAAAABB') e.y>;
 }

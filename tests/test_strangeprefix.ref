@@ -9,6 +9,9 @@
 /*           the input program                 */
 /***********************************************/
 
+/* Теcты: ('A')'BBA', ('BABBB''BABBB''BABBB''BABBB')'BABBB', ('AABAAAA')'BABA'*/
+
+
 $ENTRY Go {
 	 (e.x) e.y = <Prefix (e.x) <Concat (e.x) e.y>>;
 }

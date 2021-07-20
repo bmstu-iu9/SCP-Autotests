@@ -10,6 +10,9 @@
 /*           the input program                 */
 /***********************************************/
 
+/* Тесты: 'AABABA', 'ABAABA', 'BABABBAABBAB'*/
+
+
 $ENTRY Go {
   (s.z1 s.z2 s.z3 s.z4 e.x1)
 	 = <CheckQuad <Format1 (s.z1 s.z2 s.z3 s.z4)(s.z1 s.z2 s.z3 s.z4 e.x1)> >;

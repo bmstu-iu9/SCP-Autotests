@@ -24,6 +24,10 @@
  The input parameters e.x and e.y are arbitrary strings.
  The parameter e.N is an arbitrary path generating an element of L. 
 */
+
+/* Теcты: ('ABBBA')('BBBA')(), ('ABBBA')('BBBA')('ISI'), ('ABABBA')('BABBA')('IISISS') */
+
+
 $ENTRY Go {
  (e.y) (e.x) (e.N) =  <G0 (e.y) (e.x) (<Gram e.N>)>;
 }

@@ -10,6 +10,8 @@
 /*           the input program                 */
 /***********************************************/
 
+/* Теcты: 'AABB', 'AABABB', 'ABC()CAABCAABBCCABABBCAA' --- скобки здесь символьные!*/
+
 $ENTRY Go {
    e.q = <Check <ReplaceAB ()e.q>>;
 }

@@ -10,6 +10,8 @@
 /*           the input program                 */
 /***********************************************/
 
+/* Теcты: 'AABB', 'AABABB', 'ABCCA'('AB')'ABCAABBCCABABBCAA' --- скобки структурные.*/
+
 $ENTRY Go {
    e.p = <Check <DelAB ( )e.p>>;
 }

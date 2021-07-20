@@ -9,6 +9,9 @@
 /*           the input program                 */
 /***********************************************/
 
+/* Теcты: пусто, ()'A'('AA')'B'(()), 'IIIIIIIIIII()IBBBBB'*/
+
+
 $ENTRY Go {
 	 e.x = <Check <F e.x>>;
 }

@@ -32,6 +32,9 @@
 /*           the input program                 */
 /***********************************************/
 
+/* Теcты: 'TTTTTTTTT', 'TTT', 'TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT' */
+
+
 $ENTRY Go {
 	e.p = <while (e.p) (x1 )(x2 )(s 'I')>;
 }

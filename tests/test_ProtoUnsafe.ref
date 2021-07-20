@@ -30,6 +30,10 @@
 /***********************************************/
 /*           the input program                 */
 /***********************************************/
+
+/* Теcты: 'TTTTTTTTTTT', 'TTTT', 'TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT' */
+
+
 *$MST_FROM_ENTRY;
 $ENTRY Go {
 	e.p = <while (e.p) (x1 )(x2 )(s 'I')>;

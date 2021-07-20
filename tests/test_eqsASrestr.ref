@@ -9,6 +9,7 @@
 /*           the input program                 */
 /***********************************************/
 
+/* Теcты: 'AAAAAAA', 'A()A', 'AAABAAA'*/
 
 $ENTRY Go {
      e.x = <F <Equal ('A'e.x)(e.x 'A')>>;
