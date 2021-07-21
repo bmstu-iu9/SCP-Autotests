@@ -4,14 +4,6 @@
     "Expected": ["e.q = <Check <ReplaceAB ()e.q>>;"]
   },
   {
-    "TestCase": ["tests/test_AB_tail_complex1.ref"],
-    "Expected": ["(e.q s.x) s.y e.qq = <Check <ReplaceAB ()e.q>>;"]
-  },
-  {
-    "TestCase": ["tests/test_AB_tail_complex2.ref"],
-    "Expected": ["e.q = <Check <ReplaceAB ()e.q>>;"]
-  },
-  {
     "TestCase": ["tests/test_ABmoved.ref"],
     "Expected": ["e.p = <Check <DelAB ( )e.p>>;"]
   },

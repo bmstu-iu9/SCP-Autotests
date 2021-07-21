@@ -44,7 +44,6 @@ func getOutput(path string, data string) string {
 		indBeg, indEnd int
 		out			   bytes.Buffer
 		cmd            *exec.Cmd
-		//cmd2            *exec.Cmd
 		ok 			   bool
 	)
 
@@ -53,9 +52,13 @@ func getOutput(path string, data string) string {
 		fmt.Printf("Error reading file: %s\n", path)
 		return ""
 	}
-	newStr, err := getUnparametrizedEntryPoint(path, data)
+	newByte, err := getUnparametrizedEntryPoint(path, data)
+	newStr := string(newByte)
+	newStr = strings.Replace(newStr, "= ", "= <Prout ", 1)
+	newStr = strings.Replace(newStr, ";", ">;", 1)
+	newByte = []byte(newStr)
 	if err != nil {
-		fmt.Println("Error while unparametrize")
+		fmt.Println("Error while unparametrizing")
 		return ""
 	}
 
@@ -68,7 +71,7 @@ func getOutput(path string, data string) string {
 	}
 
 	inBytesEnd := inBytes[indEnd:]
-	inBytes = append(inBytes[:indBeg], newStr...)
+	inBytes = append(inBytes[:indBeg], newByte...)
 	inBytes = append(inBytes, inBytesEnd...)
 	f, _ := os.Create("new1.ref")
 	f.Write(inBytes)
@@ -80,7 +83,10 @@ func getOutput(path string, data string) string {
 	if err != nil {
 		fmt.Println(err)
 	}
-	os.Remove("new1.ref")
+	err = os.Remove("rm new1")
+	if err != nil {
+		errors.New("Error deleting executable file\n")
+	}
 	return out.String()
 }
 
@@ -104,7 +110,6 @@ func main() {
 			allOk = false
 		} else {
 			fmt.Printf("OK: %s\n\tDefault program output : %s\n\tResidual program output : %s\n", path, sOld, sNew)
-			//fmt.Printf("OK\n")
 		}
 	}
 	if allOk {

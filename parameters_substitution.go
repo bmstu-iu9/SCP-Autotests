@@ -24,10 +24,6 @@ func getUnparametrizedEntryPoint(path, data string) ([]byte, error) {
 		return nil, err
 	}
 	newEntryPoint := strings.TrimSpace(string(entryPoint)[strings.Index(string(entryPoint), "="):])
-	newEntryPoint = strings.Replace(newEntryPoint, "= ", "= <Prout ", 1)
-	newEntryPoint = reverse(newEntryPoint)
-	newEntryPoint = strings.Replace(newEntryPoint, ";", ">;", 1)
-	newEntryPoint = reverse(newEntryPoint)
 	return []byte(substituteParameters(values, newEntryPoint)), nil
 }
 
