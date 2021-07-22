@@ -1,5 +1,6 @@
 #!/bin/bash
 
-rlc ./new1.ref > trash.txt
-./new1
-rm ./new1.ref
+case "$1" in
+        lambda) rlc ./executable.ref >out.txt && ./executable && rm out.txt executable* ;;
+        *) refc executable >out.txt && refgo executable && rm out.txt executable* ;;
+esac

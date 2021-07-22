@@ -4,8 +4,10 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"flag"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 	"os/exec"
 	"strings"
@@ -38,81 +40,111 @@ func getMainTests(path string) ([]MainTest, error) {
 	return mainTests, nil
 }
 
-func getOutput(path string, data string) string {
+func getOutput(path string, data string, refalVersion string) (string, error) {
 	var (
-		s              string
-		indBeg, indEnd int
+		refalProgram   string
 		out			   bytes.Buffer
-		cmd            *exec.Cmd
-		ok 			   bool
 	)
 
-	inBytes, err := ioutil.ReadFile(path)
+	entryPoint, indBeg, indEnd, err := checkFile(path, &refalProgram)
 	if err != nil {
-		fmt.Printf("Error reading file: %s\n", path)
-		return ""
-	}
-	newByte, err := getUnparametrizedEntryPoint(path, data)
-	newStr := string(newByte)
-	newStr = strings.Replace(newStr, "= ", "= <Prout ", 1)
-	newStr = strings.Replace(newStr, ";", ">;", 1)
-	newByte = []byte(newStr)
-	if err != nil {
-		fmt.Println("Error while unparametrizing")
-		return ""
+		return "", err
 	}
 
-	inBytes = cleanBytes(inBytes)
-	s = string(inBytes)
-	ok, _, indBeg, indEnd = entryPointCountExceed(s)
-	if !ok {
-		fmt.Println("Exceeding of entry points' count")
-		return ""
+	newEntryPoint, err := getUnparametrizedEntryPoint(entryPoint, data)
+	if err != nil {
+		return "", err
 	}
 
-	inBytesEnd := inBytes[indEnd:]
-	inBytes = append(inBytes[:indBeg], newByte...)
-	inBytes = append(inBytes, inBytesEnd...)
-	f, _ := os.Create("new1.ref")
-	f.Write(inBytes)
-	f.Close()
+	newEntryPoint = "\n = <Prout " + newEntryPoint[2:len(newEntryPoint) - 1] + ">;\n"
 
-	cmd = exec.Command("./run_refal.sh")
-	cmd.Stdout = &out
-	err = cmd.Run()
-	if err != nil {
-		fmt.Println(err)
+	refalProgram = refalProgram[:indBeg] + newEntryPoint + refalProgram[indEnd:]
+
+	if err = createFile(refalProgram); err != nil {
+		return "", err
 	}
-	err = os.Remove("rm new1")
-	if err != nil {
-		errors.New("Error deleting executable file\n")
+
+	if err = executeRefalProgram(&out, refalVersion); err != nil {
+		return "", err
 	}
-	return out.String()
+
+	return out.String(), nil
+}
+
+func createFile(refalProgram string) error {
+	f, err := os.Create("executable.ref")
+	if err != nil {
+		return err
+	}
+
+	_, err = f.WriteString(refalProgram)
+	if err != nil {
+		return err
+	}
+
+	err = f.Close()
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func executeRefalProgram(out *bytes.Buffer, refalVersion string) error {
+	cmd := exec.Command("./run_refal.sh", refalVersion)
+	cmd.Stdout = out
+	if err := cmd.Run(); err != nil {
+		return errors.New("Error while compiling and executing a refal-program\n")
+	}
+	return nil
+}
+
+func runTests(tests []MainTest, refalVersion string) {
+	count := 0
+	for _, test := range tests {
+		path := test.FilePath[0]
+		fmt.Printf("RUN  %s\n", path)
+
+		defaultProgramOutput, err1 := getOutput(path, test.TestData[0], refalVersion)
+		path = strings.ReplaceAll(path, "tests/", "")
+		path = fmt.Sprintf("tests/RSDs/rsd_%s", path)
+		residualProgramOutput, err2 := getOutput(path, test.TestData[0], refalVersion)
+
+		if strings.Compare(defaultProgramOutput, residualProgramOutput) != 0 {
+			fmt.Print("FAIL:\n\tDefault program output :\t")
+			if err1 != nil {
+				fmt.Print(err1.Error())
+			} else {
+				fmt.Print(defaultProgramOutput)
+			}
+			fmt.Print("\tResidual program output :\t")
+			if err2 != nil {
+				fmt.Print(err2.Error())
+			} else {
+				fmt.Print(residualProgramOutput)
+			}
+			count++
+		} else {
+			fmt.Printf("OK:\n\tDefault program output :\t%s\tResidual program output :\t%s", defaultProgramOutput, residualProgramOutput)
+		}
+	}
+	if count == 0 {
+		fmt.Printf("--------------------------------\n\tAll tests passed!\n--------------------------------\n")
+	} else {
+		fmt.Println("Tests passed: ", len(tests) - count)
+		fmt.Println("Tests failed: ", count)
+	}
 }
 
 func main() {
-	tests, err := getMainTests("tests/main_tests.json")
+
+	refalVersion := flag.String("v", "default", "refal version")
+	file := flag.String("path", "tests/main_tests.json", "path to tests")
+	flag.Parse()
+
+	tests, err := getMainTests(*file)
 	if err != nil {
-		errors.New("Unable to open test files\n")
+		log.Fatal(err)
 	}
-	allOk := true
 
-	for _, test := range tests {
-		path := test.FilePath[0]
-		sOld := getOutput(path, test.TestData[0])
-		path = strings.ReplaceAll(path, "tests/", "")
-		path = fmt.Sprintf("tests/RSDs/rsd_%s", path)
-		sNew := getOutput(path, test.TestData[0])
-
-		diff := strings.Compare(sOld, sNew)
-		if diff != 0 {
-			fmt.Printf("FAIL: %s\n\tDefault program output : %s\n\tResidual program output : %s\n", path, sOld, sNew)
-			allOk = false
-		} else {
-			fmt.Printf("OK: %s\n\tDefault program output : %s\n\tResidual program output : %s\n", path, sOld, sNew)
-		}
-	}
-	if allOk {
-		fmt.Printf("--------------------------------\n\tAll tests passed!\n--------------------------------\n")
-	}
+	runTests(tests, *refalVersion)
 }
