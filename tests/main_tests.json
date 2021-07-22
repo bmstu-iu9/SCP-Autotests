@@ -40,7 +40,7 @@
 
   {
     "FilePath": ["tests/test_ba1.ref"],
-    "TestData": ["ïóñòî"]
+    "TestData": [""]
   },
   {
     "FilePath": ["tests/test_ba1.ref"],
@@ -53,7 +53,7 @@
 
   {
     "FilePath": ["tests/test_ba2.ref"],
-    "TestData": ["ïóñòî"]
+    "TestData": [""]
   },
   {
     "FilePath": ["tests/test_ba2.ref"],
