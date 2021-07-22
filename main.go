@@ -7,57 +7,62 @@ import (
 )
 
 // удаление пробельных символов с концов строки
-func deleteInsideSpaces(inString string) string {
-	inString = strings.ReplaceAll(inString, "\t", "")
-	inString = strings.ReplaceAll(inString, "\n", "")
-	inString = strings.ReplaceAll(inString, "\r", "")
-	return inString
+func deleteSpaces(inString *string) {
+	*inString = strings.Join(strings.Fields(*inString), " ")
 }
 
 // поиск точек входа и проверка на единственность
-func entryPointCountExceed(inString string) (bool, string) {
-	s := inString
-	if strings.Count(s, "$ENTRY") != 1 {
-		return false, inString
+func entryPointSearch(refalProgram string) (int, int, error) {
+	if strings.Count(refalProgram, "$ENTRY") != 1 {
+		return -1, -1, errors.New("Exceeded entry points amount\n")
 	}
-	ind := strings.Index(s, "$ENTRY")
-	if inString[ind+6] == ' ' && inString[ind+7] == 'G' && (inString[ind+8] == 'o' || inString[ind+8] == 'O') {
-		return true, inString[strings.Index(string(inString[ind+8:]), "{")+ind+9 : strings.Index(string(inString[ind+8:]), "}")+ind+8]
+	ind := strings.Index(refalProgram, "$ENTRY")
+	if refalProgram[ind+6] == ' ' && refalProgram[ind+7] == 'G' && (refalProgram[ind+8] == 'o' || refalProgram[ind+8] == 'O') {
+		indBeg := strings.Index(refalProgram[ind+8:], "{") + ind + 9
+		indEnd := strings.Index(refalProgram[ind+8:], "}") + ind + 8
+		return indBeg, indEnd, nil
 	}
-	return false, inString
+	return -1, -1, errors.New("Invalid entry point\n")
+}
+
+func deleteComments(refalProgram *string) {
+	var (
+		indBeg int
+		indEnd int
+	)
+
+	for strings.Count(*refalProgram, "/*") > 0 { // удаление многострочных комментариев
+		indBeg = strings.Index(*refalProgram, "/*")
+		indEnd = strings.Index((*refalProgram)[indBeg+2:], "*/") + indBeg + 2
+		*refalProgram = (*refalProgram)[:indBeg] + (*refalProgram)[indEnd+2:]
+	}
+
+	for strings.Count(*refalProgram, "*") > 0 { // удаление однострочных комментариев
+		indBeg = strings.Index(*refalProgram, "*")
+		indEnd = strings.Index((*refalProgram)[indBeg+1:], "\n") + indBeg + 1
+		*refalProgram = (*refalProgram)[:indBeg] + (*refalProgram)[indEnd+1:]
+	}
+
+	*refalProgram = strings.ReplaceAll(*refalProgram, "\r", "")
 }
 
 // обработка файла
-func checkFile(path string) ([]byte, error) {
+func checkFile(path string, refalProgram *string) (string, int, int, error) {
 	inBytes, err := ioutil.ReadFile(path)
-	var (
-		indBeg    int
-		indEnd    int
-		outString string
-	)
-
 	if err != nil {
-		return nil, err
+		return "", -1, -1, err
+	}
+	*refalProgram = string(inBytes)
+
+	deleteComments(refalProgram)
+
+	indBeg, indEnd, err := entryPointSearch(*refalProgram) // поиск точек входа
+	if err != nil {
+		return "", -1, -1, err
 	}
 
-	for strings.Count(string(inBytes), "/*") > 0 { // удаление многострочных комментариев
-		indBeg = strings.Index(string(inBytes), "/*")
-		indEnd = strings.Index(string(inBytes[indBeg+2:]), "*/") + indBeg + 2
-		inBytes = append(inBytes[:indBeg], inBytes[indEnd+2:]...)
-	}
+	entryPoint := (*refalProgram)[indBeg:indEnd]
+	deleteSpaces(&entryPoint)
 
-	for strings.Count(string(inBytes), "*") > 0 { // удаление однострочных комментариев
-		indBeg = strings.Index(string(inBytes), "*")
-		indEnd = strings.Index(string(inBytes[indBeg+1:]), "\n") + indBeg + 1
-		inBytes = append(inBytes[:indBeg], inBytes[indEnd+1:]...)
-	}
-
-	var notExceed bool
-	outString = strings.ReplaceAll(string(inBytes), "  ", " ")
-	notExceed, outString = entryPointCountExceed(outString) // поиск точек входа
-	outString = deleteInsideSpaces(strings.TrimSpace(outString))
-	if !notExceed {
-		return nil, errors.New("Exceeding of entry points count\n")
-	}
-	return []byte(outString), nil
+	return entryPoint, indBeg, indEnd, nil
 }
