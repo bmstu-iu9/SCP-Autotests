@@ -16,7 +16,7 @@ func TestGetUnparametrizedEntryPoint(t *testing.T) {
 				if test.Expected[0] != err.Error() {
 					t.Errorf("Incorrect error recognition\nExpected: %s\nRecieved: %s", test.Expected[0], err.Error())
 				}
-			} else if test.Expected[0] != string(res) {
+			} else if test.Expected[0] != res {
 				t.Errorf("Incorrect result\nExpected: %s\nRecieved: %s", test.Expected[0], res)
 			}
 		})

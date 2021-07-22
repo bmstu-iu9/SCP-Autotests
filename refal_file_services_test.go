@@ -12,7 +12,8 @@ func TestCheckEntry(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.TestCase[0], func(t *testing.T) {
-			if res, err := checkFile(test.TestCase[0]); err != nil {
+			var refalProgram string
+			if res, _, _, err := checkFile(test.TestCase[0], &refalProgram); err != nil {
 				t.Error(err)
 			} else if test.Expected[0] != string(res) {
 				t.Errorf("Incorrect result\nExpected: %s\nRecieved: %s", test.Expected[0], res)
