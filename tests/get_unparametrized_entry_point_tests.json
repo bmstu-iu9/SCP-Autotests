@@ -1,82 +1,82 @@
 [
   {
-    "TestCase": ["tests/test_AB_tail.ref", "'AABB'"],
+    "TestCase": ["e.q = <Check <ReplaceAB ()e.q>>;", "'AABB'"],
     "Expected": ["= <Check <ReplaceAB ()'AABB'>>;"]
   },
   {
-    "TestCase": ["tests/test_AB_tail.ref", "'AABABB'"],
+    "TestCase": ["e.q = <Check <ReplaceAB ()e.q>>;", "'AABABB'"],
     "Expected": ["= <Check <ReplaceAB ()'AABABB'>>;"]
   },
   {
-    "TestCase": ["tests/test_AB_tail.ref", "'ABC()CAABCAABBCCABABBCAA'"],
+    "TestCase": ["e.q = <Check <ReplaceAB ()e.q>>;", "'ABC()CAABCAABBCCABABBCAA'"],
     "Expected": ["= <Check <ReplaceAB ()'ABC()CAABCAABBCCABABBCAA'>>;"]
   },
   {
-    "TestCase": ["tests/test_ABmoved.ref", "'AABB'"],
+    "TestCase": ["e.p = <Check <DelAB ( )e.p>>;", "'AABB'"],
     "Expected": ["= <Check <DelAB ( )'AABB'>>;"]
   },
   {
-    "TestCase": ["tests/test_ABmoved.ref", "'AABABB'"],
+    "TestCase": ["e.p = <Check <DelAB ( )e.p>>;", "'AABABB'"],
     "Expected": ["= <Check <DelAB ( )'AABABB'>>;"]
   },
   {
-    "TestCase": ["tests/test_ABmoved.ref", "'ABCCA'('AB')'ABCAABBCCABABBCAA'"],
+    "TestCase": ["e.p = <Check <DelAB ( )e.p>>;", "'ABCCA'('AB')'ABCAABBCCABABBCAA'"],
     "Expected": ["= <Check <DelAB ( )'ABCCA'('AB')'ABCAABBCCABABBCAA'>>;"]
   },
   {
-    "TestCase": ["tests/test_ABplusPrefix.ref", "('A')'BBA'"],
+    "TestCase": ["(e.x) e.y = <Prefix (e.x) <Concat (e.x) e.y>>;", "('A')'BBA'"],
     "Expected": ["= <Prefix ('A') <Concat ('A') 'BBA'>>;"]
   },
   {
-    "TestCase": ["tests/test_ABplusPrefix.ref", "('ABABA')'C'"],
+    "TestCase": ["(e.x) e.y = <Prefix (e.x) <Concat (e.x) e.y>>;", "('ABABA')'C'"],
     "Expected": ["= <Prefix ('ABABA') <Concat ('ABABA') 'C'>>;"]
   },
   {
-    "TestCase": ["tests/test_ABplusPrefix.ref", "('AABABBA')'BABA'"],
+    "TestCase": ["(e.x) e.y = <Prefix (e.x) <Concat (e.x) e.y>>;", "('AABABBA')'BABA'"],
     "Expected": ["= <Prefix ('AABABBA') <Concat ('AABABBA') 'BABA'>>;"]
   },
   {
-    "TestCase": ["tests/test_ba_incorrect.ref", "'BAA''AAAAAAAAA'"],
+    "TestCase": ["e.x = <Check <F e.x>>;", "'BAA''AAAAAAAAA'"],
     "Expected": ["= <Check <F 'BAA''AAAAAAAAA'>>;"]
   },
   {
-    "TestCase": ["tests/test_Fabc_finalph.ref", "'AAAAAAA'"],
+    "TestCase": ["e.InitialString = <G <F e.InitialString>>;", "'AAAAAAA'"],
     "Expected": ["= <G <F 'AAAAAAA'>>;"]
   },
   {
-    "TestCase": ["tests/test_KMPtest.ref", "()'AAABAAAABAAAABAAAABB'"],
+    "TestCase": ["(e.x)e.y = <Match ('AAABAAAABB') e.y>;", "()'AAABAAAABAAAABAAAABB'"],
     "Expected": ["= <Match ('AAABAAAABB') 'AAABAAAABAAAABAAAABB'>;"]
   },
   {
-    "TestCase": ["tests/test_KMPtest.ref", "(()'A'(()))'AAABAABABB'"],
+    "TestCase": ["(e.x)e.y = <Match ('AAABAAAABB') e.y>;", "(()'A'(()))'AAABAABABB'"],
     "Expected": ["= <Match ('AAABAAAABB') 'AAABAABABB'>;"]
   },
   {
-    "TestCase": ["tests/test_KMPtest.ref", "('BBB'('B'))'AAABABAABAAAABABAABBAAABAAAABA'"],
+    "TestCase": ["(e.x)e.y = <Match ('AAABAAAABB') e.y>;", "('BBB'('B'))'AAABABAABAAAABABAABBAAABAAAABA'"],
     "Expected": ["= <Match ('AAABAAAABB') 'AAABABAABAAAABABAABBAAABAAAABA'>;"]
   },
   {
-    "TestCase": ["tests/test_look.ref", "(('A')('A'))'AA'"],
+    "TestCase": ["(e.Str1) e.Str2 = <F ('1' e.Str2 e.Str2 '101') (e.Str1 e.Str1)>;", "(('A')('A'))'AA'"],
     "Expected": ["= <F ('1' 'AA' 'AA' '101') (('A')('A') ('A')('A'))>;"]
   },
   {
-    "TestCase": ["tests/test_look.ref", "(('1')('1'))('101')('000'('0'))"],
+    "TestCase": ["(e.Str1) e.Str2 = <F ('1' e.Str2 e.Str2 '101') (e.Str1 e.Str1)>;", "(('1')('1'))('101')('000'('0'))"],
     "Expected": ["= <F ('1' ('101')('000'('0')) ('101')('000'('0')) '101') (('1')('1') ('1')('1'))>;"]
   },
   {
-    "TestCase": ["tests/test_look.ref", "('1010101')'101101'"],
+    "TestCase": ["(e.Str1) e.Str2 = <F ('1' e.Str2 e.Str2 '101') (e.Str1 e.Str1)>;", "('1010101')'101101'"],
     "Expected": ["= <F ('1' '101101' '101101' '101') ('1010101' '1010101')>;"]
   },
   {
-    "TestCase": ["tests/test_Sweden.ref", "('ABBBA')('BBBA')()"],
+    "TestCase": ["(e.y) (e.x) (e.N) = <G0 (e.y) (e.x) (<Gram e.N>)>;", "('ABBBA')('BBBA')()"],
     "Expected": ["= <G0 ('ABBBA') ('BBBA') (<Gram >)>;"]
   },
   {
-    "TestCase": ["tests/test_Sweden.ref", "('ABBBA')('BBBA')('ISI')"],
+    "TestCase": ["(e.y) (e.x) (e.N) = <G0 (e.y) (e.x) (<Gram e.N>)>;", "('ABBBA')('BBBA')('ISI')"],
     "Expected": ["= <G0 ('ABBBA') ('BBBA') (<Gram 'ISI'>)>;"]
   },
   {
-    "TestCase": ["tests/test_Sweden.ref", "('ABABBA')('BABBA')('IISISS')"],
+    "TestCase": ["(e.y) (e.x) (e.N) = <G0 (e.y) (e.x) (<Gram e.N>)>;", "('ABABBA')('BABBA')('IISISS')"],
     "Expected": ["= <G0 ('ABABBA') ('BABBA') (<Gram 'IISISS'>)>;"]
   }
 ]

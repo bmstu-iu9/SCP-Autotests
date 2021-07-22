@@ -6,25 +6,21 @@ import (
 )
 
 /*
-	Function gets a path to a Refal_program with a parametrized entry point and some data
+	Function gets a parametrized entry point of a Refal_program and some data
 	that should be matched to parameters. An unparametrized entry point or an error is returned.
 */
-func getUnparametrizedEntryPoint(path, data string) ([]byte, error) {
-	entryPoint, err := checkFile(path)
-	if err != nil {
-		return nil, err
-	}
-	params := strings.TrimSpace(string(entryPoint)[:strings.Index(string(entryPoint), "=")])
+func getUnparametrizedEntryPoint(entryPoint, data string) (string, error) {
+	params := strings.TrimSpace(entryPoint[:strings.Index(entryPoint, "=")])
 	tokens, err := checkParameters(params)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 	values, err := mapDataToParameters(tokens, data)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
-	newEntryPoint := strings.TrimSpace(string(entryPoint)[strings.Index(string(entryPoint), "="):])
-	return []byte(substituteParameters(values, newEntryPoint)), nil
+	newEntryPoint := strings.TrimSpace(entryPoint[strings.Index(entryPoint, "="):])
+	return substituteParameters(values, newEntryPoint), nil
 }
 
 /*
