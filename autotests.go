@@ -14,8 +14,8 @@ import (
 )
 
 type MainTest struct {
-	FilePath []string  `json:"FilePath"`
-	TestData []string  `json:"TestData"`
+	FilePath []string `json:"FilePath"`
+	TestData []string `json:"TestData"`
 }
 
 func getMainTests(path string) ([]MainTest, error) {
@@ -42,8 +42,8 @@ func getMainTests(path string) ([]MainTest, error) {
 
 func getOutput(path string, data string, refalVersion string) (string, error) {
 	var (
-		refalProgram   string
-		out			   bytes.Buffer
+		refalProgram string
+		out          bytes.Buffer
 	)
 
 	entryPoint, indBeg, indEnd, err := checkFile(path, &refalProgram)
@@ -56,7 +56,7 @@ func getOutput(path string, data string, refalVersion string) (string, error) {
 		return "", err
 	}
 
-	newEntryPoint = "\n = <Prout " + newEntryPoint[2:len(newEntryPoint) - 1] + ">;\n"
+	newEntryPoint = "\n = <Prout " + newEntryPoint[2:len(newEntryPoint)-1] + ">;\n"
 
 	refalProgram = refalProgram[:indBeg] + newEntryPoint + refalProgram[indEnd:]
 
@@ -130,7 +130,7 @@ func runTests(tests []MainTest, refalVersion string) {
 	if count == 0 {
 		fmt.Printf("--------------------------------\n\tAll tests passed!\n--------------------------------\n")
 	} else {
-		fmt.Println("Tests passed: ", len(tests) - count)
+		fmt.Println("Tests passed: ", len(tests)-count)
 		fmt.Println("Tests failed: ", count)
 	}
 }
