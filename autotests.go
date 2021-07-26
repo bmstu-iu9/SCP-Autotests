@@ -54,11 +54,11 @@ func deleteSCP(scpVersion string) error {
 }
 
 func createResidual(path string, scpVersion string) (string, error) {
-	cmd := exec.Command("./create_rsd.sh", fmt.Sprintf("MSCPAver%s", scpVersion), fmt.Sprintf("../tests/%s", path), fmt.Sprintf("../tests/rsd_%s", path))
+	cmd := exec.Command("./create_rsd.sh", fmt.Sprintf("MSCPAver%s", scpVersion), fmt.Sprintf("../tests/%s", path), fmt.Sprintf("../tests/rsd_%s_%s", scpVersion, path))
 	if err := cmd.Run(); err != nil {
 		return "", errors.New("Error while compiling the refal program\n")
 	}
-	path = fmt.Sprintf("rsd_%s", path)
+	path = fmt.Sprintf("rsd_%s_%s", scpVersion, path)
 	return path, nil
 }
 
@@ -125,7 +125,7 @@ func runTests(tests []MainTest, refalVersion string, SCPVersion string) {
 	createSCP(SCPVersion)
 	for _, test := range tests {
 		path := test.FilePath[0]
-		fmt.Printf("RUN  %s\n", path)
+		fmt.Printf("RUN  %s\t\t TEST: %s\n", path, test.TestData[0])
 
 		defaultProgramOutput, err1 := getOutput(fmt.Sprintf("tests/%s", path), test.TestData[0], refalVersion)
 
