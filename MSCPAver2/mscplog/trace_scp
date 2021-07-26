@@ -1,0 +1,1252 @@
+New Clash: No 1 
+  Clash: (((call (F 2 )(args (arg (par e x )))))to ())
+
+
+Splitting...
+(AreEqual (T)((weval e 1 ))())
+New assignments:
+(assign (weval e 1 )((0 Const ))())
+New common data:
+(assign (weval e 1 )((0 Const ))())
+New assignments:
+(assign (weval e 1 )((0 Const ))())
+Testing negative block in No.1 : 
+  Clash: 
+  Equations New: (Desired (AreEqual (T)((call (F 2 )(args (arg (par e x )))))()))
+
+
+***************** END OF NEGATIVE TESTING No.1  *************************
+
+    PRTC No.1  Class C IS COMPLETED:
+  Clash: 
+  Equations New: (AreEqual (T)((call (F 2 )(args (arg (par e x )))))())
+    (Desired )
+
+ to
+  Clash: 
+  Equations New: (Desired (AreEqual (T)((call (F 2 )(args (arg (par e x )))))()))
+
+---------------------------------------------------------------------------
+
+Multiset of calls to be resolved:
+(2 (call (F 2 )(args (arg (par e x )))))
+==================================================================================
+         SIMPLE NODE (0 ) with status: Driven 
+  Restrictions: 
+
+  Configuration: (call (Check 1 )(args (arg (call (F 2 )(args (arg (par e x )))))))
+  Stack: 
+      (assign (var l (0 ))((call (Check 1 )(args (arg (call (F 2 )(args (arg (par e x )))))))))
+
+  Children of (0 ): 
+==================================================================================
+         SIMPLE NODE (0 0 ) with status: Ready 
+  Restrictions: Push 
+
+  Configuration: (call (Check 1 )(args (arg (call (F 2 )(args (arg (par e x )))))))
+  Stack: 
+      (assign (var l (1 ))((call (F 2 )(args (arg (par e x ))))))
+      (assign (var l (0 ))((call (Check 1 )(args (arg (var l (1 )))))))
+
+  Children of (0 0 ): 
+======================== NODE (0 0 ) INFO END====================================
+======================== NODE (0 ) INFO END====================================
+
+==================================================================================
+         SIMPLE NODE (0 ) with status: Ready 
+  Restrictions: 
+
+  Configuration: (call (Check 1 )(args (arg (call (F 2 )(args (arg (par e x )))))))
+  Stack: 
+      (assign (var l (1 ))((call (F 2 )(args (arg (par e x ))))))
+      (assign (var l (0 ))((call (Check 1 )(args (arg (var l (1 )))))))
+
+  Children of (0 ): 
+======================== NODE (0 ) INFO END====================================
+
+New Clash: No 2 
+  Clash: (((par e x ))to ())
+
+
+Testing negative block in No.2 : 
+  Narrowings: (assign (par e x )())
+  Assignments: 
+
+
+***************** END OF NEGATIVE TESTING No.2  *************************
+
+    PRTC No.2  Class C IS COMPLETED:
+  Narrowings: (assign (par e x )())
+  Assignments: 
+
+ to
+  Narrowings: (assign (par e x )())
+  Assignments: 
+
+---------------------------------------------------------------------------
+
+New Clash: No 3 
+  Clash: (((par e x ))to ((var t x )(var e y )))
+  Equations Negative: (OR (T)(((par e x ))to ()))
+
+
+Testing negative block in No.3 : 
+  Narrowings: (assign (par e x )((par t 1 )(par e 1 )))
+  Assignments: (assign (var t x )((par t 1 )))(assign (var e y )((par e 1 )))
+  Equations Negative: (OR (T)(((par t 1 )(par e 1 ))to ()))
+
+
+Normalizing negative clash No. 4 
+(((par t 1 )(par e 1 ))to ())
+Splitting...
+(AreEqual (T)((weval t 2 )(weval e 3 ))())
+New common data:
+(AreEqual (N)((1 Const )(1 (weval e 3 )))((weval t 2 )(weval e 3 ))((0 Const ))())
+    PRTC No.4  FAILED in equation block:
+  Clash: 
+  Equations New: (AreEqual (T)((par t 1 )(par e 1 ))())
+    (Desired )
+
+
+---------------------------------------------------------------------------
+
+***************** END OF NEGATIVE TESTING No.3  *************************
+
+    PRTC No.3  Class C IS COMPLETED:
+  Narrowings: (assign (par e x )((par t 1 )(par e 1 )))
+  Assignments: (assign (var t x )((par t 1 )))(assign (var e y )((par e 1 )))
+  Equations Negative: (OR (T)(((par t 1 )(par e 1 ))to ()))
+
+ to
+  Narrowings: (assign (par e x )((par t 1 )(par e 1 )))
+  Assignments: (assign (var t x )((par t 1 )))(assign (var e y )((par e 1 )))
+
+---------------------------------------------------------------------------
+
+==================================================================================
+         SIMPLE NODE (0 ) with status: ReadyForGenCheck 
+  Restrictions: 
+
+  Configuration: (call (Check 1 )(args (arg (call ((F (1 2 ))2 )(args (arg (par e x )))))))
+  Stack: 
+      (assign (var l (1 ))((call ((F (1 2 ))2 )(args (arg (par e x ))))))
+      (assign (var l (0 ))((call (Check 1 )(args (arg (var l (1 )))))))
+
+  Children of (0 ): 
+==================================================================================
+         SIMPLE NODE (0 0 ) with status: Undriven 
+  Restrictions: (assign (par e x )())
+
+  Configuration: (call (Check 1 )(args (arg )))
+  Stack: 
+      (assign (var l (0 ))((call (Check 1 )(args (arg )))))
+
+  Children of (0 0 ): 
+======================== NODE (0 0 ) INFO END====================================
+==================================================================================
+         SIMPLE NODE (0 1 ) with status: Undriven 
+  Restrictions: (assign (par e x )((par t 1 )(par e 1 )))
+
+  Configuration: (call (Check 1 )(args (arg A(call (F 3 )(args (arg (par e 1 )))))))
+  Stack: 
+      (assign (var l (0 ))((call (Check 1 )(args (arg A(call (F 3 )(args (arg (par e 1 )))))))))
+
+  Children of (0 1 ): 
+======================== NODE (0 1 ) INFO END====================================
+======================== NODE (0 ) INFO END====================================
+
+New Clash: No 5 
+  Clash: (()to ())
+
+
+Testing negative block in No.5 : 
+  Clash: 
+
+
+***************** END OF NEGATIVE TESTING No.5  *************************
+
+    PRTC No.5  Class C IS COMPLETED:
+  Clash: 
+
+ to
+  Clash: 
+
+---------------------------------------------------------------------------
+
+==================================================================================
+         SIMPLE NODE (0 0 ) with status: ReadyForGenCheck 
+  Restrictions: (assign (par e x )())
+
+  Configuration: (call ((Check (1 ))1 )(args (arg )))
+  Stack: 
+      (assign (var l (0 ))((call ((Check (1 ))1 )(args (arg )))))
+
+  Children of (0 0 ): 
+==================================================================================
+         SIMPLE NODE (0 0 0 ) with status: Undriven 
+  Restrictions: Always 
+
+  Configuration: T
+  Stack: 
+      (assign (var l (0 ))(T))
+
+  Children of (0 0 0 ): 
+======================== NODE (0 0 0 ) INFO END====================================
+======================== NODE (0 0 ) INFO END====================================
+
+  Trying to embed: 
+(((F (1 2 ))2 ))((Check 1 ))
+ and 
+(((Check (1 ))1 ))
+==================================================================================
+         SIMPLE NODE (0 ) with status: Driven 
+  Restrictions: 
+
+  Configuration: (call (Check 1 )(args (arg (call ((F (1 2 ))2 )(args (arg (par e x )))))))
+  Stack: 
+      (assign (var l (1 ))((call ((F (1 2 ))2 )(args (arg (par e x ))))))
+      (assign (var l (0 ))((call (Check 1 )(args (arg (var l (1 )))))))
+
+  Children of (0 ): 
+==================================================================================
+         SIMPLE NODE (0 0 ) with status: Driven 
+  Restrictions: (assign (par e x )())
+
+  Configuration: (call ((Check (1 ))1 )(args (arg )))
+  Stack: 
+      (assign (var l (0 ))((call ((Check (1 ))1 )(args (arg )))))
+
+  Children of (0 0 ): 
+==================================================================================
+         SIMPLE NODE (0 0 0 ) with status: Finished 
+  Restrictions: Always 
+
+  Configuration: T
+  Stack: 
+      (assign (var l (0 ))(T))
+
+  Children of (0 0 0 ): 
+======================== NODE (0 0 0 ) INFO END====================================
+======================== NODE (0 0 ) INFO END====================================
+==================================================================================
+         SIMPLE NODE (0 1 ) with status: Undriven 
+  Restrictions: (assign (par e x )((par t 1 )(par e 1 )))
+
+  Configuration: (call (Check 1 )(args (arg A(call (F 3 )(args (arg (par e 1 )))))))
+  Stack: 
+      (assign (var l (0 ))((call (Check 1 )(args (arg A(call (F 3 )(args (arg (par e 1 )))))))))
+
+  Children of (0 1 ): 
+======================== NODE (0 1 ) INFO END====================================
+======================== NODE (0 ) INFO END====================================
+
+New Clash: No 6 
+  Clash: ((A(call (F 3 )(args (arg (par e 1 )))))to ())
+
+
+Splitting...
+(AreEqual (T)(A(weval e 4 ))())
+New common data:
+(AreEqual (N)((1 Const )(1 (weval e 4 )))(A(weval e 4 ))((0 Const ))())
+    PRTC No.6  FAILED in equation block:
+  Clash: 
+  Equations New: (AreEqual (T)(A(call (F 3 )(args (arg (par e 1 )))))())
+    (Desired )
+
+
+---------------------------------------------------------------------------
+
+New Clash: No 7 
+  Clash: ((A(call (F 3 )(args (arg (par e 1 )))))to ((var e y )B))
+
+
+Splitting...
+(AreEqual (T)(A(weval e 5 ))((weval e 6 )))
+New assignments:
+(assign (weval e 6 )((1 Const )(1 (weval e 5 )))(A(weval e 5 )))
+New common data:
+(assign (weval e 6 )((1 Const )(1 (weval e 5 )))(A(weval e 5 )))
+New assignments:
+(assign (weval e 6 )((1 Const )(1 (weval e 5 )))(A(weval e 5 )))
+Splitting...
+(AreEqual (T)((weval e 7 ))((weval e 5 )B))
+New assignments:
+(assign (weval e 7 )((1 Const )(1 (weval e 5 )))((weval e 5 )B))
+New common data:
+(assign (weval e 7 )((1 Const )(1 (weval e 5 )))((weval e 5 )B))
+New assignments:
+(assign (weval e 7 )((1 Const )(1 (weval e 5 )))((weval e 5 )B))
+Testing negative block in No.7 : 
+  Clash: 
+  Equations New: (Desired (AreEqual (T)((call (F 3 )(args (arg (par e 1 )))))((weval e 5 )B)))
+
+
+***************** END OF NEGATIVE TESTING No.7  *************************
+
+    PRTC No.7  Class C IS COMPLETED:
+  Clash: 
+  Equations New: (AreEqual (T)(A(weval e 5 ))((var e y )))
+    (Desired (AreEqual (F)((call (F 3 )(args (arg (par e 1 )))))((weval e 5 )B)))
+
+ to
+  Clash: 
+  Equations New: (Desired (AreEqual (T)((call (F 3 )(args (arg (par e 1 )))))((weval e 5 )B)))
+
+---------------------------------------------------------------------------
+
+Multiset of calls to be resolved:
+(2 (call (F 3 )(args (arg (par e 1 )))))
+==================================================================================
+         SIMPLE NODE (0 1 ) with status: Driven 
+  Restrictions: (assign (par e x )((par t 1 )(par e 1 )))
+
+  Configuration: (call (Check 1 )(args (arg A(call (F 3 )(args (arg (par e 1 )))))))
+  Stack: 
+      (assign (var l (0 ))((call (Check 1 )(args (arg A(call (F 3 )(args (arg (par e 1 )))))))))
+
+  Children of (0 1 ): 
+==================================================================================
+         SIMPLE NODE (0 1 0 ) with status: Ready 
+  Restrictions: Push 
+
+  Configuration: (call (Check 1 )(args (arg A(call (F 3 )(args (arg (par e 1 )))))))
+  Stack: 
+      (assign (var l (2 ))((call (F 3 )(args (arg (par e 1 ))))))
+      (assign (var l (0 ))((call (Check 1 )(args (arg A(var l (2 )))))))
+
+  Children of (0 1 0 ): 
+======================== NODE (0 1 0 ) INFO END====================================
+======================== NODE (0 1 ) INFO END====================================
+
+==================================================================================
+         SIMPLE NODE (0 1 ) with status: Ready 
+  Restrictions: (assign (par e x )((par t 1 )(par e 1 )))
+
+  Configuration: (call (Check 1 )(args (arg A(call (F 3 )(args (arg (par e 1 )))))))
+  Stack: 
+      (assign (var l (2 ))((call (F 3 )(args (arg (par e 1 ))))))
+      (assign (var l (0 ))((call (Check 1 )(args (arg A(var l (2 )))))))
+
+  Children of (0 1 ): 
+======================== NODE (0 1 ) INFO END====================================
+
+New Clash: No 8 
+  Clash: (((par e 1 ))to ())
+
+
+Testing negative block in No.8 : 
+  Narrowings: (assign (par e 1 )())
+  Assignments: 
+
+
+***************** END OF NEGATIVE TESTING No.8  *************************
+
+    PRTC No.8  Class C IS COMPLETED:
+  Narrowings: (assign (par e 1 )())
+  Assignments: 
+
+ to
+  Narrowings: (assign (par e 1 )())
+  Assignments: 
+
+---------------------------------------------------------------------------
+
+New Clash: No 9 
+  Clash: (((par e 1 ))to ((var t x )(var e y )))
+  Equations Negative: (OR (T)(((par e 1 ))to ()))
+
+
+Testing negative block in No.9 : 
+  Narrowings: (assign (par e 1 )((par t 2 )(par e 2 )))
+  Assignments: (assign (var t x )((par t 2 )))(assign (var e y )((par e 2 )))
+  Equations Negative: (OR (T)(((par t 2 )(par e 2 ))to ()))
+
+
+Normalizing negative clash No. 10 
+(((par t 2 )(par e 2 ))to ())
+Splitting...
+(AreEqual (T)((weval t 4 )(weval e 9 ))())
+New common data:
+(AreEqual (N)((1 Const )(1 (weval e 9 )))((weval t 4 )(weval e 9 ))((0 Const ))())
+    PRTC No.10  FAILED in equation block:
+  Clash: 
+  Equations New: (AreEqual (T)((par t 2 )(par e 2 ))())
+    (Desired )
+
+
+---------------------------------------------------------------------------
+
+***************** END OF NEGATIVE TESTING No.9  *************************
+
+    PRTC No.9  Class C IS COMPLETED:
+  Narrowings: (assign (par e 1 )((par t 2 )(par e 2 )))
+  Assignments: (assign (var t x )((par t 2 )))(assign (var e y )((par e 2 )))
+  Equations Negative: (OR (T)(((par t 2 )(par e 2 ))to ()))
+
+ to
+  Narrowings: (assign (par e 1 )((par t 2 )(par e 2 )))
+  Assignments: (assign (var t x )((par t 2 )))(assign (var e y )((par e 2 )))
+
+---------------------------------------------------------------------------
+
+==================================================================================
+         SIMPLE NODE (0 1 ) with status: ReadyForGenCheck 
+  Restrictions: (assign (par e x )((par t 1 )(par e 1 )))
+
+  Configuration: (call (Check 1 )(args (arg A(call ((F (1 2 ))3 )(args (arg (par e 1 )))))))
+  Stack: 
+      (assign (var l (2 ))((call ((F (1 2 ))3 )(args (arg (par e 1 ))))))
+      (assign (var l (0 ))((call (Check 1 )(args (arg A(var l (2 )))))))
+
+  Children of (0 1 ): 
+==================================================================================
+         SIMPLE NODE (0 1 0 ) with status: Undriven 
+  Restrictions: (assign (par e 1 )())
+
+  Configuration: (call (Check 1 )(args (arg A)))
+  Stack: 
+      (assign (var l (0 ))((call (Check 1 )(args (arg A)))))
+
+  Children of (0 1 0 ): 
+======================== NODE (0 1 0 ) INFO END====================================
+==================================================================================
+         SIMPLE NODE (0 1 1 ) with status: Undriven 
+  Restrictions: (assign (par e 1 )((par t 2 )(par e 2 )))
+
+  Configuration: (call (Check 1 )(args (arg AA(call (F 4 )(args (arg (par e 2 )))))))
+  Stack: 
+      (assign (var l (0 ))((call (Check 1 )(args (arg AA(call (F 4 )(args (arg (par e 2 )))))))))
+
+  Children of (0 1 1 ): 
+======================== NODE (0 1 1 ) INFO END====================================
+======================== NODE (0 1 ) INFO END====================================
+
+  Trying to embed: 
+(((F (1 2 ))2 ))((Check 1 ))
+ and 
+(((F (1 2 ))3 ))((Check 1 ))
+(call (Check 1 )(args (arg (call ((F (1 2 ))2 )(args (arg (par e x )))))))
+ and 
+(call (Check 1 )(args (arg A(call ((F (1 2 ))3 )(args (arg (par e 1 )))))))
+  EMBEDDING IS SUCCESSFUL.
+  Depth is 0 
+==============================================================================
+           LET NODE (0 )
+  Let information: (Let ((0 1 )(assign (par e 6 )()))((0 2 )(assign (par e 7 )((par e x ))))In ((call (Check 5 )(args (arg (par e 6 )(call ((F (1 2 ))6 )(args (arg (par e 7 )))))))))
+  Restrictions: 
+
+  Configuration: 
+  Stack: 
+======================== NODE (0 ) INFO END====================================
+
+New Clash: No 11 
+  Clash: (((par e 6 )(call ((F (1 2 ))6 )(args (arg (par e 7 )))))to ())
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+
+Splitting...
+(AreEqual (T)((weval e 10 )(weval e 11 ))())
+New common data:
+(AreEqual (N)((0 Const )(1 (weval e 10 ))(1 (weval e 11 )))((weval e 10 )(weval e 11 ))((0 Const ))())
+New assignments:
+(assign (weval e 10 )((0 Const ))())(assign (weval e 11 )((0 Const ))())
+New common data:
+(assign (weval e 10 )((0 Const ))())(assign (weval e 11 )((0 Const ))())(AreEqual (T)((0 Const ))()((0 Const ))())
+New assignments:
+(assign (weval e 10 )((0 Const ))())(assign (weval e 11 )((0 Const ))())
+Splitting...
+(AreEqual (T)(A)(A))
+Testing negative block in No.11 : 
+  Clash: 
+  Equations New: (Desired (AreEqual (T)((call ((F (1 2 ))6 )(args (arg (par e 7 )))))()))
+
+
+***************** END OF NEGATIVE TESTING No.11  *************************
+
+    PRTC No.11  Class C IS COMPLETED:
+  Clash: 
+  Equations New: (AreEqual (T)((par e 6 )(call ((F (1 2 ))6 )(args (arg (par e 7 )))))())
+    (Desired )
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+ to
+  Clash: 
+  Equations New: (Desired (AreEqual (T)((call ((F (1 2 ))6 )(args (arg (par e 7 )))))()))
+
+---------------------------------------------------------------------------
+
+Multiset of calls to be resolved:
+(2 (call ((F (1 2 ))6 )(args (arg (par e 7 )))))
+==================================================================================
+         SIMPLE NODE (0 0 ) with status: Driven 
+  Restrictions: 
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+  Configuration: (call (Check 5 )(args (arg (par e 6 )(call ((F (1 2 ))6 )(args (arg (par e 7 )))))))
+  Stack: 
+      (assign (var l (0 ))((call (Check 5 )(args (arg (par e 6 )(call ((F (1 2 ))6 )(args (arg (par e 7 )))))))))
+
+  Children of (0 0 ): 
+==================================================================================
+         SIMPLE NODE (0 0 0 ) with status: Ready 
+  Restrictions: Push 
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+  Configuration: (call (Check 5 )(args (arg (par e 6 )(call ((F (1 2 ))6 )(args (arg (par e 7 )))))))
+  Stack: 
+      (assign (var l (3 ))((call ((F (1 2 ))6 )(args (arg (par e 7 ))))))
+      (assign (var l (0 ))((call (Check 5 )(args (arg (par e 6 )(var l (3 )))))))
+
+  Children of (0 0 0 ): 
+======================== NODE (0 0 0 ) INFO END====================================
+======================== NODE (0 0 ) INFO END====================================
+
+==================================================================================
+         SIMPLE NODE (0 0 ) with status: Ready 
+  Restrictions: 
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+  Configuration: (call (Check 5 )(args (arg (par e 6 )(call ((F (1 2 ))6 )(args (arg (par e 7 )))))))
+  Stack: 
+      (assign (var l (3 ))((call ((F (1 2 ))6 )(args (arg (par e 7 ))))))
+      (assign (var l (0 ))((call (Check 5 )(args (arg (par e 6 )(var l (3 )))))))
+
+  Children of (0 0 ): 
+======================== NODE (0 0 ) INFO END====================================
+
+New Clash: No 12 
+  Clash: (((par e 7 ))to ())
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+
+Testing negative block in No.12 : 
+  Narrowings: (assign (par e 7 )())
+  Assignments: 
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+
+***************** END OF NEGATIVE TESTING No.12  *************************
+
+    PRTC No.12  Class C IS COMPLETED:
+  Narrowings: (assign (par e 7 )())
+  Assignments: 
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+ to
+  Narrowings: (assign (par e 7 )())
+  Assignments: 
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+---------------------------------------------------------------------------
+
+New Clash: No 13 
+  Clash: (((par e 7 ))to ((var t x )(var e y )))
+  Equations Negative: (OR (T)(((par e 7 ))to ()))
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+
+Testing negative block in No.13 : 
+  Narrowings: (assign (par e 7 )((par t 3 )(par e 8 )))
+  Assignments: (assign (var t x )((par t 3 )))(assign (var e y )((par e 8 )))
+  Equations Negative: (OR (T)(((par t 3 )(par e 8 ))to ()))
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+
+Normalizing negative clash No. 14 
+(((par t 3 )(par e 8 ))to ())
+Splitting...
+(AreEqual (T)((weval t 6 )(weval e 13 ))())
+New common data:
+(AreEqual (N)((1 Const )(1 (weval e 13 )))((weval t 6 )(weval e 13 ))((0 Const ))())
+    PRTC No.14  FAILED in equation block:
+  Clash: 
+  Equations New: (AreEqual (T)((par t 3 )(par e 8 ))())
+    (Desired )
+
+
+---------------------------------------------------------------------------
+
+***************** END OF NEGATIVE TESTING No.13  *************************
+
+    PRTC No.13  Class C IS COMPLETED:
+  Narrowings: (assign (par e 7 )((par t 3 )(par e 8 )))
+  Assignments: (assign (var t x )((par t 3 )))(assign (var e y )((par e 8 )))
+  Equations Negative: (OR (T)(((par t 3 )(par e 8 ))to ()))
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+ to
+  Narrowings: (assign (par e 7 )((par t 3 )(par e 8 )))
+  Assignments: (assign (var t x )((par t 3 )))(assign (var e y )((par e 8 )))
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+---------------------------------------------------------------------------
+
+==================================================================================
+         SIMPLE NODE (0 0 ) with status: ReadyForGenCheck 
+  Restrictions: 
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+  Configuration: (call (Check 5 )(args (arg (par e 6 )(call ((F (1 2 ))6 )(args (arg (par e 7 )))))))
+  Stack: 
+      (assign (var l (3 ))((call ((F (1 2 ))6 )(args (arg (par e 7 ))))))
+      (assign (var l (0 ))((call (Check 5 )(args (arg (par e 6 )(var l (3 )))))))
+
+  Children of (0 0 ): 
+==================================================================================
+         SIMPLE NODE (0 0 0 ) with status: Undriven 
+  Restrictions: (assign (par e 7 )())
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+  Configuration: (call (Check 5 )(args (arg (par e 6 ))))
+  Stack: 
+      (assign (var l (0 ))((call (Check 5 )(args (arg (par e 6 ))))))
+
+  Children of (0 0 0 ): 
+======================== NODE (0 0 0 ) INFO END====================================
+==================================================================================
+         SIMPLE NODE (0 0 1 ) with status: Undriven 
+  Restrictions: (assign (par e 7 )((par t 3 )(par e 8 )))
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+  Configuration: (call (Check 5 )(args (arg (par e 6 )A(call (F 7 )(args (arg (par e 8 )))))))
+  Stack: 
+      (assign (var l (0 ))((call (Check 5 )(args (arg (par e 6 )A(call (F 7 )(args (arg (par e 8 )))))))))
+
+  Children of (0 0 1 ): 
+======================== NODE (0 0 1 ) INFO END====================================
+======================== NODE (0 0 ) INFO END====================================
+
+  Trying to embed: 
+
+ and 
+(((F (1 2 ))6 ))((Check 5 ))
+New Clash: No 15 
+  Clash: (((par e 6 ))to ())
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+
+Splitting...
+(AreEqual (T)(A)(A))
+Testing negative block in No.15 : 
+  Narrowings: (assign (par e 6 )())
+  Assignments: 
+
+
+***************** END OF NEGATIVE TESTING No.15  *************************
+
+    PRTC No.15  Class C IS COMPLETED:
+  Narrowings: (assign (par e 6 )())
+  Assignments: 
+  Equations Generic: (AreEqual (T)(A)(A))
+
+ to
+  Narrowings: (assign (par e 6 )())
+  Assignments: 
+
+---------------------------------------------------------------------------
+
+New Clash: No 16 
+  Clash: (((par e 6 ))to ((var e y )B))
+  Equations Negative: (OR (T)(((par e 6 ))to ()))
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+
+Splitting...
+(AreEqual (T)((weval e 14 )BA)(A(weval e 14 )B))
+    PRTC No.16  FAILED in equation block:
+  Narrowings: (assign (par e 6 )((par e 9 )B))
+  Assignments: (assign (var e y )((par e 9 )))
+  Equations Negative: (OR (T)(((par e 9 )B)to ()))
+  Equations Generic: (AreEqual (T)((par e 9 )BA)(A(par e 9 )B))
+
+
+---------------------------------------------------------------------------
+
+New Clash: No 17 
+  Clash: (((par e 6 ))to ((var e Z )(var t y )))
+  Equations Negative: (OR (T)(((par e 6 ))to ()))
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+
+Splitting...
+(AreEqual (T)((weval e 15 )(weval t 7 )A)(A(weval e 15 )(weval t 7 )))
+New assignments:
+(assign (weval t 7 )((1 Const ))(A))
+New common data:
+(assign (weval t 7 )((1 Const ))(A))(AreEqual (N)((1 Const )(1 (weval e 15 )))((weval e 15 )A)((1 Const )(1 (weval e 15 )))(A(weval e 15 )))
+New assignments:
+(assign (weval t 7 )((1 Const ))(A))
+New common data:
+(AreEqual (D)((1 Const )(1 (weval e 15 )))((weval e 15 )A)((1 Const )(1 (weval e 15 )))(A(weval e 15 )))
+Simple solving:
+(()()()((AreEqual (T)()((weval e 15 )A)()(A(weval e 15 ))))()()()()(T))
+Simple solving:
+(()()()((AreEqual (T)()()()()))()()()()(T))
+New common data:
+(AreEqual (F)((1 Const )(1 (weval e 15 )))((weval e 15 )A)((1 Const )(1 (weval e 15 )))(A(weval e 15 )))
+Testing negative block in No.17 : 
+  Narrowings: (assign (par e 6 )((par e 10 )(par t 4 )))(assign (par t 4 )(A))
+  Assignments: (assign (var e Z )((par e 10 )))(assign (var t y )(A))
+  Equations Negative: (OR (T)(((par e 10 )A)to ()))
+  Equations Generic: (AreEqual (T)((par e 10 )A)(A(par e 10 )))
+
+
+Normalizing negative clash No. 18 
+(((par e 10 )A)to ())
+Splitting...
+(AreEqual (T)((weval e 16 )A)())
+New common data:
+(AreEqual (N)((1 Const )(1 (weval e 16 )))((weval e 16 )A)((0 Const ))())
+    PRTC No.18  FAILED in equation block:
+  Clash: 
+  Equations New: (AreEqual (T)((par e 10 )A)())
+    (Desired )
+
+
+---------------------------------------------------------------------------
+
+***************** END OF NEGATIVE TESTING No.17  *************************
+
+    PRTC No.17  Class C IS COMPLETED:
+  Narrowings: (assign (par e 6 )((par e 10 )(par t 4 )))
+  Assignments: (assign (var e Z )((par e 10 )))(assign (var t y )((par t 4 )))
+  Equations Negative: (OR (T)(((par e 10 )(par t 4 ))to ()))
+  Equations Generic: (AreEqual (T)((par e 10 )(par t 4 )A)(A(par e 10 )(par t 4 )))
+
+ to
+  Narrowings: (assign (par e 6 )((par e 10 )(par t 4 )))(assign (par t 4 )(A))
+  Assignments: (assign (var e Z )((par e 10 )))(assign (var t y )(A))
+  Equations Generic: (AreEqual (T)((par e 10 )A)(A(par e 10 )))
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (T)(((par e 6 ))to ((var e Neg1 )A))(((par t 4 ))to (A)))
+    (OR (T)(((par e 6 ))to ()))
+Screened inequalities:
+
+    (OR (T)(((par e 6 ))to ((var e Neg1 )A))(((par t 4 ))to (A)))
+    (OR (T)(((par e 6 ))to ()))
+==================================================================================
+         SIMPLE NODE (0 0 0 ) with status: ReadyForGenCheck 
+  Restrictions: (assign (par e 7 )())
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+  Configuration: (call ((Check (1 3 ))5 )(args (arg (par e 6 ))))
+  Stack: 
+      (assign (var l (0 ))((call ((Check (1 3 ))5 )(args (arg (par e 6 ))))))
+
+  Children of (0 0 0 ): 
+==================================================================================
+         SIMPLE NODE (0 0 0 0 ) with status: Undriven 
+  Restrictions: (assign (par e 6 )())
+
+  Configuration: T
+  Stack: 
+      (assign (var l (0 ))(T))
+
+  Children of (0 0 0 0 ): 
+======================== NODE (0 0 0 0 ) INFO END====================================
+==================================================================================
+         SIMPLE NODE (0 0 0 1 ) with status: Undriven 
+  Restrictions: (assign (par e 6 )((par e 10 )(par t 4 )))(assign (par t 4 )(A))
+  Equations Generic: (AreEqual (T)((par e 10 )A)(A(par e 10 )))
+
+  Configuration: (call (Check 8 )(args (arg (par e 10 ))))
+  Stack: 
+      (assign (var l (0 ))((call (Check 8 )(args (arg (par e 10 ))))))
+
+  Children of (0 0 0 1 ): 
+======================== NODE (0 0 0 1 ) INFO END====================================
+======================== NODE (0 0 0 ) INFO END====================================
+
+  Trying to embed: 
+(((F (1 2 ))6 ))((Check 5 ))
+ and 
+(((Check (1 3 ))5 ))
+  Trying to embed: 
+
+ and 
+(((Check (1 3 ))5 ))
+==============================================================================
+           LET NODE (0 )
+  Let information: (Let ((0 1 )(assign (par e 6 )()))((0 2 )(assign (par e 7 )((par e x ))))In ((call (Check 5 )(args (arg (par e 6 )(call ((F (1 2 ))6 )(args (arg (par e 7 )))))))))
+  Restrictions: 
+
+  Configuration: 
+  Stack: 
+======================== NODE (0 ) INFO END====================================
+
+New Clash: No 19 
+  Clash: (((par e 10 ))to ())
+  Equations Generic: (AreEqual (T)((par e 10 )A)(A(par e 10 )))
+
+
+Splitting...
+(AreEqual (T)(A)(A))
+Testing negative block in No.19 : 
+  Narrowings: (assign (par e 10 )())
+  Assignments: 
+
+
+***************** END OF NEGATIVE TESTING No.19  *************************
+
+    PRTC No.19  Class C IS COMPLETED:
+  Narrowings: (assign (par e 10 )())
+  Assignments: 
+  Equations Generic: (AreEqual (T)(A)(A))
+
+ to
+  Narrowings: (assign (par e 10 )())
+  Assignments: 
+
+---------------------------------------------------------------------------
+
+New Clash: No 20 
+  Clash: (((par e 10 ))to ((var e y )B))
+  Equations Negative: (OR (T)(((par e 10 ))to ()))
+  Equations Generic: (AreEqual (T)((par e 10 )A)(A(par e 10 )))
+
+
+Splitting...
+(AreEqual (T)((weval e 17 )BA)(A(weval e 17 )B))
+    PRTC No.20  FAILED in equation block:
+  Narrowings: (assign (par e 10 )((par e 11 )B))
+  Assignments: (assign (var e y )((par e 11 )))
+  Equations Negative: (OR (T)(((par e 11 )B)to ()))
+  Equations Generic: (AreEqual (T)((par e 11 )BA)(A(par e 11 )B))
+
+
+---------------------------------------------------------------------------
+
+New Clash: No 21 
+  Clash: (((par e 10 ))to ((var e Z )(var t y )))
+  Equations Negative: (OR (T)(((par e 10 ))to ()))
+  Equations Generic: (AreEqual (T)((par e 10 )A)(A(par e 10 )))
+
+
+Splitting...
+(AreEqual (T)((weval e 18 )(weval t 8 )A)(A(weval e 18 )(weval t 8 )))
+New assignments:
+(assign (weval t 8 )((1 Const ))(A))
+New common data:
+(assign (weval t 8 )((1 Const ))(A))(AreEqual (N)((1 Const )(1 (weval e 18 )))((weval e 18 )A)((1 Const )(1 (weval e 18 )))(A(weval e 18 )))
+New assignments:
+(assign (weval t 8 )((1 Const ))(A))
+New common data:
+(AreEqual (D)((1 Const )(1 (weval e 18 )))((weval e 18 )A)((1 Const )(1 (weval e 18 )))(A(weval e 18 )))
+Simple solving:
+(()()()((AreEqual (T)()((weval e 18 )A)()(A(weval e 18 ))))()()()()(T))
+Simple solving:
+(()()()((AreEqual (T)()()()()))()()()()(T))
+New common data:
+(AreEqual (F)((1 Const )(1 (weval e 18 )))((weval e 18 )A)((1 Const )(1 (weval e 18 )))(A(weval e 18 )))
+Testing negative block in No.21 : 
+  Narrowings: (assign (par e 10 )((par e 12 )(par t 5 )))(assign (par t 5 )(A))
+  Assignments: (assign (var e Z )((par e 12 )))(assign (var t y )(A))
+  Equations Negative: (OR (T)(((par e 12 )A)to ()))
+  Equations Generic: (AreEqual (T)((par e 12 )A)(A(par e 12 )))
+
+
+Normalizing negative clash No. 22 
+(((par e 12 )A)to ())
+Splitting...
+(AreEqual (T)((weval e 19 )A)())
+New common data:
+(AreEqual (N)((1 Const )(1 (weval e 19 )))((weval e 19 )A)((0 Const ))())
+    PRTC No.22  FAILED in equation block:
+  Clash: 
+  Equations New: (AreEqual (T)((par e 12 )A)())
+    (Desired )
+
+
+---------------------------------------------------------------------------
+
+***************** END OF NEGATIVE TESTING No.21  *************************
+
+    PRTC No.21  Class C IS COMPLETED:
+  Narrowings: (assign (par e 10 )((par e 12 )(par t 5 )))
+  Assignments: (assign (var e Z )((par e 12 )))(assign (var t y )((par t 5 )))
+  Equations Negative: (OR (T)(((par e 12 )(par t 5 ))to ()))
+  Equations Generic: (AreEqual (T)((par e 12 )(par t 5 )A)(A(par e 12 )(par t 5 )))
+
+ to
+  Narrowings: (assign (par e 10 )((par e 12 )(par t 5 )))(assign (par t 5 )(A))
+  Assignments: (assign (var e Z )((par e 12 )))(assign (var t y )(A))
+  Equations Generic: (AreEqual (T)((par e 12 )A)(A(par e 12 )))
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (T)(((par e 10 ))to ((var e Neg1 )A))(((par t 5 ))to (A)))
+    (OR (T)(((par e 10 ))to ()))
+Screened inequalities:
+
+    (OR (T)(((par e 10 ))to ((var e Neg1 )A))(((par t 5 ))to (A)))
+    (OR (T)(((par e 10 ))to ()))
+==================================================================================
+         SIMPLE NODE (0 0 0 1 ) with status: ReadyForGenCheck 
+  Restrictions: (assign (par e 6 )((par e 10 )(par t 4 )))(assign (par t 4 )(A))
+  Equations Generic: (AreEqual (T)((par e 10 )A)(A(par e 10 )))
+
+  Configuration: (call ((Check (1 3 ))8 )(args (arg (par e 10 ))))
+  Stack: 
+      (assign (var l (0 ))((call ((Check (1 3 ))8 )(args (arg (par e 10 ))))))
+
+  Children of (0 0 0 1 ): 
+==================================================================================
+         SIMPLE NODE (0 0 0 1 0 ) with status: Undriven 
+  Restrictions: (assign (par e 10 )())
+
+  Configuration: T
+  Stack: 
+      (assign (var l (0 ))(T))
+
+  Children of (0 0 0 1 0 ): 
+======================== NODE (0 0 0 1 0 ) INFO END====================================
+==================================================================================
+         SIMPLE NODE (0 0 0 1 1 ) with status: Undriven 
+  Restrictions: (assign (par e 10 )((par e 12 )(par t 5 )))(assign (par t 5 )(A))
+  Equations Generic: (AreEqual (T)((par e 12 )A)(A(par e 12 )))
+
+  Configuration: (call (Check 9 )(args (arg (par e 12 ))))
+  Stack: 
+      (assign (var l (0 ))((call (Check 9 )(args (arg (par e 12 ))))))
+
+  Children of (0 0 0 1 1 ): 
+======================== NODE (0 0 0 1 1 ) INFO END====================================
+======================== NODE (0 0 0 1 ) INFO END====================================
+
+  Trying to embed: 
+(((Check (1 3 ))5 ))
+ and 
+(((Check (1 3 ))8 ))
+(call ((Check (1 3 ))5 )(args (arg (par e 6 ))))
+ and 
+(call ((Check (1 3 ))8 )(args (arg (par e 10 ))))
+  EMBEDDING IS SUCCESSFUL.
+Depth is 0 
+
+  Equations are preserved:
+    (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+  Inequalities are preserved:
+==============================================================================
+           LET NODE (0 0 0 1 )
+  Let information: (Let ((0 0 0 1 1 )(assign (par e 6 )((par e 10 ))))In ((call ((Check (1 3 ))5 )(args (arg (par e 6 ))))))
+  Restrictions: (assign (par e 6 )((par e 10 )(par t 4 )))(assign (par t 4 )(A))
+
+  Configuration: 
+  Stack: 
+======================== NODE (0 0 0 1 ) INFO END====================================
+
+==============================================================================
+           LET NODE (0 )
+  Let information: (Let ((0 1 )(assign (par e 6 )()))((0 2 )(assign (par e 7 )((par e x ))))In ((call (Check 5 )(args (arg (par e 6 )(call ((F (1 2 ))6 )(args (arg (par e 7 )))))))))
+  Restrictions: 
+
+  Configuration: 
+  Stack: 
+======================== NODE (0 ) INFO END====================================
+
+New Clash: No 23 
+  Clash: (((par e 6 )A(call (F 7 )(args (arg (par e 8 )))))to ())
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+
+Splitting...
+(AreEqual (T)((weval e 20 )A(weval e 21 ))())
+New common data:
+(AreEqual (N)((1 Const )(1 (weval e 20 ))(1 (weval e 21 )))((weval e 20 )A(weval e 21 ))((0 Const ))())
+    PRTC No.23  FAILED in equation block:
+  Clash: 
+  Equations New: (AreEqual (T)((par e 6 )A(call (F 7 )(args (arg (par e 8 )))))())
+    (Desired )
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+
+---------------------------------------------------------------------------
+
+New Clash: No 24 
+  Clash: (((par e 6 )A(call (F 7 )(args (arg (par e 8 )))))to ((var e y )B))
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+
+Splitting...
+(AreEqual (T)((weval e 23 )A(weval e 22 ))((weval e 24 )))
+New assignments:
+(assign (weval e 24 )((1 Const )(1 (weval e 23 ))(1 (weval e 22 )))((weval e 23 )A(weval e 22 )))
+New common data:
+(assign (weval e 24 )((1 Const )(1 (weval e 23 ))(1 (weval e 22 )))((weval e 23 )A(weval e 22 )))
+New assignments:
+(assign (weval e 24 )((1 Const )(1 (weval e 23 ))(1 (weval e 22 )))((weval e 23 )A(weval e 22 )))
+Splitting...
+(AreEqual (T)((weval e 25 ))((weval e 22 )B))
+New assignments:
+(assign (weval e 25 )((1 Const )(1 (weval e 22 )))((weval e 22 )B))
+New common data:
+(assign (weval e 25 )((1 Const )(1 (weval e 22 )))((weval e 22 )B))
+New assignments:
+(assign (weval e 25 )((1 Const )(1 (weval e 22 )))((weval e 22 )B))
+Splitting...
+(AreEqual (T)((weval e 23 )A)(A(weval e 23 )))
+New common data:
+(AreEqual (N)((1 Const )(1 (weval e 23 )))((weval e 23 )A)((1 Const )(1 (weval e 23 )))(A(weval e 23 )))
+New common data:
+(AreEqual (D)((1 Const )(1 (weval e 23 )))((weval e 23 )A)((1 Const )(1 (weval e 23 )))(A(weval e 23 )))
+Simple solving:
+(()()()((AreEqual (T)()((weval e 23 )A)()(A(weval e 23 ))))()()()()(T))
+Simple solving:
+(()()()((AreEqual (T)()()()()))()()()()(T))
+New common data:
+(AreEqual (F)((1 Const )(1 (weval e 23 )))((weval e 23 )A)((1 Const )(1 (weval e 23 )))(A(weval e 23 )))
+Testing negative block in No.24 : 
+  Clash: 
+  Equations New: (Desired (AreEqual (T)((call (F 7 )(args (arg (par e 8 )))))((weval e 22 )B)))
+  Equations Generic: (AreEqual (F)((weval e 23 )A)(A(weval e 23 )))
+
+
+***************** END OF NEGATIVE TESTING No.24  *************************
+
+    PRTC No.24  Class C IS COMPLETED:
+  Clash: 
+  Equations New: (AreEqual (T)((par e 6 )A(weval e 22 ))((var e y )))
+    (Desired (AreEqual (F)((call (F 7 )(args (arg (par e 8 )))))((weval e 22 )B)))
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+ to
+  Clash: 
+  Equations New: (Desired (AreEqual (T)((call (F 7 )(args (arg (par e 8 )))))((weval e 22 )B)))
+  Equations Generic: (AreEqual (F)((weval e 23 )A)(A(weval e 23 )))
+
+---------------------------------------------------------------------------
+
+Multiset of calls to be resolved:
+(2 (call (F 7 )(args (arg (par e 8 )))))
+==================================================================================
+         SIMPLE NODE (0 0 1 ) with status: Driven 
+  Restrictions: (assign (par e 7 )((par t 3 )(par e 8 )))
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+  Configuration: (call (Check 5 )(args (arg (par e 6 )A(call (F 7 )(args (arg (par e 8 )))))))
+  Stack: 
+      (assign (var l (0 ))((call (Check 5 )(args (arg (par e 6 )A(call (F 7 )(args (arg (par e 8 )))))))))
+
+  Children of (0 0 1 ): 
+==================================================================================
+         SIMPLE NODE (0 0 1 0 ) with status: Ready 
+  Restrictions: Push 
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+  Configuration: (call (Check 5 )(args (arg (par e 6 )A(call (F 7 )(args (arg (par e 8 )))))))
+  Stack: 
+      (assign (var l (4 ))((call (F 7 )(args (arg (par e 8 ))))))
+      (assign (var l (0 ))((call (Check 5 )(args (arg (par e 6 )A(var l (4 )))))))
+
+  Children of (0 0 1 0 ): 
+======================== NODE (0 0 1 0 ) INFO END====================================
+======================== NODE (0 0 1 ) INFO END====================================
+
+==================================================================================
+         SIMPLE NODE (0 0 1 ) with status: Ready 
+  Restrictions: (assign (par e 7 )((par t 3 )(par e 8 )))
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+  Configuration: (call (Check 5 )(args (arg (par e 6 )A(call (F 7 )(args (arg (par e 8 )))))))
+  Stack: 
+      (assign (var l (4 ))((call (F 7 )(args (arg (par e 8 ))))))
+      (assign (var l (0 ))((call (Check 5 )(args (arg (par e 6 )A(var l (4 )))))))
+
+  Children of (0 0 1 ): 
+======================== NODE (0 0 1 ) INFO END====================================
+
+New Clash: No 25 
+  Clash: (((par e 8 ))to ())
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+
+Testing negative block in No.25 : 
+  Narrowings: (assign (par e 8 )())
+  Assignments: 
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+
+***************** END OF NEGATIVE TESTING No.25  *************************
+
+    PRTC No.25  Class C IS COMPLETED:
+  Narrowings: (assign (par e 8 )())
+  Assignments: 
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+ to
+  Narrowings: (assign (par e 8 )())
+  Assignments: 
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+---------------------------------------------------------------------------
+
+New Clash: No 26 
+  Clash: (((par e 8 ))to ((var t x )(var e y )))
+  Equations Negative: (OR (T)(((par e 8 ))to ()))
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+
+Testing negative block in No.26 : 
+  Narrowings: (assign (par e 8 )((par t 6 )(par e 15 )))
+  Assignments: (assign (var t x )((par t 6 )))(assign (var e y )((par e 15 )))
+  Equations Negative: (OR (T)(((par t 6 )(par e 15 ))to ()))
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+
+Normalizing negative clash No. 27 
+(((par t 6 )(par e 15 ))to ())
+Splitting...
+(AreEqual (T)((weval t 10 )(weval e 27 ))())
+New common data:
+(AreEqual (N)((1 Const )(1 (weval e 27 )))((weval t 10 )(weval e 27 ))((0 Const ))())
+    PRTC No.27  FAILED in equation block:
+  Clash: 
+  Equations New: (AreEqual (T)((par t 6 )(par e 15 ))())
+    (Desired )
+
+
+---------------------------------------------------------------------------
+
+***************** END OF NEGATIVE TESTING No.26  *************************
+
+    PRTC No.26  Class C IS COMPLETED:
+  Narrowings: (assign (par e 8 )((par t 6 )(par e 15 )))
+  Assignments: (assign (var t x )((par t 6 )))(assign (var e y )((par e 15 )))
+  Equations Negative: (OR (T)(((par t 6 )(par e 15 ))to ()))
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+ to
+  Narrowings: (assign (par e 8 )((par t 6 )(par e 15 )))
+  Assignments: (assign (var t x )((par t 6 )))(assign (var e y )((par e 15 )))
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+---------------------------------------------------------------------------
+
+==================================================================================
+         SIMPLE NODE (0 0 1 ) with status: ReadyForGenCheck 
+  Restrictions: (assign (par e 7 )((par t 3 )(par e 8 )))
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+  Configuration: (call (Check 5 )(args (arg (par e 6 )A(call ((F (1 2 ))7 )(args (arg (par e 8 )))))))
+  Stack: 
+      (assign (var l (4 ))((call ((F (1 2 ))7 )(args (arg (par e 8 ))))))
+      (assign (var l (0 ))((call (Check 5 )(args (arg (par e 6 )A(var l (4 )))))))
+
+  Children of (0 0 1 ): 
+==================================================================================
+         SIMPLE NODE (0 0 1 0 ) with status: Undriven 
+  Restrictions: (assign (par e 8 )())
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+  Configuration: (call (Check 5 )(args (arg (par e 6 )A)))
+  Stack: 
+      (assign (var l (0 ))((call (Check 5 )(args (arg (par e 6 )A)))))
+
+  Children of (0 0 1 0 ): 
+======================== NODE (0 0 1 0 ) INFO END====================================
+==================================================================================
+         SIMPLE NODE (0 0 1 1 ) with status: Undriven 
+  Restrictions: (assign (par e 8 )((par t 6 )(par e 15 )))
+  Equations Generic: (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+  Configuration: (call (Check 5 )(args (arg (par e 6 )AA(call (F 10 )(args (arg (par e 15 )))))))
+  Stack: 
+      (assign (var l (0 ))((call (Check 5 )(args (arg (par e 6 )AA(call (F 10 )(args (arg (par e 15 )))))))))
+
+  Children of (0 0 1 1 ): 
+======================== NODE (0 0 1 1 ) INFO END====================================
+======================== NODE (0 0 1 ) INFO END====================================
+
+  Trying to embed: 
+(((F (1 2 ))6 ))((Check 5 ))
+ and 
+(((F (1 2 ))7 ))((Check 5 ))
+(call (Check 5 )(args (arg (par e 6 )(call ((F (1 2 ))6 )(args (arg (par e 7 )))))))
+ and 
+(call (Check 5 )(args (arg (par e 6 )A(call ((F (1 2 ))7 )(args (arg (par e 8 )))))))
+  EMBEDDING IS SUCCESSFUL.
+  Depth is 0 
+Splitting...
+(AreEqual (T)((weval e 28 )AA)(A(weval e 28 )A))
+New common data:
+(AreEqual (N)((1 Const )(1 (weval e 28 )))((weval e 28 )A)((1 Const )(1 (weval e 28 )))(A(weval e 28 )))
+New common data:
+(AreEqual (D)((1 Const )(1 (weval e 28 )))((weval e 28 )A)((1 Const )(1 (weval e 28 )))(A(weval e 28 )))
+Splitting...
+(AreEqual (T)((weval e 28 )A)(A(weval e 28 )))
+New common data:
+(AreEqual (N)((1 Const )(1 (weval e 28 )))((weval e 28 )A)((1 Const )(1 (weval e 28 )))(A(weval e 28 )))
+New common data:
+(AreEqual (D)((1 Const )(1 (weval e 28 )))((weval e 28 )A)((1 Const )(1 (weval e 28 )))(A(weval e 28 )))
+Simple solving:
+(()()()((AreEqual (T)()((weval e 28 )A)()(A(weval e 28 ))))()()()()(T))
+Simple solving:
+(()()()((AreEqual (T)()()()()))()()()()(T))
+New common data:
+(AreEqual (F)((1 Const )(1 (weval e 28 )))((weval e 28 )A)((1 Const )(1 (weval e 28 )))(A(weval e 28 )))
+
+  Equations are preserved:
+    (AreEqual (F)((par e 6 )A)(A(par e 6 )))
+
+  Inequalities are preserved:
+==============================================================================
+           LET NODE (0 0 1 )
+  Let information: (Let ((0 0 1 1 )(assign (par e 21 )((par e 6 )A)))((0 0 1 2 )(assign (par e 22 )((par e 8 ))))In ((call (Check 11 )(args (arg (par e 21 )(call ((F (1 2 ))12 )(args (arg (par e 22 )))))))))
+  Restrictions: (assign (par e 7 )((par t 3 )(par e 8 )))
+
+  Configuration: 
+  Stack: 
+======================== NODE (0 0 1 ) INFO END====================================
+
+==============================================================================
+           LET NODE (0 )
+  Let information: (Let ((0 1 )(assign (par e 6 )()))((0 2 )(assign (par e 7 )((par e x ))))In ((call (Check 5 )(args (arg (par e 6 )(call ((F (1 2 ))6 )(args (arg (par e 7 )))))))))
+  Restrictions: 
+
+  Configuration: 
+  Stack: 
+======================== NODE (0 ) INFO END====================================
+
+==============================================================================
+           LET NODE (0 )
+  Let information: (Let ((0 1 )(assign (par e 6 )()))((0 2 )(assign (par e 7 )((par e x ))))In ((call (Check 5 )(args (arg (par e 6 )(call ((F (1 2 ))6 )(args (arg (par e 7 )))))))))
+  Restrictions: 
+
+  Configuration: 
+  Stack: 
+======================== NODE (0 ) INFO END====================================
+
+==============================================================================
+           LET NODE (0 )
+  Let information: (Let ((0 1 )(assign (par e 6 )()))((0 2 )(assign (par e 7 )((par e x ))))In ((call (Check 5 )(args (arg (par e 6 )(call ((F (1 2 ))6 )(args (arg (par e 7 )))))))))
+  Restrictions: 
+
+  Configuration: 
+  Stack: 
+======================== NODE (0 ) INFO END====================================
+
+==============================================================================
+           LET NODE (0 )
+  Let information: (Let ((0 1 )(assign (par e 6 )()))((0 2 )(assign (par e 7 )((par e x ))))In ((call (Check 5 )(args (arg (par e 6 )(call ((F (1 2 ))6 )(args (arg (par e 7 )))))))))
+  Restrictions: 
+
+  Configuration: 
+  Stack: 
+======================== NODE (0 ) INFO END====================================
+
+
+Roots of the functions:
+((0 0 0 )((Check (1 3 ))0 )(1 )((par e 6 )))((0 0 )(Check 0 )(2 )((par e 6 )(par e 7 )))
+
+(Node Finished (0 )(()((New )(Grammar )(Negative )(Numeric )(Generic ))((Let ((0 1 )(assign (par e 6 )()))((0 2 )(assign (par e 7 )((par e x ))))In ((call (Check 5 )(args (arg (par e 6 )(call ((F (1 2 ))6 )(args (arg (par e 7 ))))))))))()())(Children (Node Finished (0 0 )(()((New )(Grammar )(Negative )(Numeric )(Generic (AreEqual (F)((par e 6 )A)(A(par e 6 )))))()((call (Check 5 )(args (arg (par e 6 )(call ((F (1 2 ))6 )(args (arg (par e 7 ))))))))(((assign (var l (3 ))((call ((F (1 2 ))6 )(args (arg (par e 7 )))))))((assign (var l (0 ))((call (Check 5 )(args (arg (par e 6 )(var l (3 ))))))))))(Children (Node Finished (0 0 0 )(((assign (par e 7 )()))((New )(Grammar )(Negative )(Numeric )(Generic (AreEqual (F)((par e 6 )A)(A(par e 6 )))))()((call ((Check (1 3 ))5 )(args (arg (par e 6 )))))(((assign (var l (0 ))((call ((Check (1 3 ))5 )(args (arg (par e 6 )))))))))(Children (Node Finished (0 0 0 0 )(((assign (par e 6 )()))((New )(Grammar )(Negative )(Numeric )(Generic ))()(T)(((assign (var l (0 ))(T))))))(Node Finished (0 0 0 1 )(((assign (par e 6 )((par e 10 )(par t 4 )))(assign (par t 4 )(A)))((New )(Grammar )(Negative )(Numeric )(Generic ))((Let ((0 0 0 1 1 )(assign (par e 6 )((par e 10 ))))In ((call ((Check (1 3 ))5 )(args (arg (par e 6 )))))))()())(Children (Node (Looped To (0 0 0 )With (assign (par e 6 )((par e 10 ))))(0 0 0 1 0 )(()((New )(Grammar )(Negative )(Numeric )(Generic ))()((call ((Check (1 3 ))5 )(args (arg (par e 6 )))))(((assign (var l (0 ))((call ((Check (1 3 ))5 )(args (arg (par e 6 ))))))))))(Node Finished (0 0 0 1 1 )(()((New )(Grammar )(Negative )(Numeric )(Generic ))()((par e 10 ))(((assign (var l (0 ))((par e 10 )))))))))))(Node Finished (0 0 1 )(((assign (par e 7 )((par t 3 )(par e 8 ))))((New )(Grammar )(Negative )(Numeric )(Generic ))((Let ((0 0 1 1 )(assign (par e 21 )((par e 6 )A)))((0 0 1 2 )(assign (par e 22 )((par e 8 ))))In ((call (Check 11 )(args (arg (par e 21 )(call ((F (1 2 ))12 )(args (arg (par e 22 ))))))))))()())(Children (Node (Looped To (0 0 )With (assign (par e 6 )((par e 21 )))(assign (par e 7 )((par e 22 ))))(0 0 1 0 )(()((New )(Grammar )(Negative )(Numeric )(Generic ))()((call (Check 11 )(args (arg (par e 21 )(call ((F (1 2 ))12 )(args (arg (par e 22 ))))))))(((assign (var l (0 ))((call (Check 11 )(args (arg (par e 21 )(call ((F (1 2 ))12 )(args (arg (par e 22 )))))))))))))(Node Finished (0 0 1 1 )(()((New )(Grammar )(Negative )(Numeric )(Generic ))()((par e 6 )A)(((assign (var l (0 ))((par e 6 )A))))))(Node Finished (0 0 1 2 )(()((New )(Grammar )(Negative )(Numeric )(Generic ))()((par e 8 ))(((assign (var l (0 ))((par e 8 )))))))))))(Node Finished (0 1 )(()((New )(Grammar )(Negative )(Numeric )(Generic (AreEqual (F)((par e 6 )A)(A(par e 6 )))))()()(((assign (var l (0 ))())))))(Node Finished (0 2 )(()((New )(Grammar )(Negative )(Numeric )(Generic (AreEqual (F)((par e 6 )A)(A(par e 6 )))))()((par e x ))(((assign (var l (0 ))((par e x )))))))))
+Successors are raised:
+(Node (Function ((Check (1 3 ))0 )Merged With ((par e 6 ))And Eigen ((par e 6 )))(0 0 0 )(Children (Node Expression (0 0 0 0 )(((assign (par e 6 )()))(T)))(Node Expression (0 0 0 1 )(((assign (par e 6 )((par e 10 )(par t 4 )))(assign (par t 4 )(A)))((call ((Check (1 3 ))0 )(args (arg (par e 10 )))))))))
+Successors are raised:
+(Node (Function (Check 0 )Merged With ((par e 6 )(par e 7 ))And Eigen ((par e 7 )(par e 6 )))(0 0 )(Children (Node Expression (0 0 0 )(((assign (par e 7 )()))((call ((Check (1 3 ))0 )(args (arg (par e 6 )))))))(Node Expression (0 0 1 )(((assign (par e 7 )((par t 3 )(par e 8 ))))((call (Check 0 )(args (arg (*(par e 6 )A)(*(par e 8 ))))))))))

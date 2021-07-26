@@ -1,66 +1,66 @@
 [
   {
-    "FilePath": ["tests/test_AB_tail.ref"],
+    "FilePath": ["test_AB_tail.ref"],
     "TestData": ["'AABB'"]
   },
   {
-    "FilePath": ["tests/test_AB_tail.ref"],
+    "FilePath": ["test_AB_tail.ref"],
     "TestData": ["'AABABB'"]
   },
   {
-    "FilePath": ["tests/test_AB_tail.ref"],
+    "FilePath": ["test_AB_tail.ref"],
     "TestData": ["'ABC()CAABCAABBCCABABBCAA'"]
   },
 
   {
-    "FilePath": ["tests/test_ABmoved.ref"],
+    "FilePath": ["test_ABmoved.ref"],
     "TestData": ["'AABB'"]
   },
   {
-    "FilePath": ["tests/test_ABmoved.ref"],
+    "FilePath": ["test_ABmoved.ref"],
     "TestData": ["'AABABB'"]
   },
   {
-    "FilePath": ["tests/test_ABmoved.ref"],
+    "FilePath": ["test_ABmoved.ref"],
     "TestData": ["'ABCCA'('AB')'ABCAABBCCABABBCAA'"]
   },
 
   {
-    "FilePath": ["tests/test_ABplusPrefix.ref"],
+    "FilePath": ["test_ABplusPrefix.ref"],
     "TestData": ["('A')'BBA'"]
   },
   {
-    "FilePath": ["tests/test_ABplusPrefix.ref"],
+    "FilePath": ["test_ABplusPrefix.ref"],
     "TestData": ["('ABABA')'C'"]
   },
   {
-    "FilePath": ["tests/test_ABplusPrefix.ref"],
+    "FilePath": ["test_ABplusPrefix.ref"],
     "TestData": ["('AABABBA')'BABA'"]
   },
 
   {
-    "FilePath": ["tests/test_ba1.ref"],
+    "FilePath": ["test_ba1.ref"],
     "TestData": [""]
   },
   {
-    "FilePath": ["tests/test_ba1.ref"],
+    "FilePath": ["test_ba1.ref"],
     "TestData": ["()'A'('AA')'B'(())"]
   },
   {
-    "FilePath": ["tests/test_ba1.ref"],
+    "FilePath": ["test_ba1.ref"],
     "TestData": ["'IIIIIIIIIII()IBBBBB'"]
   },
 
   {
-    "FilePath": ["tests/test_ba2.ref"],
+    "FilePath": ["test_ba2.ref"],
     "TestData": [""]
   },
   {
-    "FilePath": ["tests/test_ba2.ref"],
+    "FilePath": ["test_ba2.ref"],
     "TestData": ["()'A'('AA')'B'(())"]
   },
   {
-    "FilePath": ["tests/test_ba2.ref"],
+    "FilePath": ["test_ba2.ref"],
     "TestData": ["'IIIIIIIIIII()IBBBBB'"]
   }
 

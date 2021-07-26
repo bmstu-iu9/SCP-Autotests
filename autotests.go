@@ -40,6 +40,28 @@ func getMainTests(path string) ([]MainTest, error) {
 	return mainTests, nil
 }
 
+func createSCP(scpVersion string) error { //refalVersion can be added
+	cmd := exec.Command("./create_scp.sh", fmt.Sprintf("MSCPAver%s", scpVersion))
+	if err := cmd.Run(); err != nil {
+		return errors.New("Error while compiling and executing a supercompiler refal-program\n")
+	}
+	return nil
+}
+
+func deleteSCP(scpVersion string) error {
+	os.Remove(fmt.Sprintf("MSCPAver%s/mscp-a", scpVersion))
+	return nil
+}
+
+func createResidual(path string, scpVersion string) (string, error) {
+	cmd := exec.Command("./create_rsd.sh", fmt.Sprintf("MSCPAver%s", scpVersion), fmt.Sprintf("../tests/%s", path), fmt.Sprintf("../tests/rsd_%s", path))
+	if err := cmd.Run(); err != nil {
+		return "", errors.New("Error while compiling the refal program\n")
+	}
+	path = fmt.Sprintf("rsd_%s", path)
+	return path, nil
+}
+
 func getOutput(path string, data string, refalVersion string) (string, error) {
 	var (
 		refalProgram string
@@ -98,16 +120,17 @@ func executeRefalProgram(out *bytes.Buffer, refalVersion string) error {
 	return nil
 }
 
-func runTests(tests []MainTest, refalVersion string) {
-	count := 0
+func runTests(tests []MainTest, refalVersion string, SCPVersion string) {
+	failCount := 0
+	createSCP(SCPVersion)
 	for _, test := range tests {
 		path := test.FilePath[0]
 		fmt.Printf("RUN  %s\n", path)
 
-		defaultProgramOutput, err1 := getOutput(path, test.TestData[0], refalVersion)
-		path = strings.ReplaceAll(path, "tests/", "")
-		path = fmt.Sprintf("tests/RSDs/rsd_%s", path)
-		residualProgramOutput, err2 := getOutput(path, test.TestData[0], refalVersion)
+		defaultProgramOutput, err1 := getOutput(fmt.Sprintf("tests/%s", path), test.TestData[0], refalVersion)
+
+		path, _ = createResidual(path, SCPVersion)
+		residualProgramOutput, err2 := getOutput(fmt.Sprintf("tests/%s", path), test.TestData[0], refalVersion)
 
 		if strings.Compare(defaultProgramOutput, residualProgramOutput) != 0 {
 			fmt.Print("FAIL:\n\tDefault program output :\t")
@@ -122,21 +145,24 @@ func runTests(tests []MainTest, refalVersion string) {
 			} else {
 				fmt.Print(residualProgramOutput)
 			}
-			count++
+			fmt.Println("\n")
+			failCount++
 		} else {
-			fmt.Printf("OK:\n\tDefault program output :\t%s\tResidual program output :\t%s", defaultProgramOutput, residualProgramOutput)
+			fmt.Printf("OK:\n\tDefault program output :\t%s\tResidual program output :\t%s\n\n", defaultProgramOutput, residualProgramOutput)
 		}
 	}
-	if count == 0 {
+	deleteSCP(SCPVersion)
+	if failCount == 0 {
 		fmt.Printf("--------------------------------\n\tAll tests passed!\n--------------------------------\n")
 	} else {
-		fmt.Println("Tests passed: ", len(tests)-count)
-		fmt.Println("Tests failed: ", count)
+		fmt.Println("Tests passed: ", len(tests)-failCount)
+		fmt.Println("Tests failed: ", failCount)
 	}
 }
 
 func main() {
 
+	SCPVersion := flag.String("scp", "1", "supercompiler version")
 	refalVersion := flag.String("v", "default", "refal version")
 	file := flag.String("path", "tests/main_tests.json", "path to tests")
 	flag.Parse()
@@ -146,5 +172,5 @@ func main() {
 		log.Fatal(err)
 	}
 
-	runTests(tests, *refalVersion)
+	runTests(tests, *refalVersion, *SCPVersion)
 }

@@ -1,0 +1,55 @@
+/*
+ A sligthly changed example test_strangeprefix.ref. 
+ The concatenation e.x++e.y is done starting from the end of the concatenated string e.y.
+ Then we prepend the prefix 'AB' to e.x++e.y.
+ The string e.x may be a prefix of 'AB'++e.x++e.y, iff it belongs to the language ['A'| EMPTY] ++ ['BA']^n.
+*/
+
+/***********************************************/
+/*           the input program                 */
+/***********************************************/
+
+*$MST_FROM_ENTRY;
+
+$ENTRY Go {
+ (e.x) e.y = <Prefix (e.x) <Concat (e.x) e.y>>;
+}
+
+Prefix {
+ () e.x = 'T';
+ (s.x e.y1) s.x e.y2 = <Prefix (e.y1) e.y2>;
+ ('A' e.y1) 'B' e.y2 = 'F';
+ ('B' e.y1) 'A' e.y2 = 'F';
+ (t.x e.y1) = 'F';
+}
+
+Concat {
+ (e.y1) = 'AB'e.y1;
+ (e.y1) e.y2 s.x = <Concat (e.y1) e.y2> s.x;
+}
+
+/***********************************************/
+/*          the residual program               */
+/***********************************************/
+/*
+$ENTRY Go {
+ (e.x1) e.x2 =  <Prefix_0 (e.x1) (e.x2) ()>;
+}
+
+
+Prefix_124_0 {
+ () (e.x1) =  'T';
+ ('A') (e.x1) =  'T';
+ ('AB' e.x1) (e.x2) =  <Prefix_124_0 (e.x1) (e.x2)>;
+ ('AA' e.x1) (e.x2) =  'F';
+ ('B' e.x1) (e.x2) =  'F';
+}
+
+
+Prefix_0 {
+ (e.x1) () (e.x2) =  <Prefix_124_0 (e.x1) (e.x2)>;
+ (e.x1) (e.x2 s.z1) (e.x3) =  <Prefix_0 (e.x1) (e.x2) (s.z1 e.x3)>;
+}
+
+*/
+

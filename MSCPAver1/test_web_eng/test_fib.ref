@@ -1,0 +1,46 @@
+/*
+ Computing the naive Fibonacci function in Peano arithmetics on the argument e.Number+2.
+
+*/
+
+
+/***********************************************/
+/*           the input program                 */
+/***********************************************/
+$ENTRY Go { e.Number = <Fib 'SS'e.Number>; }
+
+Fib {
+	     = 'S';
+	 'S' = 'S';
+	'SS' e.Num = <Fib 'S'e.Num> <Fib e.Num>;
+}
+
+/***********************************************/
+/*          the residual program               */
+/***********************************************/
+
+/*
+$ENTRY Go {
+ e.x1 =  <Fib_23_0 (e.x1) ()>;
+}
+
+
+Fib_23_0 {
+ () (e.x1) =  'SS' e.x1;
+ ('S' e.x1) (e.x2) =  <Fib_23_0 (e.x1) (<Fib_23_1 (e.x1) (e.x2)>)>;
+}
+
+
+Fib_23_1 {
+ () (e.x1) =  'S' e.x1;
+ ('S' e.x1) (e.x2) =  <Fib_23_1 (e.x1) (<Fib_123_0 (e.x1) (e.x2)>)>;
+}
+
+
+Fib_123_0 {
+ () (e.x1) =  'S' e.x1;
+ ('S') (e.x1) =  'S' e.x1;
+ ('SS' e.x1) (e.x2) =  <Fib_23_1 (e.x1) (<Fib_123_0 (e.x1) (e.x2)>)>;
+}
+*/
+

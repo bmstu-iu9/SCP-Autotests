@@ -1,0 +1,625 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1251">
+	<TITLE> MSCP: examples </TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice 4.1.2  (Win32)">
+	<META NAME="CREATED" CONTENT="0;0">
+	<META NAME="CHANGEDBY" CONTENT="А Н">
+	<META NAME="CHANGED" CONTENT="20190112;1495035">
+	<STYLE TYPE="text/css">
+	<!--
+		P { color: #000000 }
+		H2 { color: #000000 }
+		H2.cjk { font-family: "SimSun" }
+		H2.ctl { font-family: "Mangal" }
+		BLOCKQUOTE { color: #000000 }
+		H3 { color: #000000 }
+		H3.cjk { font-family: "SimSun" }
+		H3.ctl { font-family: "Mangal" }
+		TD P { color: #000000 }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="ru-RU" TEXT="#000000" BGCOLOR="#ffffff" BACKGROUND="fon.gif" DIR="LTR">
+<HR>
+<HR>
+<H2 CLASS="western"><U>MSCP: examples of the supercompilation </U>
+</H2>
+<P><B>How to understand the examples?</B></P>
+<UL>
+	<LI><BLOCKQUOTE>A Refal function definition is a list of rewrite
+	rules. The rewrite rules use the three types of variables:
+	e-variables can be associated with an arbitrary expression;
+	t-variables can be associated with a symbol or an expression (e.x),
+	where e.x is arbitrary; s-variables can be associated only with a
+	symbol.   </BLOCKQUOTE>
+
+
+<LI><BLOCKQUOTE> The associative concatenation ++ is built-in, thus i.e. we
+	understand the pattern e.x s.y as e.x ++ s.y. A call of the function
+	F on the argument Expr is written as &lt;F Expr&gt;.       </BLOCKQUOTE>
+<LI><BLOCKQUOTE>
+ We say that the supercompiler proves a statement if the input program computes some predicate and in the residual program all the
+outputs have the same truth value. That means the semantic property of the input program becomes the syntactic property of the residual one. </BLOCKQUOTE>
+	
+</UL>
+<HR>
+<H3 CLASS="western">Example list:</H3>
+<TABLE WIDTH=60% BORDER=0 CELLPADDING=0 CELLSPACING=0>
+	<TR>
+		<TD WIDTH=50%>
+			<UL>
+				<LI><P ALIGN=LEFT><A HREF="#Fabc">Fabc</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#FabcFin">Fabc (finite alphabet)</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#SqSum">SqSum </A>
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#Fib">Fibonacci</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#Prefix">Prefix</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#Prefix2">Prefix2</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#PrefixA">Prefix of A's</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#PrefixPlusAB">Prefix plus AB</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#EqsAsRestr">Equations as a condition</A>
+								</P>
+				<LI><P ALIGN=LEFT><A HREF="#RecProtocolCorr">Correct protocol
+				with a loop</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#RecProtocolInc">Incorrect protocol
+				with a loop</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#eqlemmas">Pushing equations while
+				generalizing </A>
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#Fabr_sym">More pushing equations
+				while generalizing </A>
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#FibWord">Proving properties of
+				Fibonacci words </A>
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#unused">Generalization of negative
+				restrictions </A>
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#AB_tail">Correct exhaustive deletion v.1 </A>
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#ABmoved">Correct exhaustive deletion v.2 </A>
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#CheckB">CheckForB</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#CheckB2">CheckForB variant</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#Look">WordEq</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#Order">InfCall</A> 
+				</P>
+			</UL>
+		</TD>
+		<TD WIDTH=50%>
+			<UL>
+				<LI><P ALIGN=LEFT><A HREF="#PalAB">PalAB</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#BAincorrect">Not only 'A'-s</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#Singapore">Trinh et al test</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#Sweden">Abdulla et al test</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#OpenVar">Open vars test</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#NonQuad">Non-quadratic equation</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#ScriptScript">Incorrect sanitization</A>
+								</P>
+				<LI><P ALIGN=LEFT><A HREF="#ScriptIp">Correct sanitization - ip</A>
+								</P>
+				<LI><P ALIGN=LEFT><A HREF="#ScriptIpNB">Correct sanitization - ip
+				and no blanks</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#ScriptBrackets">Correct sanitization
+				- brackets</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#ScriptSilly">Correct but silly
+				sanitization</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#scriptComplex">Guarnieri et al test</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#finiteletter">Square subword</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#KMPtest">Naive matching to KMP</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#sumcomm">Commutativity of the associative addition</A> 
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#RefalMachine">Interpreter of Zip function </A>
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#weqs_int_base_new">Word equations interpreter for xAy=yBx </A>
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#weqs_int_base_1">Word equations interpreter for ABxy = xyBA </A>
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#weqs_int_base_2">Word equations interpreter for xAy = zzz </A>
+				</P>
+				<LI><P ALIGN=LEFT><A HREF="#weqs_int_base_3">Word equations interpreter for zAByx = yzxBA </A>
+				</P>
+			</UL>
+		</TD>
+	</TR>
+</TABLE>
+<HR>
+<P><A NAME="Fabc"></A><B>Example #1 (Fabc):</B></P>
+<P><A HREF="test_Fabc.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>A simple test: merging two loops in a one. &nbsp; 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="FabcFin"></A><B>Example #2 (Fabc (finite alphabet)):</B></P>
+<P><A HREF="test_Fabc_finalph.ref">The input and the residual program</A>
+</P>
+<UL>
+	<LI><BLOCKQUOTE>A simple test: merging two loops in a one in the
+	alphabet {A,B,C}. &nbsp; 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="SqSum"></A><B>Example #3 (SqSum):</B></P>
+<P><A HREF="test_SqSum.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>The function computing a square sum in the Peano
+	arithmetic takes a partially defined value as an argument. The
+	definitions of the sum and the multiplication use associativity of
+	the language. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="Fib"></A><B>Example #4 (Fibonacci):</B></P>
+<P><A HREF="test_fib.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>The function computing the n-th Fibonacci number
+	takes a partially defined value as an argument. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="Prefix"></A><B>Example #5 (Prefix):</B></P>
+<P><A HREF="test_prefix.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>The test of the equivalence of the two concatenation
+	definitions. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="Prefix2"></A><B>Example #6 (Prefix2):</B></P>
+<P><A HREF="test_strangeprefix.ref">The input and the residual
+program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>The test of the equivalence of the two other
+	concatenation definitions. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="PrefixA"></A><B>Example #7 (Prefix of A's):</B></P>
+<P><A HREF="test_PrefixA.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>In what cases the string x is a prefix of 'A'++x++y?
+	Appending is done by the built-in concatenation. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="PrefixPlusAB"></A><B>Example #8 (Prefix Plus AB):</B></P>
+<P><A HREF="test_ABplusPrefix.ref">The input and the residual program</A>
+</P>
+<UL>
+	<LI><BLOCKQUOTE>In what cases the string x is a prefix of
+	'AB'++x++y? Appending of y is done in a loop processing a string
+	from its end. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="EqsAsRestr"></A><B>Example #9 (Equations as a
+condition):</B></P>
+<P><A HREF="test_eqsASrestr.ref">The input and the residual program</A>
+</P>
+<UL>
+	<LI><BLOCKQUOTE>A word equation is given explicitly. It is used
+	during the unfolding. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="RecProtocolCorr"></A><B>Example #10 (Correct protocol
+with a loop):</B></P>
+<P><A HREF="test_ProtoSafe.ref">The input and the residual program</A>
+</P>
+<UL>
+	<LI><BLOCKQUOTE>Verification of a safe protocol taken from the paper
+	D. Beyer, M. Dangl, P. Wendler. Boosting k-Induction with Continuously-Refined Invariants // 
+ In: Kroening D., Pasareanu C. (eds) Computer Aided Verification. CAV 2015. / LNCS, Vol. 9206, pp: 622-640. Springer, 2015. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="RecProtocolInc"></A><B>Example #11 (Incorrect protocol
+with a loop):</B></P>
+<P><A HREF="test_ProtoUnsafe.ref">The input and the residual program</A>
+</P>
+<UL>
+	<LI><BLOCKQUOTE>Finding a counterexample to an unsafe protocol taken
+	from the paper D. Beyer, M. Dangl, P. Wendler. Boosting k-Induction with Continuously-Refined Invariants // 
+ In: Kroening D., Pasareanu C. (eds) Computer Aided Verification. CAV 2015. / LNCS, Vol. 9206, pp: 622-640. Springer, 2015.
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="eqlemmas"></A><B>Example #12 (Pushing equations while
+generalizing):</B></P>
+<P><A HREF="test_eqlemmas0.ref">The input and the residual program</A>
+</P>
+<UL>
+	<LI><BLOCKQUOTE>A test on using the word equations in constructing
+	generalizations of expressions. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="Fabr_sym"></A><B>Example #13 (More using equations while
+generalizing ):</B></P>
+<P><A HREF="test_Fabr.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>Another test on using word equations in
+	generalization. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="FibWord"></A><B>Example #14 (Proving properties of
+Fibonacci words):</B></P>
+<P><A HREF="test_FibWord.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>After two iterations of the supercompilation, a
+	property of the Fibonacci words is proven. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="unused"></A><B>Example #15 (Generalization of negative
+restrictions ):</B></P>
+<P><A HREF="test_unused.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>A negative restriction on a symbol is generalized to
+	a negative restriction on an expression. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="AB_tail"></A><B>Example #16 (Exhaustive deletion 1 ):</B></P>
+<P><A HREF="test_AB_tail.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>A correct version of the exhaustive deletion algorithm. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="ABmoved"></A><B>Example #17 (Exhaustive deletion 2 ):</B></P>
+<P><A HREF="test_ABmoved.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>Another correct version of the exhaustive deletion. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="CheckB"></A><B>Example #18 (CheckForB)</B></P>
+<P><A HREF="test_ba1.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>Given a function generating a string in the language
+	'A'*, the task is to check the last letter of the string is never
+	'B'. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="CheckB2"></A><B>Example #19 (CheckForB2)</B></P>
+<P><A HREF="test_ba2.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>Given a function generating a string in the language
+	'A'*, the task is to check the last letter of the string never
+	contains 'B'. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="Look"></A><B>Example #20 (Word Equations)</B></P>
+<P><A HREF="test_look.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>Existence of the multiple t-variables in the pattern
+	may lead to an equation generation. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="Order"></A><B>Example #21 (InfCall)</B></P>
+<P><A HREF="test_order.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>The normal computation order on the associative data
+	may lead to non-trivial function order in a stack. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="PalAB"></A><B>Example #22 (PalAB)</B></P>
+<P><A HREF="test_palplusAB.ref">The input and the residual program</A>
+</P>
+<UL>
+	<LI><BLOCKQUOTE>If we append the prefix 'AB' to the
+	string and then append its inversion, we can never get a palindrome.
+		</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="BAincorrect"></A><B>Example #23 (Not only 'A'-s):</B></P>
+<P><A HREF="test_ba_incorrect.ref">The input and the residual program</A>
+</P>
+<UL>
+	<LI><BLOCKQUOTE>A simple test on removing refuted hypotheses after a
+	generalization. First, the hypothesis of belonging to the laguage A*
+	is generated. When the next generalization attempt is done, it is
+	refuted. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="Singapore"></A><B>Example #24 (Thinh et al test):</B></P>
+<P><A HREF="test_Singapore.ref">The input and the residual program</A>
+</P>
+<UL>
+	<LI><BLOCKQUOTE>The test from the paper: M.T Trinh, D.H Chu, J.
+	Jaffar, Progressive reasoning over recursively-defined strings /
+	International Conference on Computer Aided Verification, 2016,
+	218-240.<!-- Progressive Reasoning over Recursively-Defined Strings / M.T.Trinh et al -->
+		</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="Sweden"></A><B>Example #25 (Abdulla et al test):</B></P>
+<P><A HREF="test_Sweden.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>The test from the paper: Parosh Aziz Abdulla,
+	Mohamed Faouzi Atig, Yu-Fang Chen, Bui Phi Diep, Lukas Holik, Ahmed
+	Rezine, Philipp Rummer. Flatten and conquer: a framework for
+	efficient analysis of string constraints, Programming Language
+	Design and Implementation (PLDI), 2017, Barcelona, Spain, ACM, pages
+	602-617.<!-- Flatten and Conquer. A Framework for Efficient Analysis of String Constraints / P.A.Abdulla et al. -->
+		</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="OpenVar"></A><B>Example #26 (Open variables test):</B></P>
+<P><A HREF="test_openvars.ref">The input and the residual program</A>
+</P>
+<UL>
+	<LI><BLOCKQUOTE>A test on processing open variables in patterns. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="NonQuad"></A><B>Example #27 (Non-quadratic equations
+test):</B></P>
+<P><A HREF="test_nonquadratic.ref">The input and the residual program</A>
+</P>
+<UL>
+	<LI><BLOCKQUOTE>Given a non-quadratic equation, the supercompiler
+	manages to solve it combining elementary actions. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="ScriptScript"></A><B>Example #28 (Incorrect
+sanitization):</B></P>
+<P><A HREF="test_Script1.ref">The input and the residual program</A>
+</P>
+<UL>
+	<LI><BLOCKQUOTE>A simple sanitization algorithm is shown to be
+	incorrect. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="ScriptIp"></A><B>Example #29 (Correct sanitization - ip):</B></P>
+<P><A HREF="test_Script.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>The test is taken from the paper: M.T Trinh, D.H
+	Chu, J. Jaffar, Progressive reasoning over recursively-defined
+	strings / International Conference on Computer Aided Verification,
+	2016, 218-240. 
+
+A sanitization algorithm is shown to be correct in
+	respect with the given conditions. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="ScriptBrackets"></A><B>Example #30 (Correct sanitization
+- brackets):</B></P>
+<P><A HREF="test_Script2.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>The test is taken from the paper: M.T Trinh, D.H
+	Chu, J. Jaffar, Progressive reasoning over recursively-defined
+	strings / International Conference on Computer Aided Verification,
+	2016, 218-240. 
+
+A sanitization algorithm is also shown to be correct
+	in respect with the given conditions. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="ScriptIpNB"></A><B>Example #31 (Correct sanitization - ip
+and no blanks):</B></P>
+<P><A HREF="test_Script3.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>A modified version of the test #31. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="ScriptSilly"></A><B>Example #32 (Correct but silly
+sanitization):</B></P>
+<P><A HREF="test_script0.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>A simple sanitization algorithm is shown to be
+	correct. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="scriptComplex"></A><B>Example #33 (Guarnieri et al test):</B></P>
+<P><A HREF="test_scriptComplex.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>The test is taken from the paper
+
+ Guarnieri, M. Pistoia, O. Tripp, Ju. Dolby, S. Teilhet, R. Berg. Saving the World Wide Webfrom Vulnerable JavaScript // 
+In: Proceedings of the 2011 International Symposium on Software Testing and Analysis (ISSTA '11), pp: 177-187, 2011
+
+A sanitization of the innertext method. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="finiteletter"></A><B>Example #34 (Square subword):</B></P>
+<P><A HREF="test_finiteletter.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>Proving that every word in the alphabet {'A', 'B'} has a square subword. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="KMPtest"></A><B>Example #35 (Naive matching to KMP):</B></P>
+<P><A HREF="test_KMPtest.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>A version of the classical supercompiler test for the associative data type. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="sumcomm"></A><B>Example #36 (Commutativity of the addition):</B></P>
+<P><A HREF="test_sumcomm.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>The commutativity of the associative addition (on strings representing unary numbers).
+	This example is motivated by the example of the manual supercompilation proving commutativity of the addition operation
+	given on p.213 (Example 6) in: 
+	F. Turchin. The Language REFAL, the Theory of Compilation, and Metasystem Analysis. Courant Institute Report #20, New York, 1980, 245 p. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="RefalMachine"></A><B>Example #37 (Interpretation of Zip function):</B></P>
+<P><A HREF="RefalMachine.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>This is the specialization task as follows. </BLOCKQUOTE>
+
+<table border="0" cellpadding="0" cellspacing="0" width="40%" bgcolor="white" >   
+  <tr> 
+        <td width="89%" align="left"><code><tt>&lt;Interpreter&nbsp;#e.data&nbsp;&nbsp;&nbsp;.................&nbsp;
+          &gt;</tt></code></td> 
+  </tr>
+   <tr> 
+        <td width="89%" align="left"><code><tt> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &lt;Zip &nbsp;!&nbsp; &nbsp;&gt;&nbsp;&#37;Source-Zip&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;</tt></code></td>
+   </tr>
+</table>
+	
+	<LI><BLOCKQUOTE>The input program is an interpreter of a subset of Refal language. 
+	The residual program is a version of the Zip function.
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="weqs_int_base_new"></A><B>Example #38 (Word equations interpreter - xAy = yBx):</B></P>
+<P><A HREF="weqs_int_base_new.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>This is the specialization task as follows. </BLOCKQUOTE>
+
+<table border="0" cellpadding="0" cellspacing="0" width="40%" bgcolor="white" >   
+  <tr> 
+        <td width="89%" align="left"><code><tt>&nbsp;&nbsp;&lt;Scp&nbsp;&nbsp;&nbsp;.........................................&nbsp;
+          &gt;</tt></code></td> 
+  </tr>
+   <tr> 
+        <td width="89%" align="left"><code><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &lt;Eq #e.Path (LHS)(RHS) &gt;&nbsp;&#37;Int-Source&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;</tt></code></td>
+   </tr>
+</table>
+	
+	<LI><BLOCKQUOTE>The input program is an interpreter of the paths solving word equations. 
+	The residual program represents a graph of the solutions of the given word equation x++A++y = y++B++x. The program does not
+	contain outputs with the value True; thus we prove the fact that the equation x++A++y = y++B++x has no solutions. 
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="weqs_int_base_1"></A><B>Example #39 (Word equations interpreter - ABxy = xyBA):</B></P>
+<P><A HREF="weqs_int_base_1.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>This is the specialization task as follows. </BLOCKQUOTE>
+
+<table border="0" cellpadding="0" cellspacing="0" width="40%" bgcolor="white" >   
+  <tr> 
+        <td width="89%" align="left"><code><tt>&nbsp;&nbsp;&lt;Scp&nbsp;&nbsp;&nbsp;.........................................&nbsp;
+          &gt;</tt></code></td> 
+  </tr>
+   <tr> 
+        <td width="89%" align="left"><code><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &lt;Eq #e.Path (LHS)(RHS) &gt;&nbsp;&#37;Int-Source&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;</tt></code></td>
+   </tr>
+</table>
+	
+	<LI><BLOCKQUOTE>The input program is an interpreter of the paths solving word equations. 
+	The residual program represents a graph of the solutions of the given word equation A++B++x++y = x++y++B++A.
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="weqs_int_base_2"></A><B>Example #40 (Word equations interpreter - xAy = zzz):</B></P>
+<P><A HREF="weqs_int_base_2.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>This is the specialization task as follows. </BLOCKQUOTE>
+
+<table border="0" cellpadding="0" cellspacing="0" width="40%" bgcolor="white" >   
+  <tr> 
+        <td width="89%" align="left"><code><tt>&nbsp;&nbsp;&lt;Scp&nbsp;&nbsp;&nbsp;.........................................&nbsp;
+          &gt;</tt></code></td> 
+  </tr>
+   <tr> 
+        <td width="89%" align="left"><code><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &lt;Eq #e.Path (LHS)(RHS) &gt;&nbsp;&#37;Int-Source&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;</tt></code></td>
+   </tr>
+</table>
+	
+	<LI><BLOCKQUOTE>The input program is an interpreter of the paths solving word equations. 
+	The residual program represents a graph of the solutions of the given word equation x++A++y = z++z++z. The graph is finite.
+	</BLOCKQUOTE>
+</UL>
+<HR>
+<P><A NAME="weqs_int_base_3"></A><B>Example #41 (Word equations interpreter - zAByx = yzxBA):</B></P>
+<P><A HREF="weqs_int_base_3.ref">The input and the residual program</A> 
+</P>
+<UL>
+	<LI><BLOCKQUOTE>This is the specialization task as follows. </BLOCKQUOTE>
+
+<table border="0" cellpadding="0" cellspacing="0" width="40%" bgcolor="white" >   
+  <tr> 
+        <td width="89%" align="left"><code><tt>&nbsp;&nbsp;&lt;Scp&nbsp;&nbsp;&nbsp;.........................................&nbsp;
+          &gt;</tt></code></td> 
+  </tr>
+   <tr> 
+        <td width="89%" align="left"><code><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &lt;Eq #e.Path (LHS)(RHS) &gt;&nbsp;&#37;Int-Source&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ;</tt></code></td>
+   </tr>
+</table>
+	
+	<LI><BLOCKQUOTE>The input program is an interpreter of the paths solving word equations. 
+	The residual program represents a graph of the solutions of the given word equation z++A++B++y++x = y++z++x++B++A.
+	</BLOCKQUOTE>
+</UL>
+</BODY>
+</HTML>

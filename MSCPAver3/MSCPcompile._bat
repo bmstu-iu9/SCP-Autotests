@@ -1,0 +1,12 @@
+: Компиляция исходных файлов MSCP
+
+refc Unfold_SCP
+refc accessMSCP
+refc basics
+refc Drive
+refc Stack
+refc Generalize
+refc WordEquations
+refc WordEqsCases
+refc DiofEqs
+refc residual
