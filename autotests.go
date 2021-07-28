@@ -41,7 +41,7 @@ func getMainTests(path string) ([]MainTest, error) {
 }
 
 func createSCP(scpVersion string) error { //refalVersion can be added
-	cmd := exec.Command("./create_scp.sh", fmt.Sprintf("MSCPAver%s", scpVersion))
+	cmd := exec.Command("./scripts/create_scp.sh", fmt.Sprintf("MSCPAver%s", scpVersion))
 	if err := cmd.Run(); err != nil {
 		return errors.New("Error while compiling and executing a supercompiler refal-program\n")
 	}
@@ -54,7 +54,7 @@ func deleteSCP(scpVersion string) error {
 }
 
 func createResidual(path string, scpVersion string) (string, error) {
-	cmd := exec.Command("./create_rsd.sh", fmt.Sprintf("MSCPAver%s", scpVersion), fmt.Sprintf("../tests/%s", path), fmt.Sprintf("../tests/rsd_%s_%s", scpVersion, path))
+	cmd := exec.Command("./scripts/create_rsd.sh", fmt.Sprintf("MSCPAver%s", scpVersion), fmt.Sprintf("../tests/%s", path), fmt.Sprintf("../tests/rsd_%s_%s", scpVersion, path))
 	if err := cmd.Run(); err != nil {
 		return "", errors.New("Error while compiling the refal program\n")
 	}
@@ -112,7 +112,7 @@ func createFile(refalProgram string) error {
 }
 
 func executeRefalProgram(out *bytes.Buffer, refalVersion string) error {
-	cmd := exec.Command("./run_refal.sh", refalVersion)
+	cmd := exec.Command("./scripts/run_refal.sh", refalVersion)
 	cmd.Stdout = out
 	if err := cmd.Run(); err != nil {
 		return errors.New("Error while compiling and executing a refal-program\n")
