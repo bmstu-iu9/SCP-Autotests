@@ -37,10 +37,10 @@ func deleteComments(refalProgram *string) {
 		*refalProgram = (*refalProgram)[:indBeg] + (*refalProgram)[indEnd+2:]
 	}
 
-	for strings.Count(*refalProgram, "*") > 0 { // удаление однострочных комментариев
-		indBeg = strings.Index(*refalProgram, "*")
-		indEnd = strings.Index((*refalProgram)[indBeg+1:], "\n") + indBeg + 1
-		*refalProgram = (*refalProgram)[:indBeg] + (*refalProgram)[indEnd+1:]
+	for strings.Count(*refalProgram, "\n*") > 0 { // удаление однострочных комментариев
+		indBeg = strings.Index(*refalProgram, "\n*")
+		indEnd = strings.Index((*refalProgram)[indBeg+2:], "\n") + indBeg + 2
+		*refalProgram = (*refalProgram)[:indBeg + 1] + (*refalProgram)[indEnd+1:]
 	}
 
 	*refalProgram = strings.ReplaceAll(*refalProgram, "\r", "")
