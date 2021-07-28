@@ -5,7 +5,7 @@ import (
 )
 
 func TestCheckEntry(t *testing.T) {
-	tests, err := getTestsFromFile("tests/entry_point_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/entry_point_tests.json")
 	if err != nil {
 		t.Error(err)
 	}

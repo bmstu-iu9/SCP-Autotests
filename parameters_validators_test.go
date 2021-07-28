@@ -6,7 +6,7 @@ import (
 )
 
 func TestCheckParameters(t *testing.T) {
-	tests, err := getTestsFromFile("tests/check_parameters_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/check_parameters_tests.json")
 	if err != nil {
 		t.Error(err)
 	}
@@ -29,7 +29,7 @@ func TestCheckParameters(t *testing.T) {
 }
 
 func TestSplitToTokens(t *testing.T) {
-	tests, err := getTestsFromFile("tests/split_to_tokens_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/split_to_tokens_tests.json")
 	if err != nil {
 		t.Error(err)
 	}
@@ -52,7 +52,7 @@ func TestSplitToTokens(t *testing.T) {
 }
 
 func TestCheckTokens(t *testing.T) {
-	tests, err := getTestsFromFile("tests/check_tokens_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/check_tokens_tests.json")
 	if err != nil {
 		t.Error(err)
 	}
@@ -67,7 +67,7 @@ func TestCheckTokens(t *testing.T) {
 }
 
 func TestCheckVariables(t *testing.T) {
-	tests, err := getTestsFromFile("tests/check_variables_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/check_variables_tests.json")
 	if err != nil {
 		t.Error(err)
 	}
