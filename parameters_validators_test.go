@@ -15,7 +15,8 @@ func TestCheckParameters(t *testing.T) {
 		t.Run(test.TestCase[0], func(t *testing.T) {
 			if res, err := checkParameters(test.TestCase[0]); err != nil {
 				if test.Expected[0] != err.Error() {
-					t.Errorf("Incorrect error recognition\nExpected: %s\nRecieved: %s", test.Expected[0], err.Error())
+					t.Errorf("Incorrect error recognition\nExpected: %s\nRecieved: %s",
+						test.Expected[0], err.Error())
 				}
 			} else {
 				for i, token := range res {
@@ -38,7 +39,8 @@ func TestSplitToTokens(t *testing.T) {
 		t.Run(test.TestCase[0], func(t *testing.T) {
 			if res, err := splitToTokens(test.TestCase[0]); err != nil {
 				if test.Expected[0] != err.Error() {
-					t.Errorf("Incorrect error recognition\nExpected: %s\nRecieved: %s", test.Expected[0], err.Error())
+					t.Errorf("Incorrect error recognition\nExpected: %s\nRecieved: %s",
+						test.Expected[0], err.Error())
 				}
 			} else {
 				for i, token := range res {
@@ -60,7 +62,8 @@ func TestCheckTokens(t *testing.T) {
 	for _, test := range tests {
 		t.Run(strings.Join(test.TestCase, " "), func(t *testing.T) {
 			if err = checkTokens(test.TestCase); err != nil && test.Expected[0] != err.Error() {
-				t.Errorf("Incorrect error recognition\nExpected: %s\nRecieved: %s", test.Expected[0], err.Error())
+				t.Errorf("Incorrect error recognition\nExpected: %s\nRecieved: %s",
+					test.Expected[0], err.Error())
 			}
 		})
 	}
@@ -76,7 +79,8 @@ func TestCheckVariables(t *testing.T) {
 		t.Run(strings.Join(test.TestCase, " "), func(t *testing.T) {
 			coincidences := make(map[string]bool)
 			if err = checkVariables(test.TestCase, &coincidences); err != nil && test.Expected[0] != err.Error() {
-				t.Errorf("Incorrect error recognition\nExpected: %s\nRecieved: %s", test.Expected[0], err.Error())
+				t.Errorf("Incorrect error recognition\nExpected: %s\nRecieved: %s",
+					test.Expected[0], err.Error())
 			}
 		})
 	}

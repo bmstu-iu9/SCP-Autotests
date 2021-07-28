@@ -17,7 +17,8 @@ func entryPointSearch(refalProgram string) (int, int, error) {
 		return -1, -1, errors.New("Exceeded entry points amount\n")
 	}
 	ind := strings.Index(refalProgram, "$ENTRY")
-	if refalProgram[ind+6] == ' ' && refalProgram[ind+7] == 'G' && (refalProgram[ind+8] == 'o' || refalProgram[ind+8] == 'O') {
+	if refalProgram[ind+6] == ' ' && refalProgram[ind+7] == 'G' &&
+		(refalProgram[ind+8] == 'o' || refalProgram[ind+8] == 'O') {
 		indBeg := strings.Index(refalProgram[ind+8:], "{") + ind + 9
 		indEnd := strings.Index(refalProgram[ind+8:], "}") + ind + 8
 		return indBeg, indEnd, nil
@@ -40,7 +41,7 @@ func deleteComments(refalProgram *string) {
 	for strings.Count(*refalProgram, "\n*") > 0 { // удаление однострочных комментариев
 		indBeg = strings.Index(*refalProgram, "\n*")
 		indEnd = strings.Index((*refalProgram)[indBeg+2:], "\n") + indBeg + 2
-		*refalProgram = (*refalProgram)[:indBeg + 1] + (*refalProgram)[indEnd+1:]
+		*refalProgram = (*refalProgram)[:indBeg+1] + (*refalProgram)[indEnd+1:]
 	}
 
 	*refalProgram = strings.ReplaceAll(*refalProgram, "\r", "")

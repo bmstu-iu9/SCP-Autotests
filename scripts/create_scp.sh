@@ -2,5 +2,4 @@
 
 mkdir tests/rsd
 cd $1
-rlmake mscp-a.ref > trash.txt
-rm trash.txt
+rlmake mscp-a.ref >> info.txt
