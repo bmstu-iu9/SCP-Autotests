@@ -5,7 +5,7 @@ import (
 )
 
 func TestGetUnparametrizedEntryPoint(t *testing.T) {
-	tests, err := getTestsFromFile("tests/get_unparametrized_entry_point_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/get_unparametrized_entry_point_tests.json")
 	if err != nil {
 		t.Error(err)
 	}
@@ -24,7 +24,7 @@ func TestGetUnparametrizedEntryPoint(t *testing.T) {
 }
 
 func TestMatchData(t *testing.T) {
-	tests, err := getTestsFromFile("tests/match_data_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/match_data_tests.json")
 	if err != nil {
 		t.Error(err)
 	}
@@ -48,7 +48,7 @@ func TestMatchData(t *testing.T) {
 }
 
 func TestMatchDataHelper(t *testing.T) {
-	tests, err := getTestsFromFile("tests/match_data_helper_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/match_data_helper_tests.json")
 	if err != nil {
 		t.Error(err)
 	}
@@ -75,7 +75,7 @@ func TestMatchDataHelper(t *testing.T) {
 }
 
 func TestParse(t *testing.T) {
-	tests, err := getTestsFromFile("tests/parse_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/parse_tests.json")
 	if err != nil {
 		t.Error(err)
 	}
@@ -94,7 +94,7 @@ func TestParse(t *testing.T) {
 }
 
 func TestParseString(t *testing.T) {
-	tests, err := getTestsFromFile("tests/parse_string_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/parse_string_tests.json")
 	if err != nil {
 		t.Error(err)
 	}
@@ -113,7 +113,7 @@ func TestParseString(t *testing.T) {
 }
 
 func TestParseMacrodigit(t *testing.T) {
-	tests, err := getTestsFromFile("tests/parse_macrodigit_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/parse_macrodigit_tests.json")
 	if err != nil {
 		t.Error(err)
 	}
@@ -132,7 +132,7 @@ func TestParseMacrodigit(t *testing.T) {
 }
 
 func TestExtractValue(t *testing.T) {
-	tests, err := getTestsFromFile("tests/extract_value_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/extract_value_tests.json")
 	if err != nil {
 		t.Error(err)
 	}
@@ -152,7 +152,7 @@ func TestExtractValue(t *testing.T) {
 }
 
 func TestTerm(t *testing.T) {
-	tests, err := getTestsFromFile("tests/term_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/term_tests.json")
 	if err != nil {
 		t.Error(err)
 	}
@@ -171,7 +171,7 @@ func TestTerm(t *testing.T) {
 }
 
 func TestSymbol(t *testing.T) {
-	tests, err := getTestsFromFile("tests/symbol_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/symbol_tests.json")
 	if err != nil {
 		t.Error(err)
 	}
