@@ -6,7 +6,6 @@
 #esac
 #!/bin/bash
 
-rlc ./executable.ref > trash.txt
-./executable
-rm ./executable*
-rm ./trash.txt
+rlc $1 >> info.txt
+./$1
+rm $1*

@@ -11,6 +11,8 @@ import (
 	"os"
 	"os/exec"
 	"strings"
+	"sync"
+	"sync/atomic"
 )
 
 type MainTest struct {
@@ -18,8 +20,14 @@ type MainTest struct {
 	TestData string `json:"TestData"`
 }
 
-func getMainTests(path string) ([]MainTest, error) {
-	jsonStorage, err := os.Open(path)
+var (
+	SCPVersion   *string
+	refalVersion *string
+	file         *string
+)
+
+func getMainTests() ([]MainTest, error) {
+	jsonStorage, err := os.Open(*file)
 	if err != nil {
 		return nil, err
 	}
@@ -40,32 +48,32 @@ func getMainTests(path string) ([]MainTest, error) {
 	return mainTests, nil
 }
 
-func createSCP(scpVersion string) error { //refalVersion can be added
-	cmd := exec.Command("./scripts/create_scp.sh", fmt.Sprintf("MSCPAver%s", scpVersion))
+func createSCP() error { //refalVersion can be added
+	cmd := exec.Command("./scripts/create_scp.sh", fmt.Sprintf("MSCPAver%s", *SCPVersion))
 	if err := cmd.Run(); err != nil {
 		return errors.New("Error while compiling and executing a supercompiler refal-program\n")
 	}
 	return nil
 }
 
-func deleteSCP(scpVersion string) error {
-	err := os.Remove(fmt.Sprintf("MSCPAver%s/mscp-a", scpVersion))
+func deleteSCP() error {
+	err := os.Remove(fmt.Sprintf("MSCPAver%s/mscp-a", *SCPVersion))
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func createResidual(path string, scpVersion string) (string, error) {
-	cmd := exec.Command("./scripts/create_rsd.sh", fmt.Sprintf("MSCPAver%s", scpVersion), fmt.Sprintf("../tests/%s", path), fmt.Sprintf("../tests/rsd_%s_%s", scpVersion, path))
+func createResidual(filename string, i int) (string, error) {
+	path := fmt.Sprintf("rsd_%s_%s_%d.ref", *SCPVersion, filename, i)
+	cmd := exec.Command("./scripts/create_rsd.sh", fmt.Sprintf("MSCPAver%s", *SCPVersion), fmt.Sprintf("../tests/%s.ref", filename), fmt.Sprintf("../tests/%s", path))
 	if err := cmd.Run(); err != nil {
 		return "", errors.New("Error while compiling the refal program\n")
 	}
-	path = fmt.Sprintf("rsd_%s_%s", scpVersion, path)
 	return path, nil
 }
 
-func getOutput(path string, data string, refalVersion string) (string, error) {
+func getOutput(path, filename, data string) (string, error) {
 	var (
 		refalProgram string
 		out          bytes.Buffer
@@ -85,19 +93,19 @@ func getOutput(path string, data string, refalVersion string) (string, error) {
 
 	refalProgram = refalProgram[:indBeg] + newEntryPoint + refalProgram[indEnd:]
 
-	if err = createFile(refalProgram); err != nil {
+	if err = createFile(refalProgram, filename); err != nil {
 		return "", err
 	}
 
-	if err = executeRefalProgram(&out, refalVersion); err != nil {
+	if err = executeRefalProgram(&out, filename+"_executable"); err != nil {
 		return "", err
 	}
 
 	return out.String(), nil
 }
 
-func createFile(refalProgram string) error {
-	f, err := os.Create("executable.ref")
+func createFile(refalProgram, filename string) error {
+	f, err := os.Create(filename + "_executable.ref")
 	if err != nil {
 		return err
 	}
@@ -114,8 +122,8 @@ func createFile(refalProgram string) error {
 	return nil
 }
 
-func executeRefalProgram(out *bytes.Buffer, refalVersion string) error {
-	cmd := exec.Command("./scripts/run_refal.sh", refalVersion)
+func executeRefalProgram(out *bytes.Buffer, path string) error {
+	cmd := exec.Command("./scripts/run_refal.sh", path, *refalVersion)
 	cmd.Stdout = out
 	if err := cmd.Run(); err != nil {
 		return errors.New("Error while compiling and executing a refal-program\n")
@@ -123,76 +131,93 @@ func executeRefalProgram(out *bytes.Buffer, refalVersion string) error {
 	return nil
 }
 
-func customPrintln(s string) {
-	fmt.Println(strings.TrimSpace(s))
-}
-
-func printTestResult(defaultProgramOutput, residualProgramOutput string, err1, err2 error, failCount *int) {
+func printTestResult(defaultProgramOutput, residualProgramOutput string, err1, err2 error, failCount *int32, result *string) {
 	if strings.Compare(defaultProgramOutput, residualProgramOutput) != 0 || err1 != nil || err2 != nil {
-		fmt.Print("FAIL:\n\tDefault program output :\t")
-		*failCount++
+		*result += fmt.Sprint("FAIL:\n\tDefault program output :\t")
+		atomic.AddInt32(failCount, 1)
 	} else {
-		fmt.Print("OK:\n\tDefault program output :\t")
+		*result += fmt.Sprint("OK:\n\tDefault program output :\t")
 	}
 	if err1 != nil {
-		customPrintln(err1.Error())
+		*result += fmt.Sprintln(strings.TrimSpace(err1.Error()))
 	} else {
-		customPrintln(defaultProgramOutput)
+		*result += fmt.Sprintln(strings.TrimSpace(defaultProgramOutput))
 	}
-	fmt.Print("\tResidual program output :\t")
+	*result += fmt.Sprint("\tResidual program output :\t")
 	if err2 != nil {
-		customPrintln(err2.Error())
+		*result += fmt.Sprintln(strings.TrimSpace(err2.Error()))
 	} else {
-		customPrintln(residualProgramOutput)
+		*result += fmt.Sprintln(strings.TrimSpace(residualProgramOutput))
 	}
-	fmt.Println()
 }
 
-func runTests(tests []MainTest, refalVersion string, SCPVersion string) error {
-	failCount := 0
-	if err := createSCP(SCPVersion); err != nil {
+func test(wg *sync.WaitGroup, i int, test MainTest, failCount *int32) {
+	defer wg.Done()
+
+	path := test.FilePath
+	filename := path[:len(path)-4] + fmt.Sprintf("_%d", i)
+	result := fmt.Sprintf("RUN  %s\t\t TEST: %s\n", path, test.TestData)
+
+	defaultProgramOutput, err1 := getOutput(fmt.Sprintf("tests/%s", path), filename, test.TestData)
+
+	path, err := createResidual(path[:len(path)-4], i)
+	filename = path[:len(path)-4]
+	if err != nil {
+		printTestResult(defaultProgramOutput, "", err1, err, failCount, &result)
+	} else {
+		residualProgramOutput, err2 := getOutput(fmt.Sprintf("tests/%s", path), filename, test.TestData)
+
+		printTestResult(defaultProgramOutput, residualProgramOutput, err1, err2, failCount, &result)
+	}
+	fmt.Println(result)
+}
+
+func runTests(tests []MainTest) error {
+	failCount := int32(0)
+
+	fmt.Println("Building supercompiler...")
+	if err := createSCP(); err != nil {
 		return err
 	}
-	for _, test := range tests {
-		path := test.FilePath
-		fmt.Printf("RUN  %s\t\t TEST: %s\n", path, test.TestData)
 
-		defaultProgramOutput, err1 := getOutput(fmt.Sprintf("tests/%s", path), test.TestData, refalVersion)
-
-		path, _ = createResidual(path, SCPVersion)
-		residualProgramOutput, err2 := getOutput(fmt.Sprintf("tests/%s", path), test.TestData, refalVersion)
-
-		printTestResult(defaultProgramOutput, residualProgramOutput, err1, err2, &failCount)
+	fmt.Println("Starting autotests...")
+	var wg sync.WaitGroup
+	for i := range tests {
+		wg.Add(1)
+		go test(&wg, i, tests[i], &failCount)
 	}
-	if err := deleteSCP(SCPVersion); err != nil {
-		return err
-	}
+	wg.Wait()
+
 	if failCount == 0 {
 		fmt.Printf("--------------------------------\n\tAll tests passed!\n--------------------------------\n")
 	} else {
-		fmt.Println("Tests passed: ", len(tests)-failCount)
+		fmt.Println("Tests passed: ", len(tests)-int(failCount))
 		fmt.Println("Tests failed: ", failCount)
 	}
+
+	if err := deleteSCP(); err != nil {
+		return err
+	}
+
 	return nil
 }
 
-func parseCommandLineFlags() (SCPVersion, refalVersion, file *string) {
+func parseCommandLineFlags() {
 	SCPVersion = flag.String("scp", "1", "supercompiler version")
 	refalVersion = flag.String("v", "default", "refal version")
 	file = flag.String("path", "tests/main_tests.json", "path to tests")
 	flag.Parse()
-	return
 }
 
 func main() {
-	SCPVersion, refalVersion, file := parseCommandLineFlags()
+	parseCommandLineFlags()
 
-	tests, err := getMainTests(*file)
+	tests, err := getMainTests()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if err = runTests(tests, *refalVersion, *SCPVersion); err != nil {
+	if err = runTests(tests); err != nil {
 		log.Fatal(err)
 	}
 }
