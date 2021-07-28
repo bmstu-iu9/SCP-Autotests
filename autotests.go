@@ -24,6 +24,7 @@ var (
 	SCPVersion   *string
 	refalVersion *string
 	file         *string
+	rsd          *string
 )
 
 func getMainTests() ([]MainTest, error) {
@@ -56,8 +57,12 @@ func createSCP() error { //refalVersion can be added
 	return nil
 }
 
-func deleteSCP() error {
+func deleteAll() error {
 	err := os.Remove(fmt.Sprintf("MSCPAver%s/mscp-a", *SCPVersion))
+	err = os.Remove("info.txt")
+	if *rsd == "no" {
+		err = os.RemoveAll("tests/rsd/")
+	}
 	if err != nil {
 		return err
 	}
@@ -66,7 +71,7 @@ func deleteSCP() error {
 
 func createResidual(filename string, i int) (string, error) {
 	path := fmt.Sprintf("rsd_%s_%s_%d.ref", *SCPVersion, filename, i)
-	cmd := exec.Command("./scripts/create_rsd.sh", fmt.Sprintf("MSCPAver%s", *SCPVersion), fmt.Sprintf("../tests/%s.ref", filename), fmt.Sprintf("../tests/%s", path))
+	cmd := exec.Command("./scripts/create_rsd.sh", fmt.Sprintf("MSCPAver%s", *SCPVersion), fmt.Sprintf("../tests/%s.ref", filename), fmt.Sprintf("../tests/rsd/%s", path))
 	if err := cmd.Run(); err != nil {
 		return "", errors.New("Error while compiling the refal program\n")
 	}
@@ -161,11 +166,11 @@ func test(wg *sync.WaitGroup, i int, test MainTest, failCount *int32) {
 	defaultProgramOutput, err1 := getOutput(fmt.Sprintf("tests/%s", path), filename, test.TestData)
 
 	path, err := createResidual(path[:len(path)-4], i)
-	filename = path[:len(path)-4]
 	if err != nil {
 		printTestResult(defaultProgramOutput, "", err1, err, failCount, &result)
 	} else {
-		residualProgramOutput, err2 := getOutput(fmt.Sprintf("tests/%s", path), filename, test.TestData)
+		filename = path[:len(path)-4]
+		residualProgramOutput, err2 := getOutput(fmt.Sprintf("tests/rsd/%s", path), filename, test.TestData)
 
 		printTestResult(defaultProgramOutput, residualProgramOutput, err1, err2, failCount, &result)
 	}
@@ -191,11 +196,12 @@ func runTests(tests []MainTest) error {
 	if failCount == 0 {
 		fmt.Printf("--------------------------------\n\tAll tests passed!\n--------------------------------\n")
 	} else {
+		fmt.Printf("MSCPAver%s:\n", *SCPVersion)
 		fmt.Println("Tests passed: ", len(tests)-int(failCount))
 		fmt.Println("Tests failed: ", failCount)
 	}
 
-	if err := deleteSCP(); err != nil {
+	if err := deleteAll(); err != nil {
 		return err
 	}
 
@@ -206,6 +212,7 @@ func parseCommandLineFlags() {
 	SCPVersion = flag.String("scp", "1", "supercompiler version")
 	refalVersion = flag.String("v", "default", "refal version")
 	file = flag.String("path", "tests/main_tests.json", "path to tests")
+	rsd = flag.String("rsd", "no", "delete rsd files after")
 	flag.Parse()
 }
 
