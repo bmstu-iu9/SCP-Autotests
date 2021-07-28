@@ -75,6 +75,9 @@ func matchData(tokens []string, data *string, values *map[string]string) error {
 */
 func matchDataHelper(token string, data *string, values *map[string]string, reverseInd bool) error {
 	*data = strings.TrimSpace(*data)
+	if len(*data) == 0 {
+		return errors.New("Recognition impossible\n")
+	}
 	if token[0] == '(' {
 		if (*data)[0] != '(' {
 			return errors.New("Recognition impossible\n")
