@@ -14,8 +14,8 @@ import (
 )
 
 type MainTest struct {
-	FilePath []string `json:"FilePath"`
-	TestData []string `json:"TestData"`
+	FilePath string `json:"FilePath"`
+	TestData string `json:"TestData"`
 }
 
 func getMainTests(path string) ([]MainTest, error) {
@@ -49,7 +49,10 @@ func createSCP(scpVersion string) error { //refalVersion can be added
 }
 
 func deleteSCP(scpVersion string) error {
-	os.Remove(fmt.Sprintf("MSCPAver%s/mscp-a", scpVersion))
+	err := os.Remove(fmt.Sprintf("MSCPAver%s/mscp-a", scpVersion))
+	if err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -120,57 +123,76 @@ func executeRefalProgram(out *bytes.Buffer, refalVersion string) error {
 	return nil
 }
 
-func runTests(tests []MainTest, refalVersion string, SCPVersion string) {
-	failCount := 0
-	createSCP(SCPVersion)
-	for _, test := range tests {
-		path := test.FilePath[0]
-		fmt.Printf("RUN  %s\t\t TEST: %s\n", path, test.TestData[0])
+func customPrintln(s string) {
+	fmt.Println(strings.TrimSpace(s))
+}
 
-		defaultProgramOutput, err1 := getOutput(fmt.Sprintf("tests/%s", path), test.TestData[0], refalVersion)
+func printTestResult(defaultProgramOutput, residualProgramOutput string, err1, err2 error, failCount *int) {
+	if strings.Compare(defaultProgramOutput, residualProgramOutput) != 0 || err1 != nil || err2 != nil {
+		fmt.Print("FAIL:\n\tDefault program output :\t")
+		*failCount++
+	} else {
+		fmt.Print("OK:\n\tDefault program output :\t")
+	}
+	if err1 != nil {
+		customPrintln(err1.Error())
+	} else {
+		customPrintln(defaultProgramOutput)
+	}
+	fmt.Print("\tResidual program output :\t")
+	if err2 != nil {
+		customPrintln(err2.Error())
+	} else {
+		customPrintln(residualProgramOutput)
+	}
+	fmt.Println()
+}
+
+func runTests(tests []MainTest, refalVersion string, SCPVersion string) error {
+	failCount := 0
+	if err := createSCP(SCPVersion); err != nil {
+		return err
+	}
+	for _, test := range tests {
+		path := test.FilePath
+		fmt.Printf("RUN  %s\t\t TEST: %s\n", path, test.TestData)
+
+		defaultProgramOutput, err1 := getOutput(fmt.Sprintf("tests/%s", path), test.TestData, refalVersion)
 
 		path, _ = createResidual(path, SCPVersion)
-		residualProgramOutput, err2 := getOutput(fmt.Sprintf("tests/%s", path), test.TestData[0], refalVersion)
+		residualProgramOutput, err2 := getOutput(fmt.Sprintf("tests/%s", path), test.TestData, refalVersion)
 
-		if strings.Compare(defaultProgramOutput, residualProgramOutput) != 0 {
-			fmt.Print("FAIL:\n\tDefault program output :\t")
-			if err1 != nil {
-				fmt.Print(err1.Error())
-			} else {
-				fmt.Print(defaultProgramOutput)
-			}
-			fmt.Print("\tResidual program output :\t")
-			if err2 != nil {
-				fmt.Print(err2.Error())
-			} else {
-				fmt.Print(residualProgramOutput)
-			}
-			fmt.Println("\n")
-			failCount++
-		} else {
-			fmt.Printf("OK:\n\tDefault program output :\t%s\tResidual program output :\t%s\n\n", defaultProgramOutput, residualProgramOutput)
-		}
+		printTestResult(defaultProgramOutput, residualProgramOutput, err1, err2, &failCount)
 	}
-	deleteSCP(SCPVersion)
+	if err := deleteSCP(SCPVersion); err != nil {
+		return err
+	}
 	if failCount == 0 {
 		fmt.Printf("--------------------------------\n\tAll tests passed!\n--------------------------------\n")
 	} else {
 		fmt.Println("Tests passed: ", len(tests)-failCount)
 		fmt.Println("Tests failed: ", failCount)
 	}
+	return nil
+}
+
+func parseCommandLineFlags() (SCPVersion, refalVersion, file *string) {
+	SCPVersion = flag.String("scp", "1", "supercompiler version")
+	refalVersion = flag.String("v", "default", "refal version")
+	file = flag.String("path", "tests/main_tests.json", "path to tests")
+	flag.Parse()
+	return
 }
 
 func main() {
-
-	SCPVersion := flag.String("scp", "1", "supercompiler version")
-	refalVersion := flag.String("v", "default", "refal version")
-	file := flag.String("path", "tests/main_tests.json", "path to tests")
-	flag.Parse()
+	SCPVersion, refalVersion, file := parseCommandLineFlags()
 
 	tests, err := getMainTests(*file)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	runTests(tests, *refalVersion, *SCPVersion)
+	if err = runTests(tests, *refalVersion, *SCPVersion); err != nil {
+		log.Fatal(err)
+	}
 }

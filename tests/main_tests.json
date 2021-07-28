@@ -1,237 +1,236 @@
 [
   {
-    "FilePath": ["test_AB_tail.ref"],
-    "TestData": ["'AABB'"]
+    "FilePath": "test_AB_tail.ref",
+    "TestData": "'AABB'"
   },
   {
-    "FilePath": ["test_AB_tail.ref"],
-    "TestData": ["'AABABB'"]
+    "FilePath": "test_AB_tail.ref",
+    "TestData": "'AABABB'"
   },
   {
-    "FilePath": ["test_AB_tail.ref"],
-    "TestData": ["'ABC()CAABCAABBCCABABBCAA'"]
+    "FilePath": "test_AB_tail.ref",
+    "TestData": "'ABC()CAABCAABBCCABABBCAA'"
   },
-
+  
   {
-    "FilePath": ["test_ABmoved.ref"],
-    "TestData": ["'AABB'"]
-  },
-  {
-    "FilePath": ["test_ABmoved.ref"],
-    "TestData": ["'AABABB'"]
+    "FilePath": "test_ABmoved.ref",
+    "TestData": "'AABB'"
   },
   {
-    "FilePath": ["test_ABmoved.ref"],
-    "TestData": ["'ABCCA'('AB')'ABCAABBCCABABBCAA'"]
-  },
-
-  {
-    "FilePath": ["test_ABplusPrefix.ref"],
-    "TestData": ["('A')'BBA'"]
+    "FilePath": "test_ABmoved.ref",
+    "TestData": "'AABABB'"
   },
   {
-    "FilePath": ["test_ABplusPrefix.ref"],
-    "TestData": ["('ABABA')'C'"]
-  },
-  {
-    "FilePath": ["test_ABplusPrefix.ref"],
-    "TestData": ["('AABABBA')'BABA'"]
+    "FilePath": "test_ABmoved.ref",
+    "TestData": "'ABCCA'('AB')'ABCAABBCCABABBCAA'"
   },
 
   {
-    "FilePath": ["test_ba1.ref"],
-    "TestData": ["()'A'('AA')'B'(())"]
+    "FilePath": "test_ABplusPrefix.ref",
+    "TestData": "('A')'BBA'"
   },
   {
-    "FilePath": ["test_ba1.ref"],
-    "TestData": ["'IIIIIIIIIII()IBBBBB'"]
-  },
-
-  {
-    "FilePath": ["test_ba2.ref"],
-    "TestData": ["()'A'('AA')'B'(())"]
+    "FilePath": "test_ABplusPrefix.ref",
+    "TestData": "('ABABA')'C'"
   },
   {
-    "FilePath": ["test_ba2.ref"],
-    "TestData": ["'IIIIIIIIIII()IBBBBB'"]
+    "FilePath": "test_ABplusPrefix.ref",
+    "TestData": "('AABABBA')'BABA'"
   },
 
   {
-    "FilePath": ["test_ba_incorrect.ref"],
-    "TestData": ["'AAAAAA'"]
+    "FilePath": "test_ba1.ref",
+    "TestData": "()'A'('AA')'B'(())"
   },
   {
-    "FilePath": ["test_ba_incorrect.ref"],
-    "TestData": ["'BAA''AAAAAAAAA'"]
-  },
-  {
-    "FilePath": ["test_ba_incorrect.ref"],
-    "TestData": ["'ABAB'"]
+    "FilePath": "test_ba1.ref",
+    "TestData": "'IIIIIIIIIII()IBBBBB'"
   },
 
   {
-    "FilePath": ["test_eqlemmas0.ref"],
-    "TestData": ["'aaaaaaa'"]
+    "FilePath": "test_ba2.ref",
+    "TestData": "()'A'('AA')'B'(())"
   },
   {
-    "FilePath": ["test_eqlemmas0.ref"],
-    "TestData": ["'aaa(aa)'"]
-  },
-  {
-    "FilePath": ["test_eqlemmas0.ref"],
-    "TestData": ["'aa'('aa')'aa'"]
+    "FilePath": "test_ba2.ref",
+    "TestData": "'IIIIIIIIIII()IBBBBB'"
   },
 
   {
-    "FilePath": ["test_eqsASrestr.ref"],
-    "TestData": ["'AAAAAAA'"]
+    "FilePath": "test_ba_incorrect.ref",
+    "TestData": "'AAAAAA'"
   },
   {
-    "FilePath": ["test_eqsASrestr.ref"],
-    "TestData": ["'A()A'"]
+    "FilePath": "test_ba_incorrect.ref",
+    "TestData": "'BAA''AAAAAAAAA'"
   },
   {
-    "FilePath": ["test_eqsASrestr.ref"],
-    "TestData": ["'AAABAAA'"]
-  },
-
-  {
-    "FilePath": ["test_Fabc.ref"],
-    "TestData": ["'AAAAAAA'"]
-  },
-  {
-    "FilePath": ["test_Fabc.ref"],
-    "TestData": ["'A()A'"]
-  },
-  {
-    "FilePath": ["test_Fabc.ref"],
-    "TestData": ["'A(B)(A(B))BCDDAA'"]
+    "FilePath": "test_ba_incorrect.ref",
+    "TestData": "'ABAB'"
   },
 
   {
-    "FilePath": ["test_Fabc_finalph.ref"],
-    "TestData": ["'AAAAAAA'"]
+    "FilePath": "test_eqlemmas0.ref",
+    "TestData": "'aaaaaaa'"
   },
   {
-    "FilePath": ["test_Fabc_finalph.ref"],
-    "TestData": ["'ACCA'"]
+    "FilePath": "test_eqlemmas0.ref",
+    "TestData": "'aaa(aa)'"
   },
   {
-    "FilePath": ["test_Fabc_finalph.ref"],
-    "TestData": ["'ABABBCCCAA'"]
-  },
-
-  {
-    "FilePath": ["test_Fabr.ref"],
-    "TestData": ["'AAAAAAA'"]
-  },
-  {
-    "FilePath": ["test_Fabr.ref"],
-    "TestData": ["'A()A'"]
-  },
-  {
-    "FilePath": ["test_Fabr.ref"],
-    "TestData": ["'A(B)(A(B))BCDDAA'"]
+    "FilePath": "test_eqlemmas0.ref",
+    "TestData": "'aa'('aa')'aa'"
   },
 
   {
-    "FilePath": ["test_fib.ref"],
-    "TestData": ["'SSS'"]
+    "FilePath": "test_eqsASrestr.ref",
+    "TestData": "'AAAAAAA'"
   },
   {
-    "FilePath": ["test_fib.ref"],
-    "TestData": ["'SSSSSSSSSS'"]
-  },
-
-  {
-    "FilePath": ["test_FibWord.ref"],
-    "TestData": ["'ABA'"]
+    "FilePath": "test_eqsASrestr.ref",
+    "TestData": "'A()A'"
   },
   {
-    "FilePath": ["test_FibWord.ref"],
-    "TestData": ["'BBBBBB'"]
-  },
-  {
-    "FilePath": ["test_FibWord.ref"],
-    "TestData": ["'ABAABABAABA''A''A'"]
+    "FilePath": "test_eqsASrestr.ref",
+    "TestData": "'AAABAAA'"
   },
 
   {
-    "FilePath": ["test_finiteletter.ref"],
-    "TestData": ["'AABABA'"]
+    "FilePath": "test_Fabc.ref",
+    "TestData": "'AAAAAAA'"
   },
   {
-    "FilePath": ["test_finiteletter.ref"],
-    "TestData": ["'ABAABA'"]
+    "FilePath": "test_Fabc.ref",
+    "TestData": "'A()A'"
   },
   {
-    "FilePath": ["test_finiteletter.ref"],
-    "TestData": ["'BABABBAABBAB'"]
-  },
-
-  {
-    "FilePath": ["test_KMPtest.ref"],
-    "TestData": ["()'AAABAAAABAAAABAAAABB'"]
-  },
-  {
-    "FilePath": ["test_KMPtest.ref"],
-    "TestData": ["(()'A'(()))'AAABAABABB'"]
-  },
-  {
-    "FilePath": ["test_KMPtest.ref"],
-    "TestData": ["('BBB'('B'))'AAABABAABAAAABABAABBAAABAAAABA'"]
+    "FilePath": "test_Fabc.ref",
+    "TestData": "'A(B)(A(B))BCDDAA'"
   },
 
   {
-    "FilePath": ["test_look.ref"],
-    "TestData": ["(('A')('A'))'AA'"]
+    "FilePath": "test_Fabc_finalph.ref",
+    "TestData": "'AAAAAAA'"
   },
   {
-    "FilePath": ["test_look.ref"],
-    "TestData": ["(('1')('1'))('101')('000'('0'))"]
+    "FilePath": "test_Fabc_finalph.ref",
+    "TestData": "'ACCA'"
   },
   {
-    "FilePath": ["test_look.ref"],
-    "TestData": ["('1010101')'101101'"]
-  },
-
-  {
-    "FilePath": ["test_nonquadratic.ref"],
-    "TestData": ["'CC('('A')'C)CC'"]
-  },
-  {
-    "FilePath": ["test_nonquadratic.ref"],
-    "TestData": ["'CC((A))CCCBB'"]
-  },
-  {
-    "FilePath": ["test_nonquadratic.ref"],
-    "TestData": ["'CBBBBC'('BBB')(('B')'BBB')"]
+    "FilePath": "test_Fabc_finalph.ref",
+    "TestData": "'ABABBCCCAA'"
   },
 
   {
-    "FilePath": ["test_openvars.ref"],
-    "TestData": ["'AAA('('A')'C)CC'"]
+    "FilePath": "test_Fabr.ref",
+    "TestData": "'AAAAAAA'"
   },
   {
-    "FilePath": ["test_openvars.ref"],
-    "TestData": ["'CC((A))CCCBB'"]
+    "FilePath": "test_Fabr.ref",
+    "TestData": "'A()A'"
   },
   {
-    "FilePath": ["test_openvars.ref"],
-    "TestData": ["'BDBBBC'('BBB')(('B')'BBB')"]
+    "FilePath": "test_Fabr.ref",
+    "TestData": "'A(B)(A(B))BCDDAA'"
   },
 
   {
-    "FilePath": ["test_palplusAB.ref"],
-    "TestData": ["'AB('('A')'ABA'"]
+    "FilePath": "test_fib.ref",
+    "TestData": "'SSS'"
   },
   {
-    "FilePath": ["test_palplusAB.ref"],
-    "TestData": ["'ABBA'(('A'))'ABBA'"]
+    "FilePath": "test_fib.ref",
+    "TestData": "'SSSSSSSSSS'"
+  },
+
+  {
+    "FilePath": "test_FibWord.ref",
+    "TestData": "'ABA'"
   },
   {
-    "FilePath": ["test_palplusAB.ref"],
-    "TestData": ["'AAAAAAABAA')"]
+    "FilePath": "test_FibWord.ref",
+    "TestData": "'BBBBBB'"
+  },
+  {
+    "FilePath": "test_FibWord.ref",
+    "TestData": "'ABAABABAABA''A''A'"
+  },
+
+  {
+    "FilePath": "test_finiteletter.ref",
+    "TestData": "('AABABA')"
+  },
+  {
+    "FilePath": "test_finiteletter.ref",
+    "TestData": "('ABAABA')"
+  },
+  {
+    "FilePath": "test_finiteletter.ref",
+    "TestData": "('BABABBAABBAB')"
+  },
+
+  {
+    "FilePath": "test_KMPtest.ref",
+    "TestData": "()'AAABAAAABAAAABAAAABB'"
+  },
+  {
+    "FilePath": "test_KMPtest.ref",
+    "TestData": "(()'A'(()))'AAABAABABB'"
+  },
+  {
+    "FilePath": "test_KMPtest.ref",
+    "TestData": "('BBB'('B'))'AAABABAABAAAABABAABBAAABAAAABA'"
+  },
+
+  {
+    "FilePath": "test_look.ref",
+    "TestData": "(('A')('A'))'AA'"
+  },
+  {
+    "FilePath": "test_look.ref",
+    "TestData": "(('1')('1'))('101')('000'('0'))"
+  },
+  {
+    "FilePath": "test_look.ref",
+    "TestData": "('1010101')'101101'"
+  },
+
+  {
+    "FilePath": "test_nonquadratic.ref",
+    "TestData": "'CC('('A')'C)CC'"
+  },
+  {
+    "FilePath": "test_nonquadratic.ref",
+    "TestData": "'CC((A))CCCBB'"
+  },
+  {
+    "FilePath": "test_nonquadratic.ref",
+    "TestData": "'CBBBBC'('BBB')(('B')'BBB')"
+  },
+
+  {
+    "FilePath": "test_openvars.ref",
+    "TestData": "'AAA('('A')'C)CC'"
+  },
+  {
+    "FilePath": "test_openvars.ref",
+    "TestData": "'CC((A))CCCBB'"
+  },
+  {
+    "FilePath": "test_openvars.ref",
+    "TestData": "'BDBBBC'('BBB')(('B')'BBB')"
+  },
+
+  {
+    "FilePath": "test_palplusAB.ref",
+    "TestData": "'AB('('A')'ABA'"
+  },
+  {
+    "FilePath": "test_palplusAB.ref",
+    "TestData": "'ABBA'(('A'))'ABBA'"
+  },
+  {
+    "FilePath": "test_palplusAB.ref",
+    "TestData": "'AAAAAAABAA')"
   }
-
 ]
