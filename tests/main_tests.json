@@ -222,15 +222,15 @@
   },
 
   {
-    "FilePath": ["test_paplusAB.ref"],
+    "FilePath": ["test_palplusAB.ref"],
     "TestData": ["'AB('('A')'ABA'"]
   },
   {
-    "FilePath": ["test_paplusAB.ref"],
+    "FilePath": ["test_palplusAB.ref"],
     "TestData": ["'ABBA'(('A'))'ABBA'"]
   },
   {
-    "FilePath": ["test_paplusAB.ref"],
+    "FilePath": ["test_palplusAB.ref"],
     "TestData": ["'AAAAAAABAA')"]
   }
 
