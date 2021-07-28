@@ -1,0 +1,87 @@
+=================================================================================
+  FOLDING ATTEMPT: (0 0 ) and (0 ) with upper config
+    (Call ((F (1 2 4 ))1 )(Bracket  (Variable e X ))B)
+
+  Generalized Pattern: 
+    (Call ((F (1 2 4 ))1 )(Bracket  (Variable e X ))B)
+  Generalized MGUs: 
+    (assign (par e X )((par e X ))((par e 1 )))
+  Generalized Equations: 
+********************************************************************************
+
+Looped To (0 )With (assign (par e X )((par e 1 )))and (Generic )(Negative )
+  Checking embedding:
+
+
+
+  Equations are preserved:
+
+  Inequalities are preserved:
+=================================================================================
+  GENERALIZED UPWARDS: (0 1 ) and (0 ) with upper config
+    (Call ((F (1 2 4 ))1 )(Bracket  (Variable e X ))B)
+
+  Generalized Pattern: 
+    (Call ((F (1 2 4 ))8 )(Bracket  (Variable e 12 ))B(Variable e 15 ))
+  Generalized MGUs: 
+    (assign (par e 12 )((par e X ))((par e 2 )))
+    (assign (par e 15 )()((par s 1 )))
+  Generalized Equations: 
+    (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+
+*********************************************************************************
+
+Getting negative conditions from rules set:
+
+    (F (3 )((*(par e 12 ))B(par e 15 )))
+produce conditions:
+
+    (OR (T)(((par e 12 ))to ())(((par e 15 ))to ((var e Neg17 )A)))
+=================================================================================
+  FOLDING ATTEMPT: (0 0 0 ) and (0 0 ) with upper config
+    (Call ((F (1 2 4 ))8 )(Bracket  (Variable e 12 ))B(Variable e 15 ))
+
+  Generalized Pattern: 
+    (Call ((F (1 2 4 ))8 )(Bracket  (Variable e 12 ))B(Variable e 15 ))
+  Generalized MGUs: 
+    (assign (par e 12 )((par e 12 ))((par e 27 )))
+  Generalized Equations: 
+********************************************************************************
+
+Looped To (0 0 )With (assign (par e 12 )((par e 27 )))and (Generic )(Negative )
+  Checking embedding:
+
+    (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+
+    (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+
+  Equations are preserved:
+
+  Inequalities are preserved:
+    (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+=================================================================================
+  FOLDING ATTEMPT: (0 0 1 ) and (0 0 ) with upper config
+    (Call ((F (1 2 4 ))8 )(Bracket  (Variable e 12 ))B(Variable e 15 ))
+
+  Generalized Pattern: 
+    (Call ((F (1 2 4 ))15 )(Bracket  (Variable e 66 ))B(Variable e 71 ))
+  Generalized MGUs: 
+    (assign (par e 66 )((par e 12 ))((par e 30 )))
+    (assign (par e 71 )((par e 15 ))((par e 15 )(par s 4 )))
+  Generalized Equations: 
+    (OR (D)(((par e 71 ))to ((var e (A10 ))A(var e (A11 )))))
+********************************************************************************
+
+Looped To (0 0 )With (assign (par e 12 )((par e 66 )))(assign (par e 15 )((par e 71 )))and (Generic )(Negative (OR (D)(((par e 71 ))to ((var e (A10 ))A(var e (A11 ))))))
+  Checking embedding:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (D)(((par e 15 )(par s 4 ))to ((var e (A10 ))A(var e (A11 )))))
+
+    (OR (D)(((par e 15 )(par s 4 ))to ((var e (A10 ))A(var e (A11 )))))
+
+  Equations are preserved:
+
+  Inequalities are preserved:
+    (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))

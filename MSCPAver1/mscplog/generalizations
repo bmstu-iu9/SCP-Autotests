@@ -1,61 +1,331 @@
 =================================================================================
-  GENERALIZED UPWARDS: (0 1 ) and (0 ) with upper config
-    (Call (Check 1 )(Call ((F (1 2 ))2 )(Variable e x )))
+  FOLDING ATTEMPT: (0 0 ) and (0 ) with upper config
+    (Call (Check 1 )(Call ((DelAB (1 3 4 ))2 )(Bracket  )(Variable e p )))
 
   Generalized Pattern: 
-    (Call (Check 5 )(Variable e 6 )(Call ((F (1 2 ))6 )(Variable e 7 )))
+    (Call (Check 1 )(Call ((DelAB (1 3 4 ))2 )(Bracket  )(Variable e p )))
   Generalized MGUs: 
-    (assign (par e 6 )()(A))
-    (assign (par e 7 )((par e x ))((par e 1 )))
+    (assign (par e p )((par e p ))((par e 1 )))
   Generalized Equations: 
-    (AreEqual (F)((par e 6 )A)(A(par e 6 )))
-
-*********************************************************************************
-
-Getting negative conditions from rules set:
-
-produce conditions:
-
-=================================================================================
-  FOLDING ATTEMPT: (0 0 0 1 ) and (0 0 0 ) with upper config
-    (Call ((Check (1 3 ))5 )(Variable e 6 ))
-
-  Generalized Pattern: 
-    (Call ((Check (1 3 ))5 )(Variable e 6 ))
-  Generalized MGUs: 
-    (assign (par e 6 )((par e 6 ))((par e 10 )))
-  Generalized Equations: 
-    (AreEqual (F)((par e 6 )A)(A(par e 6 )))
 ********************************************************************************
 
-Looped To (0 0 0 )With (assign (par e 6 )((par e 10 )))and (Generic (AreEqual (F)((par e 6 )A)(A(par e 6 ))))(Negative )
+Looped To (0 )With (assign (par e p )((par e 1 )))and (Generic )(Negative )
   Checking embedding:
 
 
 
   Equations are preserved:
-    (AreEqual (F)((par e 6 )A)(A(par e 6 )))
 
   Inequalities are preserved:
 =================================================================================
-  FOLDING ATTEMPT: (0 0 1 ) and (0 0 ) with upper config
-    (Call (Check 5 )(Variable e 6 )(Call ((F (1 2 ))6 )(Variable e 7 )))
+  FOLDING ATTEMPT: (0 1 0 ) and (0 ) with upper config
+    (Call (Check 1 )(Call ((DelAB (1 3 4 ))2 )(Bracket  )(Variable e p )))
 
   Generalized Pattern: 
-    (Call (Check 11 )(Variable e 21 )(Call ((F (1 2 ))12 )(Variable e 22 )))
+    (Call (Check 1 )(Call ((DelAB (1 3 4 ))2 )(Bracket  )(Variable e p )))
   Generalized MGUs: 
-    (assign (par e 21 )((par e 6 ))((par e 6 )A))
-    (assign (par e 22 )((par e 7 ))((par e 8 )))
+    (assign (par e p )((par e p ))((par e 25 )))
   Generalized Equations: 
-    (AreEqual (F)((par e 21 )A)(A(par e 21 )))
 ********************************************************************************
 
-Looped To (0 0 )With (assign (par e 6 )((par e 21 )))(assign (par e 7 )((par e 22 )))and (Generic (AreEqual (F)((par e 21 )A)(A(par e 21 ))))(Negative )
+Looped To (0 )With (assign (par e p )((par e 25 )))and (Generic )(Negative )
   Checking embedding:
 
 
 
   Equations are preserved:
-    (AreEqual (F)((par e 6 )A)(A(par e 6 )))
 
   Inequalities are preserved:
+=================================================================================
+  FOLDING ATTEMPT: (0 1 1 ) and (0 1 ) with upper config
+    (Call (Check 1 )(Call ((DelAB (1 2 3 4 ))4 )(Bracket  (Variable e 2 ))(Variable t 1 )(Variable e 3 )))
+
+  Generalized Pattern: 
+    (Call (Check 1 )(Call ((DelAB (1 2 3 4 ))4 )(Bracket  (Variable e 2 ))(Variable t 1 )(Variable e 3 )))
+  Generalized MGUs: 
+    (assign (par e 2 )((par e 2 ))((par e 26 )))
+    (assign (par t 1 )((par t 1 ))((par t 9 )))
+    (assign (par e 3 )((par e 3 ))((par e 27 )))
+  Generalized Equations: 
+    (OR (T)(((par e 2 ))to (AB(var e Neg2 ))))
+    (OR (D)(((par e 2 ))to ((var e Neg3 )(var t Neg1 )AB(var e Neg4 ))))
+********************************************************************************
+
+Looped To (0 1 )With (assign (par e 2 )((par e 26 )))(assign (par t 1 )((par t 9 )))(assign (par e 3 )((par e 27 )))and (Generic )(Negative (OR (T)(((par e 2 ))to (AB(var e Neg2 ))))(OR (D)(((par e 2 ))to ((var e Neg3 )(var t Neg1 )AB(var e Neg4 )))))
+  Checking embedding:
+
+    (OR (T)(((par e 26 ))to (AB(var e Neg2 ))))
+    (OR (T)(((par e 26 ))to (A))(((par t 9 ))to (B)))
+    (OR (D)(((par e 26 ))to ((var e Neg9 )(var t Neg2 )AB(var e Neg10 ))))
+    (OR (T)(((par e 26 ))to ((var e Neg11 )(var t Neg3 )A))(((par t 9 ))to (B)))
+    (OR (T)(((par e 26 ))to (AB(var e Neg2 ))))
+    (OR (D)(((par e 26 ))to ((var e Neg3 )(var t Neg1 )AB(var e Neg4 ))))
+
+    (OR (T)(((par e 26 ))to (AB(var e Neg2 ))))
+    (OR (T)(((par e 26 ))to (A))(((par t 9 ))to (B)))
+    (OR (D)(((par e 26 ))to ((var e Neg3 )(var t Neg1 )AB(var e Neg4 ))))
+    (OR (T)(((par t 9 ))to (B))(((par e 26 ))to ((var e Neg5 )(var t Neg2 )A)))
+
+  Equations are preserved:
+
+  Inequalities are preserved:
+    (OR (T)(((par e 2 ))to (AB(var e Neg2 ))))
+    (OR (T)(((par e 2 ))to (A))(((par t 1 ))to (B)))
+    (OR (D)(((par e 2 ))to ((var e Neg3 )(var t Neg1 )AB(var e Neg4 ))))
+    (OR (T)(((par t 1 ))to (B))(((par e 2 ))to ((var e Neg5 )(var t Neg2 )A)))
+=================================================================================
+  FOLDING ATTEMPT: (0 1 2 ) and (0 1 ) with upper config
+    (Call (Check 1 )(Call ((DelAB (1 2 3 4 ))4 )(Bracket  (Variable e 2 ))(Variable t 1 )(Variable e 3 )))
+
+  Generalized Pattern: 
+    (Call (Check 1 )(Call ((DelAB (1 2 3 4 ))4 )(Bracket  (Variable e 2 ))(Variable t 1 )(Variable e 3 )))
+  Generalized MGUs: 
+    (assign (par t 1 )((par t 1 ))((par t 1 )))
+    (assign (par e 3 )((par e 3 ))((par e 34 )))
+  Generalized Equations: 
+********************************************************************************
+
+Looped To (0 1 )With (assign (par t 1 )((par t 1 )))(assign (par e 3 )((par e 34 )))and (Generic )(Negative )
+  Checking embedding:
+
+    (OR (T)(((par e 2 ))to (AB(var e Neg15 ))))
+    (OR (T)(((par e 2 ))to (A))(((par t 1 ))to (B)))
+    (OR (D)(((par e 2 ))to ((var e Neg16 )(var t Neg5 )AB(var e Neg17 ))))
+    (OR (T)(((par t 1 ))to (B))(((par e 2 ))to ((var e Neg18 )(var t Neg6 )A)))
+
+    (OR (T)(((par e 2 ))to (AB(var e Neg2 ))))
+    (OR (T)(((par e 2 ))to (A))(((par t 1 ))to (B)))
+    (OR (D)(((par e 2 ))to ((var e Neg3 )(var t Neg1 )AB(var e Neg4 ))))
+    (OR (T)(((par t 1 ))to (B))(((par e 2 ))to ((var e Neg5 )(var t Neg2 )A)))
+
+  Equations are preserved:
+
+  Inequalities are preserved:
+    (OR (T)(((par e 2 ))to (AB(var e Neg2 ))))
+    (OR (T)(((par e 2 ))to (A))(((par t 1 ))to (B)))
+    (OR (D)(((par e 2 ))to ((var e Neg3 )(var t Neg1 )AB(var e Neg4 ))))
+    (OR (T)(((par t 1 ))to (B))(((par e 2 ))to ((var e Neg5 )(var t Neg2 )A)))
+=================================================================================
+  FOLDING ATTEMPT: (0 1 3 0 ) and (0 1 3 ) with upper config
+    (Call (Check 1 )(Call ((DelAB (2 3 4 ))10 )(Bracket  (Variable e 2 )(Variable t 1 )(Variable e 35 ))(Variable t 11 )(Variable e 36 )))
+
+  Generalized Pattern: 
+    (Call (Check 1 )(Call ((DelAB (2 3 4 ))10 )(Bracket  (Variable e 2 )(Variable t 1 )(Variable e 35 ))(Variable t 11 )(Variable e 36 )))
+  Generalized MGUs: 
+    (assign (par e 2 )((par e 2 ))((par e 2 )))
+    (assign (par t 1 )((par t 1 ))((par t 1 )))
+    (assign (par e 35 )((par e 35 ))((par e 192 )))
+    (assign (par t 11 )((par t 11 ))((par t 72 )))
+    (assign (par e 36 )((par e 36 ))((par e 193 )))
+  Generalized Equations: 
+    (OR (T)(((par e 2 ))to (AB(var e Neg20 ))))
+    (OR (D)(((par e 2 ))to ((var e Neg21 )(var t Neg7 )AB(var e Neg22 ))))
+    (OR (T)(((par e 35 ))to (AB(var e Neg28 ))))
+    (OR (D)(((par e 35 ))to ((var e Neg29 )(var t Neg11 )AB(var e Neg30 ))))
+********************************************************************************
+
+Looped To (0 1 3 )With (assign (par e 2 )((par e 2 )))(assign (par t 1 )((par t 1 )))(assign (par e 35 )((par e 192 )))(assign (par t 11 )((par t 72 )))(assign (par e 36 )((par e 193 )))and (Generic )(Negative (OR (T)(((par e 2 ))to (AB(var e Neg20 ))))(OR (D)(((par e 2 ))to ((var e Neg21 )(var t Neg7 )AB(var e Neg22 ))))(OR (T)(((par e 35 ))to (AB(var e Neg28 ))))(OR (D)(((par e 35 ))to ((var e Neg29 )(var t Neg11 )AB(var e Neg30 )))))
+  Checking embedding:
+
+    (OR (T)(((par e 2 ))to (AB(var e Neg1 ))))
+    (OR (T)(((par e 2 ))to (A))(((par t 1 ))to (B)))
+    (OR (D)(((par e 2 ))to ((var e Neg2 )(var t Neg1 )AB(var e Neg3 ))))
+    (OR (T)(((par t 1 ))to (B))(((par e 2 ))to ((var e Neg4 )(var t Neg2 )A)))
+    (OR (T)(((par e 2 ))to ((var e Neg5 )(var t Neg3 )))(((par t 1 ))to (A))(((par e 192 ))to (B(var e Neg6 ))))
+    (OR (T)(((par e 2 ))to ((var e Neg7 )(var t Neg4 )))(((par t 1 ))to (A))(((par e 192 ))to ())(((par t 72 ))to (B)))
+    (OR (T)(((par e 2 ))to ())(((par t 1 ))to (A))(((par e 192 ))to (B(var e Neg8 ))))
+    (OR (T)(((par e 2 ))to ())(((par t 1 ))to (A))(((par e 192 ))to ())(((par t 72 ))to (B)))
+    (OR (T)(((par e 192 ))to (AB(var e Neg9 ))))
+    (OR (T)(((par e 192 ))to (A))(((par t 72 ))to (B)))
+    (OR (D)(((par e 192 ))to ((var e Neg16 )(var t Neg6 )AB(var e Neg17 ))))
+    (OR (T)(((par e 192 ))to ((var e Neg18 )(var t Neg7 )A))(((par t 72 ))to (B)))
+    (OR (T)(((par e 2 ))to (AB(var e Neg20 ))))
+    (OR (D)(((par e 2 ))to ((var e Neg21 )(var t Neg7 )AB(var e Neg22 ))))
+    (OR (T)(((par e 192 ))to (AB(var e Neg28 ))))
+    (OR (D)(((par e 192 ))to ((var e Neg29 )(var t Neg11 )AB(var e Neg30 ))))
+
+    (OR (T)(((par e 2 ))to (AB(var e Neg20 ))))
+    (OR (T)(((par e 2 ))to (A))(((par t 1 ))to (B)))
+    (OR (D)(((par e 2 ))to ((var e Neg21 )(var t Neg7 )AB(var e Neg22 ))))
+    (OR (T)(((par t 1 ))to (B))(((par e 2 ))to ((var e Neg23 )(var t Neg8 )A)))
+    (OR (T)(((par e 2 ))to ((var e Neg24 )(var t Neg9 )))(((par t 1 ))to (A))(((par e 192 ))to (B(var e Neg25 ))))
+    (OR (T)(((par e 2 ))to ((var e Neg26 )(var t Neg10 )))(((par t 1 ))to (A))(((par e 192 ))to ())(((par t 72 ))to (B)))
+    (OR (T)(((par e 2 ))to ())(((par t 1 ))to (A))(((par e 192 ))to (B(var e Neg27 ))))
+    (OR (T)(((par e 2 ))to ())(((par t 1 ))to (A))(((par e 192 ))to ())(((par t 72 ))to (B)))
+    (OR (T)(((par e 192 ))to (AB(var e Neg28 ))))
+    (OR (T)(((par e 192 ))to (A))(((par t 72 ))to (B)))
+    (OR (D)(((par e 192 ))to ((var e Neg29 )(var t Neg11 )AB(var e Neg30 ))))
+    (OR (T)(((par t 72 ))to (B))(((par e 192 ))to ((var e Neg31 )(var t Neg12 )A)))
+
+  Equations are preserved:
+
+  Inequalities are preserved:
+    (OR (T)(((par e 2 ))to (AB(var e Neg20 ))))
+    (OR (T)(((par e 2 ))to (A))(((par t 1 ))to (B)))
+    (OR (D)(((par e 2 ))to ((var e Neg21 )(var t Neg7 )AB(var e Neg22 ))))
+    (OR (T)(((par t 1 ))to (B))(((par e 2 ))to ((var e Neg23 )(var t Neg8 )A)))
+    (OR (T)(((par e 2 ))to ((var e Neg24 )(var t Neg9 )))(((par t 1 ))to (A))(((par e 35 ))to (B(var e Neg25 ))))
+    (OR (T)(((par e 2 ))to ((var e Neg26 )(var t Neg10 )))(((par t 1 ))to (A))(((par e 35 ))to ())(((par t 11 ))to (B)))
+    (OR (T)(((par e 2 ))to ())(((par t 1 ))to (A))(((par e 35 ))to (B(var e Neg27 ))))
+    (OR (T)(((par e 2 ))to ())(((par t 1 ))to (A))(((par e 35 ))to ())(((par t 11 ))to (B)))
+    (OR (T)(((par e 35 ))to (AB(var e Neg28 ))))
+    (OR (T)(((par e 35 ))to (A))(((par t 11 ))to (B)))
+    (OR (D)(((par e 35 ))to ((var e Neg29 )(var t Neg11 )AB(var e Neg30 ))))
+    (OR (T)(((par t 11 ))to (B))(((par e 35 ))to ((var e Neg31 )(var t Neg12 )A)))
+=================================================================================
+  FOLDING ATTEMPT: (0 1 3 1 ) and (0 1 ) with upper config
+    (Call (Check 1 )(Call ((DelAB (1 2 3 4 ))4 )(Bracket  (Variable e 2 ))(Variable t 1 )(Variable e 3 )))
+
+  Generalized Pattern: 
+    (Call (Check 1 )(Call ((DelAB (1 2 3 4 ))4 )(Bracket  (Variable e 2 ))(Variable t 1 )(Variable e 3 )))
+  Generalized MGUs: 
+    (assign (par t 1 )((par t 1 ))((par t 1 )))
+    (assign (par e 3 )((par e 3 ))((par e 194 )))
+  Generalized Equations: 
+********************************************************************************
+
+Looped To (0 1 )With (assign (par t 1 )((par t 1 )))(assign (par e 3 )((par e 194 )))and (Generic )(Negative )
+  Checking embedding:
+
+    (OR (T)(((par e 2 ))to (AB(var e Neg21 ))))
+    (OR (T)(((par e 2 ))to (A))(((par t 1 ))to (B)))
+    (OR (D)(((par e 2 ))to ((var e Neg22 )(var t Neg9 )AB(var e Neg23 ))))
+    (OR (T)(((par t 1 ))to (B))(((par e 2 ))to ((var e Neg24 )(var t Neg10 )A)))
+
+    (OR (T)(((par e 2 ))to (AB(var e Neg2 ))))
+    (OR (T)(((par e 2 ))to (A))(((par t 1 ))to (B)))
+    (OR (D)(((par e 2 ))to ((var e Neg3 )(var t Neg1 )AB(var e Neg4 ))))
+    (OR (T)(((par t 1 ))to (B))(((par e 2 ))to ((var e Neg5 )(var t Neg2 )A)))
+
+  Equations are preserved:
+
+  Inequalities are preserved:
+    (OR (T)(((par e 2 ))to (AB(var e Neg2 ))))
+    (OR (T)(((par e 2 ))to (A))(((par t 1 ))to (B)))
+    (OR (D)(((par e 2 ))to ((var e Neg3 )(var t Neg1 )AB(var e Neg4 ))))
+    (OR (T)(((par t 1 ))to (B))(((par e 2 ))to ((var e Neg5 )(var t Neg2 )A)))
+=================================================================================
+  FOLDING ATTEMPT: (0 1 3 2 ) and (0 1 3 ) with upper config
+    (Call (Check 1 )(Call ((DelAB (2 3 4 ))10 )(Bracket  (Variable e 2 )(Variable t 1 )(Variable e 35 ))(Variable t 11 )(Variable e 36 )))
+
+  Generalized Pattern: 
+    (Call (Check 1 )(Call ((DelAB (2 3 4 ))10 )(Bracket  (Variable e 2 )(Variable t 1 )(Variable e 35 ))(Variable t 11 )(Variable e 36 )))
+  Generalized MGUs: 
+    (assign (par t 11 )((par t 11 ))((par t 11 )))
+    (assign (par e 36 )((par e 36 ))((par e 215 )))
+  Generalized Equations: 
+********************************************************************************
+
+Looped To (0 1 3 )With (assign (par t 11 )((par t 11 )))(assign (par e 36 )((par e 215 )))and (Generic )(Negative )
+  Checking embedding:
+
+    (OR (T)(((par e 2 ))to (AB(var e Neg32 ))))
+    (OR (T)(((par e 2 ))to (A))(((par t 1 ))to (B)))
+    (OR (D)(((par e 2 ))to ((var e Neg33 )(var t Neg14 )AB(var e Neg34 ))))
+    (OR (T)(((par t 1 ))to (B))(((par e 2 ))to ((var e Neg35 )(var t Neg15 )A)))
+    (OR (T)(((par e 2 ))to ((var e Neg36 )(var t Neg16 )))(((par t 1 ))to (A))(((par e 35 ))to (B(var e Neg37 ))))
+    (OR (T)(((par e 2 ))to ((var e Neg38 )(var t Neg17 )))(((par t 1 ))to (A))(((par e 35 ))to ())(((par t 11 ))to (B)))
+    (OR (T)(((par e 2 ))to ())(((par t 1 ))to (A))(((par e 35 ))to (B(var e Neg39 ))))
+    (OR (T)(((par e 2 ))to ())(((par t 1 ))to (A))(((par e 35 ))to ())(((par t 11 ))to (B)))
+    (OR (T)(((par e 35 ))to (AB(var e Neg40 ))))
+    (OR (T)(((par e 35 ))to (A))(((par t 11 ))to (B)))
+    (OR (D)(((par e 35 ))to ((var e Neg41 )(var t Neg18 )AB(var e Neg42 ))))
+    (OR (T)(((par t 11 ))to (B))(((par e 35 ))to ((var e Neg43 )(var t Neg19 )A)))
+
+    (OR (T)(((par e 2 ))to (AB(var e Neg20 ))))
+    (OR (T)(((par e 2 ))to (A))(((par t 1 ))to (B)))
+    (OR (D)(((par e 2 ))to ((var e Neg21 )(var t Neg7 )AB(var e Neg22 ))))
+    (OR (T)(((par t 1 ))to (B))(((par e 2 ))to ((var e Neg23 )(var t Neg8 )A)))
+    (OR (T)(((par e 2 ))to ((var e Neg24 )(var t Neg9 )))(((par t 1 ))to (A))(((par e 35 ))to (B(var e Neg25 ))))
+    (OR (T)(((par e 2 ))to ((var e Neg26 )(var t Neg10 )))(((par t 1 ))to (A))(((par e 35 ))to ())(((par t 11 ))to (B)))
+    (OR (T)(((par e 2 ))to ())(((par t 1 ))to (A))(((par e 35 ))to (B(var e Neg27 ))))
+    (OR (T)(((par e 2 ))to ())(((par t 1 ))to (A))(((par e 35 ))to ())(((par t 11 ))to (B)))
+    (OR (T)(((par e 35 ))to (AB(var e Neg28 ))))
+    (OR (T)(((par e 35 ))to (A))(((par t 11 ))to (B)))
+    (OR (D)(((par e 35 ))to ((var e Neg29 )(var t Neg11 )AB(var e Neg30 ))))
+    (OR (T)(((par t 11 ))to (B))(((par e 35 ))to ((var e Neg31 )(var t Neg12 )A)))
+
+  Equations are preserved:
+
+  Inequalities are preserved:
+    (OR (T)(((par e 2 ))to (AB(var e Neg20 ))))
+    (OR (T)(((par e 2 ))to (A))(((par t 1 ))to (B)))
+    (OR (D)(((par e 2 ))to ((var e Neg21 )(var t Neg7 )AB(var e Neg22 ))))
+    (OR (T)(((par t 1 ))to (B))(((par e 2 ))to ((var e Neg23 )(var t Neg8 )A)))
+    (OR (T)(((par e 2 ))to ((var e Neg24 )(var t Neg9 )))(((par t 1 ))to (A))(((par e 35 ))to (B(var e Neg25 ))))
+    (OR (T)(((par e 2 ))to ((var e Neg26 )(var t Neg10 )))(((par t 1 ))to (A))(((par e 35 ))to ())(((par t 11 ))to (B)))
+    (OR (T)(((par e 2 ))to ())(((par t 1 ))to (A))(((par e 35 ))to (B(var e Neg27 ))))
+    (OR (T)(((par e 2 ))to ())(((par t 1 ))to (A))(((par e 35 ))to ())(((par t 11 ))to (B)))
+    (OR (T)(((par e 35 ))to (AB(var e Neg28 ))))
+    (OR (T)(((par e 35 ))to (A))(((par t 11 ))to (B)))
+    (OR (D)(((par e 35 ))to ((var e Neg29 )(var t Neg11 )AB(var e Neg30 ))))
+    (OR (T)(((par t 11 ))to (B))(((par e 35 ))to ((var e Neg31 )(var t Neg12 )A)))
+=================================================================================
+  FOLDING ATTEMPT: (0 1 3 3 ) and (0 1 3 ) with upper config
+    (Call (Check 1 )(Call ((DelAB (2 3 4 ))10 )(Bracket  (Variable e 2 )(Variable t 1 )(Variable e 35 ))(Variable t 11 )(Variable e 36 )))
+
+  Generalized Pattern: 
+    (Call (Check 41 )(Call ((DelAB (2 3 4 ))42 )(Bracket  (Variable e 2 )(Variable t 1 )(Variable e 701 ))(Variable t 295 )(Variable e 703 )))
+  Generalized MGUs: 
+    (assign (par e 701 )((par e 35 ))((par e 35 )(par t 11 )(par e 216 )))
+    (assign (par t 295 )((par t 11 ))((par t 82 )))
+    (assign (par e 703 )((par e 36 ))((par e 217 )))
+  Generalized Equations: 
+    (OR (T)(((par e 701 ))to (AB(var e Neg28 ))))
+    (OR (D)(((par e 701 ))to ((var e Neg29 )(var t Neg11 )AB(var e Neg30 ))))
+********************************************************************************
+
+Looped To (0 1 3 )With (assign (par e 2 )((par e 2 )))(assign (par t 1 )((par t 1 )))(assign (par e 35 )((par e 701 )))(assign (par t 11 )((par t 295 )))(assign (par e 36 )((par e 703 )))and (Generic )(Negative (OR (T)(((par e 701 ))to (AB(var e Neg28 ))))(OR (D)(((par e 701 ))to ((var e Neg29 )(var t Neg11 )AB(var e Neg30 )))))
+  Checking embedding:
+
+    (OR (T)(((par e 2 ))to (AB(var e Neg45 ))))
+    (OR (T)(((par e 2 ))to (A))(((par t 1 ))to (B)))
+    (OR (D)(((par e 2 ))to ((var e Neg46 )(var t Neg20 )AB(var e Neg47 ))))
+    (OR (T)(((par t 1 ))to (B))(((par e 2 ))to ((var e Neg48 )(var t Neg21 )A)))
+    (OR (T)(((par e 2 ))to ((var e Neg49 )(var t Neg22 )))(((par t 1 ))to (A))(((par e 35 ))to (B(var e Neg50 ))))
+    (OR (T)(((par e 2 ))to ((var e Neg51 )(var t Neg23 )))(((par t 1 ))to (A))(((par e 35 ))to ())(((par t 11 ))to (B)))
+    (OR (T)(((par e 2 ))to ())(((par t 1 ))to (A))(((par e 35 ))to (B(var e Neg52 ))))
+    (OR (T)(((par e 2 ))to ())(((par t 1 ))to (A))(((par e 35 ))to ())(((par t 11 ))to (B)))
+    (OR (T)(((par e 35 ))to (AB(var e Neg53 ))))
+    (OR (T)(((par e 35 ))to (A))(((par t 11 ))to (B)))
+    (OR (D)(((par e 35 ))to ((var e Neg54 )(var t Neg24 )AB(var e Neg55 ))))
+    (OR (T)(((par t 11 ))to (B))(((par e 35 ))to ((var e Neg56 )(var t Neg25 )A)))
+    (OR (T)(((par e 35 ))to ((var e Neg57 )(var t Neg26 )))(((par t 11 ))to (A))(((par e 216 ))to (B(var e Neg58 ))))
+    (OR (T)(((par e 35 ))to ((var e Neg59 )(var t Neg27 )))(((par t 11 ))to (A))(((par e 216 ))to ())(((par t 82 ))to (B)))
+    (OR (T)(((par e 35 ))to ())(((par t 11 ))to (A))(((par e 216 ))to (B(var e Neg60 ))))
+    (OR (T)(((par e 35 ))to ())(((par t 11 ))to (A))(((par e 216 ))to ())(((par t 82 ))to (B)))
+    (OR (T)(((par e 216 ))to (AB(var e Neg61 ))))
+    (OR (T)(((par e 216 ))to (A))(((par t 82 ))to (B)))
+    (OR (D)(((par e 216 ))to ((var e Neg62 )(var t Neg28 )AB(var e Neg63 ))))
+    (OR (T)(((par t 82 ))to (B))(((par e 216 ))to ((var e Neg64 )(var t Neg29 )A)))
+    (OR (T)(((par e 35 )(par t 11 )(par e 216 ))to (AB(var e Neg28 ))))
+    (OR (D)(((par e 35 )(par t 11 )(par e 216 ))to ((var e Neg29 )(var t Neg11 )AB(var e Neg30 ))))
+
+    (OR (T)(((par e 2 ))to (AB(var e Neg20 ))))
+    (OR (T)(((par e 2 ))to (A))(((par t 1 ))to (B)))
+    (OR (D)(((par e 2 ))to ((var e Neg21 )(var t Neg7 )AB(var e Neg22 ))))
+    (OR (T)(((par t 1 ))to (B))(((par e 2 ))to ((var e Neg23 )(var t Neg8 )A)))
+    (OR (T)(((par e 2 ))to ((var e Neg24 )(var t Neg9 )))(((par t 1 ))to (A))(((par e 35 )(par t 11 )(par e 216 ))to (B(var e Neg25 ))))
+    (OR (T)(((par e 2 ))to ((var e Neg26 )(var t Neg10 )))(((par t 1 ))to (A))(((par e 35 )(par t 11 )(par e 216 ))to ())(((par t 82 ))to (B)))
+    (OR (T)(((par e 2 ))to ())(((par t 1 ))to (A))(((par e 35 )(par t 11 )(par e 216 ))to (B(var e Neg27 ))))
+    (OR (T)(((par e 2 ))to ())(((par t 1 ))to (A))(((par e 35 )(par t 11 )(par e 216 ))to ())(((par t 82 ))to (B)))
+    (OR (T)(((par e 35 )(par t 11 )(par e 216 ))to (AB(var e Neg28 ))))
+    (OR (T)(((par e 35 )(par t 11 )(par e 216 ))to (A))(((par t 82 ))to (B)))
+    (OR (D)(((par e 35 )(par t 11 )(par e 216 ))to ((var e Neg29 )(var t Neg11 )AB(var e Neg30 ))))
+    (OR (T)(((par t 82 ))to (B))(((par e 35 )(par t 11 )(par e 216 ))to ((var e Neg31 )(var t Neg12 )A)))
+
+  Equations are preserved:
+
+  Inequalities are preserved:
+    (OR (T)(((par e 2 ))to (AB(var e Neg20 ))))
+    (OR (T)(((par e 2 ))to (A))(((par t 1 ))to (B)))
+    (OR (D)(((par e 2 ))to ((var e Neg21 )(var t Neg7 )AB(var e Neg22 ))))
+    (OR (T)(((par t 1 ))to (B))(((par e 2 ))to ((var e Neg23 )(var t Neg8 )A)))
+    (OR (T)(((par e 2 ))to ((var e Neg24 )(var t Neg9 )))(((par t 1 ))to (A))(((par e 35 ))to (B(var e Neg25 ))))
+    (OR (T)(((par e 2 ))to ((var e Neg26 )(var t Neg10 )))(((par t 1 ))to (A))(((par e 35 ))to ())(((par t 11 ))to (B)))
+    (OR (T)(((par e 2 ))to ())(((par t 1 ))to (A))(((par e 35 ))to (B(var e Neg27 ))))
+    (OR (T)(((par e 2 ))to ())(((par t 1 ))to (A))(((par e 35 ))to ())(((par t 11 ))to (B)))
+    (OR (T)(((par e 35 ))to (AB(var e Neg28 ))))
+    (OR (T)(((par e 35 ))to (A))(((par t 11 ))to (B)))
+    (OR (D)(((par e 35 ))to ((var e Neg29 )(var t Neg11 )AB(var e Neg30 ))))
+    (OR (T)(((par t 11 ))to (B))(((par e 35 ))to ((var e Neg31 )(var t Neg12 )A)))
