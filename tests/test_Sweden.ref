@@ -25,7 +25,7 @@
  The parameter e.N is an arbitrary path generating an element of L. 
 */
 
-/* Теcты: ('ABBBA')('BBBA')(), ('ABBBA')('BBBA')('ISI'), ('ABABBA')('BABBA')('IISISS') */
+/* РўРµcС‚С‹: ('ABBBA')('BBBA')(), ('ABBBA')('BBBA')('ISI'), ('ABABBA')('BABBA')('IISISS') */
 
 
 $ENTRY Go {

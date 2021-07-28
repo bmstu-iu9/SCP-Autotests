@@ -10,7 +10,7 @@
 /*           the input program                 */
 /***********************************************/
 
-/* Тесты: 'AABABA', 'ABAABA', 'BABABBAABBAB'*/
+/* РўРµСЃС‚С‹: 'AABABA', 'ABAABA', 'BABABBAABBAB'*/
 
 
 $ENTRY Go {

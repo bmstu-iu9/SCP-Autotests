@@ -10,7 +10,7 @@
 /*          Initial program                    */
 /***********************************************/
 
-/* Теcты: 'I', 'III', 'II''I''IIIIIIIII' */
+/* РўРµcС‚С‹: 'I', 'III', 'II''I''IIIIIIIII' */
 
 $ENTRY Go {
    (e.p)e.q = <Test <Unary ()(e.p)()(e.q)>>;

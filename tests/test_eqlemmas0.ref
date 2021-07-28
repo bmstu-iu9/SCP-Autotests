@@ -8,7 +8,7 @@
 /*           the input program                 */
 /***********************************************/
 
-/* Теcты: 'aaaaaaa', 'aaa(aa)', 'aa'('aa')'aa'*/
+/* РўРµcС‚С‹: 'aaaaaaa', 'aaa(aa)', 'aa'('aa')'aa'*/
 
 $ENTRY Go {
   e.X = <F1 (e.X) ( )( )>;

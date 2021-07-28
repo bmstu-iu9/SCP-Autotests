@@ -9,7 +9,7 @@
 /*           the input program                 */
 /***********************************************/
 
-/* Тесты: ()'AAABAAAABAAAABAAAABB', (()'A'(()))'AAABAABABB', ('BBB'('B'))'AAABABAABAAAABABAABBAAABAAAABA'*/
+/* РўРµСЃС‚С‹: ()'AAABAAAABAAAABAAAABB', (()'A'(()))'AAABAABABB', ('BBB'('B'))'AAABABAABAAAABABAABBAAABAAAABA'*/
 
 
 $ENTRY Go {

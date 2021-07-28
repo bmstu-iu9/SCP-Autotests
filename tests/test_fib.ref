@@ -8,7 +8,7 @@
 /*           the input program                 */
 /***********************************************/
 
-/* Теcты: пусто, 'SSS', 'SSSSSSSSSS' */
+/* РўРµcС‚С‹: РїСѓСЃС‚Рѕ, 'SSS', 'SSSSSSSSSS' */
 
 
 $ENTRY Go { e.Number = <Fib 'SS'e.Number>; }

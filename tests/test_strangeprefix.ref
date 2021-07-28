@@ -9,7 +9,7 @@
 /*           the input program                 */
 /***********************************************/
 
-/* Теcты: ('A')'BBA', ('BABBB''BABBB''BABBB''BABBB')'BABBB', ('AABAAAA')'BABA'*/
+/* РўРµcС‚С‹: ('A')'BBA', ('BABBB''BABBB''BABBB''BABBB')'BABBB', ('AABAAAA')'BABA'*/
 
 
 $ENTRY Go {

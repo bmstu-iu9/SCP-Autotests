@@ -11,7 +11,7 @@
 /*           the input program                 */
 /***********************************************/
 
-/*Тесты: 'ABA', 'BBBBBB', 'ABAABABAABA''A''A'*/
+/*РўРµСЃС‚С‹: 'ABA', 'BBBBBB', 'ABAABABAABA''A''A'*/
 
 $ENTRY Go {
   e.Word =  <NextFibWord ( ) e.Word>;
