@@ -1,2 +1,5 @@
 #Folder that is created by IDE
 .idea/
+
+tests/errors
+tests/rsd
