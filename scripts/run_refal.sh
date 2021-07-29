@@ -1,11 +1,10 @@
 #!/bin/bash
-#
-#case "$1" in        lambda)
-#rlc ./executable.ref >out.txt && ./executable && rm out.txt executable* ;;
-#        *) refc executable >out.txt && refgo executable && rm out.txt executable* ;;
-#esac
-#!/bin/bash
 
-rlc $1 >> info.txt
-./$1
+if [[ "$2" -eq "lambda" ]]; then
+  rlc $1 >>info.txt 2>>tests/errors/$1_err.txt
+  ./$1 2>>tests/errors/$1_err.txt
+else
+  refc $1 >>info.txt 2>>tests/errors/$1_err.txt
+  refgo $1 2>>tests/errors/$1_err.txt
+fi
 rm $1*

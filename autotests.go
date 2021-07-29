@@ -31,10 +31,10 @@ func runTests(tests []Autotest) error {
 	}
 	wg.Wait()
 
+	fmt.Printf("\nUsed: MSCPAver%s\n", *SCPVersion)
 	if failCount == 0 {
 		fmt.Printf("--------------------------------\n\tAll tests passed!\n--------------------------------\n")
 	} else {
-		fmt.Printf("MSCPAver%s:\n", *SCPVersion)
 		fmt.Println("Tests passed: ", len(tests)-int(failCount))
 		fmt.Println("Tests failed: ", failCount)
 	}
@@ -56,11 +56,24 @@ func runTests(tests []Autotest) error {
 	return nil
 }
 
-func buildSCP() error { //refalVersion can be added
-	cmd := exec.Command("./scripts/create_scp.sh", fmt.Sprintf("MSCPAver%s", *SCPVersion))
+func buildSCP() error {
+	cmd := exec.Command("./scripts/prepare_directories.sh")
 	if err := cmd.Run(); err != nil {
-		return errors.New("Error while compiling and executing a supercompiler refal-program\n")
+		return errors.New("Error while creating tests/rsd and tests/errors directories\n")
 	}
+	cmd = exec.Command("./scripts/create_scp.sh", fmt.Sprintf("MSCPAver%s", *SCPVersion))
+	if err := cmd.Run(); err != nil {
+		errBody, errFile := ioutil.ReadFile("err.txt")
+		if errFile != nil {
+			return errors.New("Error while compiling and executing a supercompiler refal-program\n" + errFile.Error())
+		}
+		return errors.New("Error while compiling and executing a supercompiler refal-program\n" + string(errBody))
+	}
+	errBody, errFile := ioutil.ReadFile("err.txt")
+	if errFile != nil {
+		return errors.New("Error while compiling and executing a supercompiler refal-program\n" + errFile.Error())
+	}
+	fmt.Println(string(errBody))
 	return nil
 }
 
@@ -69,7 +82,7 @@ func test(wg *sync.WaitGroup, tests *[]Autotest, i int, failCount *int32) {
 
 	path := (*tests)[i].FilePath
 	filename := path[:len(path)-4] + fmt.Sprintf("_%d", i)
-	result := fmt.Sprintf("RUN  %s\t\t TEST: %s\n", path, (*tests)[i].TestData)
+	result := fmt.Sprintf("RUN_TEST_%d  %s\t DATA: %s\n", i, path, (*tests)[i].TestData)
 
 	defaultProgramOutput, err1 := getOutput(fmt.Sprintf("tests/%s", path), filename, (*tests)[i].TestData)
 
@@ -94,10 +107,13 @@ func createResidual(filename string, expectedTime time.Duration, i int) (string,
 		fmt.Sprintf("../tests/%s.ref", filename), fmt.Sprintf("../tests/rsd/%s", path),
 		strconv.FormatInt(expectedTime.Milliseconds()/1000, 10))
 	if err := cmd.Run(); err != nil {
-		return "", time.Duration(0), errors.New("Error while compiling the refal program\n")
+		return "", time.Duration(0), errors.New("Error while creating the residual version of the refal program\n")
 	}
 	end := time.Now()
 	duration := end.Sub(start)
+	if duration > expectedTime {
+		return "", time.Duration(0), errors.New("Time limit exceeded while creating the residual version of the refal program\n")
+	}
 	return path, duration, nil
 }
 
@@ -155,6 +171,20 @@ func executeRefalProgram(out *bytes.Buffer, path string) error {
 	if err := cmd.Run(); err != nil {
 		return errors.New("Error while compiling and executing a refal-program\n")
 	}
+
+	data, errFile := ioutil.ReadFile("tests/errors/" + path + "_err.txt")
+	if errFile != nil {
+		return errors.New(errFile.Error())
+	}
+	errBody := strings.TrimSpace(string(data))
+	if len(errBody) != 0 {
+		return errors.New("Error while compiling and executing a refal-program\nFor more info: tests/errors/" + path + "_err.txt\n")
+	} else {
+		if err := os.Remove("tests/errors/" + path + "_err.txt"); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -182,6 +212,7 @@ func printTestResult(defaultProgramOutput, residualProgramOutput string, err1,
 func deleteAll() error {
 	err := os.Remove(fmt.Sprintf("MSCPAver%s/mscp-a", *SCPVersion))
 	err = os.Remove("info.txt")
+	err = os.Remove("err.txt")
 	if !*rsd {
 		err = os.RemoveAll("tests/rsd/")
 	}

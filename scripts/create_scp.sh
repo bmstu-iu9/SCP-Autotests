@@ -1,5 +1,3 @@
 #!/bin/bash
 
-mkdir tests/rsd
-cd $1
-rlmake mscp-a.ref >> info.txt
+(cd $1 && rlmake mscp-a.ref) >info.txt 2>>err.txt
