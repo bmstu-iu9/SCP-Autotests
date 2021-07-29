@@ -4,10 +4,8 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
-	"flag"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 	"os/exec"
 	"strconv"
@@ -17,42 +15,48 @@ import (
 	"time"
 )
 
-type MainTest struct {
-	FilePath    string        `json:"FilePath"`
-	TestData    string        `json:"TestData"`
-	PerfectTime time.Duration `json:"PerfectTime"`
+func runTests(tests []Autotest) error {
+	failCount := int32(0)
+
+	fmt.Println("Building supercompiler...")
+	if err := buildSCP(); err != nil {
+		return err
+	}
+
+	fmt.Println("Starting autotests...")
+	var wg sync.WaitGroup
+	for i := range tests {
+		wg.Add(1)
+		go test(&wg, &tests, i, &failCount)
+	}
+	wg.Wait()
+
+	if failCount == 0 {
+		fmt.Printf("--------------------------------\n\tAll tests passed!\n--------------------------------\n")
+	} else {
+		fmt.Printf("MSCPAver%s:\n", *SCPVersion)
+		fmt.Println("Tests passed: ", len(tests)-int(failCount))
+		fmt.Println("Tests failed: ", failCount)
+	}
+
+	if err := deleteAll(); err != nil {
+		return err
+	}
+
+	if *saveTime {
+		data, err := json.MarshalIndent(tests, " ", "\t")
+		if err != nil {
+			return err
+		}
+		if err = ioutil.WriteFile("tests/main_tests.json", data, 0644); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
-var (
-	SCPVersion   *string
-	refalVersion *string
-	file         *string
-	rsd          *string
-	markTime     *string
-)
-
-func getMainTests() ([]MainTest, error) {
-	jsonStorage, err := os.Open(*file)
-	if err != nil {
-		return nil, err
-	}
-
-	defer jsonStorage.Close()
-
-	data, err := ioutil.ReadAll(jsonStorage)
-	if err != nil {
-		return nil, err
-	}
-
-	var mainTests []MainTest
-	if err = json.Unmarshal(data, &mainTests); err != nil {
-		return nil, err
-	}
-
-	return mainTests, nil
-}
-
-func createSCP() error { //refalVersion can be added
+func buildSCP() error { //refalVersion can be added
 	cmd := exec.Command("./scripts/create_scp.sh", fmt.Sprintf("MSCPAver%s", *SCPVersion))
 	if err := cmd.Run(); err != nil {
 		return errors.New("Error while compiling and executing a supercompiler refal-program\n")
@@ -60,16 +64,27 @@ func createSCP() error { //refalVersion can be added
 	return nil
 }
 
-func deleteAll() error {
-	err := os.Remove(fmt.Sprintf("MSCPAver%s/mscp-a", *SCPVersion))
-	err = os.Remove("info.txt")
-	if *rsd == "no" {
-		err = os.RemoveAll("tests/rsd/")
-	}
+func test(wg *sync.WaitGroup, tests *[]Autotest, i int, failCount *int32) {
+	defer wg.Done()
+
+	path := (*tests)[i].FilePath
+	filename := path[:len(path)-4] + fmt.Sprintf("_%d", i)
+	result := fmt.Sprintf("RUN  %s\t\t TEST: %s\n", path, (*tests)[i].TestData)
+
+	defaultProgramOutput, err1 := getOutput(fmt.Sprintf("tests/%s", path), filename, (*tests)[i].TestData)
+
+	expectedTime := calcTime((*tests)[i].PerfectTime)
+	path, runtime, err := createResidual(path[:len(path)-4], expectedTime, i)
+	(*tests)[i].PerfectTime = runtime
+
 	if err != nil {
-		return err
+		printTestResult(defaultProgramOutput, "", err1, err, failCount, &result)
+	} else {
+		filename = path[:len(path)-4]
+		residualProgramOutput, err2 := getOutput(fmt.Sprintf("tests/rsd/%s", path), filename, (*tests)[i].TestData)
+		printTestResult(defaultProgramOutput, residualProgramOutput, err1, err2, failCount, &result)
 	}
-	return nil
+	fmt.Println(result)
 }
 
 func createResidual(filename string, expectedTime time.Duration, i int) (string, time.Duration, error) {
@@ -84,18 +99,6 @@ func createResidual(filename string, expectedTime time.Duration, i int) (string,
 	end := time.Now()
 	duration := end.Sub(start)
 	return path, duration, nil
-}
-
-func calcTime(perfectTime time.Duration) time.Duration {
-	var timeOut time.Duration
-	if perfectTime.Minutes() > 5 {
-		timeOut = time.Duration(perfectTime.Minutes() * 1.2)
-	} else if perfectTime.Minutes() > 1 {
-		timeOut = time.Duration(perfectTime.Minutes() * 1.5)
-	} else {
-		timeOut = perfectTime*2 + (2 * time.Second)
-	}
-	return timeOut
 }
 
 func getOutput(path, filename, data string) (string, error) {
@@ -115,7 +118,6 @@ func getOutput(path, filename, data string) (string, error) {
 	}
 
 	newEntryPoint = "\n = <Prout " + newEntryPoint[2:len(newEntryPoint)-1] + ">;\n"
-
 	refalProgram = refalProgram[:indBeg] + newEntryPoint + refalProgram[indEnd:]
 
 	if err = createFile(refalProgram, filename); err != nil {
@@ -177,86 +179,14 @@ func printTestResult(defaultProgramOutput, residualProgramOutput string, err1,
 	}
 }
 
-func test(wg *sync.WaitGroup, tests *[]MainTest, i int, test MainTest, failCount *int32) {
-	defer wg.Done()
-	var expectedTime time.Duration
-
-	path := test.FilePath
-	filename := path[:len(path)-4] + fmt.Sprintf("_%d", i)
-	result := fmt.Sprintf("RUN  %s\t\t TEST: %s\n", path, test.TestData)
-
-	defaultProgramOutput, err1 := getOutput(fmt.Sprintf("tests/%s", path), filename, test.TestData)
-
-	if test.PerfectTime != 0 {
-		expectedTime = calcTime(test.PerfectTime)
-	} else {
-		expectedTime = time.Minute * 15
+func deleteAll() error {
+	err := os.Remove(fmt.Sprintf("MSCPAver%s/mscp-a", *SCPVersion))
+	err = os.Remove("info.txt")
+	if !*rsd {
+		err = os.RemoveAll("tests/rsd/")
 	}
-	path, perfectTime, err := createResidual(path[:len(path)-4], expectedTime, i)
-	(*tests)[i].PerfectTime = perfectTime
-
 	if err != nil {
-		printTestResult(defaultProgramOutput, "", err1, err, failCount, &result)
-	} else {
-		filename = path[:len(path)-4]
-		residualProgramOutput, err2 := getOutput(fmt.Sprintf("tests/rsd/%s", path), filename, test.TestData)
-		printTestResult(defaultProgramOutput, residualProgramOutput, err1, err2, failCount, &result)
-	}
-	fmt.Println(result)
-}
-
-func runTests(tests []MainTest) error {
-	failCount := int32(0)
-
-	fmt.Println("Building supercompiler...")
-	if err := createSCP(); err != nil {
 		return err
 	}
-
-	fmt.Println("Starting autotests...")
-	var wg sync.WaitGroup
-	for i := range tests {
-		wg.Add(1)
-		go test(&wg, &tests, i, tests[i], &failCount)
-	}
-	wg.Wait()
-
-	data, _ := json.Marshal(tests)
-	_ = ioutil.WriteFile("tests/main_tests.json", data, 0644)
-
-	if failCount == 0 {
-		fmt.Printf("--------------------------------\n\tAll tests passed!\n--------------------------------\n")
-	} else {
-		fmt.Printf("MSCPAver%s:\n", *SCPVersion)
-		fmt.Println("Tests passed: ", len(tests)-int(failCount))
-		fmt.Println("Tests failed: ", failCount)
-	}
-
-	if err := deleteAll(); err != nil {
-		return err
-	}
-
 	return nil
-}
-
-func parseCommandLineFlags() {
-	SCPVersion = flag.String("scp", "1", "supercompiler version")
-	refalVersion = flag.String("v", "default", "refal version")
-	file = flag.String("path", "tests/main_tests.json", "path to tests")
-	rsd = flag.String("rsd", "no", "delete rsd files after")
-	markTime = flag.String("time", "no", "mark the time")
-	flag.Parse()
-}
-
-func main() {
-	parseCommandLineFlags()
-
-	tests, err := getMainTests()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	if err = runTests(tests); err != nil {
-		log.Fatal(err)
-	}
 }

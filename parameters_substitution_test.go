@@ -5,12 +5,12 @@ import (
 )
 
 func TestGetUnparametrizedEntryPoint(t *testing.T) {
-	tests, err := getTestsFromFile("tests/unit_tests/get_unparametrized_entry_point_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/get_unparametrized_entry_point_tests.json", 0)
 	if err != nil {
 		t.Error(err)
 	}
 
-	for _, test := range tests {
+	for _, test := range tests.unitTests {
 		t.Run(test.TestCase[0], func(t *testing.T) {
 			if res, err := getUnparametrizedEntryPoint(test.TestCase[0], test.TestCase[1]); err != nil {
 				if test.Expected[0] != err.Error() {
@@ -24,12 +24,12 @@ func TestGetUnparametrizedEntryPoint(t *testing.T) {
 }
 
 func TestMatchData(t *testing.T) {
-	tests, err := getTestsFromFile("tests/unit_tests/match_data_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/match_data_tests.json", 0)
 	if err != nil {
 		t.Error(err)
 	}
 
-	for _, test := range tests {
+	for _, test := range tests.unitTests {
 		t.Run(test.TestCase[0], func(t *testing.T) {
 			values := make(map[string]string)
 			if err := matchData(test.TestCase[1:], &test.TestCase[0], &values); err != nil {
@@ -50,12 +50,12 @@ func TestMatchData(t *testing.T) {
 }
 
 func TestMatchDataHelper(t *testing.T) {
-	tests, err := getTestsFromFile("tests/unit_tests/match_data_helper_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/match_data_helper_tests.json", 0)
 	if err != nil {
 		t.Error(err)
 	}
 
-	for _, test := range tests {
+	for _, test := range tests.unitTests {
 		t.Run(test.TestCase[0], func(t *testing.T) {
 			value := make(map[string]string)
 			if err = matchDataHelper(test.TestCase[0], &test.TestCase[1], &value, false); err != nil {
@@ -81,12 +81,12 @@ func TestMatchDataHelper(t *testing.T) {
 }
 
 func TestParse(t *testing.T) {
-	tests, err := getTestsFromFile("tests/unit_tests/parse_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/parse_tests.json", 0)
 	if err != nil {
 		t.Error(err)
 	}
 
-	for _, test := range tests {
+	for _, test := range tests.unitTests {
 		t.Run(test.TestCase[0], func(t *testing.T) {
 			if res, err := parse(test.TestCase[0], 0, test.TestCase[1][0]); err != nil {
 				if test.Expected[0] != err.Error() {
@@ -101,12 +101,12 @@ func TestParse(t *testing.T) {
 }
 
 func TestParseString(t *testing.T) {
-	tests, err := getTestsFromFile("tests/unit_tests/parse_string_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/parse_string_tests.json", 0)
 	if err != nil {
 		t.Error(err)
 	}
 
-	for _, test := range tests {
+	for _, test := range tests.unitTests {
 		t.Run(test.TestCase[0], func(t *testing.T) {
 			if res, err := parseString(test.TestCase[0], 0); err != nil {
 				if test.Expected[0] != err.Error() {
@@ -121,12 +121,12 @@ func TestParseString(t *testing.T) {
 }
 
 func TestParseMacrodigit(t *testing.T) {
-	tests, err := getTestsFromFile("tests/unit_tests/parse_macrodigit_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/parse_macrodigit_tests.json", 0)
 	if err != nil {
 		t.Error(err)
 	}
 
-	for _, test := range tests {
+	for _, test := range tests.unitTests {
 		t.Run(test.TestCase[0], func(t *testing.T) {
 			if res, err := parseMacrodigit(test.TestCase[0], 0); err != nil {
 				if test.Expected[0] != err.Error() {
@@ -141,12 +141,12 @@ func TestParseMacrodigit(t *testing.T) {
 }
 
 func TestExtractValue(t *testing.T) {
-	tests, err := getTestsFromFile("tests/unit_tests/extract_value_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/extract_value_tests.json", 0)
 	if err != nil {
 		t.Error(err)
 	}
 
-	for _, test := range tests {
+	for _, test := range tests.unitTests {
 		t.Run(test.TestCase[0], func(t *testing.T) {
 			value := make(map[string]string)
 			if err = extractValue(test.TestCase[0], &test.TestCase[1], &value, false); err != nil {
@@ -163,12 +163,12 @@ func TestExtractValue(t *testing.T) {
 }
 
 func TestTerm(t *testing.T) {
-	tests, err := getTestsFromFile("tests/unit_tests/term_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/term_tests.json", 0)
 	if err != nil {
 		t.Error(err)
 	}
 
-	for _, test := range tests {
+	for _, test := range tests.unitTests {
 		t.Run(test.TestCase[0], func(t *testing.T) {
 			if res, err := term(&test.TestCase[0]); err != nil {
 				if test.Expected[0] != err.Error() {
@@ -184,12 +184,12 @@ func TestTerm(t *testing.T) {
 }
 
 func TestSymbol(t *testing.T) {
-	tests, err := getTestsFromFile("tests/unit_tests/symbol_tests.json")
+	tests, err := getTestsFromFile("tests/unit_tests/symbol_tests.json", 0)
 	if err != nil {
 		t.Error(err)
 	}
 
-	for _, test := range tests {
+	for _, test := range tests.unitTests {
 		t.Run(test.TestCase[0], func(t *testing.T) {
 			if res, err := symbol(&test.TestCase[0]); err != nil {
 				if test.Expected[0] != err.Error() {

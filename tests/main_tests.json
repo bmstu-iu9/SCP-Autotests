@@ -1,1 +1,422 @@
-[{"FilePath":"test_ABmoved.ref","TestData":"'AABB'","PerfectTime":38137652822},{"FilePath":"test_ABmoved.ref","TestData":"'AABABB'","PerfectTime":37775771572},{"FilePath":"test_ABmoved.ref","TestData":"'ABCCA'('AB')'ABCAABBCCABABBCAA'","PerfectTime":35033294461},{"FilePath":"test_ABplusPrefix.ref","TestData":"('A')'BBA'","PerfectTime":0},{"FilePath":"test_ABplusPrefix.ref","TestData":"('ABABA')'C'","PerfectTime":0},{"FilePath":"test_ABplusPrefix.ref","TestData":"('AABABBA')'BABA'","PerfectTime":0},{"FilePath":"test_AB_tail.ref","TestData":"'AABB'","PerfectTime":4551800687},{"FilePath":"test_AB_tail.ref","TestData":"'AABABB'","PerfectTime":6805714288},{"FilePath":"test_AB_tail.ref","TestData":"'ABC()CAABCAABBCCABABBCAA'","PerfectTime":9289990883},{"FilePath":"test_ba1.ref","TestData":"","PerfectTime":2239205209},{"FilePath":"test_ba1.ref","TestData":"()'A'('AA')'B'(())","PerfectTime":528229782},{"FilePath":"test_ba1.ref","TestData":"'IIIIIIIIIII()IBBBBB'","PerfectTime":261545405},{"FilePath":"test_ba2.ref","TestData":"","PerfectTime":1736897186},{"FilePath":"test_ba2.ref","TestData":"()'A'('AA')'B'(())","PerfectTime":2099931824},{"FilePath":"test_ba2.ref","TestData":"'IIIIIIIIIII()IBBBBB'","PerfectTime":143513050},{"FilePath":"test_ba_incorrect.ref","TestData":"'AAAAAA'","PerfectTime":3095501909},{"FilePath":"test_ba_incorrect.ref","TestData":"'BAA''AAAAAAAAA'","PerfectTime":4758664258},{"FilePath":"test_ba_incorrect.ref","TestData":"'ABAB'","PerfectTime":4341514894},{"FilePath":"test_eqlemmas0.ref","TestData":"'aaaaaaa'","PerfectTime":938122825},{"FilePath":"test_eqlemmas0.ref","TestData":"'aaa(aa)'","PerfectTime":1224883888},{"FilePath":"test_eqlemmas0.ref","TestData":"'aa'('aa')'aa'","PerfectTime":0},{"FilePath":"test_eqsASrestr.ref","TestData":"'AAAAAAA'","PerfectTime":1793188162},{"FilePath":"test_eqsASrestr.ref","TestData":"'A()A'","PerfectTime":1380252923},{"FilePath":"test_eqsASrestr.ref","TestData":"'AAABAAA'","PerfectTime":1490133351},{"FilePath":"test_Fabc_finalph.ref","TestData":"'AAAAAAA'","PerfectTime":4558140922},{"FilePath":"test_Fabc_finalph.ref","TestData":"'ACCA'","PerfectTime":4342639082},{"FilePath":"test_Fabc_finalph.ref","TestData":"'ABABBCCCAA'","PerfectTime":2075043936},{"FilePath":"test_Fabc.ref","TestData":"'AAAAAAA'","PerfectTime":3705512723},{"FilePath":"test_Fabc.ref","TestData":"'A()A'","PerfectTime":5742733387},{"FilePath":"test_Fabc.ref","TestData":"'A(B)(A(B))BCDDAA'","PerfectTime":4005302473},{"FilePath":"test_Fabr.ref","TestData":"'AAAAAAA'","PerfectTime":2875597251},{"FilePath":"test_Fabr.ref","TestData":"'A()A'","PerfectTime":5367392096},{"FilePath":"test_Fabr.ref","TestData":"'A(B)(A(B))BCDDAA'","PerfectTime":5772507577},{"FilePath":"test_fib.ref","TestData":"","PerfectTime":3463347853},{"FilePath":"test_fib.ref","TestData":"'SSS'","PerfectTime":2631921148},{"FilePath":"test_fib.ref","TestData":"'SSSSSSSSSS'","PerfectTime":2783595565},{"FilePath":"test_PrefixA.ref","TestData":"('A')'BBA'","PerfectTime":596126962},{"FilePath":"test_PrefixA.ref","TestData":"()'BABBB'","PerfectTime":2719208430},{"FilePath":"test_PrefixA.ref","TestData":"('AABAAAA')'BABA'","PerfectTime":900562081},{"FilePath":"test_prefix.ref","TestData":"('A')'BBA'","PerfectTime":1904308977},{"FilePath":"test_prefix.ref","TestData":"('ABABA')'C'","PerfectTime":1582612847},{"FilePath":"test_prefix.ref","TestData":"('AABABBA')'BABA'","PerfectTime":1605235703},{"FilePath":"test_ProtoSafe.ref","TestData":"'TTTTTTTTT'","PerfectTime":3579640063},{"FilePath":"test_ProtoSafe.ref","TestData":"'TTT'","PerfectTime":0},{"FilePath":"test_ProtoSafe.ref","TestData":"'TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT'","PerfectTime":5655695898},{"FilePath":"test_ProtoUnsafe.ref","TestData":"'TTTTTTTTTTT'","PerfectTime":0},{"FilePath":"test_ProtoUnsafe.ref","TestData":"'TTTT'","PerfectTime":4395413834},{"FilePath":"test_ProtoUnsafe.ref","TestData":"'TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT'","PerfectTime":2765174423},{"FilePath":"test_script0.ref","TestData":"'ssss\u003c\u003csscriptcript\u003e\u003e'","PerfectTime":0},{"FilePath":"test_script0.ref","TestData":"'\u003csc\u003cscrip\u003cscripttript'","PerfectTime":0},{"FilePath":"test_script0.ref","TestData":"'(\u003cscript)'('scr\u003cscript\u003e')","PerfectTime":8629486988},{"FilePath":"test_Script1.ref","TestData":"'ssss\u003c\u003csscriptcript\u003e\u003e'","PerfectTime":22966031557},{"FilePath":"test_Script1.ref","TestData":"'\u003csc\u003cscrip\u003cscripttript'","PerfectTime":24150872175},{"FilePath":"test_Script1.ref","TestData":"'(\u003cscript)'('scr\u003cscript\u003e')","PerfectTime":20787040758},{"FilePath":"test_Script2.ref","TestData":"'ssss\u003c\u003csscriptcript\u003e\u003e'","PerfectTime":7063138503},{"FilePath":"test_Script2.ref","TestData":"'\u003csc\u003cscrip\u003cscripttript'","PerfectTime":8458401168},{"FilePath":"test_Script2.ref","TestData":"'(\u003cscript)'('scr\u003cscript\u003e')","PerfectTime":8584618415},{"FilePath":"test_Script3.ref","TestData":"'ssss\u003c\u003csscriptcript\u003e\u003e'","PerfectTime":0},{"FilePath":"test_Script3.ref","TestData":"'\u003csc\u003cscrip\u003cscripttript'","PerfectTime":2435419202},{"FilePath":"test_Script3.ref","TestData":"'(\u003cscript)'('scr\u003cscript\u003e')","PerfectTime":5167459347},{"FilePath":"test_scriptComplex.ref","TestData":"'sssinnertext(s\u003c\u003csscriptcript\u003e\u003e)'","PerfectTime":35957863895},{"FilePath":"test_scriptComplex.ref","TestData":"'innertext((innertext(\u003csc\u003cscrip\u003cscripttript)'","PerfectTime":35701382857},{"FilePath":"test_scriptComplex.ref","TestData":"'(\u003cscript)'innertext('scr\u003cscript\u003e')","PerfectTime":34128906312},{"FilePath":"test_Script.ref","TestData":"'ssss\u003c\u003cscriptcript\u003e\u003e'","PerfectTime":4121371386},{"FilePath":"test_Script.ref","TestData":"'ipadipipiiiip'","PerfectTime":6093594467},{"FilePath":"test_Script.ref","TestData":"'aaabbb'('\u003cscript\u003e')'resgdbdfnssd'","PerfectTime":6869957970},{"FilePath":"test_Singapore.ref","TestData":"'I'","PerfectTime":10562570270},{"FilePath":"test_Singapore.ref","TestData":"'III'","PerfectTime":0},{"FilePath":"test_Singapore.ref","TestData":"'IIIIIIIIIIII'","PerfectTime":3252296696},{"FilePath":"test_SqSum.ref","TestData":"'I'","PerfectTime":20177273527},{"FilePath":"test_SqSum.ref","TestData":"'III'","PerfectTime":16185307995},{"FilePath":"test_SqSum.ref","TestData":"'IIIIIIIIIIII'","PerfectTime":23332246567},{"FilePath":"test_strangeprefix.ref","TestData":"('A')'BBA'","PerfectTime":2492525381},{"FilePath":"test_strangeprefix.ref","TestData":"('BABBB''BABBB''BABBB''BABBB')'BABBB'","PerfectTime":1047743128},{"FilePath":"test_strangeprefix.ref","TestData":"('AABAAAA')'BABA'","PerfectTime":3686308006},{"FilePath":"test_sumcomm.ref","TestData":"'I'","PerfectTime":2658397422},{"FilePath":"test_sumcomm.ref","TestData":"'III'","PerfectTime":0},{"FilePath":"test_sumcomm.ref","TestData":"'II''I''IIIIIIIII'","PerfectTime":0},{"FilePath":"test_Sweden.ref","TestData":"('ABBBA')('BBBA')()","PerfectTime":778736390},{"FilePath":"test_Sweden.ref","TestData":"('ABBBA')('BBBA')('ISI')","PerfectTime":1434560697},{"FilePath":"test_Sweden.ref","TestData":"('ABABBA')('BABBA')('IISISS')","PerfectTime":1143071199},{"FilePath":"test_unused.ref","TestData":"'AAAAAAAAA'","PerfectTime":447860824},{"FilePath":"test_unused.ref","TestData":"'BBBBBBBBBBBBBBBA'","PerfectTime":1403071815},{"FilePath":"test_unused.ref","TestData":"'DGDDFGJGKJADSD((ZFD)FX)\u003cHGHJASDZG\u003eXFJC'","PerfectTime":671526664}]
+[
+ 	{
+ 		"FilePath": "test_ABmoved.ref",
+ 		"TestData": "'AABB'",
+ 		"PerfectTime": 33209931185
+ 	},
+ 	{
+ 		"FilePath": "test_ABmoved.ref",
+ 		"TestData": "'AABABB'",
+ 		"PerfectTime": 34786578541
+ 	},
+ 	{
+ 		"FilePath": "test_ABmoved.ref",
+ 		"TestData": "'ABCCA'('AB')'ABCAABBCCABABBCAA'",
+ 		"PerfectTime": 32560255307
+ 	},
+ 	{
+ 		"FilePath": "test_ABplusPrefix.ref",
+ 		"TestData": "('A')'BBA'",
+ 		"PerfectTime": 3666699061
+ 	},
+ 	{
+ 		"FilePath": "test_ABplusPrefix.ref",
+ 		"TestData": "('ABABA')'C'",
+ 		"PerfectTime": 2895291499
+ 	},
+ 	{
+ 		"FilePath": "test_ABplusPrefix.ref",
+ 		"TestData": "('AABABBA')'BABA'",
+ 		"PerfectTime": 2308592656
+ 	},
+ 	{
+ 		"FilePath": "test_AB_tail.ref",
+ 		"TestData": "'AABB'",
+ 		"PerfectTime": 9522531875
+ 	},
+ 	{
+ 		"FilePath": "test_AB_tail.ref",
+ 		"TestData": "'AABABB'",
+ 		"PerfectTime": 8948958407
+ 	},
+ 	{
+ 		"FilePath": "test_AB_tail.ref",
+ 		"TestData": "'ABC()CAABCAABBCCABABBCAA'",
+ 		"PerfectTime": 6999450388
+ 	},
+ 	{
+ 		"FilePath": "test_ba1.ref",
+ 		"TestData": "",
+ 		"PerfectTime": 1066019607
+ 	},
+ 	{
+ 		"FilePath": "test_ba1.ref",
+ 		"TestData": "()'A'('AA')'B'(())",
+ 		"PerfectTime": 1618708060
+ 	},
+ 	{
+ 		"FilePath": "test_ba1.ref",
+ 		"TestData": "'IIIIIIIIIII()IBBBBB'",
+ 		"PerfectTime": 1535034181
+ 	},
+ 	{
+ 		"FilePath": "test_ba2.ref",
+ 		"TestData": "",
+ 		"PerfectTime": 1039594780
+ 	},
+ 	{
+ 		"FilePath": "test_ba2.ref",
+ 		"TestData": "()'A'('AA')'B'(())",
+ 		"PerfectTime": 2288284707
+ 	},
+ 	{
+ 		"FilePath": "test_ba2.ref",
+ 		"TestData": "'IIIIIIIIIII()IBBBBB'",
+ 		"PerfectTime": 1290718908
+ 	},
+ 	{
+ 		"FilePath": "test_ba_incorrect.ref",
+ 		"TestData": "'AAAAAA'",
+ 		"PerfectTime": 1753912115
+ 	},
+ 	{
+ 		"FilePath": "test_ba_incorrect.ref",
+ 		"TestData": "'BAA''AAAAAAAAA'",
+ 		"PerfectTime": 2995637992
+ 	},
+ 	{
+ 		"FilePath": "test_ba_incorrect.ref",
+ 		"TestData": "'ABAB'",
+ 		"PerfectTime": 3210635314
+ 	},
+ 	{
+ 		"FilePath": "test_eqlemmas0.ref",
+ 		"TestData": "'aaaaaaa'",
+ 		"PerfectTime": 379017453
+ 	},
+ 	{
+ 		"FilePath": "test_eqlemmas0.ref",
+ 		"TestData": "'aaa(aa)'",
+ 		"PerfectTime": 1902963006
+ 	},
+ 	{
+ 		"FilePath": "test_eqlemmas0.ref",
+ 		"TestData": "'aa'('aa')'aa'",
+ 		"PerfectTime": 877470882
+ 	},
+ 	{
+ 		"FilePath": "test_eqsASrestr.ref",
+ 		"TestData": "'AAAAAAA'",
+ 		"PerfectTime": 1971229870
+ 	},
+ 	{
+ 		"FilePath": "test_eqsASrestr.ref",
+ 		"TestData": "'A()A'",
+ 		"PerfectTime": 900583751
+ 	},
+ 	{
+ 		"FilePath": "test_eqsASrestr.ref",
+ 		"TestData": "'AAABAAA'",
+ 		"PerfectTime": 1995880987
+ 	},
+ 	{
+ 		"FilePath": "test_Fabc_finalph.ref",
+ 		"TestData": "'AAAAAAA'",
+ 		"PerfectTime": 2673095964
+ 	},
+ 	{
+ 		"FilePath": "test_Fabc_finalph.ref",
+ 		"TestData": "'ACCA'",
+ 		"PerfectTime": 2343843404
+ 	},
+ 	{
+ 		"FilePath": "test_Fabc_finalph.ref",
+ 		"TestData": "'ABABBCCCAA'",
+ 		"PerfectTime": 3807253571
+ 	},
+ 	{
+ 		"FilePath": "test_Fabc.ref",
+ 		"TestData": "'AAAAAAA'",
+ 		"PerfectTime": 4716549629
+ 	},
+ 	{
+ 		"FilePath": "test_Fabc.ref",
+ 		"TestData": "'A()A'",
+ 		"PerfectTime": 3558275095
+ 	},
+ 	{
+ 		"FilePath": "test_Fabc.ref",
+ 		"TestData": "'A(B)(A(B))BCDDAA'",
+ 		"PerfectTime": 3658647519
+ 	},
+ 	{
+ 		"FilePath": "test_Fabr.ref",
+ 		"TestData": "'AAAAAAA'",
+ 		"PerfectTime": 4353423999
+ 	},
+ 	{
+ 		"FilePath": "test_Fabr.ref",
+ 		"TestData": "'A()A'",
+ 		"PerfectTime": 2764388538
+ 	},
+ 	{
+ 		"FilePath": "test_Fabr.ref",
+ 		"TestData": "'A(B)(A(B))BCDDAA'",
+ 		"PerfectTime": 3415858432
+ 	},
+ 	{
+ 		"FilePath": "test_fib.ref",
+ 		"TestData": "",
+ 		"PerfectTime": 2879999169
+ 	},
+ 	{
+ 		"FilePath": "test_fib.ref",
+ 		"TestData": "'SSS'",
+ 		"PerfectTime": 2100622722
+ 	},
+ 	{
+ 		"FilePath": "test_fib.ref",
+ 		"TestData": "'SSSSSSSSSS'",
+ 		"PerfectTime": 2207433679
+ 	},
+ 	{
+ 		"FilePath": "test_PrefixA.ref",
+ 		"TestData": "('A')'BBA'",
+ 		"PerfectTime": 619131076
+ 	},
+ 	{
+ 		"FilePath": "test_PrefixA.ref",
+ 		"TestData": "()'BABBB'",
+ 		"PerfectTime": 1783170735
+ 	},
+ 	{
+ 		"FilePath": "test_PrefixA.ref",
+ 		"TestData": "('AABAAAA')'BABA'",
+ 		"PerfectTime": 1625784086
+ 	},
+ 	{
+ 		"FilePath": "test_prefix.ref",
+ 		"TestData": "('A')'BBA'",
+ 		"PerfectTime": 1382044741
+ 	},
+ 	{
+ 		"FilePath": "test_prefix.ref",
+ 		"TestData": "('ABABA')'C'",
+ 		"PerfectTime": 1409540649
+ 	},
+ 	{
+ 		"FilePath": "test_prefix.ref",
+ 		"TestData": "('AABABBA')'BABA'",
+ 		"PerfectTime": 1282392222
+ 	},
+ 	{
+ 		"FilePath": "test_ProtoSafe.ref",
+ 		"TestData": "'TTTTTTTTT'",
+ 		"PerfectTime": 3080409951
+ 	},
+ 	{
+ 		"FilePath": "test_ProtoSafe.ref",
+ 		"TestData": "'TTT'",
+ 		"PerfectTime": 4186326767
+ 	},
+ 	{
+ 		"FilePath": "test_ProtoSafe.ref",
+ 		"TestData": "'TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT'",
+ 		"PerfectTime": 3322003159
+ 	},
+ 	{
+ 		"FilePath": "test_ProtoUnsafe.ref",
+ 		"TestData": "'TTTTTTTTTTT'",
+ 		"PerfectTime": 3555323564
+ 	},
+ 	{
+ 		"FilePath": "test_ProtoUnsafe.ref",
+ 		"TestData": "'TTTT'",
+ 		"PerfectTime": 4920794863
+ 	},
+ 	{
+ 		"FilePath": "test_ProtoUnsafe.ref",
+ 		"TestData": "'TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT'",
+ 		"PerfectTime": 4455358361
+ 	},
+ 	{
+ 		"FilePath": "test_script0.ref",
+ 		"TestData": "'ssss\u003c\u003csscriptcript\u003e\u003e'",
+ 		"PerfectTime": 6180198771
+ 	},
+ 	{
+ 		"FilePath": "test_script0.ref",
+ 		"TestData": "'\u003csc\u003cscrip\u003cscripttript'",
+ 		"PerfectTime": 4669823007
+ 	},
+ 	{
+ 		"FilePath": "test_script0.ref",
+ 		"TestData": "'(\u003cscript)'('scr\u003cscript\u003e')",
+ 		"PerfectTime": 4328554448
+ 	},
+ 	{
+ 		"FilePath": "test_Script1.ref",
+ 		"TestData": "'ssss\u003c\u003csscriptcript\u003e\u003e'",
+ 		"PerfectTime": 18110657934
+ 	},
+ 	{
+ 		"FilePath": "test_Script1.ref",
+ 		"TestData": "'\u003csc\u003cscrip\u003cscripttript'",
+ 		"PerfectTime": 17269831763
+ 	},
+ 	{
+ 		"FilePath": "test_Script1.ref",
+ 		"TestData": "'(\u003cscript)'('scr\u003cscript\u003e')",
+ 		"PerfectTime": 16637157188
+ 	},
+ 	{
+ 		"FilePath": "test_Script2.ref",
+ 		"TestData": "'ssss\u003c\u003csscriptcript\u003e\u003e'",
+ 		"PerfectTime": 9222974627
+ 	},
+ 	{
+ 		"FilePath": "test_Script2.ref",
+ 		"TestData": "'\u003csc\u003cscrip\u003cscripttript'",
+ 		"PerfectTime": 8840086107
+ 	},
+ 	{
+ 		"FilePath": "test_Script2.ref",
+ 		"TestData": "'(\u003cscript)'('scr\u003cscript\u003e')",
+ 		"PerfectTime": 10656068262
+ 	},
+ 	{
+ 		"FilePath": "test_Script3.ref",
+ 		"TestData": "'ssss\u003c\u003csscriptcript\u003e\u003e'",
+ 		"PerfectTime": 3257423863
+ 	},
+ 	{
+ 		"FilePath": "test_Script3.ref",
+ 		"TestData": "'\u003csc\u003cscrip\u003cscripttript'",
+ 		"PerfectTime": 3281031346
+ 	},
+ 	{
+ 		"FilePath": "test_Script3.ref",
+ 		"TestData": "'(\u003cscript)'('scr\u003cscript\u003e')",
+ 		"PerfectTime": 3539401762
+ 	},
+ 	{
+ 		"FilePath": "test_scriptComplex.ref",
+ 		"TestData": "'sssinnertext(s\u003c\u003csscriptcript\u003e\u003e)'",
+ 		"PerfectTime": 33081240387
+ 	},
+ 	{
+ 		"FilePath": "test_scriptComplex.ref",
+ 		"TestData": "'innertext((innertext(\u003csc\u003cscrip\u003cscripttript)'",
+ 		"PerfectTime": 30954185807
+ 	},
+ 	{
+ 		"FilePath": "test_scriptComplex.ref",
+ 		"TestData": "'(\u003cscript)'innertext('scr\u003cscript\u003e')",
+ 		"PerfectTime": 32519411575
+ 	},
+ 	{
+ 		"FilePath": "test_Script.ref",
+ 		"TestData": "'ssss\u003c\u003cscriptcript\u003e\u003e'",
+ 		"PerfectTime": 3746661377
+ 	},
+ 	{
+ 		"FilePath": "test_Script.ref",
+ 		"TestData": "'ipadipipiiiip'",
+ 		"PerfectTime": 4041868331
+ 	},
+ 	{
+ 		"FilePath": "test_Script.ref",
+ 		"TestData": "'aaabbb'('\u003cscript\u003e')'resgdbdfnssd'",
+ 		"PerfectTime": 3087022267
+ 	},
+ 	{
+ 		"FilePath": "test_Singapore.ref",
+ 		"TestData": "'I'",
+ 		"PerfectTime": 8635725295
+ 	},
+ 	{
+ 		"FilePath": "test_Singapore.ref",
+ 		"TestData": "'III'",
+ 		"PerfectTime": 9064417454
+ 	},
+ 	{
+ 		"FilePath": "test_Singapore.ref",
+ 		"TestData": "'IIIIIIIIIIII'",
+ 		"PerfectTime": 0
+ 	},
+ 	{
+ 		"FilePath": "test_SqSum.ref",
+ 		"TestData": "'I'",
+ 		"PerfectTime": 15677400308
+ 	},
+ 	{
+ 		"FilePath": "test_SqSum.ref",
+ 		"TestData": "'III'",
+ 		"PerfectTime": 15715747914
+ 	},
+ 	{
+ 		"FilePath": "test_SqSum.ref",
+ 		"TestData": "'IIIIIIIIIIII'",
+ 		"PerfectTime": 14787492028
+ 	},
+ 	{
+ 		"FilePath": "test_strangeprefix.ref",
+ 		"TestData": "('A')'BBA'",
+ 		"PerfectTime": 2362290078
+ 	},
+ 	{
+ 		"FilePath": "test_strangeprefix.ref",
+ 		"TestData": "('BABBB''BABBB''BABBB''BABBB')'BABBB'",
+ 		"PerfectTime": 3765052707
+ 	},
+ 	{
+ 		"FilePath": "test_strangeprefix.ref",
+ 		"TestData": "('AABAAAA')'BABA'",
+ 		"PerfectTime": 2132628286
+ 	},
+ 	{
+ 		"FilePath": "test_sumcomm.ref",
+ 		"TestData": "'I'",
+ 		"PerfectTime": 4989077940
+ 	},
+ 	{
+ 		"FilePath": "test_sumcomm.ref",
+ 		"TestData": "'III'",
+ 		"PerfectTime": 6149197572
+ 	},
+ 	{
+ 		"FilePath": "test_sumcomm.ref",
+ 		"TestData": "'II''I''IIIIIIIII'",
+ 		"PerfectTime": 5274290912
+ 	},
+ 	{
+ 		"FilePath": "test_Sweden.ref",
+ 		"TestData": "('ABBBA')('BBBA')()",
+ 		"PerfectTime": 1717520807
+ 	},
+ 	{
+ 		"FilePath": "test_Sweden.ref",
+ 		"TestData": "('ABBBA')('BBBA')('ISI')",
+ 		"PerfectTime": 1569102730
+ 	},
+ 	{
+ 		"FilePath": "test_Sweden.ref",
+ 		"TestData": "('ABABBA')('BABBA')('IISISS')",
+ 		"PerfectTime": 1655094119
+ 	},
+ 	{
+ 		"FilePath": "test_unused.ref",
+ 		"TestData": "'AAAAAAAAA'",
+ 		"PerfectTime": 0
+ 	},
+ 	{
+ 		"FilePath": "test_unused.ref",
+ 		"TestData": "'BBBBBBBBBBBBBBBA'",
+ 		"PerfectTime": 4029931744
+ 	},
+ 	{
+ 		"FilePath": "test_unused.ref",
+ 		"TestData": "'DGDDFGJGKJADSD((ZFD)FX)\u003cHGHJASDZG\u003eXFJC'",
+ 		"PerfectTime": 3394367161
+ 	}
+ ]
