@@ -61,7 +61,7 @@ func buildSCP() error {
 	if err := cmd.Run(); err != nil {
 		return errors.New("Error while creating tests/rsd and tests/errors directories\n")
 	}
-	cmd = exec.Command("./scripts/create_scp.sh", fmt.Sprintf("MSCPAver%s", *SCPVersion))
+	cmd = exec.Command("./scripts/build_scp.sh", fmt.Sprintf("MSCPAver%s", *SCPVersion))
 	if err := cmd.Run(); err != nil {
 		errBody, errFile := ioutil.ReadFile("err.txt")
 		if errFile != nil {
