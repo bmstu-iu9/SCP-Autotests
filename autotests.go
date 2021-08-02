@@ -11,12 +11,12 @@ import (
 	"strconv"
 	"strings"
 	"sync"
-	"sync/atomic"
 	"time"
 )
 
 func runTests(tests []Autotest) error {
-	failCount := int32(0)
+	failCount := 0
+	completedCount := 0
 
 	fmt.Println("Building supercompiler...")
 	if err := buildSCP(); err != nil {
@@ -24,18 +24,39 @@ func runTests(tests []Autotest) error {
 	}
 
 	fmt.Println("Starting autotests...")
-	var wg sync.WaitGroup
+	var (
+		wg sync.WaitGroup
+		m sync.Mutex
+	)
+	c := make(chan string, len(tests))
+
 	for i := range tests {
+		fmt.Printf("Test #%d is active\n", i)
 		wg.Add(1)
-		go test(&wg, &tests, i, &failCount)
+		go test(&wg, &m, &tests, i, &failCount, &completedCount, c)
 	}
+	fmt.Println("All tests are active. Waiting for results...")
 	wg.Wait()
+	fmt.Println("\n\tAll tests completed. Press ENTER to print results...")
+	if _, err := fmt.Scanln(); err != nil {
+		return err
+	}
+	for i := 0; i < len(tests); i++ {
+		val, ok := <-c
+		if ok == false {
+			fmt.Println("Tests are broken. Aborting...")
+			break
+		} else {
+			fmt.Println(val)
+		}
+	}
 
 	fmt.Printf("\nUsed: MSCPAver%s\n", *SCPVersion)
-	if failCount == 0 {
+	fmt.Println("Tests completed:", completedCount, "out of", len(tests))
+	if failCount == 0 && completedCount == len(tests) {
 		fmt.Printf("--------------------------------\n\tAll tests passed!\n--------------------------------\n")
 	} else {
-		fmt.Println("Tests passed: ", len(tests)-int(failCount))
+		fmt.Println("Tests passed: ", len(tests)-failCount)
 		fmt.Println("Tests failed: ", failCount)
 	}
 
@@ -77,9 +98,8 @@ func buildSCP() error {
 	return nil
 }
 
-func test(wg *sync.WaitGroup, tests *[]Autotest, i int, failCount *int32) {
+func test(wg *sync.WaitGroup, m *sync.Mutex, tests *[]Autotest, i int, failCount *int, completedCount *int, c chan<- string) {
 	defer wg.Done()
-
 	path := (*tests)[i].FilePath
 	filename := path[:len(path)-4] + fmt.Sprintf("_%d", i)
 	result := fmt.Sprintf("RUN_TEST_%d  %s\t DATA: %s\n", i, path, (*tests)[i].TestData)
@@ -91,13 +111,17 @@ func test(wg *sync.WaitGroup, tests *[]Autotest, i int, failCount *int32) {
 	(*tests)[i].PerfectTime = runtime
 
 	if err != nil {
-		printTestResult(defaultProgramOutput, "", err1, err, failCount, &result)
+		printTestResult(m, defaultProgramOutput, "", err1, err, failCount, &result)
 	} else {
 		filename = path[:len(path)-4]
 		residualProgramOutput, err2 := getOutput(fmt.Sprintf("tests/rsd/%s", path), filename, (*tests)[i].TestData)
-		printTestResult(defaultProgramOutput, residualProgramOutput, err1, err2, failCount, &result)
+		printTestResult(m, defaultProgramOutput, residualProgramOutput, err1, err2, failCount, &result)
 	}
-	fmt.Println(result)
+	m.Lock()
+	*completedCount++
+	fmt.Println("Test #", i, "completed. Tests remaining:", len(*tests) - *completedCount)
+	m.Unlock()
+	c <- result
 }
 
 func createResidual(filename string, expectedTime time.Duration, i int) (string, time.Duration, error) {
@@ -188,11 +212,13 @@ func executeRefalProgram(out *bytes.Buffer, path string) error {
 	return nil
 }
 
-func printTestResult(defaultProgramOutput, residualProgramOutput string, err1,
-	err2 error, failCount *int32, result *string) {
+func printTestResult(m *sync.Mutex, defaultProgramOutput, residualProgramOutput string, err1,
+	err2 error, failCount *int, result *string) {
 	if strings.Compare(defaultProgramOutput, residualProgramOutput) != 0 || err1 != nil || err2 != nil {
 		*result += fmt.Sprint("FAIL:\n\tDefault program output :\t")
-		atomic.AddInt32(failCount, 1)
+		m.Lock()
+		*failCount++
+		m.Unlock()
 	} else {
 		*result += fmt.Sprint("OK:\n\tDefault program output :\t")
 	}
