@@ -1,0 +1,44 @@
+/*
+ The negative test for saving equations in a folding.
+ The residual program must contain the branches returning 'F'.
+*/
+
+/***********************************************/
+/*           the input program                 */
+/***********************************************/
+
+/* Теcты: 'AAAAAA', 'BAA''AAAAAAAAA', 'ABAB'*/
+
+
+$ENTRY Go {
+	e.x = <Check <F e.x>>;
+}
+
+F {
+	 = ;
+	'A' e.x = 'A' <F e.x>;
+	'B' e.x = 'B' <F e.x>;
+}
+
+Check {
+	e.Z 'B' = 'F';
+	e.Z = 'T';
+}
+
+/***********************************************/
+/*          the residual program               */
+/***********************************************/
+
+/*
+ $ENTRY Go {
+  e.x1 =  <Check_0 () (e.x1)>;
+ }
+
+
+ Check_0 {
+  (e.x1 'B') () =  'F';
+  (e.x1) () =  'T';
+  (e.x1) ('A' e.x2) =  <Check_0 (e.x1 'A') (e.x2)>;
+  (e.x1) ('B' e.x2) =  <Check_0 (e.x1 'B') (e.x2)>;
+ }
+*/

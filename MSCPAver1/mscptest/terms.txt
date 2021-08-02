@@ -1,0 +1,2 @@
+(call (CheckQuadAux 3 )(args (arg (*ABAA)(*ABAAA(par e 2578 ))(call ((IsInAlphabetAux (1 ))194 )(args (arg T(par e 2578 )))))))
+(call ((SS1 (1 3 4 ))97 )(args (arg (*BAAAABB)(*(par e 18 ))(*AAABAAAABB)(*AAA(par e 18 )))))

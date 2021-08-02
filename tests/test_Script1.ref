@@ -1,0 +1,70 @@
+
+/*
+ The test of the incorrect sanitization.
+
+ The sanitization deletes all the occurrences of the substring 'script' in the code. It is modeled by the function Delscript. 
+ A sanitization is said to be correct if the resulting code does not contain the substring '<script'. 
+ The correctness check is done by the fubction Check.
+
+ In the residual program, there are branches ending in 'F'. Tracking these branches, we can construct a counter-example refuting
+ correctness of the sanitization.
+*/
+
+
+/***********************************************/
+/*           the input program                 */
+/***********************************************/
+
+/* Теcты: 'ssss<<sscriptcript>>', '<sc<scrip<scripttript', '(<script)'('scr<script>') */
+
+$ENTRY Go {
+   e.p = <Check <Delscript e.p>>;
+}
+
+Delscript {
+    e.x1 'script' e.x2 = e.x1 <Delscript e.x2>;
+    e.Other = e.Other;
+}
+
+Check {
+    = 'T';
+    '<script'e.x = 'F';
+    t.y e.Z = <Check e.Z>;
+}
+
+/***********************************************/
+/*          the residual program               */
+/***********************************************/
+
+/*
+
+$ENTRY Go {
+ e.x1 =  <Check_0 () (e.x1)>;
+}
+
+
+Check_0 {
+ (e.x1) (e.x2 'script' e.x3) =  <Check_0 (e.x1 e.x2) (e.x3)>;
+ (e.x1) (e.x2) =  <Check_123_0 (e.x1) (e.x2)>;
+}
+
+
+Check_123_0 {
+ () () =  'T';
+ ('<script' e.x1) (e.x2) =  'F';
+ ('<scrip') ('t' e.x1) =  'F';
+ ('<scri') ('pt' e.x1) =  'F';
+ ('<scr') ('ipt' e.x1) =  'F';
+ ('<sc') ('ript' e.x1) =  'F';
+ ('<s') ('cript' e.x1) =  'F';
+ (t.y1 e.x1) (e.x2) =  <Check_123_0 (e.x1) (e.x2)>;
+ () (t.y1 e.x1) =  <Check_13_0 e.x1>;
+}
+
+
+Check_13_0 {
+ =  'T';
+ t.y1 e.x1 =  <Check_13_0 e.x1>;
+}
+
+*/

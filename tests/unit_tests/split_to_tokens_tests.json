@@ -1,0 +1,42 @@
+[
+  {
+    "TestCase": ["(e.x e.x) e.y"],
+    "Expected": ["(e.x e.x)", "e.y"]
+  },
+  {
+    "TestCase": ["(e.x s.y (s.z)) e.y"],
+    "Expected": ["Nested parentheses occurred\n"]
+  },
+  {
+    "TestCase": ["e.x s.1 s.2 s.1"],
+    "Expected": ["e.x", "s.1", "s.2", "s.1"]
+  },
+  {
+    "TestCase": ["(e.x) e.y (e.z) e.q"],
+    "Expected": ["(e.x)", "e.y", "(e.z)", "e.q"]
+  },
+  {
+    "TestCase": ["(e.x) e.y (e.z)"],
+    "Expected": ["(e.x)", "e.y", "(e.z)"]
+  },
+  {
+    "TestCase": ["(e.x s.1 s.2 t.xx)"],
+    "Expected": ["(e.x s.1 s.2 t.xx)"]
+  },
+  {
+    "TestCase": ["(e.x ()) (s.1 s.2) (t.xx)"],
+    "Expected": ["Nested parentheses occurred\n"]
+  },
+  {
+    "TestCase": ["e.x (s.2 t.x"],
+    "Expected": ["Not enough parentheses\n"]
+  },
+  {
+    "TestCase": ["e.x t.x"],
+    "Expected": ["e.x", "t.x"]
+  },
+  {
+    "TestCase": ["e.x q.1"],
+    "Expected": ["e.x", "q.1"]
+  }
+]

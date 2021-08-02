@@ -1,0 +1,50 @@
+[
+  {
+    "TestCase": ["'2'", "s.x"],
+    "Expected": ["s.x", "'2'"]
+  },
+  {
+    "TestCase": ["(('A')('S'))", "t.x"],
+    "Expected": ["t.x", "(('A')('S'))"]
+  },
+  {
+    "TestCase": ["(('A'()('A'))'AA'", "t.x"],
+    "Expected": ["Not enough parentheses\n"]
+  },
+  {
+    "TestCase": ["('A')'AA'", "s.x"],
+    "Expected": ["Invalid data\n"]
+  },
+  {
+    "TestCase": ["'A'", "s.x"],
+    "Expected": ["s.x", "'A'"]
+  },
+  {
+    "TestCase": ["'Aqq''AA'", "s.x"],
+    "Expected": ["Recognition impossible\n"]
+  },
+  {
+    "TestCase": ["'Aqq''AA'", "(s.x)"],
+    "Expected": ["Recognition impossible\n"]
+  },
+  {
+    "TestCase": ["('A') ", "(s.x)"],
+    "Expected": ["s.x", "'A'"]
+  },
+  {
+    "TestCase": ["('A' ('asas' 123) 'cccq')", "(s.x t.x e.x s.c)"],
+    "Expected": ["s.x", "'A'", "t.x", "('asas' 123)", "s.c", "'q'", "e.x", "'ccc'"]
+  },
+  {
+    "TestCase": ["('A' ('asas' 123) 'cccq' ('qwe'))", "(s.x t.x e.x s.c t.e)"],
+    "Expected": ["s.x", "'A'", "t.x", "('asas' 123)", "s.c", "'q'", "t.e", "('qwe')", "e.x", "'ccc'"]
+  },
+  {
+    "TestCase": ["('A' ('asas' 123) 'cccq' ('qwe'))", "(s.x t.x (e.x) s.c t.e)"],
+    "Expected": ["Recognition impossible\n"]
+  },
+  {
+    "TestCase": ["'abracadabra' 2323 (' as' 2 22 2 2) 'e' 222", "e.x" ,"(e.y)", "s.w", "t.a"],
+    "Expected": ["s.w", "'e'", "t.a", "222", "e.y", "' as' 2 22 2 2", "e.x", "'abracadabra' 2323 "]
+  }
+]

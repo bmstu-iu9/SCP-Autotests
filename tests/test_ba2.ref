@@ -1,0 +1,52 @@
+/*
+ Given a string containing only letters 'A', prove that it cannot contain letter 'B'.
+ The generation function F processes the string from the beginning.
+ The Check function processes its argument from the end.
+ This test is a slightly modified test_ba1.ref.
+*/
+
+/***********************************************/
+/*           the input program                 */
+/***********************************************/
+
+/* Теcты: пусто, ()'A'('AA')'B'(()), 'IIIIIIIIIII()IBBBBB'*/
+
+
+$ENTRY Go {
+	 e.x = <Check <F e.x>>;
+}
+
+F {
+	 = ;
+	t.x e.y = 'A' <F e.y>;
+}
+
+Check {
+	 = 'T';
+	e.y 'B' = 'F';
+	e.Z t.y = <Check e.Z>;
+}
+
+/***********************************************/
+/*          the residual program               */
+/***********************************************/
+
+/*
+$ENTRY Go {
+ e.x1 =  <Check_0 () (e.x1)>;
+}
+
+
+Check_13_0 {
+ =  'T';
+ e.x1 'A' =  <Check_13_0 e.x1>;
+}
+
+
+Check_0 {
+ (e.x1) () =  <Check_13_0 e.x1>;
+ (e.x1) (t.y1 e.x2) =  <Check_0 (e.x1 'A') (e.x2)>;
+}
+*/
+
+

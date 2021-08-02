@@ -1,0 +1,30 @@
+[
+  {
+    "TestCase": ["123"],
+    "Expected": ["3"]
+  },
+  {
+    "TestCase": ["12q"],
+    "Expected": ["Invalid data\n"]
+  },
+  {
+    "TestCase": ["1"],
+    "Expected": ["1"]
+  },
+  {
+    "TestCase": ["12345 "],
+    "Expected": ["5"]
+  },
+  {
+    "TestCase": ["12345'12'"],
+    "Expected": ["5"]
+  },
+  {
+    "TestCase": ["12345)"],
+    "Expected": ["5"]
+  },
+  {
+    "TestCase": ["12345("],
+    "Expected": ["5"]
+  }
+]

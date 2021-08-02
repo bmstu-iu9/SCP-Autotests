@@ -1,0 +1,50 @@
+/*
+ Given the alphabet {A,B}, the function Prefix(e.x1, e.x2) checks whether e.x1 is a prefix of e.x2.
+ The function Concat is concatenation.
+
+ The supercompiler is to check when e.x is a prefix of Concat('A'e.x, e.y).
+*/
+
+/***********************************************/
+/*           the input program                 */
+/***********************************************/
+
+/* Теcты: ('A')'BBA', ( )'BABBB', ('AABAAAA')'BABA'*/
+
+
+$ENTRY Go {
+	 (e.x) e.y = <Prefix (e.x) <Concat ('A' e.x) e.y>>;
+}
+
+Prefix {
+	() e.x = 'T';
+	(t.x e.z1) t.x e.z2 = <Prefix (e.z1) e.z2>;
+	('A' e.x1) 'B' e.x2 = 'F';
+	('B' e.x1) 'A' e.x2 = 'F';
+	(t.y e.x) = 'F';
+}
+
+Concat {
+	(e.x1) e.x2 = e.x1 e.x2;
+}
+
+/***********************************************/
+/*          the residual program               */
+/***********************************************/
+/*
+$ENTRY Go {
+ (e.x1) e.x2 =  <Prefix_124_0 e.x1>;
+}
+
+
+Prefix_124_0 {
+ () (e.x1) =  'T';
+ ('A' e.x1) (e.x2) =  <Prefix_124_0 (e.x1) (e.x2)>;
+ ('B' e.x1) (e.x2) =  'F';
+}
+*/
+
+/*
+ Цикл Prefix_124_0 остаточной программы отвечает на вопрос, поставленный в задаче:
+ префиксом слова 'A' e.x e.y слово e.x будет тогда и только тогда, когда слово e.x само состоит из одних букв 'А'.
+*/

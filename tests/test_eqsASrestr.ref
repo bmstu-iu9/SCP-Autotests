@@ -1,0 +1,54 @@
+/*
+  
+ Given a string parameter satisfying the equality e.x++'A'='A'++e.x, a supercompiler is to prove that all
+ its suffixes are q^N for some letter q. 
+ In the residual program, the initial equation is placed as a condition in the pattern of the function InputFormat_0.
+*/
+
+/***********************************************/
+/*           the input program                 */
+/***********************************************/
+
+/* Теcты: 'AAAAAAA', 'A()A', 'AAABAAA'*/
+
+$ENTRY Go {
+     e.x = <F <Equal ('A'e.x)(e.x 'A')>>;
+}
+
+
+F {
+	 ()   = 'T';
+	(s.1) = 'T';
+    (s.x e.1 s.x) = <F (e.1 s.x)>;
+    ('A' e.1 'B') = 'F';
+    ('B' e.1 'A') = 'F';
+}
+
+Equal {
+	t.X t.X = t.X;
+	(e.X) t.Y = ; /* If the terms are not equal, return the empty string, which results in the recognition impossible.*/
+}
+
+/***********************************************/
+/*          the residual program               */
+/***********************************************/
+
+/*
+$ENTRY Go {
+ e.x1 =  <InputFormat_0 e.x1>;
+}
+
+
+InputFormat_0 {
+ =  'T';
+ e.x1 'A', ('A' e.x1) (e.x1 'A') : t.Eq1 t.Eq1 =  <F_23_0 e.x1>;
+}
+
+
+F_23_0 {
+ =  'T';
+ 'A' e.x1 =  <F_23_0 e.x1>;
+}
+*/
+
+

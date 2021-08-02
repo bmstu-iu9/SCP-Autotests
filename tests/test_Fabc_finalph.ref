@@ -1,0 +1,48 @@
+/*
+  A simple test transforming two loops in a one.
+  Due to the program semantics, the input argument belongs to the alphabet {'A','B','C'}. 
+*/
+
+/***********************************************/
+/*           the input program                 */
+/***********************************************/
+
+/* Теcты: 'AAAAAAA', 'ACCA', 'ABABBCCCAA'*/
+
+
+$ENTRY Go {
+	 e.InitialString = <G <F e.InitialString>>;
+}
+
+F {
+	 = ;
+	'A' e.Str = 'B'<F e.Str>;
+	'B' e.Str = 'B'<F e.Str>;
+	'C' e.Str = 'C'<F e.Str>;
+}
+
+G {
+  	= ;
+	'B' e.Str = 'C'<G e.Str>;
+	'A' e.Str = 'A'<G e.Str>;
+	'C' e.Str = 'C'<G e.Str>;
+}
+
+/***********************************************/
+/*          the residual program               */
+/***********************************************/
+
+/*
+$ENTRY Go {
+ e.x1 =  <G_0 () (e.x1)>;
+}
+
+
+G_0 {
+ (e.x1) () =  e.x1;
+ (e.x1) ('A' e.x2) =  <G_0 (e.x1 'C') (e.x2)>;
+ (e.x1) ('B' e.x2) =  <G_0 (e.x1 'C') (e.x2)>;
+ (e.x1) ('C' e.x2) =  <G_0 (e.x1 'C') (e.x2)>;
+}
+*/
+

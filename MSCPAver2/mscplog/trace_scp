@@ -1,0 +1,1689 @@
+New Clash: No 1 
+  Clash: (((*(par e X ))B)to ((*A(var e X1 ))(var e X2 )))
+
+
+Testing negative block in No.1 : 
+  Narrowings: (assign (par e X )(A(par e 1 )))
+  Assignments: (assign (var e X2 )(B))(assign (var e X1 )((par e 1 )))
+
+
+***************** END OF NEGATIVE TESTING No.1  *************************
+
+    PRTC No.1  Class C IS COMPLETED:
+  Narrowings: (assign (par e X )(A(par e 1 )))
+  Assignments: (assign (var e X2 )(B))(assign (var e X1 )((par e 1 )))
+
+ to
+  Narrowings: (assign (par e X )(A(par e 1 )))
+  Assignments: (assign (var e X2 )(B))(assign (var e X1 )((par e 1 )))
+
+---------------------------------------------------------------------------
+
+New Clash: No 2 
+  Clash: (((*(par e X ))B)to ((*(var s Z )(var e X1 ))(var e X2 )))
+  Equations Negative: (OR (T)(((par e X ))to (A(var e Neg1 ))))
+
+
+Testing negative block in No.2 : 
+  Narrowings: (assign (par e X )((par s 1 )(par e 2 )))
+  Assignments: (assign (var e X2 )(B))(assign (var s Z )((par s 1 )))(assign (var e X1 )((par e 2 )))
+  Equations Negative: (OR (T)(((par s 1 )(par e 2 ))to (A(var e Neg1 ))))
+
+
+Normalizing negative clash No. 3 
+(((par s 1 )(par e 2 ))to (A(var e Neg1 )))
+New negative: (OR (T)(((par s 1 ))to (A)))
+***************** END OF NEGATIVE TESTING No.2  *************************
+
+    PRTC No.2  Class C IS COMPLETED:
+  Narrowings: (assign (par e X )((par s 1 )(par e 2 )))
+  Assignments: (assign (var e X2 )(B))(assign (var s Z )((par s 1 )))(assign (var e X1 )((par e 2 )))
+  Equations Negative: (OR (T)(((par s 1 )(par e 2 ))to (A(var e Neg1 ))))
+
+ to
+  Narrowings: (assign (par e X )((par s 1 )(par e 2 )))
+  Assignments: (assign (var e X2 )(B))(assign (var s Z )((par s 1 )))(assign (var e X1 )((par e 2 )))
+  Equations Negative: (OR (T)(((par s 1 ))to (A)))
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (T)(((par e X ))to ((var s Neg1 )(var e Neg2 ))))
+    (OR (T)(((par e X ))to (A(var e Neg1 ))))
+Screened inequalities:
+
+    (OR (T)(((par e X ))to ((var s Neg1 )(var e Neg2 ))))
+New Clash: No 4 
+  Clash: (((*(par e X ))B)to ((*)(var e X )A))
+  Equations Negative: (OR (T)(((par e X ))to ((var s Neg1 )(var e Neg2 ))))
+
+
+New Clash: No 5 
+  Clash: (((*(par e X ))B)to ((*)(var e X )))
+  Equations Negative: (OR (T)(((par e X ))to ((var s Neg1 )(var e Neg2 ))))
+
+
+Testing negative block in No.5 : 
+  Narrowings: (assign (par e X )())
+  Assignments: (assign (var e X )(B))
+  Equations Negative: (OR (T)(()to ((var s Neg1 )(var e Neg2 ))))
+
+
+Normalizing negative clash No. 6 
+(()to ((var s Neg1 )(var e Neg2 )))
+***************** END OF NEGATIVE TESTING No.5  *************************
+
+    PRTC No.5  Class C IS COMPLETED:
+  Narrowings: (assign (par e X )())
+  Assignments: (assign (var e X )(B))
+  Equations Negative: (OR (T)(()to ((var s Neg1 )(var e Neg2 ))))
+
+ to
+  Narrowings: (assign (par e X )())
+  Assignments: (assign (var e X )(B))
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (T)(((par e X ))to ()))
+    (OR (T)(((par e X ))to ((var s Neg1 )(var e Neg2 ))))
+Screened inequalities:
+
+    (OR (T)(((par e X ))to ()))
+    (OR (T)(((par e X ))to ((var s Neg1 )(var e Neg2 ))))
+==================================================================================
+         SIMPLE NODE (0 ) with status: ReadyForGenCheck 
+  Restrictions: 
+
+  Configuration: (call ((F (1 2 4 ))1 )(args (arg (*(par e X ))B)))
+  Stack: 
+      (assign (var l (0 ))((call ((F (1 2 4 ))1 )(args (arg (*(par e X ))B)))))
+
+  Children of (0 ): 
+==================================================================================
+         SIMPLE NODE (0 0 ) with status: Undriven 
+  Restrictions: (assign (par e X )(A(par e 1 )))
+
+  Configuration: (call (F 2 )(args (arg (*(par e 1 ))B)))
+  Stack: 
+      (assign (var l (0 ))((call (F 2 )(args (arg (*(par e 1 ))B)))))
+
+  Children of (0 0 ): 
+======================== NODE (0 0 ) INFO END====================================
+==================================================================================
+         SIMPLE NODE (0 1 ) with status: Undriven 
+  Restrictions: (assign (par e X )((par s 1 )(par e 2 )))
+  Equations Negative: (OR (T)(((par s 1 ))to (A)))
+
+  Configuration: (call (F 3 )(args (arg (*(par e 2 ))B(par s 1 ))))
+  Stack: 
+      (assign (var l (0 ))((call (F 3 )(args (arg (*(par e 2 ))B(par s 1 ))))))
+
+  Children of (0 1 ): 
+======================== NODE (0 1 ) INFO END====================================
+==================================================================================
+         SIMPLE NODE (0 2 ) with status: Undriven 
+  Restrictions: (assign (par e X )())
+
+  Configuration: False 
+  Stack: 
+      (assign (var l (0 ))(False ))
+
+  Children of (0 2 ): 
+======================== NODE (0 2 ) INFO END====================================
+======================== NODE (0 ) INFO END====================================
+
+New Clash: No 7 
+  Clash: (((*(par e 1 ))B)to ((*A(var e X1 ))(var e X2 )))
+
+
+Testing negative block in No.7 : 
+  Narrowings: (assign (par e 1 )(A(par e 3 )))
+  Assignments: (assign (var e X2 )(B))(assign (var e X1 )((par e 3 )))
+
+
+***************** END OF NEGATIVE TESTING No.7  *************************
+
+    PRTC No.7  Class C IS COMPLETED:
+  Narrowings: (assign (par e 1 )(A(par e 3 )))
+  Assignments: (assign (var e X2 )(B))(assign (var e X1 )((par e 3 )))
+
+ to
+  Narrowings: (assign (par e 1 )(A(par e 3 )))
+  Assignments: (assign (var e X2 )(B))(assign (var e X1 )((par e 3 )))
+
+---------------------------------------------------------------------------
+
+New Clash: No 8 
+  Clash: (((*(par e 1 ))B)to ((*(var s Z )(var e X1 ))(var e X2 )))
+  Equations Negative: (OR (T)(((par e 1 ))to (A(var e Neg1 ))))
+
+
+Testing negative block in No.8 : 
+  Narrowings: (assign (par e 1 )((par s 2 )(par e 4 )))
+  Assignments: (assign (var e X2 )(B))(assign (var s Z )((par s 2 )))(assign (var e X1 )((par e 4 )))
+  Equations Negative: (OR (T)(((par s 2 )(par e 4 ))to (A(var e Neg1 ))))
+
+
+Normalizing negative clash No. 9 
+(((par s 2 )(par e 4 ))to (A(var e Neg1 )))
+New negative: (OR (T)(((par s 2 ))to (A)))
+***************** END OF NEGATIVE TESTING No.8  *************************
+
+    PRTC No.8  Class C IS COMPLETED:
+  Narrowings: (assign (par e 1 )((par s 2 )(par e 4 )))
+  Assignments: (assign (var e X2 )(B))(assign (var s Z )((par s 2 )))(assign (var e X1 )((par e 4 )))
+  Equations Negative: (OR (T)(((par s 2 )(par e 4 ))to (A(var e Neg1 ))))
+
+ to
+  Narrowings: (assign (par e 1 )((par s 2 )(par e 4 )))
+  Assignments: (assign (var e X2 )(B))(assign (var s Z )((par s 2 )))(assign (var e X1 )((par e 4 )))
+  Equations Negative: (OR (T)(((par s 2 ))to (A)))
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (T)(((par e 1 ))to ((var s Neg1 )(var e Neg2 ))))
+    (OR (T)(((par e 1 ))to (A(var e Neg1 ))))
+Screened inequalities:
+
+    (OR (T)(((par e 1 ))to ((var s Neg1 )(var e Neg2 ))))
+New Clash: No 10 
+  Clash: (((*(par e 1 ))B)to ((*)(var e X )A))
+  Equations Negative: (OR (T)(((par e 1 ))to ((var s Neg1 )(var e Neg2 ))))
+
+
+New Clash: No 11 
+  Clash: (((*(par e 1 ))B)to ((*)(var e X )))
+  Equations Negative: (OR (T)(((par e 1 ))to ((var s Neg1 )(var e Neg2 ))))
+
+
+Testing negative block in No.11 : 
+  Narrowings: (assign (par e 1 )())
+  Assignments: (assign (var e X )(B))
+  Equations Negative: (OR (T)(()to ((var s Neg1 )(var e Neg2 ))))
+
+
+Normalizing negative clash No. 12 
+(()to ((var s Neg1 )(var e Neg2 )))
+***************** END OF NEGATIVE TESTING No.11  *************************
+
+    PRTC No.11  Class C IS COMPLETED:
+  Narrowings: (assign (par e 1 )())
+  Assignments: (assign (var e X )(B))
+  Equations Negative: (OR (T)(()to ((var s Neg1 )(var e Neg2 ))))
+
+ to
+  Narrowings: (assign (par e 1 )())
+  Assignments: (assign (var e X )(B))
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (T)(((par e 1 ))to ()))
+    (OR (T)(((par e 1 ))to ((var s Neg1 )(var e Neg2 ))))
+Screened inequalities:
+
+    (OR (T)(((par e 1 ))to ()))
+    (OR (T)(((par e 1 ))to ((var s Neg1 )(var e Neg2 ))))
+==================================================================================
+         SIMPLE NODE (0 0 ) with status: ReadyForGenCheck 
+  Restrictions: (assign (par e X )(A(par e 1 )))
+
+  Configuration: (call ((F (1 2 4 ))2 )(args (arg (*(par e 1 ))B)))
+  Stack: 
+      (assign (var l (0 ))((call ((F (1 2 4 ))2 )(args (arg (*(par e 1 ))B)))))
+
+  Children of (0 0 ): 
+==================================================================================
+         SIMPLE NODE (0 0 0 ) with status: Undriven 
+  Restrictions: (assign (par e 1 )(A(par e 3 )))
+
+  Configuration: (call (F 4 )(args (arg (*(par e 3 ))B)))
+  Stack: 
+      (assign (var l (0 ))((call (F 4 )(args (arg (*(par e 3 ))B)))))
+
+  Children of (0 0 0 ): 
+======================== NODE (0 0 0 ) INFO END====================================
+==================================================================================
+         SIMPLE NODE (0 0 1 ) with status: Undriven 
+  Restrictions: (assign (par e 1 )((par s 2 )(par e 4 )))
+  Equations Negative: (OR (T)(((par s 2 ))to (A)))
+
+  Configuration: (call (F 5 )(args (arg (*(par e 4 ))B(par s 2 ))))
+  Stack: 
+      (assign (var l (0 ))((call (F 5 )(args (arg (*(par e 4 ))B(par s 2 ))))))
+
+  Children of (0 0 1 ): 
+======================== NODE (0 0 1 ) INFO END====================================
+==================================================================================
+         SIMPLE NODE (0 0 2 ) with status: Undriven 
+  Restrictions: (assign (par e 1 )())
+
+  Configuration: False 
+  Stack: 
+      (assign (var l (0 ))(False ))
+
+  Children of (0 0 2 ): 
+======================== NODE (0 0 2 ) INFO END====================================
+======================== NODE (0 0 ) INFO END====================================
+
+  Trying to embed: 
+(((F (1 2 4 ))1 ))
+ and 
+(((F (1 2 4 ))2 ))
+(call ((F (1 2 4 ))1 )(args (arg (*(par e X ))B)))
+ and 
+(call ((F (1 2 4 ))2 )(args (arg (*(par e 1 ))B)))
+  EMBEDDING IS SUCCESSFUL.
+Depth is 0 
+
+  Equations are preserved:
+
+  Inequalities are preserved:
+==============================================================================
+           LET NODE (0 0 )
+  Let information: (Let ((0 0 1 )(assign (par e X )((par e 1 ))))In ((call ((F (1 2 4 ))1 )(args (arg (*(par e X ))B)))))
+  Restrictions: (assign (par e X )(A(par e 1 )))
+
+  Configuration: 
+  Stack: 
+======================== NODE (0 0 ) INFO END====================================
+
+==================================================================================
+         SIMPLE NODE (0 ) with status: Driven 
+  Restrictions: 
+
+  Configuration: (call ((F (1 2 4 ))1 )(args (arg (*(par e X ))B)))
+  Stack: 
+      (assign (var l (0 ))((call ((F (1 2 4 ))1 )(args (arg (*(par e X ))B)))))
+
+  Children of (0 ): 
+==============================================================================
+           LET NODE (0 0 )
+  Let information: (Let ((0 0 1 )(assign (par e X )((par e 1 ))))In ((call ((F (1 2 4 ))1 )(args (arg (*(par e X ))B)))))
+  Restrictions: (assign (par e X )(A(par e 1 )))
+
+  Configuration: 
+  Stack: 
+======================== NODE (0 0 ) INFO END====================================
+======================== NODE (0 ) INFO END====================================
+
+New Clash: No 13 
+  Clash: (((*(par e 2 ))B(par s 1 ))to ((*A(var e X1 ))(var e X2 )))
+  Equations Negative: (OR (T)(((par s 1 ))to (A)))
+
+
+Testing negative block in No.13 : 
+  Narrowings: (assign (par e 2 )(A(par e 7 )))
+  Assignments: (assign (var e X2 )(B(par s 1 )))(assign (var e X1 )((par e 7 )))
+  Equations Negative: (OR (T)(((par s 1 ))to (A)))
+
+
+Normalizing negative clash No. 14 
+(((par s 1 ))to (A))
+New negative: (OR (T)(((par s 1 ))to (A)))
+***************** END OF NEGATIVE TESTING No.13  *************************
+
+    PRTC No.13  Class C IS COMPLETED:
+  Narrowings: (assign (par e 2 )(A(par e 7 )))
+  Assignments: (assign (var e X2 )(B(par s 1 )))(assign (var e X1 )((par e 7 )))
+  Equations Negative: (OR (T)(((par s 1 ))to (A)))
+
+ to
+  Narrowings: (assign (par e 2 )(A(par e 7 )))
+  Assignments: (assign (var e X2 )(B(par s 1 )))(assign (var e X1 )((par e 7 )))
+  Equations Negative: (OR (T)(((par s 1 ))to (A)))
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (T)(((par s 1 ))to (A)))
+    (OR (T)(((par s 1 ))to ((var s Neg1 )))(((par e 2 ))to (A(var e Neg1 ))))
+Screened inequalities:
+
+    (OR (T)(((par s 1 ))to (A)))
+    (OR (T)(((par s 1 ))to ((var s Neg1 )))(((par e 2 ))to (A(var e Neg1 ))))
+New Clash: No 15 
+  Clash: (((*(par e 2 ))B(par s 1 ))to ((*(var s Z )(var e X1 ))(var e X2 )))
+  Equations Negative: (OR (T)(((par s 1 ))to (A)))
+    (OR (T)(((par s 1 ))to ((var s Neg1 )))(((par e 2 ))to (A(var e Neg1 ))))
+
+
+Testing negative block in No.15 : 
+  Narrowings: (assign (par e 2 )((par s 3 )(par e 8 )))
+  Assignments: (assign (var e X2 )(B(par s 1 )))(assign (var s Z )((par s 3 )))(assign (var e X1 )((par e 8 )))
+  Equations Negative: (OR (T)(((par s 1 ))to (A)))
+    (OR (T)(((par s 1 ))to ((var s Neg1 )))(((par s 3 )(par e 8 ))to (A(var e Neg1 ))))
+
+
+Normalizing negative clash No. 16 
+(((par s 1 ))to (A))
+New negative: (OR (T)(((par s 1 ))to (A)))
+Normalizing negative clash No. 17 
+(((par s 1 ))to ((var s Neg1 )))(((par s 3 )(par e 8 ))to (A(var e Neg1 )))
+New negative: (OR (T)(((par s 3 ))to (A)))
+ToScreen inequalities:
+
+    (OR (T)(((par s 1 ))to (A)))
+    (OR (T)(((par s 3 ))to (A)))
+Screened inequalities:
+
+    (OR (T)(((par s 1 ))to (A)))
+    (OR (T)(((par s 3 ))to (A)))
+ToScreen inequalities:
+
+    (OR (T)(((par s 1 ))to (A)))
+    (OR (T)(((par s 3 ))to (A)))
+Screened inequalities:
+
+    (OR (T)(((par s 1 ))to (A)))
+    (OR (T)(((par s 3 ))to (A)))
+ToScreen inequalities:
+
+    (OR (T)(((par s 1 ))to (A)))
+    (OR (T)(((par s 3 ))to (A)))
+Screened inequalities:
+
+    (OR (T)(((par s 1 ))to (A)))
+    (OR (T)(((par s 3 ))to (A)))
+***************** END OF NEGATIVE TESTING No.15  *************************
+
+    PRTC No.15  Class C IS COMPLETED:
+  Narrowings: (assign (par e 2 )((par s 3 )(par e 8 )))
+  Assignments: (assign (var e X2 )(B(par s 1 )))(assign (var s Z )((par s 3 )))(assign (var e X1 )((par e 8 )))
+  Equations Negative: (OR (T)(((par s 1 ))to (A)))
+    (OR (T)(((par s 1 ))to ((var s Neg1 )))(((par s 3 )(par e 8 ))to (A(var e Neg1 ))))
+
+ to
+  Narrowings: (assign (par e 2 )((par s 3 )(par e 8 )))
+  Assignments: (assign (var e X2 )(B(par s 1 )))(assign (var s Z )((par s 3 )))(assign (var e X1 )((par e 8 )))
+  Equations Negative: (OR (T)(((par s 1 ))to (A)))
+    (OR (T)(((par s 3 ))to (A)))
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (T)(((par s 1 ))to ((var s Neg2 )))(((par e 2 ))to ((var s Neg3 )(var e Neg2 ))))
+    (OR (T)(((par s 1 ))to ((var s Neg1 )))(((par e 2 ))to (A(var e Neg1 ))))
+Screened inequalities:
+
+    (OR (T)(((par s 1 ))to ((var s Neg2 )))(((par e 2 ))to ((var s Neg3 )(var e Neg2 ))))
+ToScreen inequalities:
+
+    (OR (T)(((par s 1 ))to (A)))
+    (OR (T)(((par s 1 ))to ((var s Neg2 )))(((par e 2 ))to ((var s Neg3 )(var e Neg2 ))))
+Screened inequalities:
+
+    (OR (T)(((par s 1 ))to (A)))
+    (OR (T)(((par s 1 ))to ((var s Neg2 )))(((par e 2 ))to ((var s Neg3 )(var e Neg2 ))))
+New Clash: No 18 
+  Clash: (((*(par e 2 ))B(par s 1 ))to ((*)(var e X )A))
+  Equations Negative: (OR (T)(((par s 1 ))to (A)))
+    (OR (T)(((par s 1 ))to ((var s Neg2 )))(((par e 2 ))to ((var s Neg3 )(var e Neg2 ))))
+
+
+Testing negative block in No.18 : 
+  Narrowings: (assign (par e 2 )())(assign (par s 1 )(A))
+  Assignments: (assign (var e X )(B))
+  Equations Negative: (OR (T)((A)to (A)))
+    (OR (T)((A)to ((var s Neg2 )))(()to ((var s Neg3 )(var e Neg2 ))))
+
+
+Normalizing negative clash No. 19 
+((A)to (A))
+***************** END OF NEGATIVE TESTING PRTC No.18   *************************
+
+    PRTC No.18  FAILED in negative block:
+  Narrowings: (assign (par e 2 )())(assign (par s 1 )(A))
+  Assignments: (assign (var e X )(B))
+  Equations Negative: (OR (T)((A)to (A)))
+    (OR (T)((A)to ((var s Neg2 )))(()to ((var s Neg3 )(var e Neg2 ))))
+
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (T)(((par s 1 ))to (A)))
+    (OR (T)(((par s 1 ))to ((var s Neg2 )))(((par e 2 ))to ((var s Neg3 )(var e Neg2 ))))
+Screened inequalities:
+
+    (OR (T)(((par s 1 ))to (A)))
+    (OR (T)(((par s 1 ))to ((var s Neg2 )))(((par e 2 ))to ((var s Neg3 )(var e Neg2 ))))
+New Clash: No 20 
+  Clash: (((*(par e 2 ))B(par s 1 ))to ((*)(var e X )))
+  Equations Negative: (OR (T)(((par s 1 ))to (A)))
+    (OR (T)(((par s 1 ))to ((var s Neg2 )))(((par e 2 ))to ((var s Neg3 )(var e Neg2 ))))
+
+
+Testing negative block in No.20 : 
+  Narrowings: (assign (par e 2 )())
+  Assignments: (assign (var e X )(B(par s 1 )))
+  Equations Negative: (OR (T)(((par s 1 ))to (A)))
+    (OR (T)(((par s 1 ))to ((var s Neg2 )))(()to ((var s Neg3 )(var e Neg2 ))))
+
+
+Normalizing negative clash No. 21 
+(((par s 1 ))to (A))
+New negative: (OR (T)(((par s 1 ))to (A)))
+Normalizing negative clash No. 22 
+(((par s 1 ))to ((var s Neg2 )))(()to ((var s Neg3 )(var e Neg2 )))
+***************** END OF NEGATIVE TESTING No.20  *************************
+
+    PRTC No.20  Class C IS COMPLETED:
+  Narrowings: (assign (par e 2 )())
+  Assignments: (assign (var e X )(B(par s 1 )))
+  Equations Negative: (OR (T)(((par s 1 ))to (A)))
+    (OR (T)(((par s 1 ))to ((var s Neg2 )))(()to ((var s Neg3 )(var e Neg2 ))))
+
+ to
+  Narrowings: (assign (par e 2 )())
+  Assignments: (assign (var e X )(B(par s 1 )))
+  Equations Negative: (OR (T)(((par s 1 ))to (A)))
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (T)(((par s 1 ))to ((var s Neg4 )))(((par e 2 ))to ()))
+    (OR (T)(((par s 1 ))to ((var s Neg2 )))(((par e 2 ))to ((var s Neg3 )(var e Neg2 ))))
+Screened inequalities:
+
+    (OR (T)(((par s 1 ))to ((var s Neg4 )))(((par e 2 ))to ()))
+    (OR (T)(((par s 1 ))to ((var s Neg2 )))(((par e 2 ))to ((var s Neg3 )(var e Neg2 ))))
+==================================================================================
+         SIMPLE NODE (0 1 ) with status: ReadyForGenCheck 
+  Restrictions: (assign (par e X )((par s 1 )(par e 2 )))
+  Equations Negative: (OR (T)(((par s 1 ))to (A)))
+
+  Configuration: (call ((F (1 2 4 ))3 )(args (arg (*(par e 2 ))B(par s 1 ))))
+  Stack: 
+      (assign (var l (0 ))((call ((F (1 2 4 ))3 )(args (arg (*(par e 2 ))B(par s 1 ))))))
+
+  Children of (0 1 ): 
+==================================================================================
+         SIMPLE NODE (0 1 0 ) with status: Undriven 
+  Restrictions: (assign (par e 2 )(A(par e 7 )))
+  Equations Negative: (OR (T)(((par s 1 ))to (A)))
+
+  Configuration: (call (F 6 )(args (arg (*(par e 7 ))B(par s 1 ))))
+  Stack: 
+      (assign (var l (0 ))((call (F 6 )(args (arg (*(par e 7 ))B(par s 1 ))))))
+
+  Children of (0 1 0 ): 
+======================== NODE (0 1 0 ) INFO END====================================
+==================================================================================
+         SIMPLE NODE (0 1 1 ) with status: Undriven 
+  Restrictions: (assign (par e 2 )((par s 3 )(par e 8 )))
+  Equations Negative: (OR (T)(((par s 1 ))to (A)))
+    (OR (T)(((par s 3 ))to (A)))
+
+  Configuration: (call (F 7 )(args (arg (*(par e 8 ))B(par s 1 )(par s 3 ))))
+  Stack: 
+      (assign (var l (0 ))((call (F 7 )(args (arg (*(par e 8 ))B(par s 1 )(par s 3 ))))))
+
+  Children of (0 1 1 ): 
+======================== NODE (0 1 1 ) INFO END====================================
+==================================================================================
+         SIMPLE NODE (0 1 2 ) with status: Undriven 
+  Restrictions: (assign (par e 2 )())
+  Equations Negative: (OR (T)(((par s 1 ))to (A)))
+
+  Configuration: False 
+  Stack: 
+      (assign (var l (0 ))(False ))
+
+  Children of (0 1 2 ): 
+======================== NODE (0 1 2 ) INFO END====================================
+======================== NODE (0 1 ) INFO END====================================
+
+  Trying to embed: 
+(((F (1 2 4 ))1 ))
+ and 
+(((F (1 2 4 ))3 ))
+(call ((F (1 2 4 ))1 )(args (arg (*(par e X ))B)))
+ and 
+(call ((F (1 2 4 ))3 )(args (arg (*(par e 2 ))B(par s 1 ))))
+  EMBEDDING IS SUCCESSFUL.
+  Depth is 0 
+Normalizing negative clash No. 23 
+(((*(par e 12 ))B(par e 15 ))to ((*)(var e X )A))
+New negative: (OR (T)(((par e 12 ))to ())(((par e 15 ))to ((var e Neg17 )A)))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+    (OR (T)(((par e 12 ))to ())(((par e 15 ))to ((var e Neg17 )A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+==============================================================================
+           LET NODE (0 )
+  Let information: (Let ((0 1 )(assign (par e 12 )((par e X ))))((0 2 )(assign (par e 15 )()))In ((call ((F (1 2 4 ))8 )(args (arg (*(par e 12 ))B(par e 15 ))))))
+  Restrictions: 
+
+  Configuration: 
+  Stack: 
+======================== NODE (0 ) INFO END====================================
+
+New Clash: No 24 
+  Clash: (((*(par e 12 ))B(par e 15 ))to ((*A(var e X1 ))(var e X2 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+
+
+Testing negative block in No.24 : 
+  Narrowings: (assign (par e 12 )(A(par e 27 )))
+  Assignments: (assign (var e X2 )(B(par e 15 )))(assign (var e X1 )((par e 27 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+
+
+Normalizing negative clash No. 25 
+(((par e 15 ))to ((var e (A10 ))A(var e (A11 ))))
+New negative: (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+***************** END OF NEGATIVE TESTING No.24  *************************
+
+    PRTC No.24  Class C IS COMPLETED:
+  Narrowings: (assign (par e 12 )(A(par e 27 )))
+  Assignments: (assign (var e X2 )(B(par e 15 )))(assign (var e X1 )((par e 27 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+
+ to
+  Narrowings: (assign (par e 12 )(A(par e 27 )))
+  Assignments: (assign (var e X2 )(B(par e 15 )))(assign (var e X1 )((par e 27 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+    (OR (T)(((par e 12 ))to (A(var e Neg4 ))))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+    (OR (T)(((par e 12 ))to (A(var e Neg4 ))))
+New Clash: No 26 
+  Clash: (((*(par e 12 ))B(par e 15 ))to ((*(var s Z )(var e X1 ))(var e X2 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+    (OR (T)(((par e 12 ))to (A(var e Neg4 ))))
+
+
+Testing negative block in No.26 : 
+  Narrowings: (assign (par e 12 )((par s 4 )(par e 30 )))
+  Assignments: (assign (var e X2 )(B(par e 15 )))(assign (var s Z )((par s 4 )))(assign (var e X1 )((par e 30 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+    (OR (T)(((par s 4 )(par e 30 ))to (A(var e Neg4 ))))
+
+
+Normalizing negative clash No. 27 
+(((par e 15 ))to ((var e (A10 ))A(var e (A11 ))))
+New negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+Normalizing negative clash No. 28 
+(((par s 4 )(par e 30 ))to (A(var e Neg4 )))
+New negative: (OR (T)(((par s 4 ))to (A)))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+***************** END OF NEGATIVE TESTING No.26  *************************
+
+    PRTC No.26  Class C IS COMPLETED:
+  Narrowings: (assign (par e 12 )((par s 4 )(par e 30 )))
+  Assignments: (assign (var e X2 )(B(par e 15 )))(assign (var s Z )((par s 4 )))(assign (var e X1 )((par e 30 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+    (OR (T)(((par s 4 )(par e 30 ))to (A(var e Neg4 ))))
+
+ to
+  Narrowings: (assign (par e 12 )((par s 4 )(par e 30 )))
+  Assignments: (assign (var e X2 )(B(par e 15 )))(assign (var s Z )((par s 4 )))(assign (var e X1 )((par e 30 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (T)(((par e 12 ))to ((var s Neg1 )(var e Neg8 ))))
+    (OR (T)(((par e 12 ))to (A(var e Neg4 ))))
+Screened inequalities:
+
+    (OR (T)(((par e 12 ))to ((var s Neg1 )(var e Neg8 ))))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+    (OR (T)(((par e 12 ))to ((var s Neg1 )(var e Neg8 ))))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+    (OR (T)(((par e 12 ))to ((var s Neg1 )(var e Neg8 ))))
+New Clash: No 29 
+  Clash: (((*(par e 12 ))B(par e 15 ))to ((*)(var e X )A))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+    (OR (T)(((par e 12 ))to ((var s Neg1 )(var e Neg8 ))))
+
+
+Testing negative block in No.29 : 
+  Narrowings: (assign (par e 12 )())(assign (par e 15 )((par e 33 )A))
+  Assignments: (assign (var e X )(B(par e 33 )))
+  Equations Negative: (OR (D)(((par e 33 )A)to ((var e (A10 ))A(var e (A11 )))))
+    (OR (T)(()to ((var s Neg1 )(var e Neg8 ))))
+
+
+Normalizing negative clash No. 30 
+(((par e 33 )A)to ((var e (A10 ))A(var e (A11 ))))
+(((New (Desired ))(Grammar )(Negative (OR (T)(()to ((var s Neg1 )(var e Neg8 )))))(Numeric )(Generic ))((assign (par e 33 )((par e 34 )A(par e 35 ))))((assign (var e (A10 ))((par e 34 ))))((((par e 35 )A)to ((var e (A11 ))))(Delayed ))(T))(((New (Desired ))(Grammar )(Negative (OR (T)(()to ((var s Neg1 )(var e Neg8 )))))(Numeric )(Generic ))()((assign (var e (A10 ))((par e 33 )(var e 9 ))))(((A)to ((var e 9 )A(var e (A11 ))))(Delayed ))(T))
+(((New (Desired ))(Grammar )(Negative (OR (T)(()to ((var s Neg1 )(var e Neg8 )))))(Numeric )(Generic ))()((assign (var e 9 )())(assign (var e (A10 ))((par e 33 ))))((()to ((var e (A11 ))))(Delayed ))(T))(((New (Desired ))(Grammar )(Negative (OR (T)(()to ((var s Neg1 )(var e Neg8 )))))(Numeric )(Generic ))()((assign (var e 9 )(A(var e 12 )))(assign (var e (A10 ))((par e 33 )A(var e 12 ))))((()to ((var e 12 )A(var e (A11 ))))(Delayed ))(T))
+***************** END OF NEGATIVE TESTING PRTC No.29   *************************
+
+    PRTC No.29  FAILED in negative block:
+  Narrowings: (assign (par e 12 )())(assign (par e 15 )((par e 33 )A))
+  Assignments: (assign (var e X )(B(par e 33 )))
+  Equations Negative: (OR (D)(((par e 33 )A)to ((var e (A10 ))A(var e (A11 )))))
+    (OR (T)(()to ((var s Neg1 )(var e Neg8 ))))
+
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+    (OR (T)(((par e 12 ))to ((var s Neg1 )(var e Neg8 ))))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+    (OR (T)(((par e 12 ))to ((var s Neg1 )(var e Neg8 ))))
+New Clash: No 31 
+  Clash: (((*(par e 12 ))B(par e 15 ))to ((*)(var e X )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+    (OR (T)(((par e 12 ))to ((var s Neg1 )(var e Neg8 ))))
+
+
+Testing negative block in No.31 : 
+  Narrowings: (assign (par e 12 )())
+  Assignments: (assign (var e X )(B(par e 15 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+    (OR (T)(()to ((var s Neg1 )(var e Neg8 ))))
+
+
+Normalizing negative clash No. 32 
+(((par e 15 ))to ((var e (A10 ))A(var e (A11 ))))
+New negative: (OR (D)(((par e 15 ))to ((var e Neg13 )A(var e Neg14 ))))
+Normalizing negative clash No. 33 
+(()to ((var s Neg1 )(var e Neg8 )))
+***************** END OF NEGATIVE TESTING No.31  *************************
+
+    PRTC No.31  Class C IS COMPLETED:
+  Narrowings: (assign (par e 12 )())
+  Assignments: (assign (var e X )(B(par e 15 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+    (OR (T)(()to ((var s Neg1 )(var e Neg8 ))))
+
+ to
+  Narrowings: (assign (par e 12 )())
+  Assignments: (assign (var e X )(B(par e 15 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg13 )A(var e Neg14 ))))
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (T)(((par e 12 ))to ()))
+    (OR (T)(((par e 12 ))to ((var s Neg1 )(var e Neg8 ))))
+Screened inequalities:
+
+    (OR (T)(((par e 12 ))to ()))
+    (OR (T)(((par e 12 ))to ((var s Neg1 )(var e Neg8 ))))
+==================================================================================
+         SIMPLE NODE (0 0 ) with status: ReadyForGenCheck 
+  Restrictions: 
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+
+  Configuration: (call ((F (1 2 4 ))8 )(args (arg (*(par e 12 ))B(par e 15 ))))
+  Stack: 
+      (assign (var l (0 ))((call ((F (1 2 4 ))8 )(args (arg (*(par e 12 ))B(par e 15 ))))))
+
+  Children of (0 0 ): 
+==================================================================================
+         SIMPLE NODE (0 0 0 ) with status: Undriven 
+  Restrictions: (assign (par e 12 )(A(par e 27 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+
+  Configuration: (call (F 9 )(args (arg (*(par e 27 ))B(par e 15 ))))
+  Stack: 
+      (assign (var l (0 ))((call (F 9 )(args (arg (*(par e 27 ))B(par e 15 ))))))
+
+  Children of (0 0 0 ): 
+======================== NODE (0 0 0 ) INFO END====================================
+==================================================================================
+         SIMPLE NODE (0 0 1 ) with status: Undriven 
+  Restrictions: (assign (par e 12 )((par s 4 )(par e 30 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+
+  Configuration: (call (F 10 )(args (arg (*(par e 30 ))B(par e 15 )(par s 4 ))))
+  Stack: 
+      (assign (var l (0 ))((call (F 10 )(args (arg (*(par e 30 ))B(par e 15 )(par s 4 ))))))
+
+  Children of (0 0 1 ): 
+======================== NODE (0 0 1 ) INFO END====================================
+==================================================================================
+         SIMPLE NODE (0 0 2 ) with status: Undriven 
+  Restrictions: (assign (par e 12 )())
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg13 )A(var e Neg14 ))))
+
+  Configuration: False 
+  Stack: 
+      (assign (var l (0 ))(False ))
+
+  Children of (0 0 2 ): 
+======================== NODE (0 0 2 ) INFO END====================================
+======================== NODE (0 0 ) INFO END====================================
+
+  Trying to embed: 
+
+ and 
+(((F (1 2 4 ))8 ))
+New Clash: No 34 
+  Clash: (((*(par e 27 ))B(par e 15 ))to ((*A(var e X1 ))(var e X2 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+
+
+Testing negative block in No.34 : 
+  Narrowings: (assign (par e 27 )(A(par e 38 )))
+  Assignments: (assign (var e X2 )(B(par e 15 )))(assign (var e X1 )((par e 38 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+
+
+Normalizing negative clash No. 35 
+(((par e 15 ))to ((var e Neg1 )A(var e Neg2 )))
+New negative: (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+***************** END OF NEGATIVE TESTING No.34  *************************
+
+    PRTC No.34  Class C IS COMPLETED:
+  Narrowings: (assign (par e 27 )(A(par e 38 )))
+  Assignments: (assign (var e X2 )(B(par e 15 )))(assign (var e X1 )((par e 38 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+
+ to
+  Narrowings: (assign (par e 27 )(A(par e 38 )))
+  Assignments: (assign (var e X2 )(B(par e 15 )))(assign (var e X1 )((par e 38 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(((par e 27 ))to (A(var e Neg4 ))))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(((par e 27 ))to (A(var e Neg4 ))))
+New Clash: No 36 
+  Clash: (((*(par e 27 ))B(par e 15 ))to ((*(var s Z )(var e X1 ))(var e X2 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(((par e 27 ))to (A(var e Neg4 ))))
+
+
+Testing negative block in No.36 : 
+  Narrowings: (assign (par e 27 )((par s 5 )(par e 41 )))
+  Assignments: (assign (var e X2 )(B(par e 15 )))(assign (var s Z )((par s 5 )))(assign (var e X1 )((par e 41 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(((par s 5 )(par e 41 ))to (A(var e Neg4 ))))
+
+
+Normalizing negative clash No. 37 
+(((par e 15 ))to ((var e Neg1 )A(var e Neg2 )))
+New negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+Normalizing negative clash No. 38 
+(((par s 5 )(par e 41 ))to (A(var e Neg4 )))
+New negative: (OR (T)(((par s 5 ))to (A)))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 5 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 5 ))to (A)))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 5 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 5 ))to (A)))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 5 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 5 ))to (A)))
+***************** END OF NEGATIVE TESTING No.36  *************************
+
+    PRTC No.36  Class C IS COMPLETED:
+  Narrowings: (assign (par e 27 )((par s 5 )(par e 41 )))
+  Assignments: (assign (var e X2 )(B(par e 15 )))(assign (var s Z )((par s 5 )))(assign (var e X1 )((par e 41 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(((par s 5 )(par e 41 ))to (A(var e Neg4 ))))
+
+ to
+  Narrowings: (assign (par e 27 )((par s 5 )(par e 41 )))
+  Assignments: (assign (var e X2 )(B(par e 15 )))(assign (var s Z )((par s 5 )))(assign (var e X1 )((par e 41 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 5 ))to (A)))
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (T)(((par e 27 ))to ((var s Neg1 )(var e Neg8 ))))
+    (OR (T)(((par e 27 ))to (A(var e Neg4 ))))
+Screened inequalities:
+
+    (OR (T)(((par e 27 ))to ((var s Neg1 )(var e Neg8 ))))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(((par e 27 ))to ((var s Neg1 )(var e Neg8 ))))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(((par e 27 ))to ((var s Neg1 )(var e Neg8 ))))
+New Clash: No 39 
+  Clash: (((*(par e 27 ))B(par e 15 ))to ((*)(var e X )A))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(((par e 27 ))to ((var s Neg1 )(var e Neg8 ))))
+
+
+Testing negative block in No.39 : 
+  Narrowings: (assign (par e 27 )())(assign (par e 15 )((par e 44 )A))
+  Assignments: (assign (var e X )(B(par e 44 )))
+  Equations Negative: (OR (D)(((par e 44 )A)to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(()to ((var s Neg1 )(var e Neg8 ))))
+
+
+Normalizing negative clash No. 40 
+(((par e 44 )A)to ((var e Neg1 )A(var e Neg2 )))
+(((New (Desired ))(Grammar )(Negative (OR (T)(()to ((var s Neg1 )(var e Neg8 )))))(Numeric )(Generic ))((assign (par e 44 )((par e 45 )A(par e 46 ))))((assign (var e Neg1 )((par e 45 ))))((((par e 46 )A)to ((var e Neg2 )))(Delayed ))(T))(((New (Desired ))(Grammar )(Negative (OR (T)(()to ((var s Neg1 )(var e Neg8 )))))(Numeric )(Generic ))()((assign (var e Neg1 )((par e 44 )(var e 9 ))))(((A)to ((var e 9 )A(var e Neg2 )))(Delayed ))(T))
+(((New (Desired ))(Grammar )(Negative (OR (T)(()to ((var s Neg1 )(var e Neg8 )))))(Numeric )(Generic ))()((assign (var e 9 )())(assign (var e Neg1 )((par e 44 ))))((()to ((var e Neg2 )))(Delayed ))(T))(((New (Desired ))(Grammar )(Negative (OR (T)(()to ((var s Neg1 )(var e Neg8 )))))(Numeric )(Generic ))()((assign (var e 9 )(A(var e 12 )))(assign (var e Neg1 )((par e 44 )A(var e 12 ))))((()to ((var e 12 )A(var e Neg2 )))(Delayed ))(T))
+***************** END OF NEGATIVE TESTING PRTC No.39   *************************
+
+    PRTC No.39  FAILED in negative block:
+  Narrowings: (assign (par e 27 )())(assign (par e 15 )((par e 44 )A))
+  Assignments: (assign (var e X )(B(par e 44 )))
+  Equations Negative: (OR (D)(((par e 44 )A)to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(()to ((var s Neg1 )(var e Neg8 ))))
+
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(((par e 27 ))to ((var s Neg1 )(var e Neg8 ))))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(((par e 27 ))to ((var s Neg1 )(var e Neg8 ))))
+New Clash: No 41 
+  Clash: (((*(par e 27 ))B(par e 15 ))to ((*)(var e X )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(((par e 27 ))to ((var s Neg1 )(var e Neg8 ))))
+
+
+Testing negative block in No.41 : 
+  Narrowings: (assign (par e 27 )())
+  Assignments: (assign (var e X )(B(par e 15 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(()to ((var s Neg1 )(var e Neg8 ))))
+
+
+Normalizing negative clash No. 42 
+(((par e 15 ))to ((var e Neg1 )A(var e Neg2 )))
+New negative: (OR (D)(((par e 15 ))to ((var e Neg13 )A(var e Neg14 ))))
+Normalizing negative clash No. 43 
+(()to ((var s Neg1 )(var e Neg8 )))
+***************** END OF NEGATIVE TESTING No.41  *************************
+
+    PRTC No.41  Class C IS COMPLETED:
+  Narrowings: (assign (par e 27 )())
+  Assignments: (assign (var e X )(B(par e 15 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(()to ((var s Neg1 )(var e Neg8 ))))
+
+ to
+  Narrowings: (assign (par e 27 )())
+  Assignments: (assign (var e X )(B(par e 15 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg13 )A(var e Neg14 ))))
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (T)(((par e 27 ))to ()))
+    (OR (T)(((par e 27 ))to ((var s Neg1 )(var e Neg8 ))))
+Screened inequalities:
+
+    (OR (T)(((par e 27 ))to ()))
+    (OR (T)(((par e 27 ))to ((var s Neg1 )(var e Neg8 ))))
+==================================================================================
+         SIMPLE NODE (0 0 0 ) with status: ReadyForGenCheck 
+  Restrictions: (assign (par e 12 )(A(par e 27 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+
+  Configuration: (call ((F (1 2 4 ))9 )(args (arg (*(par e 27 ))B(par e 15 ))))
+  Stack: 
+      (assign (var l (0 ))((call ((F (1 2 4 ))9 )(args (arg (*(par e 27 ))B(par e 15 ))))))
+
+  Children of (0 0 0 ): 
+==================================================================================
+         SIMPLE NODE (0 0 0 0 ) with status: Undriven 
+  Restrictions: (assign (par e 27 )(A(par e 38 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+
+  Configuration: (call (F 11 )(args (arg (*(par e 38 ))B(par e 15 ))))
+  Stack: 
+      (assign (var l (0 ))((call (F 11 )(args (arg (*(par e 38 ))B(par e 15 ))))))
+
+  Children of (0 0 0 0 ): 
+======================== NODE (0 0 0 0 ) INFO END====================================
+==================================================================================
+         SIMPLE NODE (0 0 0 1 ) with status: Undriven 
+  Restrictions: (assign (par e 27 )((par s 5 )(par e 41 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 5 ))to (A)))
+
+  Configuration: (call (F 12 )(args (arg (*(par e 41 ))B(par e 15 )(par s 5 ))))
+  Stack: 
+      (assign (var l (0 ))((call (F 12 )(args (arg (*(par e 41 ))B(par e 15 )(par s 5 ))))))
+
+  Children of (0 0 0 1 ): 
+======================== NODE (0 0 0 1 ) INFO END====================================
+==================================================================================
+         SIMPLE NODE (0 0 0 2 ) with status: Undriven 
+  Restrictions: (assign (par e 27 )())
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg13 )A(var e Neg14 ))))
+
+  Configuration: False 
+  Stack: 
+      (assign (var l (0 ))(False ))
+
+  Children of (0 0 0 2 ): 
+======================== NODE (0 0 0 2 ) INFO END====================================
+======================== NODE (0 0 0 ) INFO END====================================
+
+  Trying to embed: 
+(((F (1 2 4 ))8 ))
+ and 
+(((F (1 2 4 ))9 ))
+(call ((F (1 2 4 ))8 )(args (arg (*(par e 12 ))B(par e 15 ))))
+ and 
+(call ((F (1 2 4 ))9 )(args (arg (*(par e 27 ))B(par e 15 ))))
+  EMBEDDING IS SUCCESSFUL.
+Depth is 0 
+Normalizing negative clash No. 44 
+(((par e 15 ))to ((var e (A10 ))A(var e (A11 ))))
+New negative: (OR (D)(((par e 15 ))to ((var e Neg16 )A(var e Neg17 ))))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+
+  Equations are preserved:
+
+  Inequalities are preserved:
+    (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+==============================================================================
+           LET NODE (0 0 0 )
+  Let information: (Let ((0 0 0 1 )(assign (par e 12 )((par e 27 ))))In ((call ((F (1 2 4 ))8 )(args (arg (*(par e 12 ))B(par e 15 ))))))
+  Restrictions: (assign (par e 12 )(A(par e 27 )))
+
+  Configuration: 
+  Stack: 
+======================== NODE (0 0 0 ) INFO END====================================
+
+==============================================================================
+           LET NODE (0 )
+  Let information: (Let ((0 1 )(assign (par e 12 )((par e X ))))((0 2 )(assign (par e 15 )()))In ((call ((F (1 2 4 ))8 )(args (arg (*(par e 12 ))B(par e 15 ))))))
+  Restrictions: 
+
+  Configuration: 
+  Stack: 
+======================== NODE (0 ) INFO END====================================
+
+New Clash: No 45 
+  Clash: (((*(par e 30 ))B(par e 15 )(par s 4 ))to ((*A(var e X1 ))(var e X2 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+
+
+Testing negative block in No.45 : 
+  Narrowings: (assign (par e 30 )(A(par e 53 )))
+  Assignments: (assign (var e X2 )(B(par e 15 )(par s 4 )))(assign (var e X1 )((par e 53 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+
+
+Normalizing negative clash No. 46 
+(((par e 15 ))to ((var e Neg5 )A(var e Neg6 )))
+New negative: (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+Normalizing negative clash No. 47 
+(((par s 4 ))to (A))
+New negative: (OR (T)(((par s 4 ))to (A)))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(((par s 4 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(((par s 4 ))to (A)))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(((par s 4 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(((par s 4 ))to (A)))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(((par s 4 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(((par s 4 ))to (A)))
+***************** END OF NEGATIVE TESTING No.45  *************************
+
+    PRTC No.45  Class C IS COMPLETED:
+  Narrowings: (assign (par e 30 )(A(par e 53 )))
+  Assignments: (assign (var e X2 )(B(par e 15 )(par s 4 )))(assign (var e X1 )((par e 53 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+
+ to
+  Narrowings: (assign (par e 30 )(A(par e 53 )))
+  Assignments: (assign (var e X2 )(B(par e 15 )(par s 4 )))(assign (var e X1 )((par e 53 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(((par s 4 ))to (A)))
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 4 ))to ((var s Neg1 )))(((par e 30 ))to (A(var e Neg4 ))))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 4 ))to ((var s Neg1 )))(((par e 30 ))to (A(var e Neg4 ))))
+New Clash: No 48 
+  Clash: (((*(par e 30 ))B(par e 15 )(par s 4 ))to ((*(var s Z )(var e X1 ))(var e X2 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 4 ))to ((var s Neg1 )))(((par e 30 ))to (A(var e Neg4 ))))
+
+
+Testing negative block in No.48 : 
+  Narrowings: (assign (par e 30 )((par s 6 )(par e 56 )))
+  Assignments: (assign (var e X2 )(B(par e 15 )(par s 4 )))(assign (var s Z )((par s 6 )))(assign (var e X1 )((par e 56 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 4 ))to ((var s Neg1 )))(((par s 6 )(par e 56 ))to (A(var e Neg4 ))))
+
+
+ToScreen inequalities:
+
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 4 ))to ((var s Neg1 )))(((par s 6 )(par e 56 ))to (A(var e Neg4 ))))
+Screened inequalities:
+
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 4 ))to ((var s Neg1 )))(((par s 6 )(par e 56 ))to (A(var e Neg4 ))))
+Normalizing negative clash No. 49 
+(((par e 15 ))to ((var e Neg5 )A(var e Neg6 )))
+New negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+Normalizing negative clash No. 50 
+(((par s 4 ))to (A))
+New negative: (OR (T)(((par s 4 ))to (A)))
+Normalizing negative clash No. 51 
+(((par s 4 ))to ((var s Neg1 )))(((par s 6 )(par e 56 ))to (A(var e Neg4 )))
+New negative: (OR (T)(((par s 6 ))to (A)))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 6 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 6 ))to (A)))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 6 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 6 ))to (A)))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 6 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 6 ))to (A)))
+***************** END OF NEGATIVE TESTING No.48  *************************
+
+    PRTC No.48  Class C IS COMPLETED:
+  Narrowings: (assign (par e 30 )((par s 6 )(par e 56 )))
+  Assignments: (assign (var e X2 )(B(par e 15 )(par s 4 )))(assign (var s Z )((par s 6 )))(assign (var e X1 )((par e 56 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 4 ))to ((var s Neg1 )))(((par s 6 )(par e 56 ))to (A(var e Neg4 ))))
+
+ to
+  Narrowings: (assign (par e 30 )((par s 6 )(par e 56 )))
+  Assignments: (assign (var e X2 )(B(par e 15 )(par s 4 )))(assign (var s Z )((par s 6 )))(assign (var e X1 )((par e 56 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 6 ))to (A)))
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (T)(((par s 4 ))to ((var s Neg2 )))(((par e 30 ))to ((var s Neg3 )(var e Neg8 ))))
+    (OR (T)(((par s 4 ))to ((var s Neg1 )))(((par e 30 ))to (A(var e Neg4 ))))
+Screened inequalities:
+
+    (OR (T)(((par s 4 ))to ((var s Neg2 )))(((par e 30 ))to ((var s Neg3 )(var e Neg8 ))))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 4 ))to ((var s Neg2 )))(((par e 30 ))to ((var s Neg3 )(var e Neg8 ))))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 4 ))to ((var s Neg2 )))(((par e 30 ))to ((var s Neg3 )(var e Neg8 ))))
+New Clash: No 52 
+  Clash: (((*(par e 30 ))B(par e 15 )(par s 4 ))to ((*)(var e X )A))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 4 ))to ((var s Neg2 )))(((par e 30 ))to ((var s Neg3 )(var e Neg8 ))))
+
+
+Testing negative block in No.52 : 
+  Narrowings: (assign (par e 30 )())(assign (par s 4 )(A))
+  Assignments: (assign (var e X )(B(par e 15 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)((A)to (A)))
+    (OR (T)((A)to ((var s Neg2 )))(()to ((var s Neg3 )(var e Neg8 ))))
+
+
+ToScreen inequalities:
+
+    (OR (T)((A)to (A)))
+    (OR (T)((A)to ((var s Neg2 )))(()to ((var s Neg3 )(var e Neg8 ))))
+Screened inequalities:
+
+    (OR (T)((A)to (A)))
+    (OR (T)((A)to ((var s Neg2 )))(()to ((var s Neg3 )(var e Neg8 ))))
+Normalizing negative clash No. 53 
+(((par e 15 ))to ((var e Neg5 )A(var e Neg6 )))
+New negative: (OR (D)(((par e 15 ))to ((var e Neg9 )A(var e Neg10 ))))
+Normalizing negative clash No. 54 
+((A)to (A))
+***************** END OF NEGATIVE TESTING PRTC No.52   *************************
+
+    PRTC No.52  FAILED in negative block:
+  Narrowings: (assign (par e 30 )())(assign (par s 4 )(A))
+  Assignments: (assign (var e X )(B(par e 15 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)((A)to (A)))
+    (OR (T)((A)to ((var s Neg2 )))(()to ((var s Neg3 )(var e Neg8 ))))
+
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 4 ))to ((var s Neg2 )))(((par e 30 ))to ((var s Neg3 )(var e Neg8 ))))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 4 ))to ((var s Neg2 )))(((par e 30 ))to ((var s Neg3 )(var e Neg8 ))))
+New Clash: No 55 
+  Clash: (((*(par e 30 ))B(par e 15 )(par s 4 ))to ((*)(var e X )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 4 ))to ((var s Neg2 )))(((par e 30 ))to ((var s Neg3 )(var e Neg8 ))))
+
+
+Testing negative block in No.55 : 
+  Narrowings: (assign (par e 30 )())
+  Assignments: (assign (var e X )(B(par e 15 )(par s 4 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 4 ))to ((var s Neg2 )))(()to ((var s Neg3 )(var e Neg8 ))))
+
+
+ToScreen inequalities:
+
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 4 ))to ((var s Neg2 )))(()to ((var s Neg3 )(var e Neg8 ))))
+Screened inequalities:
+
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 4 ))to ((var s Neg2 )))(()to ((var s Neg3 )(var e Neg8 ))))
+Normalizing negative clash No. 56 
+(((par e 15 ))to ((var e Neg5 )A(var e Neg6 )))
+New negative: (OR (D)(((par e 15 ))to ((var e Neg11 )A(var e Neg12 ))))
+Normalizing negative clash No. 57 
+(((par s 4 ))to (A))
+New negative: (OR (T)(((par s 4 ))to (A)))
+Normalizing negative clash No. 58 
+(((par s 4 ))to ((var s Neg2 )))(()to ((var s Neg3 )(var e Neg8 )))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg11 )A(var e Neg12 ))))
+    (OR (T)(((par s 4 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg11 )A(var e Neg12 ))))
+    (OR (T)(((par s 4 ))to (A)))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg11 )A(var e Neg12 ))))
+    (OR (T)(((par s 4 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg11 )A(var e Neg12 ))))
+    (OR (T)(((par s 4 ))to (A)))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg11 )A(var e Neg12 ))))
+    (OR (T)(((par s 4 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg11 )A(var e Neg12 ))))
+    (OR (T)(((par s 4 ))to (A)))
+***************** END OF NEGATIVE TESTING No.55  *************************
+
+    PRTC No.55  Class C IS COMPLETED:
+  Narrowings: (assign (par e 30 )())
+  Assignments: (assign (var e X )(B(par e 15 )(par s 4 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 4 ))to ((var s Neg2 )))(()to ((var s Neg3 )(var e Neg8 ))))
+
+ to
+  Narrowings: (assign (par e 30 )())
+  Assignments: (assign (var e X )(B(par e 15 )(par s 4 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg11 )A(var e Neg12 ))))
+    (OR (T)(((par s 4 ))to (A)))
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (T)(((par s 4 ))to ((var s Neg4 )))(((par e 30 ))to ()))
+    (OR (T)(((par s 4 ))to ((var s Neg2 )))(((par e 30 ))to ((var s Neg3 )(var e Neg8 ))))
+Screened inequalities:
+
+    (OR (T)(((par s 4 ))to ((var s Neg4 )))(((par e 30 ))to ()))
+    (OR (T)(((par s 4 ))to ((var s Neg2 )))(((par e 30 ))to ((var s Neg3 )(var e Neg8 ))))
+==================================================================================
+         SIMPLE NODE (0 0 1 ) with status: ReadyForGenCheck 
+  Restrictions: (assign (par e 12 )((par s 4 )(par e 30 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+
+  Configuration: (call ((F (1 2 4 ))10 )(args (arg (*(par e 30 ))B(par e 15 )(par s 4 ))))
+  Stack: 
+      (assign (var l (0 ))((call ((F (1 2 4 ))10 )(args (arg (*(par e 30 ))B(par e 15 )(par s 4 ))))))
+
+  Children of (0 0 1 ): 
+==================================================================================
+         SIMPLE NODE (0 0 1 0 ) with status: Undriven 
+  Restrictions: (assign (par e 30 )(A(par e 53 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg1 )A(var e Neg2 ))))
+    (OR (T)(((par s 4 ))to (A)))
+
+  Configuration: (call (F 13 )(args (arg (*(par e 53 ))B(par e 15 )(par s 4 ))))
+  Stack: 
+      (assign (var l (0 ))((call (F 13 )(args (arg (*(par e 53 ))B(par e 15 )(par s 4 ))))))
+
+  Children of (0 0 1 0 ): 
+======================== NODE (0 0 1 0 ) INFO END====================================
+==================================================================================
+         SIMPLE NODE (0 0 1 1 ) with status: Undriven 
+  Restrictions: (assign (par e 30 )((par s 6 )(par e 56 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (T)(((par s 6 ))to (A)))
+
+  Configuration: (call (F 14 )(args (arg (*(par e 56 ))B(par e 15 )(par s 4 )(par s 6 ))))
+  Stack: 
+      (assign (var l (0 ))((call (F 14 )(args (arg (*(par e 56 ))B(par e 15 )(par s 4 )(par s 6 ))))))
+
+  Children of (0 0 1 1 ): 
+======================== NODE (0 0 1 1 ) INFO END====================================
+==================================================================================
+         SIMPLE NODE (0 0 1 2 ) with status: Undriven 
+  Restrictions: (assign (par e 30 )())
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg11 )A(var e Neg12 ))))
+    (OR (T)(((par s 4 ))to (A)))
+
+  Configuration: False 
+  Stack: 
+      (assign (var l (0 ))(False ))
+
+  Children of (0 0 1 2 ): 
+======================== NODE (0 0 1 2 ) INFO END====================================
+======================== NODE (0 0 1 ) INFO END====================================
+
+  Trying to embed: 
+(((F (1 2 4 ))8 ))
+ and 
+(((F (1 2 4 ))10 ))
+(call ((F (1 2 4 ))8 )(args (arg (*(par e 12 ))B(par e 15 ))))
+ and 
+(call ((F (1 2 4 ))10 )(args (arg (*(par e 30 ))B(par e 15 )(par s 4 ))))
+  EMBEDDING IS SUCCESSFUL.
+  Depth is 0 
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+Driving GENERALIZING negative clash No. 59 
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+(((New (Desired ))(Grammar )(Negative (OR (D)(((par e 90 )A(par e 91 ))to ((var e Neg5 )A(var e Neg6 ))))(OR (T)(((par s 4 ))to (A))))(Numeric )(Generic ))((assign (par e 15 )((par e 90 )A(par e 91 ))))((assign (var e (A10 ))((par e 90 ))))((((par e 91 )(par s 4 ))to ((var e (A11 ))))(Delayed ))(T))(((New (Desired ))(Grammar )(Negative (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))(OR (T)(((par s 4 ))to (A))))(Numeric )(Generic ))()((assign (var e (A10 ))((par e 15 )(var e 14 ))))((((par s 4 ))to ((var e 14 )A(var e (A11 ))))(Delayed ))(T))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+(((New (Desired ))(Grammar )(Negative (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))(OR (T)((A)to (A))))(Numeric )(Generic ))((assign (par s 4 )(A)))((assign (var e 14 )())(assign (var e (A10 ))((par e 15 ))))((()to ((var e (A11 ))))(Delayed ))(T))(((New (Desired ))(Grammar )(Negative (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))(OR (T)(((par s 4 ))to (A))))(Numeric )(Generic ))()((assign (var e 14 )((par s 4 )(var e 17 )))(assign (var e (A10 ))((par e 15 )(par s 4 )(var e 17 ))))((()to ((var e 17 )A(var e (A11 ))))(Delayed ))(T))
+Testing negative block in No.59 : 
+  Narrowings: (assign (par e 15 )((par e 90 )A(par e 91 )))
+  Assignments: (assign (var e (A11 ))((par e 91 )(par s 4 )))(assign (var e (A10 ))((par e 90 )))
+  Equations Negative: (OR (D)(((par e 90 )A(par e 91 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+
+
+Normalizing negative clash No. 60 
+(((par e 90 )A(par e 91 ))to ((var e Neg5 )A(var e Neg6 )))
+(((New (Desired ))(Grammar )(Negative (OR (T)(((par s 4 ))to (A))))(Numeric )(Generic ))((assign (par e 90 )((par e 92 )A(par e 93 ))))((assign (var e Neg5 )((par e 92 ))))((((par e 93 )A(par e 91 ))to ((var e Neg6 )))(Delayed ))(T))(((New (Desired ))(Grammar )(Negative (OR (T)(((par s 4 ))to (A))))(Numeric )(Generic ))()((assign (var e Neg5 )((par e 90 )(var e 18 ))))(((A(par e 91 ))to ((var e 18 )A(var e Neg6 )))(Delayed ))(T))
+(((New (Desired ))(Grammar )(Negative (OR (T)(((par s 4 ))to (A))))(Numeric )(Generic ))()((assign (var e 18 )())(assign (var e Neg5 )((par e 90 ))))((((par e 91 ))to ((var e Neg6 )))(Delayed ))(T))(((New (Desired ))(Grammar )(Negative (OR (T)(((par s 4 ))to (A))))(Numeric )(Generic ))()((assign (var e 18 )(A(var e 21 )))(assign (var e Neg5 )((par e 90 )A(var e 21 ))))((((par e 91 ))to ((var e 21 )A(var e Neg6 )))(Delayed ))(T))
+***************** END OF NEGATIVE TESTING PRTC No.59   *************************
+
+    PRTC No.59  FAILED in negative block:
+  Narrowings: (assign (par e 15 )((par e 90 )A(par e 91 )))
+  Assignments: (assign (var e (A11 ))((par e 91 )(par s 4 )))(assign (var e (A10 ))((par e 90 )))
+  Equations Negative: (OR (D)(((par e 90 )A(par e 91 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+
+
+---------------------------------------------------------------------------
+
+Testing negative block in No.60 : 
+  Narrowings: (assign (par s 4 )(A))
+  Assignments: (assign (var e (A11 ))())(assign (var e 14 )())(assign (var e (A10 ))((par e 15 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)((A)to (A)))
+
+
+Normalizing negative clash No. 61 
+(((par e 15 ))to ((var e Neg5 )A(var e Neg6 )))
+New negative: (OR (D)(((par e 15 ))to ((var e Neg22 )A(var e Neg23 ))))
+Normalizing negative clash No. 62 
+((A)to (A))
+***************** END OF NEGATIVE TESTING PRTC No.60   *************************
+
+    PRTC No.60  FAILED in negative block:
+  Narrowings: (assign (par s 4 )(A))
+  Assignments: (assign (var e (A11 ))())(assign (var e 14 )())(assign (var e (A10 ))((par e 15 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)((A)to (A)))
+
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+Driving GENERALIZING negative clash No. 63 
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+(((New (Desired ))(Grammar )(Negative (OR (D)(((par e 98 )A(par e 99 ))to ((var e Neg5 )A(var e Neg6 ))))(OR (T)(((par s 4 ))to (A))))(Numeric )(Generic ))((assign (par e 15 )((par e 98 )A(par e 99 ))))((assign (var e (A10 ))((par e 98 ))))((((par e 99 )(par s 4 ))to ((var e (A11 ))))(Delayed ))(T))(((New (Desired ))(Grammar )(Negative (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))(OR (T)(((par s 4 ))to (A))))(Numeric )(Generic ))()((assign (var e (A10 ))((par e 15 )(var e 24 ))))((((par s 4 ))to ((var e 24 )A(var e (A11 ))))(Delayed ))(T))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+(((New (Desired ))(Grammar )(Negative (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))(OR (T)((A)to (A))))(Numeric )(Generic ))((assign (par s 4 )(A)))((assign (var e 24 )())(assign (var e (A10 ))((par e 15 ))))((()to ((var e (A11 ))))(Delayed ))(T))(((New (Desired ))(Grammar )(Negative (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))(OR (T)(((par s 4 ))to (A))))(Numeric )(Generic ))()((assign (var e 24 )((par s 4 )(var e 27 )))(assign (var e (A10 ))((par e 15 )(par s 4 )(var e 27 ))))((()to ((var e 27 )A(var e (A11 ))))(Delayed ))(T))
+Testing negative block in No.63 : 
+  Narrowings: (assign (par e 15 )((par e 98 )A(par e 99 )))
+  Assignments: (assign (var e (A11 ))((par e 99 )(par s 4 )))(assign (var e (A10 ))((par e 98 )))
+  Equations Negative: (OR (D)(((par e 98 )A(par e 99 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+
+
+Normalizing negative clash No. 64 
+(((par e 98 )A(par e 99 ))to ((var e Neg5 )A(var e Neg6 )))
+(((New (Desired ))(Grammar )(Negative (OR (T)(((par s 4 ))to (A))))(Numeric )(Generic ))((assign (par e 98 )((par e 100 )A(par e 101 ))))((assign (var e Neg5 )((par e 100 ))))((((par e 101 )A(par e 99 ))to ((var e Neg6 )))(Delayed ))(T))(((New (Desired ))(Grammar )(Negative (OR (T)(((par s 4 ))to (A))))(Numeric )(Generic ))()((assign (var e Neg5 )((par e 98 )(var e 28 ))))(((A(par e 99 ))to ((var e 28 )A(var e Neg6 )))(Delayed ))(T))
+(((New (Desired ))(Grammar )(Negative (OR (T)(((par s 4 ))to (A))))(Numeric )(Generic ))()((assign (var e 28 )())(assign (var e Neg5 )((par e 98 ))))((((par e 99 ))to ((var e Neg6 )))(Delayed ))(T))(((New (Desired ))(Grammar )(Negative (OR (T)(((par s 4 ))to (A))))(Numeric )(Generic ))()((assign (var e 28 )(A(var e 31 )))(assign (var e Neg5 )((par e 98 )A(var e 31 ))))((((par e 99 ))to ((var e 31 )A(var e Neg6 )))(Delayed ))(T))
+***************** END OF NEGATIVE TESTING PRTC No.63   *************************
+
+    PRTC No.63  FAILED in negative block:
+  Narrowings: (assign (par e 15 )((par e 98 )A(par e 99 )))
+  Assignments: (assign (var e (A11 ))((par e 99 )(par s 4 )))(assign (var e (A10 ))((par e 98 )))
+  Equations Negative: (OR (D)(((par e 98 )A(par e 99 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+
+
+---------------------------------------------------------------------------
+
+Testing negative block in No.64 : 
+  Narrowings: (assign (par s 4 )(A))
+  Assignments: (assign (var e (A11 ))())(assign (var e 24 )())(assign (var e (A10 ))((par e 15 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)((A)to (A)))
+
+
+Normalizing negative clash No. 65 
+(((par e 15 ))to ((var e Neg5 )A(var e Neg6 )))
+New negative: (OR (D)(((par e 15 ))to ((var e Neg32 )A(var e Neg33 ))))
+Normalizing negative clash No. 66 
+((A)to (A))
+***************** END OF NEGATIVE TESTING PRTC No.64   *************************
+
+    PRTC No.64  FAILED in negative block:
+  Narrowings: (assign (par s 4 )(A))
+  Assignments: (assign (var e (A11 ))())(assign (var e 24 )())(assign (var e (A10 ))((par e 15 )))
+  Equations Negative: (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)((A)to (A)))
+
+
+---------------------------------------------------------------------------
+
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (D)(((par e 15 )(par s 4 ))to ((var e (A10 ))A(var e (A11 )))))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (D)(((par e 15 )(par s 4 ))to ((var e (A10 ))A(var e (A11 )))))
+Normalizing negative clash No. 67 
+(((par e 15 )(par s 4 ))to ((var e (A10 ))A(var e (A11 ))))
+(((New (Desired ))(Grammar )(Negative )(Numeric )(Generic ))((assign (par e 15 )((par e 106 )A(par e 107 ))))((assign (var e (A10 ))((par e 106 ))))((((par e 107 )(par s 4 ))to ((var e (A11 ))))(Delayed ))(T))(((New (Desired ))(Grammar )(Negative )(Numeric )(Generic ))()((assign (var e (A10 ))((par e 15 )(var e 34 ))))((((par s 4 ))to ((var e 34 )A(var e (A11 ))))(Delayed ))(T))
+(((New (Desired ))(Grammar )(Negative )(Numeric )(Generic ))((assign (par s 4 )(A)))((assign (var e 34 )())(assign (var e (A10 ))((par e 15 ))))((()to ((var e (A11 ))))(Delayed ))(T))(((New (Desired ))(Grammar )(Negative )(Numeric )(Generic ))()((assign (var e 34 )((par s 4 )(var e 37 )))(assign (var e (A10 ))((par e 15 )(par s 4 )(var e 37 ))))((()to ((var e 37 )A(var e (A11 ))))(Delayed ))(T))
+New negative: (OR (D)(((par e 15 ))to ((var e Neg38 )A(var e Neg39 ))))
+New negative: (OR (T)(((par s 4 ))to (A)))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg38 )A(var e Neg39 ))))
+    (OR (T)(((par s 4 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg38 )A(var e Neg39 ))))
+    (OR (T)(((par s 4 ))to (A)))
+ToScreen inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg38 )A(var e Neg39 ))))
+    (OR (T)(((par s 4 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg38 )A(var e Neg39 ))))
+    (OR (T)(((par s 4 ))to (A)))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (D)(((par e 15 )(par s 4 ))to ((var e (A10 ))A(var e (A11 )))))
+Screened inequalities:
+
+    (OR (D)(((par e 15 ))to ((var e Neg5 )A(var e Neg6 ))))
+    (OR (T)(((par s 4 ))to (A)))
+    (OR (D)(((par e 15 )(par s 4 ))to ((var e (A10 ))A(var e (A11 )))))
+
+  Equations are preserved:
+
+  Inequalities are preserved:
+    (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 )))))
+==============================================================================
+           LET NODE (0 0 1 )
+  Let information: (Let ((0 0 1 1 )(assign (par e 66 )((par e 30 ))))((0 0 1 2 )(assign (par e 71 )((par e 15 )(par s 4 ))))In ((call ((F (1 2 4 ))15 )(args (arg (*(par e 66 ))B(par e 71 ))))))
+  Restrictions: (assign (par e 12 )((par s 4 )(par e 30 )))
+
+  Configuration: 
+  Stack: 
+======================== NODE (0 0 1 ) INFO END====================================
+
+==============================================================================
+           LET NODE (0 )
+  Let information: (Let ((0 1 )(assign (par e 12 )((par e X ))))((0 2 )(assign (par e 15 )()))In ((call ((F (1 2 4 ))8 )(args (arg (*(par e 12 ))B(par e 15 ))))))
+  Restrictions: 
+
+  Configuration: 
+  Stack: 
+======================== NODE (0 ) INFO END====================================
+
+==============================================================================
+           LET NODE (0 )
+  Let information: (Let ((0 1 )(assign (par e 12 )((par e X ))))((0 2 )(assign (par e 15 )()))In ((call ((F (1 2 4 ))8 )(args (arg (*(par e 12 ))B(par e 15 ))))))
+  Restrictions: 
+
+  Configuration: 
+  Stack: 
+======================== NODE (0 ) INFO END====================================
+
+==============================================================================
+           LET NODE (0 )
+  Let information: (Let ((0 1 )(assign (par e 12 )((par e X ))))((0 2 )(assign (par e 15 )()))In ((call ((F (1 2 4 ))8 )(args (arg (*(par e 12 ))B(par e 15 ))))))
+  Restrictions: 
+
+  Configuration: 
+  Stack: 
+======================== NODE (0 ) INFO END====================================
+
+==============================================================================
+           LET NODE (0 )
+  Let information: (Let ((0 1 )(assign (par e 12 )((par e X ))))((0 2 )(assign (par e 15 )()))In ((call ((F (1 2 4 ))8 )(args (arg (*(par e 12 ))B(par e 15 ))))))
+  Restrictions: 
+
+  Configuration: 
+  Stack: 
+======================== NODE (0 ) INFO END====================================
+
+==============================================================================
+           LET NODE (0 )
+  Let information: (Let ((0 1 )(assign (par e 12 )((par e X ))))((0 2 )(assign (par e 15 )()))In ((call ((F (1 2 4 ))8 )(args (arg (*(par e 12 ))B(par e 15 ))))))
+  Restrictions: 
+
+  Configuration: 
+  Stack: 
+======================== NODE (0 ) INFO END====================================
+
+
+Roots of the functions:
+((0 0 )((F (1 2 4 ))0 )(2 )((par e 12 )(par e 15 )))
+
+(Node Finished (0 )(()((New )(Grammar )(Negative )(Numeric )(Generic ))((Let ((0 1 )(assign (par e 12 )((par e X ))))((0 2 )(assign (par e 15 )()))In ((call ((F (1 2 4 ))8 )(args (arg (*(par e 12 ))B(par e 15 )))))))()())(Children (Node Finished (0 0 )(()((New )(Grammar )(Negative (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 ))))))(Numeric )(Generic ))()((call ((F (1 2 4 ))8 )(args (arg (*(par e 12 ))B(par e 15 )))))(((assign (var l (0 ))((call ((F (1 2 4 ))8 )(args (arg (*(par e 12 ))B(par e 15 )))))))))(Children (Node Finished (0 0 0 )(((assign (par e 12 )(A(par e 27 ))))((New )(Grammar )(Negative )(Numeric )(Generic ))((Let ((0 0 0 1 )(assign (par e 12 )((par e 27 ))))In ((call ((F (1 2 4 ))8 )(args (arg (*(par e 12 ))B(par e 15 )))))))()())(Children (Node (Looped To (0 0 )With (assign (par e 12 )((par e 27 ))))(0 0 0 0 )(()((New )(Grammar )(Negative )(Numeric )(Generic ))()((call ((F (1 2 4 ))8 )(args (arg (*(par e 12 ))B(par e 15 )))))(((assign (var l (0 ))((call ((F (1 2 4 ))8 )(args (arg (*(par e 12 ))B(par e 15 ))))))))))(Node Finished (0 0 0 1 )(()((New )(Grammar )(Negative )(Numeric )(Generic ))()((par e 27 ))(((assign (var l (0 ))((par e 27 )))))))))(Node Finished (0 0 1 )(((assign (par e 12 )((par s 4 )(par e 30 ))))((New )(Grammar )(Negative )(Numeric )(Generic ))((Let ((0 0 1 1 )(assign (par e 66 )((par e 30 ))))((0 0 1 2 )(assign (par e 71 )((par e 15 )(par s 4 ))))In ((call ((F (1 2 4 ))15 )(args (arg (*(par e 66 ))B(par e 71 )))))))()())(Children (Node (Looped To (0 0 )With (assign (par e 12 )((par e 66 )))(assign (par e 15 )((par e 71 ))))(0 0 1 0 )(()((New )(Grammar )(Negative )(Numeric )(Generic ))()((call ((F (1 2 4 ))15 )(args (arg (*(par e 66 ))B(par e 71 )))))(((assign (var l (0 ))((call ((F (1 2 4 ))15 )(args (arg (*(par e 66 ))B(par e 71 ))))))))))(Node Finished (0 0 1 1 )(()((New )(Grammar )(Negative )(Numeric )(Generic ))()((par e 30 ))(((assign (var l (0 ))((par e 30 )))))))(Node Finished (0 0 1 2 )(()((New )(Grammar )(Negative )(Numeric )(Generic ))()((par e 15 )(par s 4 ))(((assign (var l (0 ))((par e 15 )(par s 4 )))))))))(Node Finished (0 0 2 )(((assign (par e 12 )()))((New )(Grammar )(Negative (OR (D)(((par e 15 ))to ((var e Neg13 )A(var e Neg14 )))))(Numeric )(Generic ))()(False )(((assign (var l (0 ))(False ))))))))(Node Finished (0 1 )(()((New )(Grammar )(Negative (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 ))))))(Numeric )(Generic ))()((par e X ))(((assign (var l (0 ))((par e X )))))))(Node Finished (0 2 )(()((New )(Grammar )(Negative (OR (D)(((par e 15 ))to ((var e (A10 ))A(var e (A11 ))))))(Numeric )(Generic ))()()(((assign (var l (0 ))())))))))
+Successors are raised:
+(Node (Function ((F (1 2 4 ))0 )Merged With ((par e 12 )(par e 15 ))And Eigen ((par e 12 )))(0 0 )(Children (Node Expression (0 0 0 )(((assign (par e 12 )(A(par e 27 ))))((call ((F (1 2 4 ))0 )(args (arg (*(par e 27 ))(*(par e 15 ))))))))(Node Expression (0 0 1 )(((assign (par e 12 )((par s 4 )(par e 30 ))))((call ((F (1 2 4 ))0 )(args (arg (*(par e 30 ))(*(par e 15 )(par s 4 ))))))))(Node Expression (0 0 2 )(((assign (par e 12 )()))(False )))))

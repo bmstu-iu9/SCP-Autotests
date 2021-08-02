@@ -1,0 +1,31 @@
+/*
+ We try to match two parameterized strings: the word of power 2 (e.g. the word of the form e.x++e.x)
+ and the word 1++e.y++e.y++101.
+ The matching is always unsuccessful.
+ The test on the equations solving.
+*/
+
+/***********************************************/
+/*           the input program                 */
+/***********************************************/
+
+$ENTRY Go {
+	 (e.Str1) e.Str2 = <F ('1' e.Str2 e.Str2 '101') (e.Str1 e.Str1)>;
+}
+
+F {
+	t.Eq t.Eq = 'T';
+	e.z ='F';
+}
+
+/***********************************************/
+/*          the residual program               */
+/***********************************************/
+
+/*
+
+$ENTRY Go {
+ (e.x1) e.x2 =  'F';
+}
+*/
+

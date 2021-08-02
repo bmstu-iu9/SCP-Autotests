@@ -1,0 +1,43 @@
+/*
+ The function Pal(e.x) checks whether its argument is a palindrome.
+ The call Inv(e.x) gets the reverse of e.x.
+ The supercompiler verifies the fact that e.x++'AB'++Inv(e.x) is never a palindrome.
+*/
+
+/***********************************************/
+/*           the input program                 */
+/***********************************************/
+
+/* Тесты: 'AB('('A')'ABA', 'ABBA'(('A'))'ABBA', 'AAAAAAABAA')*/
+
+$ENTRY Go {
+	e.x = <Pal e.x 'AB' <Inv e.x>>;
+}
+
+Pal {
+	 = 'T';
+	t.y = 'T';
+	t.y e.x t.y = <Pal e.x>;
+	e.Z = 'F';
+}
+
+Inv {
+    = ;
+    t.y e.x = <Inv e.x> t.y;
+}
+
+/***********************************************/
+/*          the residual program               */
+/***********************************************/
+
+/*
+$ENTRY Go {
+ e.x1 =  <Pal_0 e.x1>;
+}
+
+
+Pal_0 {
+ =  'F';
+ t.y1 e.x1 =  <Pal_0 e.x1>;
+}
+*/

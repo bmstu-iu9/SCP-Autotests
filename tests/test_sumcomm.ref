@@ -1,0 +1,75 @@
+
+/*
+  This test demonstrates that MSCP-A can prove the commutativity property of the associative addition,
+  e.g. addition that is defined on strings presenting Peano numbers.
+  The string x++y is equal to the string y++x, if they are Peano numbers (belong to the alphabet I*).
+*/
+
+
+/***********************************************/
+/*          Initial program                    */
+/***********************************************/
+
+/* Теcты: 'I', 'III', 'II''I''IIIIIIIII' */
+
+$ENTRY Go {
+   (e.p)e.q = <Test <Unary ()(e.p)()(e.q)>>;
+}
+
+ Test {(e.p)(e.q) = <Equal (e.p e.q)(e.q e.p)>;
+}
+
+Unary {
+	(e.t)('I' e.x)()(e.y) = <Unary (e.t'I')(e.x)()(e.y)>;
+	(e.t)()(e.tt)('I'e.y) = <Unary (e.t)()(e.tt'I')(e.y)>;
+	(e.t)()(e.tt)() = (e.t)(e.tt);
+}
+
+Equal {
+	('I'e.x)('I'e.y) = <Equal (e.x)(e.y)>;
+	()() = True;
+	('I'e.1)( ) = False;
+	(  )('I'e.1) = False;
+}
+/***********************************************/
+/*          Residual Program                   */
+/***********************************************/
+
+/*
+$ENTRY Go {
+ (e.x1) e.x2 =  <Test_0 () (e.x1) (e.x2)>;
+}
+
+
+Test_0 {
+ (e.x1) ('I' e.x2) (e.x3) =  <Test_0 (e.x1 'I') (e.x2) (e.x3)>;
+ (e.x1) () ('I' e.x2) =  <Test_1 (e.x1) () (e.x2)>;
+ (e.x1) () () =  <Equal_12_2 e.x1>;
+}
+
+
+Equal_12_0 {
+ ('I' e.x1) (e.x2) =  <Equal_12_0 (e.x1) (e.x2)>;
+ () ('I' e.x1) =  <Equal_12_1 e.x1>;
+ () () =  True;
+}
+
+
+Equal_12_1 {
+ 'I' e.x1 =  <Equal_12_1 e.x1>;
+ =  True;
+}
+
+
+Test_1 {
+ (e.x1) (e.x2) ('I' e.x3) =  <Test_1 (e.x1) (e.x2 'I') (e.x3)>;
+ (e.x1) (e.x2) () =  <Equal_12_0 (e.x1) (e.x2)>;
+}
+
+
+Equal_12_2 {
+ 'I' e.x1 =  <Equal_12_2 e.x1>;
+ =  True;
+}
+
+*/

@@ -1,0 +1,43 @@
+/*
+ First, a string containing only letters 'A' is generated.
+ Then we check its last letter is not 'B'.
+ The string generation algorithm processes the string from the beginning.
+*/
+
+/***********************************************/
+/*           the input program                 */
+/***********************************************/
+
+/* Теcты: пусто, ()'A'('AA')'B'(()), 'IIIIIIIIIII()IBBBBB'*/
+
+
+$ENTRY Go {
+	e.x = <Check <F e.x>>;
+}
+
+F {
+	 = ;
+	t.x e.y = 'A' <F e.y>;
+}
+
+Check {
+	e.X 'B' = 'F';
+	e.Z = 'T';
+}
+
+/***********************************************/
+/*          the residual program               */
+/***********************************************/
+
+/*
+$ENTRY Go {
+ e.x1 =  <Check_0 () (e.x1)>;
+}
+
+
+Check_0 {
+ (e.x1) () =  'T';
+ (e.x1) (t.y1 e.x2) =  <Check_0 (e.x1 'A') (e.x2)>;
+}
+*/
+

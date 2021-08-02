@@ -1,0 +1,274 @@
+/*
+ Interpreter of a subset of Refal:
+                                  Program ::= $ENTRY  definition+          
+                                  definition ::= function-name {  sentence;+ }
+                                  sentence   ::= pattern  =  expr 
+                                  expr  ::= empty | term expr1 | function-call expr1
+                                  function-call ::= <function-name expr>
+                                  pattern ::= empty | term pattern1
+                                  term  ::= SYMBOL | var | (expr)
+                                  var   ::= e.name | t.name  | s.name
+                                  empty ::=  
+
+There are two additional restrictions: 
+ 1) the set of the variables of the right side of a sentence is a subset of the variable set 
+    of the left side of the sentence; 
+ 2) two e-variables are not allowed on the same parenthesis structure in the patterns. 
+    (For example, the pattern (e.1) e.2 (e.3) is allowed, while (e.1 A e.2) e.3 is not.)
+
+We use the following mapping Encode to encode the programs and the data in the Refal data.
+
+Encode(Program) = ( Encode(definition)+ )
+Encode(F {  sentence;+ }) = (F Encode(sentence;)+ )
+Encode(pattern =  expr;) = (( Encode(pattern) )'='( Encode(expr) ))
+Encode(expr1 expr2) = Encode(expr1) Encode(expr2)
+Encode( ( expr ) ) = ('*' Encode(expr) )
+Encode( <F expr> ) = (Call  F Encode(expr) )
+Encode(e.name) = (Var 'e' name)
+Encode(t.name) = (Var 't' name)
+Encode(s.name) = (Var 's' name)
+Encode(SYMBOL) = SYMBOL
+Encode() = 
+A pattern is the partial case of an expression. 
+
+The input program code for the interpreter (using the encoding described above) is as follows.
+ Zip = ( 
+   (Go (( ('*' (Var 'e' names)) ('*' (Var 'e' values)) ) 
+               '=' ((Call Zip ('*' (Var 'e' names)) ('*' (Var 'e' values)) )) ))
+   (Zip 
+     ( ( ('*' (Var 's' name) (Var 'e' names)) ('*' (Var 't' value) (Var 'e' values)) ) 
+               '=' ( ('*' (Var 's' name) (Var 't' value)) 
+                     (Call Zip ('*' (Var 'e' names)) ('*' (Var 'e' values)) )) )
+     ( ( ('*') ('*') ) '=' (  ) )
+  )
+ );
+
+*/
+* No open e-variables. (two e-variables on the same structure bracket level)
+
+/*****************************************************************************************************/
+/*                            The residual program                                                   */ 
+/*****************************************************************************************************/
+/*
+$ENTRY Go {
+ e.x1 =  <Eval_0 () (e.x1) ()>;
+}
+
+Eval_0 {
+ (e.x1) (('*' s.z1 e.x2) ('*' t.y1 e.x3)) (e.x4) =  <Eval_0 (e.x1 ('*' s.z1 t.y1))
+                                                       (('*' e.x2) ('*' e.x3)) (e.x4)
+                                                    >;
+ (e.x1) (('*') ('*')) (e.x2) =  e.x1 e.x2;
+}
+*/
+/* The resulting program is the tail-recursive version of the input program of the interpreter (shown above) 
+   with the redundant empty argument (in the third brackets). 
+   The symbol '*' in the resulting program is the encoding of the data given to the initial program as an input.  
+*/
+/*****************************************************************************************************/
+/*                            The initial interpreter                                                */ 
+/*****************************************************************************************************/
+$ENTRY 
+Go {
+ e.data = <Interpreter (Call Zip e.data) <Prog Zip>>;
+}
+
+GoInt { 
+ t.Program e.data = <Interpreter (Call Go e.data) t.Program>; 
+}
+
+Interpreter { (Call s.F e.d) t.P = <Eval <EvalCall s.F (e.d) t.P> t.P>; }
+
+* <Eval (e.environment) (e.expression) t.Program> ==> e.data
+Eval {
+ (e.env) ((Call s.F e.expr1) e.expr) t.P 
+      = <Eval <EvalCall s.F (<Eval (e.env) (e.expr1) t.P>) t.P> t.P>
+        <Eval (e.env) (e.expr) t.P>;
+
+ (e.env) ((Var e.var) e.expr) t.P 
+      = <Subst (e.env) (Var e.var)> <Eval (e.env) (e.expr) t.P>;
+
+ (e.env) (('*' e.expr1) e.expr) t.P 
+      = ('*' <Eval (e.env) (e.expr1) t.P>) <Eval (e.env) (e.expr) t.P>;
+
+ (e.env) (s.x e.expr) t.P = s.x <Eval (e.env) (e.expr) t.P>;
+ (e.env) () t.P = ;
+}
+
+EvalCall {
+ s.F (e.d) t.P = <Matching False (((False)'='(False)) <LookFor s.F t.P>) (e.d)>;
+}
+
+* <Matching t.boolen (e.pattern)'='(e.data)> ==> (e.environment) (e.expression)
+* , where t.boolen ::= (e.environment) | False
+Matching {
+ False (t.sent ((e.p)'='(e.expr)) e.def) (e.d) =
+       <Matching <RigitMatch (e.p)'='(e.d) ()> (((e.p)'='(e.expr)) e.def) (e.d)>; 
+ (e.env) (((e.p)'='(e.expr)) e.def) (e.d) = (e.env) (e.expr);
+}
+
+* <RigitMatch (e.pattern)'='(e.data) (e.environment)> ==> (e.environment1) | False
+RigitMatch {
+ ((Var 'e' s.n))'='(e.s) (e.env) 
+                    = <RigitMatch ()'='() <PutVar ((Var 'e' s.n) e.s) (e.env)>>;
+ ((Var 's' s.n) e.p)'='(s.1 e.s) (e.env)
+                    = <RigitMatch (e.p)'='(e.s) <PutVar ((Var 's' s.n) s.1) (e.env)>>;
+ ((Var 't' s.n) e.p)'='(t.1 e.s) (e.env)
+                    = <RigitMatch (e.p)'='(e.s) <PutVar ((Var 't' s.n) t.1) (e.env)>>;
+ (('*' e.p1) e.p)'='(('*' e.1) e.s) (e.env)
+                    = <RigitMatch (e.p)'='(e.s) <RigitMatch (e.p1)'='(e.1) (e.env)>>;
+ (s.1 e.p)'='(s.1 e.s) (e.env)
+                    = <RigitMatch (e.p)'='(e.s) (e.env)>;
+
+ ((Var 'e' s.n) e.p (Var 's' s.n1))'='(e.s s.1) (e.env) 
+           = <RigitMatch ((Var 'e' s.n) e.p)'='(e.s) <PutVar ((Var 's' s.n1) s.1) (e.env)>>;
+ ((Var 'e' s.n) e.p (Var 't' s.n1))'='(e.s t.1) (e.env) 
+           = <RigitMatch ((Var 'e' s.n) e.p)'='(e.s) <PutVar ((Var 't' s.n1) t.1) (e.env)>>;
+ ((Var 'e' s.n) e.p ('*' e.p1))'='(e.s ('*' e.1)) (e.env) 
+           = <RigitMatch (e.p1)'='(e.1) <RigitMatch ((Var 'e' s.n) e.p)'='(e.s) (e.env)>>;
+ ((Var 'e' s.n) e.p s.1)'='(e.s s.1) (e.env) 
+                    = <RigitMatch ((Var 'e' s.n) e.p)'='(e.s) (e.env)>;
+
+ ()'='() (e.env) = (e.env);
+ (e.p)'='(e.s) e.False = False;
+}
+
+* <PutVar (e.assignment) (e.environment) > ==> t.boolean
+PutVar { t.assign (e.env) = <CheckPut <PutVar1 t.assign (e.env)>>; }
+PutVar1 {
+ ((Var s.t s.n) e.value) (((Var s.t s.n) e.value1) e.env)  
+                   = ((Var s.t s.n) e.value1) e.env <Eq (e.value) (e.value1)>;
+ t.assign (t.assign1 e.env) = t.assign1 <PutVar1 t.assign (e.env)>;  
+ t.assign () = t.assign True;  
+}
+
+CheckPut {
+ e.env True = (e.env);
+ e.trash False = False;
+}
+
+* <Eq (e.expression1) (e.expression2)> ==> s.boolean
+* , where s.boolean ::= True | False
+Eq {
+ (s.1 e.xpr1) (s.1 e.xpr2) = <Eq (e.xpr1) (e.xpr2)>;
+* Was: -- it is wrong. Consider <Eq (('*' A B) C) (('*' A) B C)>
+*- (('*' e.1) e.xpr1) (('*' e.2) e.xpr2) = <Eq (e.1 e.xpr1) (e.2 e.xpr2)>;
+ (('*' e.1) e.xpr1) (('*' e.2) e.xpr2) = <ContEq <Eq (e.1) (e.2)> (e.xpr1) (e.xpr2)>;
+ () () = True;
+ (e.xpr1) (e.xpr2) = False;
+}
+
+ContEq {
+ False (e.ex) (e.ey) = False;
+ True (e.ex) (e.ey) = <Eq (e.ex) (e.ey)>;
+}
+
+
+* <LookFor s.Function-name (e.Program)> ==> e.definition
+LookFor {
+ s.F ((s.F e.def) e.P) = e.def;
+ s.F ((s.F1 e.def) e.P) = <LookFor s.F (e.P)>;
+}
+
+* <Subst (e.environment) t.variable> ==> e.data
+Subst {
+ (((Var s.t s.n) e.value) e.env)  (Var s.t s.n) = e.value;
+ (t.assign e.env) t.var = <Subst (e.env) t.var>;  
+}
+
+*-----------------------------------------
+*Interpreter { (Call s.F e.d) t.P = <Eval <EvalCall s.F (e.d) t.P> t.P>; }
+Testing {
+ s.F t.P (e.d) = <Prout "Program:" s.F> <Prout "Data:"  e.d>
+                 <Prout "Result:" <Interpreter (Call Go e.d) t.P>>;
+}
+
+
+Prog { 
+ Zip = ( 
+   (Go (( ('*' (Var 'e' names)) ('*' (Var 'e' values)) ) 
+               '=' ((Call Zip ('*' (Var 'e' names)) ('*' (Var 'e' values)) )) ))
+   (Zip 
+     ( ( ('*' (Var 's' name) (Var 'e' names)) ('*' (Var 't' value) (Var 'e' values)) ) 
+               '=' ( ('*' (Var 's' name) (Var 't' value)) 
+                     (Call Zip ('*' (Var 'e' names)) ('*' (Var 'e' values)) )) )
+     ( ( ('*') ('*') ) '=' (  ) )
+  )
+ );
+
+}
+
+*********************************************************************************
+Timing {
+ = <Prout Timing_DoublePQ '...'> 
+   <Timing Turing_DoublePQ>;
+
+ Turing_DoublePQ =  
+            <Prout 'Turing_DoublePQ:'>
+            <Interpreter (Call Go ('*' <Data DoublePQBlanks>) ('*' P) ('*' <Data DoublePQ>)) 
+                         <Prog Turing> <Prout 'Start step: ' <Step> <Nil <TimeElapsed 0>>> >
+            <Prout 'Steps: ' <Step> '\n' 'Time elapsed: ' <TimeElapsed>> ;
+
+}
+
+Nil { e.1 = ; }
+
+Data {
+ Plus = ('*' I I I) ('*' I I);
+ Replace = ('*' name A B) 
+           1 2 ('*' name);
+ DoublePQ  =
+  P P P P P P P P P P P P
+*  P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P /* 32*16=512 */
+/*
+  P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P
+  P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P
+/*
+  P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P
+
+  P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P
+  P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P
+  P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P
+  P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P
+
+  P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P
+  P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P
+  P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P
+  P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P
+  P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P
+  P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P
+  P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P
+  P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P P
+*/
+  B B B B
+  ;
+
+ DoublePQBlanks  = <Blanks <Data DoublePQ>>;
+
+ Mult1 =
+  '11111111111111111111'  /* 20 */
+  '11111111111111111111'  /* 20 */
+;
+
+ Mult2 =
+  '11111111111111111111'  /* 20 */
+  '1111111111'  /* 10 */
+;
+
+ MultBlanks = <Times (<Blanks <Data Mult1>>) (<Data Mult2>)>;
+
+}
+
+Times { 
+ (e.u) () = ;
+ (e.u) (s.I e.v) = <Times (e.u) (e.v)> e.u;
+}
+
+Blanks {
+         = ;
+ s.1 e.x = B <Blanks e.x>;
+}
+
+
+
+

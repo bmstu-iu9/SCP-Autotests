@@ -1,0 +1,37 @@
+/*
+ The test for the computation order. This program results in 'F', although the call H(e.x) comes to an infinite loop.
+ For the associative data, the order of a lazy computation may vary depending on the properties of computation arguments.
+*/
+
+/***********************************************/
+/*           the input program                 */
+/***********************************************/
+
+$ENTRY Go {
+     e.x = <F <G'B'> <H e.x> <G 'A'>>;
+}
+
+
+F {
+    s.z e.x s.z = 'T';
+    e.Z = 'F';
+}
+
+G {
+    e.x = e.x;
+}
+
+H {
+    e.x = <H e.x>;
+}
+
+/***********************************************/
+/*          the residual program               */
+/***********************************************/
+
+/*
+$ENTRY Go {
+ e.x1 =  'F';
+}
+*/
+

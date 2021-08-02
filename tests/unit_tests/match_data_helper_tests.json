@@ -1,0 +1,74 @@
+[
+  {
+    "TestCase": ["s.x", "'2'"],
+    "Expected": ["", "s.x", "'2'"]
+  },
+  {
+    "TestCase": ["s.x", "'2'134"],
+    "Expected": ["134", "s.x", "'2'"]
+  },
+  {
+    "TestCase": ["t.x", "'2'134"],
+    "Expected": ["134", "t.x", "'2'"]
+  },
+  {
+    "TestCase": ["t.x", "('2')134"],
+    "Expected": ["134", "t.x", "('2')"]
+  },
+  {
+    "TestCase": ["t.x", "(('A')('S'))'AA'"],
+    "Expected": ["'AA'", "t.x", "(('A')('S'))"]
+  },
+  {
+    "TestCase": ["t.x", "(('A'()('A'))'AA'"],
+    "Expected": ["Not enough parentheses\n"]
+  },
+  {
+    "TestCase": ["s.x", "('A')'AA'"],
+    "Expected": ["Invalid data\n"]
+  },
+  {
+    "TestCase": ["s.x", "'A''AA'"],
+    "Expected": ["'AA'", "s.x", "'A'"]
+  },
+  {
+    "TestCase": ["s.x", "'Aqq''AA'"],
+    "Expected": ["'qq''AA'", "s.x", "'A'"]
+  },
+  {
+    "TestCase": ["(s.x)", "'Aqq''AA'"],
+    "Expected": ["Recognition impossible\n"]
+  },
+  {
+    "TestCase": ["(s.x)", "('A') 'ccc'"],
+    "Expected": [" 'ccc'", "s.x", "'A'"]
+  },
+  {
+    "TestCase": ["(s.x t.x e.x s.c)", "('A' ('asas' 123) 'cccq')"],
+    "Expected": ["", "s.x", "'A'", "t.x", "('asas' 123)", "s.c", "'q'", "e.x", "'ccc'"]
+  },
+  {
+    "TestCase": ["(s.x t.x e.x s.c t.e)", "('A' ('asas' 123) 'cccq' ('qwe'))"],
+    "Expected": ["", "s.x", "'A'", "t.x", "('asas' 123)", "s.c", "'q'", "t.e", "('qwe')", "e.x", "'ccc'"]
+  },
+  {
+    "TestCase": ["(s.x t.x (e.x) s.c t.e)", "('A' ('asas' 123) 'cccq' ('qwe'))"],
+    "Expected": ["Recognition impossible\n"]
+  },
+  {
+    "TestCase": ["(s.x t.x (e.x) s.c t.e)", "('A' ('asas' 123) ('cccq') ('qwe'))"],
+    "Expected": ["Invalid data\n"]
+  },
+  {
+    "TestCase": ["(s.x t.x (e.x) s.c t.e)", "('A' ('asas' 123) ('cccq') 123 ('qwe'))"],
+    "Expected": ["", "s.x", "'A'", "t.x", "('asas' 123)", "s.c", "123", "t.e", "('qwe')", "e.x", "'cccq'"]
+  },
+  {
+    "TestCase": ["(s.x t.x ((e.x)) ((s.c)) (t.e))", "('A' ('asas' 123) (('cccq')) ((123)) (('qwe')))"],
+    "Expected": ["", "s.x", "'A'", "t.x", "('asas' 123)", "s.c", "123", "t.e", "('qwe')", "e.x", "'cccq'"]
+  },
+  {
+    "TestCase": ["(s.x t.x ((e.x)) ((s.c)) e.z (t.e))", "('A' ('asas' 123) (('cccq')) ((123)) 'asdasd' ((123)) (('qwe')))"],
+    "Expected": ["", "s.x", "'A'", "t.x", "('asas' 123)", "s.c", "123", "t.e", "('qwe')", "e.x", "'cccq'", "e.z", "'asdasd' ((123)) "]
+  }
+]

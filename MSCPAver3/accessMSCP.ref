@@ -1,0 +1,188 @@
+/*******************************************************************
+
+              Модуль доступа к структурам данных MSCP
+
+*******************************************************************/
+
+
+$ENTRY GetNodeStatus {
+    (Node t.Status t.Name e.Other) = t.Status; 
+}
+
+$ENTRY PutNodeStatus {
+    (Node t.Status t.Name e.Other) t.NewStatus = (Node t.NewStatus t.Name e.Other); 
+}
+
+$ENTRY GetNodeName {
+    (Node t.Status t.Name e.Other) = t.Name; 
+}
+
+$ENTRY PutNodeName {
+    (Node t.Status t.Name e.Other) t.NewName = (Node t.Status t.NewName e.Other); 
+}
+
+$ENTRY GetNodeChildren {
+    (Node e.Node (Children e.Children)) = e.Children; 
+    (Node e.Node) = ; 
+
+}
+
+$ENTRY PutNodeChildren {
+    (Node e.Node (Children e.Children)) =
+        (Node e.Node);
+    (Node e.Node (Children e.Children)) e.NewChildren =
+        (Node e.Node (Children e.NewChildren));
+    (Node e.Node) =
+        (Node e.Node);
+    (Node e.Node) e.NewChildren =
+        (Node e.Node (Children e.NewChildren));
+    
+}
+
+$ENTRY PutNodeNewChild {
+    (Node e.Node (Children e.Children)) (Node e.NewChild) =
+        (Node e.Node (Children e.Children (Node e.NewChild)));
+}
+
+$ENTRY GetNodeStack {
+    (Node 
+        t.Status 
+        t.Name 
+        ((e.Restrictions)(e.ConfigEquations)(e.LetExpressions)(e.FullConfig)(e.Stack))
+        e.Children
+    ) = (e.Stack);
+}
+
+$ENTRY PutNodeStack {
+    (Node 
+        t.Status 
+        t.Name 
+        ((e.Restrictions)(e.ConfigEquations)(e.LetExpressions)(e.FullConfig)(e.Stack))
+        e.Children
+    )
+    (e.NewStack) =
+        (Node 
+            t.Status 
+            t.Name 
+            ((e.Restrictions)(e.ConfigEquations)(e.LetExpressions)(e.FullConfig)(e.NewStack))
+            e.Children
+        );
+}
+
+$ENTRY GetNodeConfig {
+    (Node 
+        t.Status 
+        t.Name 
+        ((e.Restrictions)(e.ConfigEquations)(e.LetExpressions)(e.FullConfig)(e.Stack))
+        e.Children
+    ) = e.FullConfig;
+}
+
+$ENTRY PutNodeConfig {
+    (Node 
+        t.Status 
+        t.Name 
+        ((e.Restrictions)(e.ConfigEquations)(e.LetExpressions)(e.FullConfig)(e.Stack))
+        e.Children
+    ) (e.NewConfig)= 
+        (Node 
+            t.Status 
+            t.Name 
+            ((e.Restrictions)(e.ConfigEquations)(e.LetExpressions)(e.NewConfig)(e.Stack))
+            e.Children
+        );
+}
+
+$ENTRY GetNodeEqs {
+    (Node 
+        t.Status 
+        t.Name 
+        ((e.Restrictions)(e.ConfigEquations)(e.LetExpressions)(e.FullConfig)(e.Stack))
+        e.Children
+    ) = e.ConfigEquations;
+}
+
+$ENTRY PutNodeEqs {
+    (Node 
+        t.Status 
+        t.Name 
+        ((e.Restrictions)(e.ConfigEquations)(e.LetExpressions)(e.FullConfig)(e.Stack))
+        e.Children
+    ) (e.NewEquations)= 
+    (Node 
+        t.Status 
+        t.Name 
+        ((e.Restrictions)(e.NewEquations)(e.LetExpressions)(e.FullConfig)(e.Stack))
+        e.Children
+    );
+}
+
+$ENTRY GetNodeRestrictions {
+    (Node 
+        t.Status 
+        t.Name 
+        ((e.Restrictions)(e.ConfigEquations)(e.LetExpressions)(e.FullConfig)(e.Stack))
+        e.Children
+    ) = (e.Restrictions);
+}
+$ENTRY PutNodeRestrictions {
+    (Node 
+        t.Status 
+        t.Name 
+        ((e.Restrictions)(e.ConfigEquations)(e.LetExpressions)(e.FullConfig)(e.Stack))
+        e.Children
+    ) (e.NewRestrictions) = 
+    (Node 
+        t.Status 
+        t.Name 
+        ((e.NewRestrictions)(e.ConfigEquations)(e.LetExpressions)(e.FullConfig)(e.Stack))
+        e.Children
+    );
+}
+
+$ENTRY GetNodeLets {
+    (Node 
+        t.Status 
+        t.Name 
+        ((e.Restrictions)(e.ConfigEquations)(e.LetExpressions)(e.FullConfig)(e.Stack))
+        e.Children
+    ) = (e.LetExpressions);
+}
+
+$ENTRY PutNodeLets {
+    (Node 
+        t.Status 
+        t.Name 
+        ((e.Restrictions)(e.ConfigEquations)(e.LetExpressions)(e.FullConfig)(e.Stack))
+        e.Children
+    ) (e.NewLetExpressions) = (Node 
+        t.Status 
+        t.Name 
+        ((e.Restrictions)(e.ConfigEquations)(e.NewLetExpressions)(e.FullConfig)(e.Stack))
+        e.Children
+    );
+}
+
+$ENTRY GenerateNewNode {
+    t.NodeName = (Node Undriven t.NodeName (()()()()()));
+}
+
+$ENTRY DeleteNodeActiveData {
+    t.Node,
+    <PutNodeConfig t.Node ()> : t.Node1,
+    <PutNodeStack t.Node1 ()> : t.Node2
+     = t.Node2;
+}
+
+$ENTRY GetNodeFullConfig {
+    t.Node,
+    <GetNodeRestrictions t.Node> : t.Restrs,
+    <GetNodeEqs t.Node> : e.Eqs,
+    <GetNodeStack t.Node> : t.Stack,
+    <GetNodeConfig t.Node> : e.FullConf
+    = t.Restrs (e.Eqs) (e.FullConf) t.Stack;
+}
+
+$ENTRY GetStackTop {
+    (((assign t.svar (e.Expr))e.LowerLevel)e.OtherStack) = e.Expr;
+}

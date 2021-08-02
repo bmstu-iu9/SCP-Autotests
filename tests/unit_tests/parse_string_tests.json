@@ -1,0 +1,26 @@
+[
+  {
+    "TestCase": ["ababa'"],
+    "Expected": ["5"]
+  },
+  {
+    "TestCase": ["abracadabra"],
+    "Expected": ["Invalid data\n"]
+  },
+  {
+    "TestCase": ["1sad'"],
+    "Expected": ["4"]
+  },
+  {
+    "TestCase": ["12345 \\''"],
+    "Expected": ["8"]
+  },
+  {
+    "TestCase": ["345''12'"],
+    "Expected": ["3"]
+  },
+  {
+    "TestCase": ["12345)"],
+    "Expected": ["Invalid data\n"]
+  }
+]

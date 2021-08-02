@@ -1,0 +1,69 @@
+/*
+ The test is taken from the following paper. 
+     Parosh Aziz Abdulla, Mohamed Faouzi Atig, Yu-Fang Chen, Bui Phi Diep, Lukas Holik, Ahmed Rezine, Philipp Rummer.
+     Flatten and conquer: a framework for efficient analysis of string constraints,
+     Programming Language Design and Implementation (PLDI), 2017, Barcelona, Spain, ACM, pages 602-617
+
+ The test checks if there exists a solution of the word equation
+ 'A'wx = wy,
+ if w belongs to the language L described as follows:
+
+ N -> 'A' N 'B' | N 'B' | EMPTY 
+
+ To solve this test, the supercompiler solves a quadratic word equation given some restrictions.
+
+ The supercompiler determines that the only solution in the language exists: w=EMPTY.
+*/
+
+
+/***********************************************/
+/*          the initial program                */
+/***********************************************/
+
+/* 
+ The input parameters e.x and e.y are arbitrary strings.
+ The parameter e.N is an arbitrary path generating an element of L. 
+*/
+
+/* Теcты: ('ABBBA')('BBBA')(), ('ABBBA')('BBBA')('ISI'), ('ABABBA')('BABBA')('IISISS') */
+
+
+$ENTRY Go {
+ (e.y) (e.x) (e.N) =  <G0 (e.y) (e.x) (<Gram e.N>)>;
+}
+
+
+/* The function that constructs an element of the language L. */
+Gram {
+	'I' e.x = 'A' <Gram e.x> 'B';
+	'S' e.x = <Gram e.x> 'B';
+                = ;
+}
+
+/* The auxiliary function constructing the equation. */
+G0 {
+	(e.y) (e.x) (e.w) = <Equal ('A' e.w e.x) (e.w e.y)>;
+}
+
+Equal {
+	t.X t.X = 'T';
+	t.X t.Y = 'F'; /* The order of the rules determines that t.X != t.Y. */
+}
+
+/***********************************************/
+/*          the residual program               */
+/***********************************************/
+
+/*
+$ENTRY Go {
+ (e.x1) (e.x2) (e.x3) =  <InputFormat_0 (e.x3) (e.x2) (e.x1)>;
+}
+
+
+InputFormat_0 {
+ ('I' e.x1) (e.x2) (e.x3) =  'F';
+ ('S' e.x1) (e.x2) (e.x3) =  'F';
+ () (e.x1) ('A' e.x1) =  'T';
+ () (e.x1) (e.x2) =  'F';
+}
+*/

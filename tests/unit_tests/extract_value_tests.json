@@ -1,0 +1,46 @@
+[
+  {
+    "TestCase": ["s.x", "'alice'"],
+    "Expected": ["'a'", "'lice'"]
+  },
+  {
+    "TestCase": ["s.y", "''"],
+    "Expected": ["No symbol found\n"]
+  },
+  {
+    "TestCase": ["s.x", "12 'bob'"],
+    "Expected": ["12", "'bob'"]
+  },
+  {
+    "TestCase": ["t.x","12 'bob'"],
+    "Expected": ["12", "'bob'"]
+  },
+  {
+    "TestCase": ["s.x", "12 12"],
+    "Expected": ["12", "12"]
+  },
+  {
+    "TestCase": ["t.x", "'a'12"],
+    "Expected": ["'a'", "12"]
+  },
+  {
+    "TestCase": ["s.x", "'a''b'"],
+    "Expected": ["'a'", "'b'"]
+  },
+  {
+    "TestCase": ["t.x", "('a')"],
+    "Expected": ["('a')", ""]
+  },
+  {
+    "TestCase": ["s.x", "('a')"],
+    "Expected": ["Invalid data\n"]
+  },
+  {
+    "TestCase": ["t.x", "(()(()))(123)"],
+    "Expected": ["(()(()))", "(123)"]
+  },
+  {
+    "TestCase": ["s.x", "123"],
+    "Expected": ["123", ""]
+  }
+]

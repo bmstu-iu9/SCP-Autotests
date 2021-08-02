@@ -1,0 +1,46 @@
+/*
+  The simplest test transforming two loops in a one with the elementary negative restrictions.
+  The input parameter may be a string in any alphabet.
+*/
+
+/***********************************************/
+/*           the input program                 */
+/***********************************************/
+
+/* Теcты: 'AAAAAAA', 'A()A', 'A(B)(A(B))BCDDAA'*/
+
+
+$ENTRY Go {
+	 e.InitialString = <G <F e.InitialString>>;
+}
+
+F {
+	            = ;
+	'A' e.String = 'B'<F e.String>;	
+	s.NotA e.String = s.NotA <F e.String>;
+}
+
+G {
+	            = ;
+	'B' e.String  = 'C'<G e.String>;
+	s.NotB e.String = s.NotB <G e.String>;
+}
+
+/***********************************************/
+/*          the residual program               */
+/***********************************************/
+
+/*
+$ENTRY Go {
+ e.x1 =  <G_0 () (e.x1)>;
+}
+
+
+G_0 {
+ (e.x1) () =  e.x1;
+ (e.x1) ('A' e.x2) =  <G_0 (e.x1 'C') (e.x2)>;
+ (e.x1) ('B' e.x2) =  <G_0 (e.x1 'C') (e.x2)>;
+ (e.x1) (s.z1 e.x2) =  <G_0 (e.x1 s.z1) (e.x2)>;
+}
+*/
+

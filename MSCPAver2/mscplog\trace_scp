@@ -1,0 +1,16 @@
+==================================================================================
+         SIMPLE NODE (0 ) with status: Finished 
+  Restrictions: 
+
+  Configuration: 
+  Stack: 
+      (assign (var l (0 ))())
+
+  Children of (0 ): 
+======================== NODE (0 ) INFO END====================================
+
+
+Roots of the functions:
+
+
+(Node Finished (0 )(()((New )(Grammar )(Negative )(Numeric )(Generic ))()()(((assign (var l (0 ))())))))

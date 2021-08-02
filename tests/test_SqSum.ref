@@ -1,0 +1,49 @@
+/*
+ The program computes the sum of the squares of naturals from 1 to e.x.
+ The number e.x is represented in the Peano arithmetics as a string 'I'...'I'.
+*/
+
+/***********************************************/
+/*           the input program                 */
+/***********************************************/
+
+/* Теcты: 'I', 'III', 'IIIIIIIIIIII' */
+
+$ENTRY Go {
+	 e.x = <Sq e.x'I'>;
+}
+
+Sq {
+	 = ;
+	'I' e.x = <Add1 (<Mul1 ('I'e.x)'I'e.x>) <Sq e.x>>;
+}
+
+Mul1 {
+	()       e.y = ;
+	('I'e.x) e.y = e.y <Mul1 (e.x)e.y>;
+}
+
+Add1 {
+	(e.x) e.y = e.x e.y;
+}
+
+/***********************************************/
+/*          the residual program               */
+/***********************************************/
+/*
+$ENTRY Go {
+ e.x1 =  <Sq_2_0 () (e.x1)>;
+}
+
+
+Mul1_2_0 {
+ (e.x1) ('I' e.x2) (e.x3) (e.x4) =  <Mul1_2_0 (e.x1 'I') (e.x2) (e.x3 'I' e.x4 'I') (e.x4)>;
+ (e.x1) () (e.x2) (e.x3) =  <Sq_2_0 (e.x1 'II' e.x2 'I' e.x3 'I') (e.x3)>;
+}
+
+
+Sq_2_0 {
+ (e.x1) ('I' e.x2) =  <Mul1_2_0 (e.x1) (e.x2) () (e.x2)>;
+ (e.x1) () =  e.x1 'I';
+}
+*/

@@ -1,0 +1,41 @@
+/*
+ The function Prefix checks whether its first argument is a prefix of the second in the alphabet {'A','B'}.
+ The function Concat is the in-built concatenation.
+ The task of the supercompiler is to verify whether the concatenation function does not change its first argument.
+*/
+
+/***********************************************/
+/*           the input program                 */
+/***********************************************/
+
+$ENTRY Go {
+	(e.x) e.y = <Prefix (e.x) <Concat (e.x) e.y>>;
+}
+
+Prefix {
+	() e.x = 'T';
+	(t.y e.x1) t.y e.x2 = <Prefix (e.x1) e.x2>;
+	('A' e.x1) 'B' e.x2 = 'F';
+	('B' e.x1) 'A' e.x2 = 'F';
+	(t.y e.x) = 'F';
+}
+
+Concat {
+	(e.x1) e.x2 = e.x1 e.x2;
+}
+
+/***********************************************/
+/*          the residual program               */
+/***********************************************/
+/*
+$ENTRY Go {
+ (e.x1) e.x2 =  <Prefix_12_0 e.x1>;
+}
+
+
+Prefix_12_0 {
+ () (e.x1) =  'T';
+ (t.y1 e.x1) (e.x2) =  <Prefix_12_0 (e.x1) (e.x2)>;
+}
+`*/
+
