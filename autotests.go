@@ -26,7 +26,7 @@ func runTests(tests []Autotest) error {
 	fmt.Println("Starting autotests...")
 	var (
 		wg sync.WaitGroup
-		m sync.Mutex
+		m  sync.Mutex
 	)
 	c := make(chan string, len(tests))
 
@@ -51,13 +51,13 @@ func runTests(tests []Autotest) error {
 		}
 	}
 
-	fmt.Printf("\nUsed: MSCPAver%s\n", *SCPVersion)
+	fmt.Printf("\nUsed: %s\n", fmt.Sprintf("MSCPAver%s", *SCPVersion))
 	fmt.Println("Tests completed:", completedCount, "out of", len(tests))
 	if failCount == 0 && completedCount == len(tests) {
 		fmt.Printf("--------------------------------\n\tAll tests passed!\n--------------------------------\n")
 	} else {
 		fmt.Println("Tests passed: ", len(tests)-failCount)
-		fmt.Println("Tests failed: ", failCount)
+		fmt.Printf("Tests failed: %v\t(errors: tests/errors/)\n", failCount)
 	}
 
 	if err := deleteAll(); err != nil {
@@ -119,7 +119,7 @@ func test(wg *sync.WaitGroup, m *sync.Mutex, tests *[]Autotest, i int, failCount
 	}
 	m.Lock()
 	*completedCount++
-	fmt.Println("Test #", i, "completed. Tests remaining:", len(*tests) - *completedCount)
+	fmt.Printf("Test # %-3v completed. Tests remaining: %v\n", i+1, len(*tests)-*completedCount)
 	m.Unlock()
 	c <- result
 }
